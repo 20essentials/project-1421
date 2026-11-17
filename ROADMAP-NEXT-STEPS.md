@@ -1,6 +1,7 @@
 # Próximos pasos — Stefano Lunardi (Wix Headless)
 
-Orden sugerido de ejecución. Los keys/identificadores viven en `ROADMAP-CURRENT.md`.
+Orden sugerido de ejecución. El registro de lo ya hecho (con sus keys) vive en
+`ROADMAP-DONE.md`.
 
 ## 0. Primera release desde CI (listo para ejecutar)
 - [ ] Etiquetar y pushear para disparar el workflow `Release`:
@@ -38,7 +39,4 @@ Orden sugerido de ejecución. Los keys/identificadores viven en `ROADMAP-CURRENT
 - [ ] Revisar titles/descriptions por página (el layout ya soporta SEO por página; los posts y FAQs usan el servicio de SEO de Wix).
 
 ## Hecho (referencia)
-- Scaffold Astro + deploy de verticales, seeds completos, capa de marca, FAQ limpiada, build/release verificados en vivo.
-- Git inicializado y pusheado a GitHub (20essentials/project-1421), CI verde con login Wix + env pull + check + build.
-- Fix de peer dep `@wix/services-manager` para que el build pase también en CI.
-- Scaffolding de project-1415 adaptado: .nvmrc, .gitattributes, .npmrc, prettier, CONTRIBUTING, LICENSE, .vscode, .env.example, PR template, workflows CI/Release (todo en npm).
+Ver el detalle completo en `ROADMAP-DONE.md`.
