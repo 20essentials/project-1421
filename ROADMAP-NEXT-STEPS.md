@@ -20,9 +20,9 @@ Orden sugerido de ejecución. El registro de lo ya hecho (con sus keys) vive en
 ## 3. Parches de node_modules (resuelto — no son necesarios)
 - [x] Confirmado el 2026-11-17 con `@astrojs/cloudflare@14.3.2`: `node_modules` recién instalado (sin rastro de fixes para Windows en `dist/index.js` ni `dist/utils/wrangler-config.js`) y el build local en Windows (`wix build`) y el de CI pasan igual. No aplicar `patch-package`; reabrir solo si un build limpio vuelve a fallar.
 
-## 4. Formularios en vivo
-- [ ] Probar el envío real de "Heart to Heart" desde `/contatti` (validación, otros-valores, mensaje de éxito) y confirmar que la submission llega al dashboard.
-- [ ] Integrar el form "Newsletter" (está sembrado en el sitio pero no está wired en ninguna página): sección en el footer o al final del blog.
+## 4. Formularios en vivo (listo)
+- [x] Envío real de "Heart to Heart" desde `/contatti` probado el 2026-11-17 (release v0.1.2): validación OK, mensaje de éxito mostrado y submission CONFIRMED en el sitio (id `c53729d2-9b53-42c4-ab15-e5dcf91ae228`). Screenshots en `.screenshots/h2h-live-*.png`.
+- [x] Form "Newsletter" wired: sección en el footer de todas las páginas (`src/app/layout.astro`), form id `99167414-c329-4e8f-8f02-db033652f376`, publicado en v0.1.2.
 
 ## 5. Contenido que depende del cliente
 - [ ] Las 8 "Domande profonde" del KB no tienen respuesta todavía → no se sembraron. Pedirle a Stefano las respuestas y añadirlas a FAQ si quiere.

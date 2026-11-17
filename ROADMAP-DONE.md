@@ -56,3 +56,11 @@ dónde viven. Los pasos siguientes viven en `ROADMAP-NEXT-STEPS.md`.
 - Verificación previa: `astro check` 0 errores, `vitest` 6/6, `wix build` OK → push `main` + tag `v0.1.1` → workflow `Release` success (run 44191009760).
 - Live verificado: homepage 200 con favicon nuevo, logos Vogue Sposa/Wezoree y menciones de awards; `/awards` 200.
 - Keys: tag `v0.1.1`, release run https://github.com/20essentials/project-1421/actions/runs/44191009760.
+
+### Release v0.1.2 — Newsletter en el footer + form Heart to Heart verificado
+- Newsletter form (`99167414-c329-4e8f-8f02-db033652f376`) wired en el footer de todas las páginas (`src/app/layout.astro`), con fallback si el form no carga.
+- Fix CI: `astro check` fallaba en `playwright.config.ts`/`vitest.config.ts` sin `@types/node` declarado → devDependency exacta `@types/node@16.9.1`.
+- Form "Heart to Heart" probado end-to-end en el live: mensaje de éxito mostrado y submission CONFIRMED en el sitio (id `c53729d2-9b53-42c4-ab15-e5dcf91ae228`, consulta vía `/form-submission-service/v4/submissions/namespace/query`).
+- Verificado paso 1 del roadmap: 12 logos de seals/prensa ya servidos vía `static.wixstatic.com/media/600582_*~mv2` (todas 200), grid en `/awards` y banda en home.
+- Paso 3 cerrado: los parches de Windows en `@astrojs/cloudflare` ya no hacen falta (`14.3.2`, build local Windows + CI pasan sin ellos).
+- Keys: tag `v0.1.2`, form Newsletter id `99167414-…`, form Heart to Heart id `9ab7aa27-14c9-4278-a9e5-c530df27d1ac`, screenshots `.screenshots/newsletter-footer-*` y `.screenshots/h2h-live-*`.
