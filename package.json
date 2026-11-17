@@ -5,6 +5,10 @@
   "scripts": {
     "astro": "astro",
     "check": "astro check",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "dev": "wix dev",
@@ -36,6 +40,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
     "@astrojs/react": "^6.0.6",
+    "@playwright/test": "1.65.1",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.1",
     "@wix/astro-wix-hosting-adapter": "^3.0.0",
@@ -43,6 +48,7 @@
     "prettier": "3.8.1",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "vitest": "5.1.0"
   }
 }
