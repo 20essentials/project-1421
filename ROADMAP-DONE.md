@@ -101,3 +101,9 @@ dónde viven. Los pasos siguientes viven en `ROADMAP-NEXT-STEPS.md`.
   3. **Hotel Excelsior** ← `…Excelsior_D8D4547.jpg` (primer plano de manos entrelazadas): estilo candid, no retrato editorial; encajaría mejor en "Autentiche e naturali".
 - Notas menores OK: `_212.jpg` ( filename Excelsior) muestra el puente de Rialto; `01_veillow.jpg` (Il velo) es también Venezia; `Z8D_4743_1.jpg` parece interior de castillo austriaco. Todo coherente como "boda con base en Excelsior".
 - Las 3 aéreas DJI ✓, los retratos editoriales de Excelsior ✓, los velos 04/05/11/7106 ✓.
+
+### PDFs de stefano-lunardi-assets/pdfs/ — decisión
+- Cerrado el 2026-11-18: no habrá material descargable (dossier/menú) por ahora. Los PDFs quedan como fuente local y la brochure ya está volcada como secciones web (método, inversión). Reabrir solo si Stefano pide un dossier descargable.
+
+### Cierre de "5. Contenido que depende del cliente"
+- Los 3 ítems de la sección 5 de `ROADMAP-NEXT-STEPS.md` quedan cerrados aquí; la sección queda solo con el seguimiento con Stefano (textos de las respuestas + 3 fotos marcadas).

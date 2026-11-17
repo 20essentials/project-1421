@@ -4,10 +4,8 @@ Orden sugerido de ejecución. El registro de lo ya hecho (con sus keys) vive en
 `ROADMAP-DONE.md`.
 
 
-## 5. Contenido que depende del cliente
-- [x] Las 8 "Domande profonde" del KB: respuestas redactadas desde el KB (metodo, brochure, Storybrand) y sembradas en la FAQ como categoría nueva "Domande profonde" (8 preguntas, id 56b08ebe, live verificado 2026-11-18). ⚠️ Confirmar con Stefano los textos (sobre todo los números de la respuesta 6: 500-800 seleccionadas).
-- [x] Revisión visual de la asignación de fotos (2026-11-18, 18/18 ficheros mirados): 15 OK, 3 banderas para confirmar con Stefano (ver ROADMAP-DONE.md, sección 2026-11-18).
-- [x] PDFs de `stefano-lunardi-assets/pdfs/` decidido el 2026-11-18: no habrá material descargable por ahora; los PDFs quedan como fuente local y la brochure ya está volcada como secciones web (método, inversión). Reabrir solo si Stefano pide un dossier descargable.
+## 5. Contenido que depende del cliente — cerrado 2026-11-18 (ver ROADMAP-DONE.md)
+- Queda solo el seguimiento con Stefano: confirmar los textos de las respuestas "Domande profonde" (sobre todo los números de la respuesta 6) y las 3 fotos marcadas en la revisión del portfolio.
 
 
 ### FUTURO (YO TE DIRE CUANDO)
