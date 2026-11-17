@@ -3,10 +3,10 @@
 // Portfolio has no documented Wix SEO item type, so this page carries plain
 // <title>/<meta description> from the DTO (no wixMetadata / <SEO.Tags>). Keep the
 // frontmatter; swap the island import to YOUR detail component.
-import SiteLayout from "@/layouts/site-layout.astro";
-import ProjectPage from "@/components/portfolio/project-page";
-import { fetchProjectBySlug, fetchProjectGallery } from "@/wix/portfolio/portfolio";
-import type { GalleryItem, ProjectDetail } from "@/wix/portfolio/types";
+import SiteLayout from "@/app/layout.astro";
+import ProjectPage from "@/features/portfolio/project-page";
+import { fetchProjectBySlug, fetchProjectGallery } from "@/features/portfolio/portfolio";
+import type { GalleryItem, ProjectDetail } from "@/features/portfolio/types";
 
 const slug = Astro.params.slug!;
 

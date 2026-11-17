@@ -3,13 +3,13 @@
 // handed to the islands as DTO props. Keep this frontmatter (the fetch, the JSON-LD, the category
 // pre-selection); swap the island imports to YOUR components. The three islands share one module-scope
 // store, so they can stay separate or be merged into one — your call.
-import SiteLayout from "@/layouts/site-layout.astro";
-import FaqSearch from "@/components/faq/faq-search";
-import FaqCategoryNav from "@/components/faq/faq-category-nav";
-import FaqAccordion from "@/components/faq/faq-accordion";
-import { fetchFaq } from "@/wix/faq/faq";
-import { faqJsonLd, parseDeepLink } from "@/wix/faq/faq-core";
-import type { FaqData } from "@/wix/faq/types";
+import SiteLayout from "@/app/layout.astro";
+import FaqSearch from "@/features/faq/faq-search";
+import FaqCategoryNav from "@/features/faq/faq-category-nav";
+import FaqAccordion from "@/features/faq/faq-accordion";
+import { fetchFaq } from "@/features/faq/faq";
+import { faqJsonLd, parseDeepLink } from "@/features/faq/faq-core";
+import type { FaqData } from "@/features/faq/types";
 
 let data: FaqData = { categories: [], questions: [], truncated: false };
 try {

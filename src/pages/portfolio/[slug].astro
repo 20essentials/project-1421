@@ -4,10 +4,10 @@
 // <title>/<meta description> from the DTO (no wixMetadata / <SEO.Tags> — unlike
 // storefront/bookings item pages). Keep the frontmatter; swap the island import to YOUR
 // collection-page component.
-import SiteLayout from "@/layouts/site-layout.astro";
-import CollectionPage from "@/components/portfolio/collection-page";
-import { fetchCollectionBySlug, fetchProjects } from "@/wix/portfolio/portfolio";
-import type { CollectionSummary, ProjectSummary } from "@/wix/portfolio/types";
+import SiteLayout from "@/app/layout.astro";
+import CollectionPage from "@/features/portfolio/collection-page";
+import { fetchCollectionBySlug, fetchProjects } from "@/features/portfolio/portfolio";
+import type { CollectionSummary, ProjectSummary } from "@/features/portfolio/types";
 
 const slug = Astro.params.slug!;
 

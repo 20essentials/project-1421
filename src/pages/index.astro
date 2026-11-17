@@ -1,12 +1,12 @@
 ---
-import SiteLayout from "@/layouts/site-layout.astro";
-import { fetchCollections } from "@/wix/portfolio/portfolio";
-import { fetchPosts, postMetaLine, postPath } from "@/wix/blog/posts";
-import { fetchFaq } from "@/wix/faq/faq";
-import { imgAttrs } from "@/wix/media";
-import type { CollectionSummary } from "@/wix/portfolio/types";
-import type { PostPage } from "@/wix/blog/types";
-import type { FaqData } from "@/wix/faq/types";
+import SiteLayout from "@/app/layout.astro";
+import { fetchCollections } from "@/features/portfolio/portfolio";
+import { fetchPosts, postMetaLine, postPath } from "@/features/blog/posts";
+import { fetchFaq } from "@/features/faq/faq";
+import { imgAttrs } from "@/shared/media";
+import type { CollectionSummary } from "@/features/portfolio/types";
+import type { PostPage } from "@/features/blog/types";
+import type { FaqData } from "@/features/faq/types";
 
 let collections: CollectionSummary[] = [];
 let posts: PostPage | undefined;
