@@ -42,3 +42,9 @@ check-output.txt
 
 # jetbrains setting folder
 .idea/
+
+# screenshots of visual features (agent workflow)
+.screenshots/
+
+# test artifacts
+test-results/

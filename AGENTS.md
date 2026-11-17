@@ -41,3 +41,17 @@ its copy, under the same names, in the client's own skills folder.
 - `wix-manage` — recipes for the live site itself (content, prices, settings), run from the shell
   with `npx -y @wix/cli@latest token --site <siteId>`, minted inline in each command; the token
   never lands in a file anywhere (not the project, not `/tmp`) nor in client code.
+
+## Visual features — mandatory screenshot
+
+Whenever the user requests a visual/UI feature (layout, component, styling, animation, page change),
+after implementing it take a screenshot as proof of the result and store it in `.screenshots/` inside
+this project. Workflow:
+
+1. Implement the feature and verify it compiles (`npx astro check`).
+2. Start the dev server if not running (`npm run dev`, default `http://localhost:4321`).
+3. Capture a full-page screenshot of the affected page(s) with Playwright (Chromium, already used by
+   this project) and save it to `.screenshots/<feature>-<YYYYMMDD-HHmmss>.png`. Take one per affected
+   page or viewport when relevant (e.g. mobile menu: capture closed and open states).
+4. Report the saved file path(s) to the user and stop — never delete or overwrite previous screenshots.
+
