@@ -1,5 +1,5 @@
 ---
-import SiteLayout from "../layouts/SiteLayout.astro";
+import SiteLayout from "@/layouts/site-layout.astro";
 
 const personali = [
   "2012 — TERRA, Casa della Musica, Cervignano (con Slow Food)",
@@ -16,6 +16,19 @@ const collettive = [
   "Convention FIOF, Orvieto",
   '"Élogie de la féminité", Normal magazine, Parigi',
 ];
+
+const seals = [
+  { src: "https://static.wixstatic.com/media/600582_fba6dd2ca035494cb920338e825adfa2~mv2.jpg", alt: "Qualifica QEP — Qualified European Photographer" },
+  { src: "https://static.wixstatic.com/media/600582_02a8c1efe51347b6b7f588636d848557~mv2.png", alt: "IPA International Photo Awards — winner seal" },
+  { src: "https://static.wixstatic.com/media/600582_0334b4cb9a1b4846963c5c3631d83b47~mv2.png", alt: "IPA International Photo Awards — 2° place Wedding 2016" },
+  { src: "https://static.wixstatic.com/media/600582_8a308e530faa45cfbcdf8ea49c438de9~mv2.png", alt: "IPA International Photo Awards — 3° place \"Black Heart\" 2020" },
+  { src: "https://static.wixstatic.com/media/600582_bd28daabcca94357bd6e3a41e0d4ea3a~mv2.jpg", alt: "B&W Spider Awards — honorable mention" },
+  { src: "https://static.wixstatic.com/media/600582_3bc5573e9969414b839d337d95269b6f~mv2.png", alt: "International Color Awards — winner 11th edizione" },
+  { src: "https://static.wixstatic.com/media/600582_6b844f98f59f4792af43ce1483106b65~mv2.jpg", alt: "International Color Awards — Color Master nominee" },
+  { src: "https://static.wixstatic.com/media/600582_fbdd14dd878d401890627eb7f701cd66~mv2.png", alt: "MIFA Moscow International Foto Awards — silver 2017" },
+  { src: "https://static.wixstatic.com/media/600582_c44541e7e73d4a8aad75998536353639~mv2.png", alt: "WPGA — honorable mention 2016" },
+  { src: "https://static.wixstatic.com/media/600582_e670259e22cb4eec80d2b88f434b4584~mv2.jpeg", alt: "La Grande Plaque" },
+];
 ---
 
 <SiteLayout title="Awards — Premi e riconoscimenti | Stefano Lunardi" description="Oltre 100 riconoscimenti internazionali: IPA, International Color Awards, MIFA, B&W Spider Awards, qualifica QEP.">
@@ -25,7 +38,20 @@ const collettive = [
     <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">Auszeichnungen und Anerkennungen — un percorso che attraversa fotogiornalismo, fine art e wedding.</p>
   </section>
 
-  <section class="mx-auto max-w-3xl py-14">
+  <section class="mx-auto max-w-5xl px-6 py-14">
+    <h2 class="font-display text-3xl font-medium">I sigilli</h2>
+    <div class="mt-8 grid grid-cols-3 gap-4 sm:grid-cols-5">
+      {
+        seals.map((s) => (
+          <div class="flex h-32 items-center justify-center border border-border bg-background p-3">
+            <img src={s.src} alt={s.alt} loading="lazy" decoding="async" class="max-h-full max-w-full object-contain" />
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl pb-14">
     <h2 class="font-display text-3xl font-medium">Certificazioni e qualifiche</h2>
     <p class="mt-4 leading-relaxed text-muted-foreground"><strong class="text-foreground">QEP — Qualified European Photographer</strong>, settore ritratto, della Federation of European Photographers.</p>
 

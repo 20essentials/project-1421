@@ -1,12 +1,12 @@
 ---
-import SiteLayout from "../layouts/SiteLayout.astro";
-import { fetchCollections } from "../wix/portfolio/portfolio";
-import { fetchPosts, postMetaLine, postPath } from "../wix/blog/posts";
-import { fetchFaq } from "../wix/faq/faq";
-import { imgAttrs } from "../wix/media";
-import type { CollectionSummary } from "../wix/portfolio/types";
-import type { PostPage } from "../wix/blog/types";
-import type { FaqData } from "../wix/faq/types";
+import SiteLayout from "@/layouts/site-layout.astro";
+import { fetchCollections } from "@/wix/portfolio/portfolio";
+import { fetchPosts, postMetaLine, postPath } from "@/wix/blog/posts";
+import { fetchFaq } from "@/wix/faq/faq";
+import { imgAttrs } from "@/wix/media";
+import type { CollectionSummary } from "@/wix/portfolio/types";
+import type { PostPage } from "@/wix/blog/types";
+import type { FaqData } from "@/wix/faq/types";
 
 let collections: CollectionSummary[] = [];
 let posts: PostPage | undefined;
@@ -148,7 +148,15 @@ const latestPosts = posts?.posts.slice(0, 3) ?? [];
       <p class="eyebrow">Riconoscimenti</p>
       <p class="font-display mt-3 text-3xl font-medium sm:text-4xl">Oltre 100 premi internazionali</p>
       <p class="mt-4 text-sm leading-relaxed text-muted-foreground">IPA International Photo Awards · International Color Awards · B&W Spider Awards · MIFA Moscow · WPGA · ANFM · Qualifica QEP</p>
-      <a href="/awards" class="mt-6 inline-block text-sm text-accent underline-offset-4 hover:underline no-underline">Tutti i premi e le mostre</a>
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
+        <img src="https://static.wixstatic.com/media/600582_c6b21435075c4f75a2e85ae788bd40f8~mv2.png" alt="Vogue Sposa" loading="lazy" decoding="async" class="h-12 w-auto object-contain opacity-80" />
+        <img src="https://static.wixstatic.com/media/600582_ddc10a9178a043be98339105c08ea8d5~mv2.png" alt="Wezoree" loading="lazy" decoding="async" class="h-10 w-auto object-contain opacity-80" />
+        <img src="https://static.wixstatic.com/media/600582_02a8c1efe51347b6b7f588636d848557~mv2.png" alt="IPA International Photo Awards — 1° place Fine Art 2016" loading="lazy" decoding="async" class="h-14 w-auto object-contain opacity-80" />
+        <img src="https://static.wixstatic.com/media/600582_fbdd14dd878d401890627eb7f701cd66~mv2.png" alt="MIFA Moscow International Foto Awards" loading="lazy" decoding="async" class="h-14 w-auto object-contain opacity-80" />
+        <img src="https://static.wixstatic.com/media/600582_3bc5573e9969414b839d337d95269b6f~mv2.png" alt="International Color Awards" loading="lazy" decoding="async" class="h-14 w-auto object-contain opacity-80" />
+        <img src="https://static.wixstatic.com/media/600582_0334b4cb9a1b4846963c5c3631d83b47~mv2.png" alt="IPA International Photo Awards — 2° place Wedding 2016" loading="lazy" decoding="async" class="h-14 w-auto object-contain opacity-80" />
+      </div>
+      <a href="/awards" class="mt-8 inline-block text-sm text-accent underline-offset-4 hover:underline no-underline">Tutti i premi e le mostre</a>
     </div>
   </section>
 
