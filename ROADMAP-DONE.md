@@ -50,3 +50,9 @@ dónde viven. Los pasos siguientes viven en `ROADMAP-NEXT-STEPS.md`.
 - Fix del workflow: faltaba `wix env pull` en release.yml (fallaba con `Missing environment variable WIX_CLIENT_ID`) → añadido, commit `83fda95`.
 - Release: success → https://github.com/20essentials/project-1421/actions
 - Keys: tag `v0.1.0` (fuerza re-release: `git tag -f v<ver> && git push -f origin v<ver>`), workflow `Release` (manual o por tags `v*`).
+
+### Release v0.1.1 con el contenido actual
+- El live seguía sirviendo `v0.1.0` (tag en `83fda95`, 11 commits atrás: header pill, favicon set, logos de awards/prensa, rename kebab-case + alias `@`, tests vitest/playwright, restructura `app/features/shared`).
+- Verificación previa: `astro check` 0 errores, `vitest` 6/6, `wix build` OK → push `main` + tag `v0.1.1` → workflow `Release` success (run 44191009760).
+- Live verificado: homepage 200 con favicon nuevo, logos Vogue Sposa/Wezoree y menciones de awards; `/awards` 200.
+- Keys: tag `v0.1.1`, release run https://github.com/20essentials/project-1421/actions/runs/44191009760.
