@@ -7,20 +7,18 @@ Orden sugerido de ejecución. El registro de lo ya hecho (con sus keys) vive en
 - [x] Etiquetar y pushear para disparar el workflow `Release`: hecho con `v0.1.0`, success.
 - [x] Verificar que el sitio live queda actualizado tras la release: `v0.1.0` quedó obsoleta (11 commits después); con `v0.1.1` (2026-11-17) el live muestra favicon, header pill y logos de awards/prensa en home; `/awards` 200.
 
-## 1. Logos de awards y prensa en Wix Media
-- [ ] Subir a Wix Media los logos que están solo en local:
-  - `stefano-lunardi-assets/awards logo/` (seals IPA, QEP, winner/hmention, colormaster…)
-  - `stefano-lunardi-assets/loghi-home-page/` (Vogue Sposa, Wezoree, color-awards, mifa…)
-- [ ] Mostrarlos en `/awards` (hoy es solo texto) y considerar una banda de "featured in" en la homepage con los logos de `loghi-home-page`.
-- [ ] Recordar regla del proyecto: todo asset de imagen en `.astro`/`.tsx` se llama con `baseUrl(...)` (el CSS puede usar rutas relativas).
+## 1. Logos de awards y prensa en Wix Media (listo)
+- [x] Subir a Wix Media los logos que están solo en local: ya servidos vía `static.wixstatic.com/media/600582_*~mv2` (las 12 URLs verificadas 200 el 2026-11-17).
+- [x] Mostrarlos en `/awards` (grid de 10 seals en `src/pages/awards.astro`) y banda "Riconoscimenti" en la homepage con logos de prensa (`src/pages/index.astro:146`).
+- [x] Regla del proyecto: todo asset de imagen en `.astro`/`.tsx` se llama con `baseUrl(...)` (el CSS puede usar rutas relativas).
 
 ## 2. Multi-idioma (DE / EN)
 - [ ] Decidir enfoque (rutas `/de/…`, `/en/…` con astro i18n, o réplicas por página) y qué páginas se traducen primero (home, portfolio, contatti, faq).
 - [ ] Traducir contenido del KB: los textos fuente ya existen en la base de conocimiento (italiano) y el fotógrafo trabaja Italia + Austria.
 - [ ] Actualizar `hreflang` y el JSON-LD si se añaden idiomas.
 
-## 3. Persistir los parches de node_modules
-- [ ] Los fixes para Windows en `node_modules/@astrojs/cloudflare/dist/index.js`, `dist/utils/wrangler-config.js` se pierden con un `npm install` limpio → aplicar `patch-package` (o reponerlos antes del próximo build/release). Nota: CI build ya pasa sin ellos, confirmar si siguen siendo necesarios.
+## 3. Parches de node_modules (resuelto — no son necesarios)
+- [x] Confirmado el 2026-11-17 con `@astrojs/cloudflare@14.3.2`: `node_modules` recién instalado (sin rastro de fixes para Windows en `dist/index.js` ni `dist/utils/wrangler-config.js`) y el build local en Windows (`wix build`) y el de CI pasan igual. No aplicar `patch-package`; reabrir solo si un build limpio vuelve a fallar.
 
 ## 4. Formularios en vivo
 - [ ] Probar el envío real de "Heart to Heart" desde `/contatti` (validación, otros-valores, mensaje de éxito) y confirmar que la submission llega al dashboard.

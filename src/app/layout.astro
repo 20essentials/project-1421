@@ -1,12 +1,23 @@
 ---
 import "@/styles/global.css";
 import SiteHeader from "@/app/header.astro";
+import SchemaForm from "@/features/forms/schema-form";
+import { getForm } from "@/features/forms/forms";
+import type { FormDto } from "@/features/forms/types";
 
 interface Props {
   title?: string;
   description?: string;
 }
 const { title, description } = Astro.props;
+
+const NEWSLETTER_FORM_ID = "99167414-c329-4e8f-8f02-db033652f376";
+
+let newsletterForm: FormDto | null = null;
+try {
+  newsletterForm = await getForm(NEWSLETTER_FORM_ID);
+} catch {
+}
 
 const primaryNav = [
   { href: "/portfolio", label: "Portfolio" },
@@ -49,6 +60,18 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
     </main>
     <footer class="border-t border-border px-6 pb-10 pt-16">
       <div class="mx-auto max-w-7xl">
+        <section class="mx-auto max-w-xl border-b border-border pb-14 text-center">
+          <p class="eyebrow">Aggiornamenti esclusivi</p>
+          <h2 class="font-display mt-3 text-2xl font-medium sm:text-3xl">La newsletter di Stefano</h2>
+          <p class="mt-3 text-sm leading-relaxed text-muted-foreground">Nuovi lavori, premi e storie dietro le quinte, una volta al mese. Niente spam.</p>
+          <div class="mt-8 text-left">
+            {newsletterForm ? (
+              <SchemaForm client:load formId={NEWSLETTER_FORM_ID} initialForm={newsletterForm} />
+            ) : (
+              <p class="text-sm text-muted-foreground">L'iscrizione alla newsletter è temporaneamente non disponibile. Scrivici a studio@stefanolunardi.com.</p>
+            )}
+          </div>
+        </section>
         <p class="font-display mx-auto max-w-3xl text-center text-2xl italic leading-snug sm:text-3xl">
           "Tutto è fugace, ma ciò che rimane è il ricordo."
         </p>
