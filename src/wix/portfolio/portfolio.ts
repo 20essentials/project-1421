@@ -13,8 +13,8 @@ import {
   projectItems as projectItemsModule,
 } from "@wix/portfolio";
 import { media, VideoResolution } from "@wix/sdk";
-import { wixModule } from "../sdk";
-import { imgSrc } from "../media";
+import { wixModule } from "@/wix/sdk";
+import { imgSrc } from "@/wix/media";
 import {
   galleryItems,
   visibleCollection,
@@ -23,8 +23,8 @@ import {
   visibleProjects,
   type Raw,
   type VideoSrc,
-} from "./portfolio-core";
-import type { CollectionSummary, GalleryItem, ProjectDetail, ProjectSummary } from "./types";
+} from "@/wix/portfolio/portfolio-core";
+import type { CollectionSummary, GalleryItem, ProjectDetail, ProjectSummary } from "@/wix/portfolio/types";
 
 const collections = wixModule(collectionsModule);
 const projects = wixModule(projectsModule);

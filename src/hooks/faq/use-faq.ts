@@ -16,9 +16,9 @@ import {
   toggleQuestion,
   type FaqState,
   type FaqStoreOptions,
-} from "../../wix/faq/faq-store";
-import { groupByCategory } from "../../wix/faq/faq-core";
-import type { FaqSection } from "../../wix/faq/types";
+} from "@/wix/faq/faq-store";
+import { groupByCategory } from "@/wix/faq/faq-core";
+import type { FaqSection } from "@/wix/faq/types";
 
 export type UseFaqOptions = FaqStoreOptions;
 

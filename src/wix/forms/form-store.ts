@@ -12,8 +12,8 @@
 // SSR-friendly: pass a server-fetched FormDto as `initialForm` and no client fetch happens;
 // `start()` then does nothing. Without it `start()` loads the schema. One store per mounted form:
 // createFormStore(), not a singleton — a page can hold two forms.
-import { applyRules, getForm, isClosed, otherText, otherValue } from "./forms";
-import { addressPartsForCountry } from "./forms-core";
+import { applyRules, getForm, isClosed, otherText, otherValue } from "@/wix/forms/forms";
+import { addressPartsForCountry } from "@/wix/forms/forms-core";
 import {
   EMAIL_PATTERN,
   PHONE_PATTERN,
@@ -25,7 +25,7 @@ import {
   rangeMessage,
   requiredMessage,
   withSeconds,
-} from "./submissions-core";
+} from "@/wix/forms/submissions-core";
 import {
   checkoutUrl,
   createSubmission,
@@ -35,8 +35,8 @@ import {
   submissionErrors,
   toSubmissionValues,
   uploadFiles,
-} from "./submissions";
-import type { FormDto, FormErrors, FormFieldDto, FormStep, FormValues, SubmitOutcome } from "./types";
+} from "@/wix/forms/submissions";
+import type { FormDto, FormErrors, FormFieldDto, FormStep, FormValues, SubmitOutcome } from "@/wix/forms/types";
 
 export { otherText, otherValue };
 

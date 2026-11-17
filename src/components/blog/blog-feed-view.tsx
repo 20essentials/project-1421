@@ -4,9 +4,9 @@
 // byline, a counter, or a cover appears only when the DTO carries one; hrefs come from the path
 // helpers (slugs may contain "/"); the cover's alt is the DTO's.
 import type { ComponentType, ReactNode } from "react";
-import { useBlogFeed } from "../../hooks/blog/useBlogFeed";
-import { formatCount, postMetaLine, postPath } from "../../wix/blog/posts";
-import type { BlogCategory, BlogTag, PostPage, PostSummary } from "../../wix/blog/types";
+import { useBlogFeed } from "@/hooks/blog/use-blog-feed";
+import { formatCount, postMetaLine, postPath } from "@/wix/blog/posts";
+import type { BlogCategory, BlogTag, PostPage, PostSummary } from "@/wix/blog/types";
 
 export interface LinkLikeProps {
   href: string;

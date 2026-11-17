@@ -4,8 +4,8 @@
 // complete; per the skill's model you design and build your own on useComments. Mount it only when
 // `post.commentingEnabled && post.referenceId` — in Astro as a `client:load` island.
 import { useState, type FormEvent } from "react";
-import { useComments } from "../../hooks/blog/useComments";
-import type { BlogComment } from "../../wix/blog/types";
+import { useComments } from "@/hooks/blog/use-comments";
+import type { BlogComment } from "@/wix/blog/types";
 
 export interface CommentsViewProps {
   /** `PostDetail.referenceId`. */

@@ -13,9 +13,9 @@
 // URL state (syncUrl, default on): `?category=<id>` and `#q-<slug>` are read once when the first
 // island subscribes and written with history.replaceState on every change — a visitor can copy the
 // address bar at any point and get back to the same view.
-import { fetchFaq } from "./faq";
-import { anchorId, findByAnchor, parseDeepLink, visibleQuestions } from "./faq-core";
-import type { FaqData, FaqQuestion } from "./types";
+import { fetchFaq } from "@/wix/faq/faq";
+import { anchorId, findByAnchor, parseDeepLink, visibleQuestions } from "@/wix/faq/faq-core";
+import type { FaqData, FaqQuestion } from "@/wix/faq/types";
 
 export interface FaqState {
   /** null while the first load is in flight and nothing was seeded — render skeletons, not an empty state. */

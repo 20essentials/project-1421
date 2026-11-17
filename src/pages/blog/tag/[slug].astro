@@ -5,11 +5,11 @@
 // title comes from the tag's label. Keep the frontmatter; restyle the template. The first page is
 // fetched SERVER-SIDE with the tag filter and seeded together with the filter id. An unknown slug is
 // a real 404 (Wix's router answers 200 + empty feed; on a headless site that page does not exist).
-import SiteLayout from "../../../layouts/SiteLayout.astro";
-import Feed from "../../../components/blog/Feed";
-import { fetchPosts } from "../../../wix/blog/posts";
-import { fetchBlogCategories, fetchBlogTags, fetchTagBySlug } from "../../../wix/blog/taxonomy";
-import type { BlogCategory, BlogTag, PostPage } from "../../../wix/blog/types";
+import SiteLayout from "@/layouts/site-layout.astro";
+import Feed from "@/components/blog/feed";
+import { fetchPosts } from "@/wix/blog/posts";
+import { fetchBlogCategories, fetchBlogTags, fetchTagBySlug } from "@/wix/blog/taxonomy";
+import type { BlogCategory, BlogTag, PostPage } from "@/wix/blog/types";
 
 const slug = Astro.params.slug;
 if (!slug) {

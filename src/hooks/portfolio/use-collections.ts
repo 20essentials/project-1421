@@ -3,7 +3,7 @@
 // gallery. SSR-friendly: pass server-fetched data as `initialCollections` and no client fetch
 // happens; a SPA passes nothing. A static page, Vue, or Svelte uses the store directly.
 import { useEffect, useRef, useSyncExternalStore } from "react";
-import { createCollectionsStore, type CollectionsState, type CollectionsStore, type CollectionsStoreOptions } from "../../wix/portfolio/collections-store";
+import { createCollectionsStore, type CollectionsState, type CollectionsStore, type CollectionsStoreOptions } from "@/wix/portfolio/collections-store";
 
 export type UseCollectionsOptions = CollectionsStoreOptions;
 

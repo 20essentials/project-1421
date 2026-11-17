@@ -6,8 +6,8 @@
 // the project seeded, `start()` fetches its gallery; with nothing seeded it resolves the slug
 // first. `notFound` is the real not-found signal (project stays null while loading). One store
 // per (slug, mount): createProjectDetailStore(slug, options), not a singleton.
-import { fetchProjectBySlug, fetchProjectGallery } from "./portfolio";
-import type { GalleryItem, ProjectDetail } from "./types";
+import { fetchProjectBySlug, fetchProjectGallery } from "@/wix/portfolio/portfolio";
+import type { GalleryItem, ProjectDetail } from "@/wix/portfolio/types";
 
 export interface ProjectDetailStoreOptions {
   initialProject?: ProjectDetail;

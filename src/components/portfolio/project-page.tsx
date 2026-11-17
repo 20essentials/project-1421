@@ -1,7 +1,7 @@
-import { useProjectDetail } from "../../hooks/portfolio/useProjectDetail";
-import { GalleryLink, GalleryMedia } from "./GalleryMedia";
-import { imgAttrs } from "../../wix/media";
-import type { GalleryItem, ProjectDetail } from "../../wix/portfolio/types";
+import { useProjectDetail } from "@/hooks/portfolio/use-project-detail";
+import { GalleryLink, GalleryMedia } from "@/components/portfolio/gallery-media";
+import { imgAttrs } from "@/wix/media";
+import type { GalleryItem, ProjectDetail } from "@/wix/portfolio/types";
 
 export default function ProjectPage(props: {
   slug: string;

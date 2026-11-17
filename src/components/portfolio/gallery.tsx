@@ -1,6 +1,6 @@
-import { useCollections } from "../../hooks/portfolio/useCollections";
-import { imgAttrs } from "../../wix/media";
-import type { CollectionSummary } from "../../wix/portfolio/types";
+import { useCollections } from "@/hooks/portfolio/use-collections";
+import { imgAttrs } from "@/wix/media";
+import type { CollectionSummary } from "@/wix/portfolio/types";
 
 export default function Gallery(props: { initialCollections?: CollectionSummary[] }) {
   const { collections, error } = useCollections(props);

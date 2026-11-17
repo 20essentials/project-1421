@@ -1,9 +1,9 @@
 // REFERENCE gallery surface: collections grid on the @theme tokens.
 // Correct and complete; per the skill's model you design and build your own on useCollections.
 import type { ComponentType, ReactNode } from "react";
-import { useCollections } from "../../hooks/portfolio/useCollections";
-import { imgAttrs } from "../../wix/media";
-import type { CollectionSummary } from "../../wix/portfolio/types";
+import { useCollections } from "@/hooks/portfolio/use-collections";
+import { imgAttrs } from "@/wix/media";
+import type { CollectionSummary } from "@/wix/portfolio/types";
 
 export interface LinkLikeProps {
   href: string;

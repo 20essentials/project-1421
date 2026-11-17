@@ -4,8 +4,8 @@
 // shared with every other stack; this is its React spelling. Wrapped in a link when the owner
 // attached one. `className` styles the media element itself.
 import type { ReactNode } from "react";
-import { mediaElement } from "../../wix/portfolio/portfolio-core";
-import type { GalleryItem } from "../../wix/portfolio/types";
+import { mediaElement } from "@/wix/portfolio/portfolio-core";
+import type { GalleryItem } from "@/wix/portfolio/types";
 
 export interface GalleryMediaProps {
   item: GalleryItem;

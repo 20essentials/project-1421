@@ -5,8 +5,8 @@
 // come from the SDK (`_id`, media as a `wix:image://` string, dates as Date) or from REST (`id`,
 // media as an { id, url } object, dates as ISO strings); the mappers accept both and produce the
 // same DTO. Its one runtime import is the shared Ricos renderer, deployed beside it on every stack.
-import { richContentToHtml } from "../rich-content";
-import type { BlogAuthor, PostDetail, PostMetrics, PostSummary } from "./types";
+import { richContentToHtml } from "@/wix/rich-content";
+import type { BlogAuthor, PostDetail, PostMetrics, PostSummary } from "@/wix/blog/types";
 
 /** A raw Blog V3 entity as either transport returns it. */
 export type Raw = Record<string, any>;

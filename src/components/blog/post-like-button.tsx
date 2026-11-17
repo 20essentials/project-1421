@@ -2,9 +2,9 @@
 // the statically rendered header mounts (`client:load`): it re-creates the post store from the
 // server-fetched post and reads only the viewer's like state (personal, client-only), so nothing
 // else is fetched twice. In a SPA, PostView renders the same row from its own usePost.
-import { usePost } from "../../hooks/blog/usePost";
-import { formatCount } from "../../wix/blog/posts";
-import type { PostDetail } from "../../wix/blog/types";
+import { usePost } from "@/hooks/blog/use-post";
+import { formatCount } from "@/wix/blog/posts";
+import type { PostDetail } from "@/wix/blog/types";
 
 export interface PostLikeButtonProps {
   /** The server-fetched post (SSR) — the store starts from it and skips every read but the like state. */

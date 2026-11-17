@@ -2,8 +2,8 @@
 // and the REST twin in templates/blog/rest/taxonomy.ts (fetch). Raw entities may carry `_id`
 // (SDK) or `id` (REST). Has its own rawId/mediaValue (copies of posts-core's) so it stands alone
 // when stripped; imports are type-only.
-import type { BlogCategory, BlogTag } from "./types";
-import type { ImgSrc, Raw } from "./posts-core";
+import type { BlogCategory, BlogTag } from "@/wix/blog/types";
+import type { ImgSrc, Raw } from "@/wix/blog/posts-core";
 
 /** Menu order — displayPosition ascending; -1 (unplaced) sorts first, which is also what the SDK path shows. */
 export const CATEGORY_SORT = [{ fieldName: "displayPosition", order: "ASC" }] as const;

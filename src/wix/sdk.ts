@@ -17,7 +17,7 @@
 import { createClient, OAuthStrategy, EMPTY_TOKENS } from "@wix/sdk";
 import { fetchWithAuth as ambientFetch } from "@wix/sdk/context";
 import type { IOAuthStrategy, TokenStorage, Tokens } from "@wix/sdk";
-import { WIX_CLIENT_ID } from "./config";
+import { WIX_CLIENT_ID } from "@/wix/config";
 
 const STORAGE_KEY = `wix-session-${WIX_CLIENT_ID ?? "ambient"}`;
 

@@ -16,10 +16,10 @@
 // docs: https://dev.wix.com/docs/api-reference/crm/forms/form-schemas/get-form.md
 // docs: https://dev.wix.com/docs/api-reference/crm/forms/form-schemas/list-forms.md
 // docs: https://dev.wix.com/docs/api-reference/crm/forms/form-schemas/about-form-fields.md
-import { wixFetch } from "../sdk";
-import { imgSrc } from "../media";
-import { FORMS_NAMESPACE, applyRules, isClosed, otherText, otherValue, toForm, type Raw } from "./forms-core";
-import type { FormDto } from "./types";
+import { wixFetch } from "@/wix/sdk";
+import { imgSrc } from "@/wix/media";
+import { FORMS_NAMESPACE, applyRules, isClosed, otherText, otherValue, toForm, type Raw } from "@/wix/forms/forms-core";
+import type { FormDto } from "@/wix/forms/types";
 
 export { FORMS_NAMESPACE, applyRules, isClosed, otherText, otherValue };
 

@@ -7,9 +7,9 @@
 // docs: https://dev.wix.com/docs/api-reference/business-solutions/blog/posts-stats/get-post-by-slug.md
 // docs: https://dev.wix.com/docs/api-reference/business-solutions/blog/posts-stats/get-post-metrics.md
 import { posts as postsModule } from "@wix/blog";
-import { wixModule } from "../sdk";
-import { imgSrc } from "../media";
-import { fetchAuthorsByIds } from "./authors";
+import { wixModule } from "@/wix/sdk";
+import { imgSrc } from "@/wix/media";
+import { fetchAuthorsByIds } from "@/wix/blog/authors";
 import {
   BLOG_APP_ID,
   CARD_FIELDSETS,
@@ -29,8 +29,8 @@ import {
   withAuthors,
   type FetchPostsOptions,
   type Raw,
-} from "./posts-core";
-import type { PostDetail, PostMetrics, PostPage, PostSummary } from "./types";
+} from "@/wix/blog/posts-core";
+import type { PostDetail, PostMetrics, PostPage, PostSummary } from "@/wix/blog/types";
 
 export { BLOG_APP_ID, categoryPath, formatCount, postMetaLine, postPath, relativeDateLabel, tagPath, type FetchPostsOptions };
 

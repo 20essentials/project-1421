@@ -7,11 +7,11 @@
 // SERVER-SIDE with the category filter and seeded into the island together with the filter id, so
 // the island trusts it and fetches nothing on load. An unknown slug is a real 404 (Wix's own router
 // answers 200 with an empty feed; on a headless site a page that exists for no category is a 404).
-import SiteLayout from "../../../layouts/SiteLayout.astro";
-import Feed from "../../../components/blog/Feed";
-import { fetchPosts } from "../../../wix/blog/posts";
-import { fetchBlogCategories, fetchBlogTags, fetchCategoryBySlug } from "../../../wix/blog/taxonomy";
-import type { BlogCategory, BlogTag, PostPage } from "../../../wix/blog/types";
+import SiteLayout from "@/layouts/site-layout.astro";
+import Feed from "@/components/blog/feed";
+import { fetchPosts } from "@/wix/blog/posts";
+import { fetchBlogCategories, fetchBlogTags, fetchCategoryBySlug } from "@/wix/blog/taxonomy";
+import type { BlogCategory, BlogTag, PostPage } from "@/wix/blog/types";
 import { WIX_APPS } from "@wix/essentials";
 import { SEO } from "@wix/seo/components";
 import { loadSEOTagsServiceConfig } from "@wix/seo/services";

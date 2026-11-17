@@ -2,10 +2,10 @@
 // video items) on the @theme tokens. Correct and complete; per the skill's model you design
 // and build your own on useProjectDetail. The gallery items render through the SHIPPED
 // GalleryMedia (kind branching, poster, link wrap) — keep that in whatever you build.
-import { useProjectDetail } from "../../hooks/portfolio/useProjectDetail";
-import { imgAttrs } from "../../wix/media";
-import type { GalleryItem, ProjectDetail } from "../../wix/portfolio/types";
-import { GalleryLink, GalleryMedia } from "./GalleryMedia";
+import { useProjectDetail } from "@/hooks/portfolio/use-project-detail";
+import { imgAttrs } from "@/wix/media";
+import type { GalleryItem, ProjectDetail } from "@/wix/portfolio/types";
+import { GalleryLink, GalleryMedia } from "@/components/portfolio/gallery-media";
 
 export interface ProjectDetailViewProps {
   slug: string;

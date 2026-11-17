@@ -2,9 +2,9 @@
 // Correct and complete; per the skill's model you design and build your own on
 // useCollectionProjects (ProjectCard is reusable for an all-work grid or a home strip).
 import type { ComponentType, ReactNode } from "react";
-import { useCollectionProjects } from "../../hooks/portfolio/useCollectionProjects";
-import { imgAttrs } from "../../wix/media";
-import type { CollectionSummary, ProjectSummary } from "../../wix/portfolio/types";
+import { useCollectionProjects } from "@/hooks/portfolio/use-collection-projects";
+import { imgAttrs } from "@/wix/media";
+import type { CollectionSummary, ProjectSummary } from "@/wix/portfolio/types";
 
 export interface LinkLikeProps {
   href: string;

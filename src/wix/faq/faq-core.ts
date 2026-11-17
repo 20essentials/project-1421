@@ -4,10 +4,10 @@
 // Ricos-to-HTML rendering, the FAQPage structured data, and the wire spelling of a query lives HERE,
 // once. A raw entity may come from the SDK (`_id`) or from REST (`id`); the mappers accept both.
 // Its one runtime import is the shared Ricos renderer, deployed beside it on every stack.
-import { escapeHtml, richContentToHtml, richContentToText } from "../rich-content";
-import type { FaqCategory, FaqData, FaqQuestion, FaqQuestionPage, FaqSection, FetchQuestionsOptions } from "./types";
+import { escapeHtml, richContentToHtml, richContentToText } from "@/wix/rich-content";
+import type { FaqCategory, FaqData, FaqQuestion, FaqQuestionPage, FaqSection, FetchQuestionsOptions } from "@/wix/faq/types";
 
-export { escapeHtml, imageValue, richContentToHtml, richContentToText } from "../rich-content";
+export { escapeHtml, imageValue, richContentToHtml, richContentToText } from "@/wix/rich-content";
 
 /** A raw FAQ entity (Category, QuestionEntry) as either transport returns it. */
 export type Raw = Record<string, any>;

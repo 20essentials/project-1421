@@ -5,8 +5,8 @@
 // post id through an internal client instead — verify on a live site that the dashboard's threads
 // come back). Threads are two levels deep: a reply is stored under its TOP-level comment, and its
 // `parentComment` may itself be a reply ("replying to"). Imports are type-only.
-import type { BlogAuthor, BlogComment, CommentPage, CommentStatus, CommentThread } from "./types";
-import type { Raw } from "./posts-core";
+import type { BlogAuthor, BlogComment, CommentPage, CommentStatus, CommentThread } from "@/wix/blog/types";
+import type { Raw } from "@/wix/blog/posts-core";
 
 // A copy of posts-core's BLOG_APP_ID and dateParts, so this file stands alone when stripped.
 const BLOG_APP_ID = "14bcded7-0066-7c35-14d7-466cb3f09103";

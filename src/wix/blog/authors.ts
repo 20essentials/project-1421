@@ -5,11 +5,11 @@
 // in templates/blog/rest/authors.ts). Both reads are non-fatal: authors are decoration.
 // docs: https://dev.wix.com/docs/api-reference/crm/members-contacts/members/member-management/members/query-members.md
 // docs: https://dev.wix.com/docs/api-reference/crm/members-contacts/members/member-management/members/get-my-member.md
-import { wixFetch } from "../sdk";
-import { imgSrc } from "../media";
-import { authorsQuery, indexAuthors, toAuthor, uniqueIds } from "./authors-core";
-import type { Raw } from "./posts-core";
-import type { BlogAuthor } from "./types";
+import { wixFetch } from "@/wix/sdk";
+import { imgSrc } from "@/wix/media";
+import { authorsQuery, indexAuthors, toAuthor, uniqueIds } from "@/wix/blog/authors-core";
+import type { Raw } from "@/wix/blog/posts-core";
+import type { BlogAuthor } from "@/wix/blog/types";
 
 /**
  * Every distinct author of one page in ONE request, keyed by member id. {} on failure or when the

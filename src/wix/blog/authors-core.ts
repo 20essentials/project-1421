@@ -3,8 +3,8 @@
 // the Members API's PUBLIC fieldset (nickname + photo), looked up in ONE batched query per page.
 // Authors are decoration on a card: every failure degrades to "no byline", never to a placeholder
 // name. Imports are type-only so a strip to JS emits no imports.
-import type { BlogAuthor } from "./types";
-import type { ImgSrc, Raw } from "./posts-core";
+import type { BlogAuthor } from "@/wix/blog/types";
+import type { ImgSrc, Raw } from "@/wix/blog/posts-core";
 
 /** The PUBLIC fieldset covers everything a byline needs: `profile.nickname` and `profile.photo`. */
 export const AUTHOR_FIELDSETS = ["PUBLIC"] as const;

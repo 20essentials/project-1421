@@ -5,8 +5,8 @@
 //
 // SSR-friendly: seed with `initialCollections` and nothing is fetched; without a seed `start()`
 // fetches once. One store per mounted gallery: createCollectionsStore(), not a singleton.
-import { fetchCollections } from "./portfolio";
-import type { CollectionSummary } from "./types";
+import { fetchCollections } from "@/wix/portfolio/portfolio";
+import type { CollectionSummary } from "@/wix/portfolio/types";
 
 export interface CollectionsStoreOptions {
   initialCollections?: CollectionSummary[];

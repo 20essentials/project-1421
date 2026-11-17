@@ -7,14 +7,14 @@
 // frontmatter; restyle the template below freely. The body island is client:only — the ricos
 // viewer breaks under SSR. The like row and the comments are client:load islands: both read as
 // the VIEWER (personal like state, the member's own comments), which SSR cannot do.
-import SiteLayout from "../../layouts/SiteLayout.astro";
-import RichContent from "../../components/blog/RichContent";
-import PostLikeButton from "../../components/blog/PostLikeButton";
-import CommentsView from "../../components/blog/CommentsView";
-import { PostCard } from "../../components/blog/BlogFeedView";
-import { categoryPath, fetchPostBySlug, fetchRelatedPosts, postMetaLine, tagPath } from "../../wix/blog/posts";
-import { fetchBlogCategories, fetchTagsByIds, inIdOrder } from "../../wix/blog/taxonomy";
-import type { BlogCategory, BlogTag, PostDetail, PostSummary } from "../../wix/blog/types";
+import SiteLayout from "@/layouts/site-layout.astro";
+import RichContent from "@/components/blog/rich-content";
+import PostLikeButton from "@/components/blog/post-like-button";
+import CommentsView from "@/components/blog/comments-view";
+import { PostCard } from "@/components/blog/blog-feed-view";
+import { categoryPath, fetchPostBySlug, fetchRelatedPosts, postMetaLine, tagPath } from "@/wix/blog/posts";
+import { fetchBlogCategories, fetchTagsByIds, inIdOrder } from "@/wix/blog/taxonomy";
+import type { BlogCategory, BlogTag, PostDetail, PostSummary } from "@/wix/blog/types";
 import { WIX_APPS } from "@wix/essentials";
 import { SEO } from "@wix/seo/components";
 import { loadSEOTagsServiceConfig } from "@wix/seo/services";

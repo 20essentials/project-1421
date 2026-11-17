@@ -3,7 +3,7 @@
 // (fetch, a static site or a port to another language). Every rule about hidden entities, order,
 // covers, media kinds lives HERE, once. A raw entity may come from the SDK (`_id`) or from REST
 // (`id`); the mappers accept both. Imports are type-only so a strip to JS emits no imports.
-import type { CollectionSummary, GalleryItem, ProjectDetail, ProjectDetailRow, ProjectSummary } from "./types";
+import type { CollectionSummary, GalleryItem, ProjectDetail, ProjectDetailRow, ProjectSummary } from "@/wix/portfolio/types";
 
 /** A raw Portfolio v1 entity as either transport returns it. */
 export type Raw = Record<string, any>;

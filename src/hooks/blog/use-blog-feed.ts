@@ -7,7 +7,7 @@
 // no client fetch happens; a SPA passes nothing. Category/tag filtering fetches live
 // (server-side-filtered); the two filters are mutually exclusive — setting one clears the other.
 import { useEffect, useRef, useSyncExternalStore } from "react";
-import { createBlogFeedStore, type BlogFeedState, type BlogFeedStore, type BlogFeedStoreOptions } from "../../wix/blog/blog-feed-store";
+import { createBlogFeedStore, type BlogFeedState, type BlogFeedStore, type BlogFeedStoreOptions } from "@/wix/blog/blog-feed-store";
 
 export type UseBlogFeedOptions = BlogFeedStoreOptions;
 

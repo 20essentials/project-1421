@@ -8,11 +8,11 @@
 // refused create sets `needsSignIn` (render a sign-in prompt), never a client-side guess. The
 // site-wide comments master switch has no public read — a post whose owner turned comments off
 // site-wide still says commentingEnabled here.
-import { fetchCurrentMemberId } from "./authors";
-import { createComment, deleteComment, fetchComments, fetchReplies } from "./comments";
-import { DEFAULT_COMMENT_SORT, markOwn, mergeById, toDeletedPlaceholder, type CommentSort } from "./comments-core";
-import { isPermissionDenied } from "./posts-core";
-import type { BlogComment, CommentThread } from "./types";
+import { fetchCurrentMemberId } from "@/wix/blog/authors";
+import { createComment, deleteComment, fetchComments, fetchReplies } from "@/wix/blog/comments";
+import { DEFAULT_COMMENT_SORT, markOwn, mergeById, toDeletedPlaceholder, type CommentSort } from "@/wix/blog/comments-core";
+import { isPermissionDenied } from "@/wix/blog/posts-core";
+import type { BlogComment, CommentThread } from "@/wix/blog/types";
 
 export { type CommentSort };
 

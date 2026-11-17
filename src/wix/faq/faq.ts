@@ -6,8 +6,8 @@
 // docs: https://dev.wix.com/docs/api-reference/business-management/faq-app/category-v2/query-categories.md
 // docs: https://dev.wix.com/docs/api-reference/business-management/faq-app/question-entry-v2/query-question-entries.md
 import { category as categoryModule, questionEntry as questionModule } from "@wix/faq";
-import { wixModule } from "../sdk";
-import { imgSrc } from "../media";
+import { wixModule } from "@/wix/sdk";
+import { imgSrc } from "@/wix/media";
 import {
   CONTENT_FORMAT,
   FAQ_APP_ID,
@@ -19,8 +19,8 @@ import {
   toCategory,
   toQuestion,
   type Raw,
-} from "./faq-core";
-import type { FaqCategory, FaqData, FaqQuestion, FaqQuestionPage, FetchQuestionsOptions } from "./types";
+} from "@/wix/faq/faq-core";
+import type { FaqCategory, FaqData, FaqQuestion, FaqQuestionPage, FetchQuestionsOptions } from "@/wix/faq/types";
 
 export { FAQ_APP_ID };
 

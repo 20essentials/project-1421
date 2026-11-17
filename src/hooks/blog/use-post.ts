@@ -6,7 +6,7 @@
 // read happens except the personal like state; a SPA passes only the slug. A slug change creates a
 // fresh store and refetches.
 import { useEffect, useRef, useSyncExternalStore } from "react";
-import { createPostStore, type PostState, type PostStore, type PostStoreOptions } from "../../wix/blog/post-store";
+import { createPostStore, type PostState, type PostStore, type PostStoreOptions } from "@/wix/blog/post-store";
 
 export type UsePostOptions = PostStoreOptions;
 

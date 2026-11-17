@@ -8,10 +8,10 @@
 // docs: https://dev.wix.com/docs/api-reference/business-solutions/blog/likes/query-likes.md
 // docs: https://dev.wix.com/docs/api-reference/business-solutions/blog/likes/delete-like-by-fqdn-and-entity-id.md
 import { likes as likesModule } from "@wix/blog";
-import { wixModule } from "../sdk";
-import { fetchPostMetrics } from "./posts";
-import { BLOG_POST_FQDN } from "./posts-core";
-import type { LikeState } from "./types";
+import { wixModule } from "@/wix/sdk";
+import { fetchPostMetrics } from "@/wix/blog/posts";
+import { BLOG_POST_FQDN } from "@/wix/blog/posts-core";
+import type { LikeState } from "@/wix/blog/types";
 
 const likes = wixModule(likesModule);
 

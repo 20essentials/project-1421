@@ -1,5 +1,5 @@
-import { useWixForm, otherValue, FORM_ERROR } from "../../hooks/forms/useWixForm";
-import type { FormDto, FormFieldDto } from "../../wix/forms/types";
+import { useWixForm, otherValue, FORM_ERROR } from "@/hooks/forms/use-wix-form";
+import type { FormDto, FormFieldDto } from "@/wix/forms/types";
 
 const OTHER_SELECT_VALUE = "__other__";
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { formatMoney } from "../../src/wix/money";
+import { formatMoney } from "@/wix/money";
 
 describe("formatMoney", () => {
   it("returns empty string for null or missing money", () => {

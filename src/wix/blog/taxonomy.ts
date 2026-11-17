@@ -8,11 +8,11 @@
 // docs: https://dev.wix.com/docs/api-reference/business-solutions/blog/tags/get-tag-by-slug.md
 // docs: https://dev.wix.com/docs/api-reference/business-solutions/blog/posts-stats/query-posts.md
 import { categories as categoriesModule, posts as postsModule, tags as tagsModule } from "@wix/blog";
-import { wixModule } from "../sdk";
-import { imgSrc } from "../media";
-import { RECENT_POSTS_LIMIT, TAG_BY_IDS_LIMIT, TAXONOMY_LIMIT, inIdOrder, toCategory, toTag, withPostCounts, type FetchCategoriesOptions } from "./taxonomy-core";
-import type { Raw } from "./posts-core";
-import type { BlogCategory, BlogTag } from "./types";
+import { wixModule } from "@/wix/sdk";
+import { imgSrc } from "@/wix/media";
+import { RECENT_POSTS_LIMIT, TAG_BY_IDS_LIMIT, TAXONOMY_LIMIT, inIdOrder, toCategory, toTag, withPostCounts, type FetchCategoriesOptions } from "@/wix/blog/taxonomy-core";
+import type { Raw } from "@/wix/blog/posts-core";
+import type { BlogCategory, BlogTag } from "@/wix/blog/types";
 
 export { inIdOrder, type FetchCategoriesOptions };
 

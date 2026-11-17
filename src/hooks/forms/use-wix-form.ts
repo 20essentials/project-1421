@@ -11,10 +11,10 @@
 // SSR-friendly: pass a server-fetched FormDto as `initialForm` (Astro frontmatter) and no
 // client fetch happens; a SPA passes nothing and the hook loads it.
 import { useCallback, useEffect, useRef, useSyncExternalStore } from "react";
-import { createFormStore, type FormStore, type FormSubmitEvent } from "../../wix/forms/form-store";
-import type { FormDto, FormErrors, FormValues, SubmitOutcome } from "../../wix/forms/types";
+import { createFormStore, type FormStore, type FormSubmitEvent } from "@/wix/forms/form-store";
+import type { FormDto, FormErrors, FormValues, SubmitOutcome } from "@/wix/forms/types";
 
-export { FORM_ERROR, otherText, otherValue, validateValue } from "../../wix/forms/form-store";
+export { FORM_ERROR, otherText, otherValue, validateValue } from "@/wix/forms/form-store";
 
 export interface UseWixFormOptions {
   /** Server-fetched form (Astro frontmatter) — skips the client fetch entirely. */

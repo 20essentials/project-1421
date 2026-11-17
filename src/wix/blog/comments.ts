@@ -7,8 +7,8 @@
 // docs: https://dev.wix.com/docs/api-reference/crm/community/comments/comments/list-comments-by-resource.md
 // docs: https://dev.wix.com/docs/api-reference/crm/community/comments/comments/create-comment.md
 // docs: https://dev.wix.com/docs/api-reference/crm/community/comments/comments/delete-comment.md
-import { wixFetch } from "../sdk";
-import { fetchAuthorsByIds } from "./authors";
+import { wixFetch } from "@/wix/sdk";
+import { fetchAuthorsByIds } from "@/wix/blog/authors";
 import {
   commentAuthorIds,
   createCommentBody,
@@ -20,9 +20,9 @@ import {
   toCommentThread,
   type CreateCommentOptions,
   type ListCommentsOptions,
-} from "./comments-core";
-import type { Raw } from "./posts-core";
-import type { BlogComment, CommentPage, CommentThread } from "./types";
+} from "@/wix/blog/comments-core";
+import type { Raw } from "@/wix/blog/posts-core";
+import type { BlogComment, CommentPage, CommentThread } from "@/wix/blog/types";
 
 export { type CreateCommentOptions, type ListCommentsOptions };
 

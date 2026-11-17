@@ -5,7 +5,7 @@
 // Mount the surface only when `post.commentingEnabled && post.referenceId`; pass the referenceId.
 // Client-side by nature (the thread is read as the viewer) — in Astro, a `client:load` island.
 import { useEffect, useRef, useSyncExternalStore } from "react";
-import { createCommentsStore, type CommentsState, type CommentsStore, type CommentsStoreOptions } from "../../wix/blog/comments-store";
+import { createCommentsStore, type CommentsState, type CommentsStore, type CommentsStoreOptions } from "@/wix/blog/comments-store";
 
 export type UseCommentsOptions = CommentsStoreOptions;
 

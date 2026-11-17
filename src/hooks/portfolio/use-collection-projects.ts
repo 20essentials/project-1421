@@ -9,7 +9,7 @@ import {
   type CollectionProjectsState,
   type CollectionProjectsStore,
   type CollectionProjectsStoreOptions,
-} from "../../wix/portfolio/collection-projects-store";
+} from "@/wix/portfolio/collection-projects-store";
 
 export type UseCollectionProjectsOptions = CollectionProjectsStoreOptions;
 

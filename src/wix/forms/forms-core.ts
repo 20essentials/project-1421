@@ -18,9 +18,9 @@ import type {
   FormValues,
   RuleCondition,
   RuleEffect,
-} from "./types";
-import { addressOverrides, addressParts, humanizeSub } from "./forms-address-core";
-export { ADDRESS_SUBFIELDS, COUNTRY_CODES, addressPartsForCountry, countryName, humanizeSub } from "./forms-address-core";
+} from "@/wix/forms/types";
+import { addressOverrides, addressParts, humanizeSub } from "@/wix/forms/forms-address-core";
+export { ADDRESS_SUBFIELDS, COUNTRY_CODES, addressPartsForCountry, countryName, humanizeSub } from "@/wix/forms/forms-address-core";
 
 /** A raw Form Schemas v4 entity as either transport returns it. */
 export type Raw = Record<string, any>;

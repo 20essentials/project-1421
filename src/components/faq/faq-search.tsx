@@ -3,7 +3,7 @@
 // complete; per the skill's model you design and build your own on useFaq. Search runs client-side over
 // the loaded questions and answers (the API has no substring search) — nothing here fetches.
 import { useEffect, useRef, useState } from "react";
-import { useFaq, type UseFaqOptions } from "../../hooks/faq/useFaq";
+import { useFaq, type UseFaqOptions } from "@/hooks/faq/use-faq";
 
 export interface FaqSearchProps extends UseFaqOptions {
   label?: string;

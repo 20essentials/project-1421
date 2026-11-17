@@ -7,10 +7,10 @@
 // SSR-friendly: pass the server-fetched PostDetail as `initialPost` (plus `initialCategories`,
 // `initialTags`, `initialRelated`) and no client read happens except the personal like state; a SPA
 // passes only the slug. One store per post surface: createPostStore().
-import { fetchPostBySlug, fetchRelatedPosts } from "./posts";
-import { fetchLikeState, likePost, unlikePost } from "./post-likes";
-import { fetchBlogCategories, fetchTagsByIds, inIdOrder } from "./taxonomy";
-import type { BlogCategory, BlogTag, PostDetail, PostSummary } from "./types";
+import { fetchPostBySlug, fetchRelatedPosts } from "@/wix/blog/posts";
+import { fetchLikeState, likePost, unlikePost } from "@/wix/blog/post-likes";
+import { fetchBlogCategories, fetchTagsByIds, inIdOrder } from "@/wix/blog/taxonomy";
+import type { BlogCategory, BlogTag, PostDetail, PostSummary } from "@/wix/blog/types";
 
 export interface PostStoreOptions {
   slug: string;

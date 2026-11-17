@@ -8,7 +8,7 @@ import {
   type ProjectDetailState,
   type ProjectDetailStore,
   type ProjectDetailStoreOptions,
-} from "../../wix/portfolio/project-detail-store";
+} from "@/wix/portfolio/project-detail-store";
 
 export type UseProjectDetailOptions = ProjectDetailStoreOptions;
 

@@ -4,13 +4,13 @@
 // ONLY via RichContent; the byline, counters, related strip, and comments appear only when the
 // DTO carries them.
 import type { ComponentType } from "react";
-import { usePost } from "../../hooks/blog/usePost";
-import { categoryPath, postMetaLine, postPath, tagPath } from "../../wix/blog/posts";
-import type { BlogCategory, BlogTag, PostDetail, PostSummary } from "../../wix/blog/types";
-import RichContent from "./RichContent";
-import CommentsView from "./CommentsView";
-import { EngagementRow } from "./PostLikeButton";
-import { PostCard, type LinkLikeProps } from "./BlogFeedView";
+import { usePost } from "@/hooks/blog/use-post";
+import { categoryPath, postMetaLine, postPath, tagPath } from "@/wix/blog/posts";
+import type { BlogCategory, BlogTag, PostDetail, PostSummary } from "@/wix/blog/types";
+import RichContent from "@/components/blog/rich-content";
+import CommentsView from "@/components/blog/comments-view";
+import { EngagementRow } from "@/components/blog/post-like-button";
+import { PostCard, type LinkLikeProps } from "@/components/blog/blog-feed-view";
 
 export interface PostViewProps {
   slug: string;

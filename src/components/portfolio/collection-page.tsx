@@ -1,6 +1,6 @@
-import { useCollectionProjects } from "../../hooks/portfolio/useCollectionProjects";
-import { imgAttrs } from "../../wix/media";
-import type { CollectionSummary, ProjectSummary } from "../../wix/portfolio/types";
+import { useCollectionProjects } from "@/hooks/portfolio/use-collection-projects";
+import { imgAttrs } from "@/wix/media";
+import type { CollectionSummary, ProjectSummary } from "@/wix/portfolio/types";
 
 export default function CollectionPage(props: {
   slug: string;

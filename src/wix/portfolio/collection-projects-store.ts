@@ -7,8 +7,8 @@
 // slug first. `notFound` is the real not-found signal (collection stays null while loading too) —
 // route a 404 off it, never off a transient null. One store per (slug, mount):
 // createCollectionProjectsStore(slug, options), not a singleton.
-import { fetchCollectionBySlug, fetchProjects } from "./portfolio";
-import type { CollectionSummary, ProjectSummary } from "./types";
+import { fetchCollectionBySlug, fetchProjects } from "@/wix/portfolio/portfolio";
+import type { CollectionSummary, ProjectSummary } from "@/wix/portfolio/types";
 
 export interface CollectionProjectsStoreOptions {
   initialCollection?: CollectionSummary;

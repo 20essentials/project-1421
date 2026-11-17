@@ -3,9 +3,9 @@
 // one of twelve templates by country (address-templates.generated.ts), and the submission API
 // rejects any other key as "additional properties". Imported by forms-core.ts (toField) and the
 // store (the parts are recomputed when the visitor picks a country); re-exported from forms-core.
-import { ADDRESS_TEMPLATES } from "./address-templates.generated";
-import type { FormAddressPart, AddressOverrides } from "./types";
-import type { Raw } from "./forms-core";
+import { ADDRESS_TEMPLATES } from "@/wix/forms/address-templates.generated";
+import type { FormAddressPart, AddressOverrides } from "@/wix/forms/types";
+import type { Raw } from "@/wix/forms/forms-core";
 
 /**
  * Every country an address may name when the owner set no `allowedCountries` — the list Wix's

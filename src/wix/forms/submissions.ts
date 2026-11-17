@@ -18,8 +18,8 @@
 // docs: https://dev.wix.com/docs/api-reference/crm/forms/form-submissions/about-submission-values.md
 // docs: https://dev.wix.com/docs/api-reference/business-management/headless/redirects/create-redirect-session.md
 import { submissions as submissionsModule } from "@wix/forms";
-import { wixFetch, wixModule } from "../sdk";
-import type { Raw } from "./forms-core";
+import { wixFetch, wixModule } from "@/wix/sdk";
+import type { Raw } from "@/wix/forms/forms-core";
 import {
   SUBMITTED_OK,
   formLevelError,
@@ -33,8 +33,8 @@ import {
   toSubmissionValues,
   uploadFilesWith,
   uploadMimeType,
-} from "./submissions-core";
-import type { FormFieldDto, FormValues, SubmissionDto, UploadedFile } from "./types";
+} from "@/wix/forms/submissions-core";
+import type { FormFieldDto, FormValues, SubmissionDto, UploadedFile } from "@/wix/forms/types";
 
 export { SUBMITTED_OK, formLevelError, normalizePhone, normalizeUrl, submissionErrors, toSubmissionValues };
 

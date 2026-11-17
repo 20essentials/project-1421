@@ -5,9 +5,9 @@
 // and a search engine still get every answer in the HTML). No fetching, no routing; the ONLY HTML render
 // is `answerHtml`, which the core sanitized.
 import { useState, type ComponentType, type ReactNode } from "react";
-import { useFaq, type UseFaqOptions } from "../../hooks/faq/useFaq";
-import { anchorId, faqDeepLink } from "../../wix/faq/faq-core";
-import type { FaqQuestion, FaqSection } from "../../wix/faq/types";
+import { useFaq, type UseFaqOptions } from "@/hooks/faq/use-faq";
+import { anchorId, faqDeepLink } from "@/wix/faq/faq-core";
+import type { FaqQuestion, FaqSection } from "@/wix/faq/types";
 
 export interface LinkLikeProps {
   href: string;

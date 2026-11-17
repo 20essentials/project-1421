@@ -16,9 +16,9 @@
 //
 // Error vs empty: a failed read leaves `posts: []` AND sets `error`. Render the empty state only
 // when `error` is null — "No posts yet" over a network failure is a lie.
-import { fetchPosts } from "./posts";
-import { fetchBlogCategories, fetchBlogTags } from "./taxonomy";
-import type { BlogCategory, BlogTag, PostPage, PostSummary } from "./types";
+import { fetchPosts } from "@/wix/blog/posts";
+import { fetchBlogCategories, fetchBlogTags } from "@/wix/blog/taxonomy";
+import type { BlogCategory, BlogTag, PostPage, PostSummary } from "@/wix/blog/types";
 
 export interface BlogFeedStoreOptions {
   initialPage?: PostPage;

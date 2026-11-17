@@ -5,8 +5,8 @@
 // created submission may arrive wrapped (`{ submission }`, REST) or bare (SDK), with `_id` (SDK)
 // or `id` (REST); the mapper accepts both.
 // docs: https://dev.wix.com/docs/api-reference/crm/forms/form-submissions/about-submission-values.md
-import { humanizeSub, type Raw } from "./forms-core";
-import type { FormDto, FormFieldDto, FormValues, SubmissionDto, UploadedFile } from "./types";
+import { humanizeSub, type Raw } from "@/wix/forms/forms-core";
+import type { FormDto, FormFieldDto, FormValues, SubmissionDto, UploadedFile } from "@/wix/forms/types";
 
 /**
  * Statuses that mean the submission EXISTS — `CONFIRMED` is recorded, `PENDING` is created but

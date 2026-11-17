@@ -1,7 +1,7 @@
-import { useBlogFeed } from "../../hooks/blog/useBlogFeed";
-import { categoryPath, formatCount, postMetaLine, postPath } from "../../wix/blog/posts";
-import { imgAttrs } from "../../wix/media";
-import type { BlogCategory, BlogTag, PostPage } from "../../wix/blog/types";
+import { useBlogFeed } from "@/hooks/blog/use-blog-feed";
+import { categoryPath, formatCount, postMetaLine, postPath } from "@/wix/blog/posts";
+import { imgAttrs } from "@/wix/media";
+import type { BlogCategory, BlogTag, PostPage } from "@/wix/blog/types";
 
 export default function Feed(props: {
   initialPage?: PostPage;

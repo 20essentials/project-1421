@@ -2,7 +2,7 @@
 // tokens. Correct and complete; per the skill's model you design and build your own on useFaq.
 // Renders nothing while fewer than two categories have questions. `asLinks` renders plain anchors to
 // `?category=<id>` instead of buttons — a no-JS fallback (the page pre-selects the category server-side).
-import { useFaq, type UseFaqOptions } from "../../hooks/faq/useFaq";
+import { useFaq, type UseFaqOptions } from "@/hooks/faq/use-faq";
 
 export interface FaqCategoryNavProps extends UseFaqOptions {
   /** The FAQ page's path (default "/faq") — the href base in asLinks mode. */
