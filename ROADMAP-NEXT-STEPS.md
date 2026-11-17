@@ -3,26 +3,10 @@
 Orden sugerido de ejecución. El registro de lo ya hecho (con sus keys) vive en
 `ROADMAP-DONE.md`.
 
-## 0. Primera release desde CI (listo para ejecutar)
-- [x] Etiquetar y pushear para disparar el workflow `Release`: hecho con `v0.1.0`, success.
-- [x] Verificar que el sitio live queda actualizado tras la release: `v0.1.0` quedó obsoleta (11 commits después); con `v0.1.1` (2026-11-17) el live muestra favicon, header pill y logos de awards/prensa en home; `/awards` 200.
-
-## 1. Logos de awards y prensa en Wix Media (listo)
-- [x] Subir a Wix Media los logos que están solo en local: ya servidos vía `static.wixstatic.com/media/600582_*~mv2` (las 12 URLs verificadas 200 el 2026-11-17).
-- [x] Mostrarlos en `/awards` (grid de 10 seals en `src/pages/awards.astro`) y banda "Riconoscimenti" en la homepage con logos de prensa (`src/pages/index.astro:146`).
-- [x] Regla del proyecto: todo asset de imagen en `.astro`/`.tsx` se llama con `baseUrl(...)` (el CSS puede usar rutas relativas).
-
 ## 2. Multi-idioma (DE / EN)
 - [ ] Decidir enfoque (rutas `/de/…`, `/en/…` con astro i18n, o réplicas por página) y qué páginas se traducen primero (home, portfolio, contatti, faq).
 - [ ] Traducir contenido del KB: los textos fuente ya existen en la base de conocimiento (italiano) y el fotógrafo trabaja Italia + Austria.
 - [ ] Actualizar `hreflang` y el JSON-LD si se añaden idiomas.
-
-## 3. Parches de node_modules (resuelto — no son necesarios)
-- [x] Confirmado el 2026-11-17 con `@astrojs/cloudflare@14.3.2`: `node_modules` recién instalado (sin rastro de fixes para Windows en `dist/index.js` ni `dist/utils/wrangler-config.js`) y el build local en Windows (`wix build`) y el de CI pasan igual. No aplicar `patch-package`; reabrir solo si un build limpio vuelve a fallar.
-
-## 4. Formularios en vivo (listo)
-- [x] Envío real de "Heart to Heart" desde `/contatti` probado el 2026-11-17 (release v0.1.2): validación OK, mensaje de éxito mostrado y submission CONFIRMED en el sitio (id `c53729d2-9b53-42c4-ab15-e5dcf91ae228`). Screenshots en `.screenshots/h2h-live-*.png`.
-- [x] Form "Newsletter" wired: sección en el footer de todas las páginas (`src/app/layout.astro`), form id `99167414-c329-4e8f-8f02-db033652f376`, publicado en v0.1.2.
 
 ## 5. Contenido que depende del cliente
 - [ ] Las 8 "Domande profonde" del KB no tienen respuesta todavía → no se sembraron. Pedirle a Stefano las respuestas y añadirlas a FAQ si quiere.
@@ -36,4 +20,8 @@ Orden sugerido de ejecución. El registro de lo ya hecho (con sus keys) vive en
 - [ ] Revisar titles/descriptions por página (el layout ya soporta SEO por página; los posts y FAQs usan el servicio de SEO de Wix).
 
 ## Hecho (referencia)
-Ver el detalle completo en `ROADMAP-DONE.md`.
+Ver el detalle completo en `ROADMAP-DONE.md`, sección "Pasos cerrados del roadmap".
+- Paso 0 — Primera release desde CI: cerrado con `v0.1.0` y verificado en vivo con `v0.1.1`.
+- Paso 1 — Logos de awards y prensa en Wix Media: cerrado (12 URLs en `static.wixstatic.com`, grid en `/awards` + banda en home).
+- Paso 3 — Parches de node_modules: cerrado (innecesarios con `@astrojs/cloudflare@14.3.2`).
+- Paso 4 — Formularios en vivo: cerrado (Heart to Heart probado end-to-end, Newsletter wired en el footer; release `v0.1.2`).

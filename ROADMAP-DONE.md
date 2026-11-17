@@ -22,6 +22,26 @@ dónde viven. Los pasos siguientes viven en `ROADMAP-NEXT-STEPS.md`.
 | Plantilla de referencia    | https://github.com/20essentials/project-1415                                |
 | Comandos                   | `npm run dev` (cerrar puerto 4321 al terminar) · `npm run check` · `npm run build` · `npm run release` |
 
+## Pasos cerrados del roadmap (trasladados desde ROADMAP-NEXT-STEPS.md)
+
+### Paso 0 — Primera release desde CI
+- Tag `v0.1.0` → workflow `Release` success (detalle en "Primera release vía tag v0.1.0", abajo).
+- Verificación del live tras release: `v0.1.0` quedó obsoleta (11 commits después); con `v0.1.1` el live muestra favicon, header pill y logos de awards/prensa en home, `/awards` 200 (detalle en "Release v0.1.1 con el contenido actual").
+- Keys: tags `v0.1.0` y `v0.1.1`, runs 44154953965 y 44191009760.
+
+### Paso 1 — Logos de awards y prensa en Wix Media
+- Logos servidos vía `static.wixstatic.com/media/600582_*~mv2` (las 12 URLs verificadas 200 el 2026-11-17).
+- Grid de 10 seals en `src/pages/awards.astro` y banda "Riconoscimenti" en la homepage con logos de prensa (`src/pages/index.astro:146`).
+- Regla del proyecto: todo asset de imagen en `.astro`/`.tsx` se llama con `baseUrl(...)` (el CSS puede usar rutas relativas).
+
+### Paso 3 — Parches de node_modules
+- Cerrado sin acción el 2026-11-17: con `@astrojs/cloudflare@14.3.2` no hay fixes para Windows en `dist/index.js` ni `dist/utils/wrangler-config.js` y los builds local (Windows) y de CI pasan igual. No aplicar `patch-package`; reabrir solo si un build limpio vuelve a fallar.
+
+### Paso 4 — Formularios en vivo
+- Envío real de "Heart to Heart" desde `/contatti` probado el 2026-11-17 (release v0.1.2): validación OK, mensaje de éxito mostrado y submission CONFIRMED en el sitio (id `c53729d2-9b53-42c4-ab15-e5dcf91ae228`). Screenshots en `.screenshots/h2h-live-*.png`.
+- Form "Newsletter" wired: sección en el footer de todas las páginas (`src/app/layout.astro`), form id `99167414-c329-4e8f-8f02-db033652f376`, publicado en v0.1.2. Screenshots en `.screenshots/newsletter-footer-*`.
+- Detalle completo en "Release v0.1.2" más abajo.
+
 ## 2026-11-17
 
 ### Scaffold Astro + verticales + seeds + marca
