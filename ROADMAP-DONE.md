@@ -84,3 +84,20 @@ dónde viven. Los pasos siguientes viven en `ROADMAP-NEXT-STEPS.md`.
 - Verificado paso 1 del roadmap: 12 logos de seals/prensa ya servidos vía `static.wixstatic.com/media/600582_*~mv2` (todas 200), grid en `/awards` y banda en home.
 - Paso 3 cerrado: los parches de Windows en `@astrojs/cloudflare` ya no hacen falta (`14.3.2`, build local Windows + CI pasan sin ellos).
 - Keys: tag `v0.1.2`, form Newsletter id `99167414-…`, form Heart to Heart id `9ab7aa27-14c9-4278-a9e5-c530df27d1ac`, screenshots `.screenshots/newsletter-footer-*` y `.screenshots/h2h-live-*`.
+
+## 2026-11-18
+
+### FAQ "Domande profonde" sembrada
+- Categoría nueva "Domande profonde" (dallo Storybrand, según `stefano-lunardi-assets/sitemap/10-faq.md`): 8 preguntas con respuestas redactadas desde el KB (secciones 6, 7, 11, 12).
+- Seed ejecutado con `node .agents/skills/wix-headless-kit/templates/faq/seed/seed-faq.mjs seed/faq-plan.json`: 8 creadas, 0 fallidas, 21 preguntas en el sitio; plan actualizado en `seed/faq-plan.json`.
+- Live verificado: `https://stefanolunardi…/faq` renderiza "Domande profonde" (el FAQ se sirve desde Wix, no requiere release).
+- Keys: categoría id `56b08ebe-a5b6-4b76-91e8-e284b6842de4`, preguntas: quanti-incontri `5d866e67…`, conoscerai-le `37911dd5…`, hai-fatto-un `417fec1e…`, come-gestisci-i `e5226a7b…`, scatti-anche-in `dc406d92…`, quante-foto `587fd137…`, posso-vedere-una `cb7c5485…`, hai-un-piano-b-per `c3a9dc82…`.
+- Pendiente: confirmar textos con Stefano (números de la respuesta "Quante foto…").
+
+### Revisión visual de la asignación de fotos (portfolio)
+- Las 18 imágenes de los 4 proyectos miradas una por una con los ficheros originales. Resultado: 15 asignaciones OK, 3 banderas para confirmar con Stefano:
+  1. **Venezia** ← `weddingemotions_sipa2016.jpg` (foto de emociones en ceremonia, B&N): sin evidencia visual de Venezia (posible boda austriaca; es una foto premiada SIPA 2016). Confirmar proyecto.
+  2. **Il velo** ← `Z8D_6299.jpg` (pareja decorando la torta, color): sin velo ni tema del proyecto. Candidata a "Autentiche e naturali" general o a otro proyecto.
+  3. **Hotel Excelsior** ← `…Excelsior_D8D4547.jpg` (primer plano de manos entrelazadas): estilo candid, no retrato editorial; encajaría mejor en "Autentiche e naturali".
+- Notas menores OK: `_212.jpg` ( filename Excelsior) muestra el puente de Rialto; `01_veillow.jpg` (Il velo) es también Venezia; `Z8D_4743_1.jpg` parece interior de castillo austriaco. Todo coherente como "boda con base en Excelsior".
+- Las 3 aéreas DJI ✓, los retratos editoriales de Excelsior ✓, los velos 04/05/11/7106 ✓.

@@ -3,15 +3,19 @@
 Orden sugerido de ejecución. El registro de lo ya hecho (con sus keys) vive en
 `ROADMAP-DONE.md`.
 
+
+## 5. Contenido que depende del cliente
+- [x] Las 8 "Domande profonde" del KB: respuestas redactadas desde el KB (metodo, brochure, Storybrand) y sembradas en la FAQ como categoría nueva "Domande profonde" (8 preguntas, id 56b08ebe, live verificado 2026-11-18). ⚠️ Confirmar con Stefano los textos (sobre todo los números de la respuesta 6: 500-800 seleccionadas).
+- [x] Revisión visual de la asignación de fotos (2026-11-18, 18/18 ficheros mirados): 15 OK, 3 banderas para confirmar con Stefano (ver ROADMAP-DONE.md, sección 2026-11-18).
+- [x] PDFs de `stefano-lunardi-assets/pdfs/` decidido el 2026-11-18: no habrá material descargable por ahora; los PDFs quedan como fuente local y la brochure ya está volcada como secciones web (método, inversión). Reabrir solo si Stefano pide un dossier descargable.
+
+
+### FUTURO (YO TE DIRE CUANDO)
+
 ## 2. Multi-idioma (DE / EN)
 - [ ] Decidir enfoque (rutas `/de/…`, `/en/…` con astro i18n, o réplicas por página) y qué páginas se traducen primero (home, portfolio, contatti, faq).
 - [ ] Traducir contenido del KB: los textos fuente ya existen en la base de conocimiento (italiano) y el fotógrafo trabaja Italia + Austria.
 - [ ] Actualizar `hreflang` y el JSON-LD si se añaden idiomas.
-
-## 5. Contenido que depende del cliente
-- [ ] Las 8 "Domande profonde" del KB no tienen respuesta todavía → no se sembraron. Pedirle a Stefano las respuestas y añadirlas a FAQ si quiere.
-- [ ] Revisión humana de la asignación de fotos: los 4 proyectos (venezia, il-velo, hotel-excelsior-venezia, aeree) se agruparon por evidencia de filenames; confirmar que ninguna foto quedó en el proyecto/boda equivocado.
-- [ ] Descargar PDFs referenciados en `stefano-lunardi-assets/pdfs/` si el plan incluye material descargable (menu/dossier).
 
 ## 6. Dominio y SEO
 - [ ] Conectar el dominio propio (ahora es el subdominio `wix-site-host.com`).
