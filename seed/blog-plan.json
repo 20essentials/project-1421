@@ -1,0 +1,57 @@
+{
+  "categories": ["Il metodo", "Consigli per le coppie"],
+  "posts": [
+    {
+      "title": "Il grande inganno della fotografia natural style",
+      "category": "Il metodo",
+      "tags": ["natural style", "metodo"],
+      "coverImagePath": "stefano-lunardi-assets/foto/autentiche e naturali/D8D_4935.jpg",
+      "content": [
+        { "type": "paragraph", "text": "La promessa \"foto spontanee\" nasconde spesso l'assenza di preparazione tecnica, estetica e relazionale. \"Naturale\" era diventato sinonimo di \"senza direzione, senza preparazione, senza visione\"; la \"spontaneità\" confusa con l'impreparazione, la \"naturalità\" con la mancanza di metodo." },
+        { "type": "paragraph", "text": "Un sistema che ha disumanizzato il matrimonio: sposi come soggetti da posizionare nella luce giusta per il prossimo post Instagram." },
+        { "type": "heading", "text": "I 3 errori che ogni coppia dovrebbe evitare", "level": 2 },
+        { "type": "paragraph", "text": "1. Confondere \"stile naturale\" con \"assenza di metodo\". La vera spontaneità richiede PIÙ preparazione: leggere la scena prima che accada, posizionarsi nel punto giusto, gestire la luce. Non è \"fortuna\" quando la luce accarezza il volto di tuo padre: è un fotografo che sapeva dove stare." },
+        { "type": "paragraph", "text": "2. Non verificare cosa succede PRIMA del matrimonio. Un fotografo che non ti conosce non può catturare la tua essenza: non sa che tuo zio è la persona più importante della famiglia, non sa il significato del gesto tra te e tua sorella." },
+        { "type": "paragraph", "text": "3. Giudicare un fotografo solo dal portfolio e dal prezzo. Tutti mostrano le 20 migliori foto; la differenza sta nelle altre 1.480." },
+        { "type": "quote", "text": "La differenza tra un preventivo di 2.500 e uno di 900 non è il margine del fotografo: è la differenza tra preparazione e improvvisazione, tra relazione e transazione, tra opera d'arte e documentazione." }
+      ]
+    },
+    {
+      "title": "Dietro l'obiettivo: i 3 pilastri del Metodo Lunardi",
+      "category": "Il metodo",
+      "tags": ["metodo", "analogico"],
+      "coverImagePath": "stefano-lunardi-assets/foto/eleganti e iconiche/_D3S9720.jpg",
+      "content": [
+        { "type": "paragraph", "text": "Il fotografo-fornitore: arriva, scatta, edita, consegna, fattura. Il prima e il dopo sono amministrazione, non relazione. Io non \"scatto foto a un matrimonio\": creo un'opera d'arte che nasce dalla relazione umana. Un'opera che inizia settimane prima, vive il giorno stesso, continuerà a parlare per generazioni." },
+        { "type": "heading", "text": "Conoscenza", "level": 2 },
+        { "type": "paragraph", "text": "Un mese dopo la firma inizia il dialogo autentico in tre fasi: conoscitivo-empatica, dinamiche familiari, tecnica. Tra un incontro e l'altro contatti via WhatsApp e videocall: non è un fornitore che sparisce dopo il contratto, è una presenza costante e rassicurante." },
+        { "type": "heading", "text": "Integrazione", "level": 2 },
+        { "type": "paragraph", "text": "Arrivo due ore prima e entro nella stanza dei preparativi senza tirare fuori la macchina fotografica. I momenti più importanti spesso non sono quelli \"ufficiali\" — anelli, bacio — ma quelli intorno: lo sguardo commosso di una madre, le lacrime trattenute di un padre, l'abbraccio tra sorelle. Copertura full-day 12 ore." },
+        { "type": "heading", "text": "Restituzione", "level": 2 },
+        { "type": "paragraph", "text": "Entro pochi giorni una piccola selezione online; entro 30 giorni la gallery completa: centinaia, non migliaia, più la selezione autoriale con post-produzione. Provini analogici: gli sposi scelgono circa 30 foto definitive. L'album arriva con una consulenza dedicata." },
+        { "type": "quote", "text": "Non un fornitore, ma un testimone. Non un tecnico, ma un autore. Non un estraneo, ma qualcuno che vi conosce." }
+      ]
+    },
+    {
+      "title": "La scelta che cambia tutto: le 8 domande da porre al tuo fotografo",
+      "category": "Consigli per le coppie",
+      "tags": ["consigli", "preventivo"],
+      "coverImagePath": "stefano-lunardi-assets/foto/eleganti e iconiche/Z8D_4057l.jpg",
+      "content": [
+        { "type": "paragraph", "text": "Come riconoscere il fotografo che non ti deluderà? Prima di firmare, poni queste otto domande a qualsiasi fotografo." },
+        { "type": "ordered", "items": [
+          "Quanti incontri avrai con noi prima del matrimonio e cosa succederà in ciascuno?",
+          "Come ti muovi il giorno del matrimonio? Dai indicazioni agli sposi?",
+          "Posso vedere una gallery completa, non solo le 20 foto migliori?",
+          "Scatti in analogico, in digitale, o entrambi? Perché?",
+          "Cosa ricevo esattamente, in che formato e in quali tempi?",
+          "Come gestisci il lavoro con gli altri fornitori e il wedding planner?",
+          "Che background hai oltre la fotografia di matrimoni?",
+          "Hai un piano B per gli imprevisti?"
+        ] },
+        { "type": "paragraph", "text": "La conferma del metodo arriva poi dalle recensioni: \"foto naturali e mai in posa, ha colto tutte le emozioni\" — e la domanda degli ospiti: \"ma chi era il fotografo? Non l'abbiamo nemmeno notato\"." },
+        { "type": "quote", "text": "Non è magia. Non è fortuna. Non è AI. È relazione costruita. Maestria tecnica consolidata." }
+      ]
+    }
+  ]
+}

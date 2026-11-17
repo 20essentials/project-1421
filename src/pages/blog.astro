@@ -1,0 +1,36 @@
+---
+// Blog index — data fetched SERVER-SIDE (SEO) and handed to the island as DTO props.
+// Keep this frontmatter; swap the island import to YOUR feed component. The category pills link
+// to the category pages (/blog/category/<slug>) so every filter has a URL; pass no `categoryHref`
+// for client-side filtering instead.
+import SiteLayout from "../layouts/SiteLayout.astro";
+import Feed from "../components/blog/Feed";
+import { fetchPosts } from "../wix/blog/posts";
+import { fetchBlogCategories, fetchBlogTags } from "../wix/blog/taxonomy";
+import type { BlogCategory, BlogTag, PostPage } from "../wix/blog/types";
+
+let page: PostPage | undefined;
+let categories: BlogCategory[] = [];
+let tags: BlogTag[] = [];
+let failed = false;
+try {
+  [page, categories, tags] = await Promise.all([fetchPosts(), fetchBlogCategories(), fetchBlogTags()]);
+} catch {
+  // An unguarded SSR throw truncates the response mid-stream. With no seed the island fetches
+  // client-side and shows its own error state — never "No posts yet" for a failed read.
+  failed = true;
+}
+---
+
+<SiteLayout title="Storie, location e consigli — Stefano Lunardi" description="Racconti di matrimoni reali, location tra Italia e Austria e consigli per le coppie.">
+  <header class="mt-12 border-b border-border pb-10 text-center">
+    <h1 class="font-display text-4xl font-medium sm:text-5xl">Storie, location e consigli</h1>
+    <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">Dietro l'obiettivo: il metodo, le scelte, le storie.</p>
+  </header>
+  <Feed
+    client:load
+    initialPage={failed ? undefined : page}
+    initialCategories={categories}
+    initialTags={tags}
+  />
+</SiteLayout>

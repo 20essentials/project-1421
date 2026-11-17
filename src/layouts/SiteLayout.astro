@@ -1,0 +1,109 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title, description } = Astro.props;
+
+const primaryNav = [
+  { href: "/portfolio", label: "Portfolio" },
+  { href: "/il-mio-metodo", label: "Il metodo" },
+  { href: "/chi-sono", label: "Chi sono" },
+  { href: "/location", label: "Location" },
+  { href: "/investimento", label: "Investimento" },
+  { href: "/blog", label: "Storie" },
+  { href: "/faq", label: "FAQ" },
+];
+const secondaryNav = [
+  { href: "/recensioni", label: "Recensioni" },
+  { href: "/awards", label: "Awards" },
+  { href: "/fine-art", label: "Fine Art" },
+];
+const allNav = [...primaryNav.slice(0, 5), ...secondaryNav, ...primaryNav.slice(5)];
+---
+
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {title && <title>{title}</title>}
+    {description && <meta name="description" content={description} />}
+    <slot name="seo-tags" />
+  </head>
+  <body>
+    <header class="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur">
+      <div class="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-6">
+        <a href="/" class="font-display text-xl font-semibold uppercase tracking-[0.18em] text-foreground no-underline">
+          Stefano Lunardi
+        </a>
+        <nav class="hidden items-center gap-6 text-sm lg:flex" aria-label="Principale">
+          {primaryNav.map((l) => (
+            <a href={l.href} class="text-foreground no-underline transition-colors hover:text-accent">{l.label}</a>
+          ))}
+          <a href="/contatti" class="rounded-control border border-foreground bg-foreground px-4 py-2 text-primary-foreground no-underline transition-colors hover:bg-accent hover:border-accent">
+            Contatti
+          </a>
+        </nav>
+        <details class="relative lg:hidden">
+          <summary class="cursor-pointer list-none px-2 py-1 text-sm font-semibold uppercase tracking-widest">Menu</summary>
+          <div class="absolute right-0 top-12 w-56 border border-border bg-background p-4 shadow-lg">
+            <nav class="flex flex-col gap-3 text-sm" aria-label="Menu completo">
+              {allNav.map((l) => (
+                <a href={l.href} class="text-foreground no-underline hover:text-accent">{l.label}</a>
+              ))}
+              <a href="/contatti" class="mt-2 rounded-control border border-foreground bg-foreground px-4 py-2 text-center text-primary-foreground no-underline">Contatti</a>
+            </nav>
+          </div>
+        </details>
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="border-t border-border px-6 pb-10 pt-16">
+      <div class="mx-auto max-w-7xl">
+        <p class="font-display mx-auto max-w-3xl text-center text-2xl italic leading-snug sm:text-3xl">
+          "Tutto è fugace, ma ciò che rimane è il ricordo."
+        </p>
+        <p class="mt-6 text-center text-xs uppercase tracking-[0.25em] text-muted-foreground">
+          Autenticità · Contemplazione · Relazione · Arte · Emozione
+        </p>
+        <div class="mt-12 grid grid-cols-1 gap-10 text-sm sm:grid-cols-3">
+          <div>
+            <p class="eyebrow">Il sito</p>
+            <nav class="mt-4 flex flex-col gap-2" aria-label="Footer">
+              {allNav.map((l) => (
+                <a href={l.href} class="text-foreground no-underline hover:text-accent">{l.label}</a>
+              ))}
+            </nav>
+          </div>
+          <div>
+            <p class="eyebrow">Contatti</p>
+            <div class="mt-4 flex flex-col gap-2">
+              <a href="mailto:studio@stefanolunardi.com" class="text-foreground no-underline hover:text-accent">studio@stefanolunardi.com</a>
+              <a href="tel:+393387513113" class="text-foreground no-underline hover:text-accent">+39 338 751 3113 (Italia)</a>
+              <a href="tel:+436767517274" class="text-foreground no-underline hover:text-accent">+43 676 751 7274 (Austria)</a>
+              <p class="text-muted-foreground">Villach · Udine · Treviso</p>
+            </div>
+          </div>
+          <div>
+            <p class="eyebrow">Segui</p>
+            <div class="mt-4 flex flex-col gap-2">
+              <a href="https://www.instagram.com/stefanolunardiphoto" target="_blank" rel="noopener" class="text-foreground no-underline hover:text-accent">Instagram</a>
+              <a href="https://www.facebook.com/StefanoLunardiFotografo" target="_blank" rel="noopener" class="text-foreground no-underline hover:text-accent">Facebook</a>
+              <a href="https://www.linkedin.com/in/stefano-lunardi-5b761526" target="_blank" rel="noopener" class="text-foreground no-underline hover:text-accent">LinkedIn</a>
+              <a href="https://www.singulart.com" target="_blank" rel="noopener" class="text-foreground no-underline hover:text-accent">Singulart — opere fine art</a>
+            </div>
+          </div>
+        </div>
+        <div class="mt-12 flex flex-col items-center justify-between gap-3 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row">
+          <p>© {new Date().getFullYear()} Stefano Lunardi — Fotografo di matrimoni | Fine Art | Fotoreporter</p>
+          <a href="/impressum" class="no-underline hover:text-accent">Impressum</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+# wix integration
+.wix/
+stefano-lunardi-assets/
+
+# build output
+dist/
+
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+npm-install.log
+wix-error.log
+seed.log
+seed-result.json
+check-output.txt
+*.log
+
+# local tool artifacts
+.install-exit
+.seed-exit
+.wrangler/
+
+# agent/IDE settings
+.gemini/
+.agents/
+
+# environment variables
+.env
+.env.production
+.env.local
+
+# macOS-specific files
+.DS_Store
+
+# jetbrains setting folder
+.idea/

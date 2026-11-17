@@ -1,0 +1,195 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import { fetchCollections } from "../wix/portfolio/portfolio";
+import { fetchPosts, postMetaLine, postPath } from "../wix/blog/posts";
+import { fetchFaq } from "../wix/faq/faq";
+import { imgAttrs } from "../wix/media";
+import type { CollectionSummary } from "../wix/portfolio/types";
+import type { PostPage } from "../wix/blog/types";
+import type { FaqData } from "../wix/faq/types";
+
+let collections: CollectionSummary[] = [];
+let posts: PostPage | undefined;
+let faq: FaqData = { categories: [], questions: [], truncated: false };
+try {
+  [collections, posts, faq] = await Promise.all([fetchCollections(), fetchPosts(), fetchFaq()]);
+} catch {
+}
+
+const heroCollection = collections.find((c) => c.slug === "eleganti-e-iconiche") ?? collections[0];
+const faqPreview = faq.questions.slice(0, 3);
+const latestPosts = posts?.posts.slice(0, 3) ?? [];
+---
+
+<SiteLayout
+  title="Stefano Lunardi — Fotografo di matrimoni | Fine Art | Fotoreporter"
+  description="Matrimoni come opere d'arte, non come catene di montaggio. Destination wedding tra Italia e Austria: ogni scatto è un quadro d'arte."
+>
+  <section class="relative min-h-[85vh] overflow-hidden bg-foreground">
+    {
+      heroCollection?.imageUrl && (
+        <img
+          {...imgAttrs(heroCollection.imageUrl, "100vw", 3 / 2)}
+          alt={heroCollection.title}
+          class="absolute inset-0 h-full w-full object-cover opacity-80"
+        />
+      )
+    }
+    <div class="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/30 to-foreground/20"></div>
+    <div class="relative mx-auto flex min-h-[85vh] max-w-7xl flex-col items-center justify-end px-6 pb-20 pt-40 text-center">
+      <p class="eyebrow text-primary-foreground/80">Fotografo di matrimoni | Fine Art | Fotoreporter</p>
+      <h1 class="font-display mt-4 max-w-4xl text-4xl font-medium leading-tight text-primary-foreground sm:text-5xl md:text-6xl">
+        Matrimoni come opere d'arte, non come catene di montaggio
+      </h1>
+      <p class="mt-4 max-w-2xl text-sm leading-relaxed text-primary-foreground/85 sm:text-base">
+        Destination wedding tra Italia e Austria. Ogni scatto è un quadro d'arte.
+      </p>
+      <div class="mt-8 flex flex-col items-center gap-4 sm:flex-row">
+        <a href="/contatti" class="rounded-control bg-primary-foreground px-8 py-3 text-sm font-medium text-foreground no-underline transition-colors hover:bg-accent hover:text-accent-foreground">Raccontami la vostra storia</a>
+        <a href="/portfolio" class="rounded-control border border-primary-foreground/60 px-8 py-3 text-sm font-medium text-primary-foreground no-underline transition-colors hover:border-primary-foreground hover:bg-primary-foreground/10">Guarda il portfolio</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-6 py-20">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="font-display text-3xl font-medium leading-snug sm:text-4xl">
+        "Ti hanno detto che deve essere il giorno più bello della tua vita. Nessuno ti ha detto che deve essere il tuo."
+      </p>
+      <p class="mt-6 leading-relaxed text-muted-foreground">
+        Esiste un'altra strada. Più lenta. Più rara. Più umana. Una fotografia che si prende il tempo di conoscerti prima di fotografarti, che consegna cento immagini straordinarie invece di mille dimenticabili, che tratta il matrimonio per quello che è: un'opera d'arte.
+      </p>
+      <p class="font-display mt-6 text-xl italic text-accent">Benvenuto nella tua storia.</p>
+    </div>
+  </section>
+
+  <section class="px-6 pb-20">
+    <div class="mx-auto max-w-7xl">
+      <div class="mb-10 flex flex-col items-end justify-between gap-4 sm:flex-row">
+        <h2 class="font-display text-3xl font-medium sm:text-4xl">Le collezioni</h2>
+        <a href="/portfolio" class="text-sm text-accent underline-offset-4 hover:underline no-underline">Tutto il portfolio</a>
+      </div>
+      <div class="grid grid-cols-1 gap-8 sm:grid-cols-2">
+        {
+          collections.map((c) => (
+            <a href={`/portfolio/${c.slug}`} class="group block min-w-0 no-underline">
+              <div class="aspect-[4/3] w-full overflow-hidden bg-secondary">
+                {c.imageUrl && (
+                  <img {...imgAttrs(c.imageUrl, "(min-width: 640px) 50vw, 100vw", 4 / 3)} alt={c.title} class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
+                )}
+              </div>
+              <h3 class="font-display mt-4 break-words text-2xl font-medium text-foreground transition-colors group-hover:text-accent sm:text-3xl">{c.title}</h3>
+              {c.description && <p class="mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">{c.description}</p>}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-border bg-secondary px-6 py-20">
+    <div class="mx-auto grid max-w-5xl grid-cols-1 gap-10 md:grid-cols-3">
+      <div>
+        <p class="eyebrow">La foto iconica naturale</p>
+        <p class="mt-3 text-sm leading-relaxed text-muted-foreground">Non forzata, non posata, ma tecnicamente perfetta: il soggetto nella luce giusta — e non lo sa.</p>
+      </div>
+      <div>
+        <p class="eyebrow">La candid foto</p>
+        <p class="mt-3 text-sm leading-relaxed text-muted-foreground">Interazione vera — una risata, un abbraccio, uno sguardo — impostata a livello tecnico.</p>
+      </div>
+      <div>
+        <p class="eyebrow">Lo snapshot</p>
+        <p class="mt-3 text-sm leading-relaxed text-muted-foreground">Catturato in real-time senza alcun intervento: il livello più intimo.</p>
+      </div>
+      <a href="/il-mio-metodo" class="md:col-span-3 text-center text-sm text-accent underline-offset-4 hover:underline no-underline">Scopri il Metodo Fusion</a>
+    </div>
+  </section>
+
+  <section class="px-6 py-20">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="eyebrow">Foto e video</p>
+      <h2 class="font-display mt-3 text-3xl font-medium sm:text-4xl">Foto e video nascono dallo stesso sguardo</h2>
+      <p class="mt-4 leading-relaxed text-muted-foreground">Un videomaker interno, stesso metodo: presenza discreta, nessuna messa in scena. Non due fornitori che si incontrano quel giorno.</p>
+    </div>
+  </section>
+
+  {
+    latestPosts.length > 0 && (
+      <section class="px-6 pb-20">
+        <div class="mx-auto max-w-7xl">
+          <div class="mb-10 flex flex-col items-end justify-between gap-4 sm:flex-row">
+            <h2 class="font-display text-3xl font-medium sm:text-4xl">Dietro l'obiettivo</h2>
+            <a href="/blog" class="text-sm text-accent underline-offset-4 hover:underline no-underline">Tutti gli articoli</a>
+          </div>
+          <div class="grid grid-cols-1 gap-8 sm:grid-cols-3">
+            {latestPosts.map((p) => (
+              <a href={postPath(p.slug)} class="group block min-w-0 no-underline">
+                <div class="aspect-[4/3] w-full overflow-hidden bg-secondary">
+                  {p.coverUrl && (
+                    <img {...imgAttrs(p.coverUrl, "(min-width: 640px) 33vw, 100vw", 4 / 3)} alt={p.coverAlt} class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
+                  )}
+                </div>
+                <h3 class="font-display mt-4 break-words text-xl font-medium leading-snug text-foreground transition-colors group-hover:text-accent">{p.title}</h3>
+                {postMetaLine(p) && (
+                  <time datetime={p.dateISO} class="eyebrow mt-2 block">
+                    {postMetaLine(p)}
+                  </time>
+                )}
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <section class="border-y border-border px-6 py-20">
+    <div class="mx-auto max-w-4xl text-center">
+      <p class="eyebrow">Riconoscimenti</p>
+      <p class="font-display mt-3 text-3xl font-medium sm:text-4xl">Oltre 100 premi internazionali</p>
+      <p class="mt-4 text-sm leading-relaxed text-muted-foreground">IPA International Photo Awards · International Color Awards · B&W Spider Awards · MIFA Moscow · WPGA · ANFM · Qualifica QEP</p>
+      <a href="/awards" class="mt-6 inline-block text-sm text-accent underline-offset-4 hover:underline no-underline">Tutti i premi e le mostre</a>
+    </div>
+  </section>
+
+  <section class="px-6 py-20">
+    <div class="mx-auto max-w-3xl text-center">
+      <blockquote class="border-l-2 border-accent pl-6 text-left">
+        <p class="font-display text-2xl italic leading-snug">"Ma chi era il fotografo? Non l'abbiamo nemmeno notato, eppure le foto sono incredibili."</p>
+        <p class="mt-3 text-xs uppercase tracking-widest text-muted-foreground">Gli ospiti, a ogni matrimonio</p>
+      </blockquote>
+      <a href="/recensioni" class="mt-6 inline-block text-sm text-accent underline-offset-4 hover:underline no-underline">Leggi le recensioni delle coppie</a>
+    </div>
+  </section>
+
+  {
+    faqPreview.length > 0 && (
+      <section class="border-y border-border bg-secondary px-6 py-20">
+        <div class="mx-auto max-w-3xl">
+          <div class="text-center">
+            <p class="eyebrow">FAQ</p>
+            <h2 class="font-display mt-3 text-3xl font-medium sm:text-4xl">Domande frequenti</h2>
+          </div>
+          <div class="mt-10 flex flex-col gap-6">
+            {faqPreview.map((q) => (
+              <div>
+                <h3 class="font-medium text-foreground">{q.question}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-muted-foreground">{q.answerText}</p>
+              </div>
+            ))}
+          </div>
+          <div class="mt-10 text-center">
+            <a href="/faq" class="text-sm text-accent underline-offset-4 hover:underline no-underline">Tutte le domande e le risposte</a>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <section class="px-6 py-24 text-center">
+    <p class="eyebrow">Heart to Heart</p>
+    <h2 class="font-display mx-auto mt-4 max-w-3xl text-4xl font-medium leading-tight sm:text-5xl">Quando sarete pronti, basterà un messaggio</h2>
+    <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">Risposta entro 48 ore. Nessuna fretta, nessuna pressione: solo una conversazione sulla vostra storia.</p>
+    <a href="/contatti" class="mt-8 inline-block rounded-control border border-foreground bg-foreground px-8 py-3 text-sm font-medium text-primary-foreground no-underline transition-colors hover:border-accent hover:bg-accent">Conosci Stefano</a>
+  </section>
+</SiteLayout>

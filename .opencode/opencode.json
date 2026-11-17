@@ -1,0 +1,23 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "wix-mcp": {
+      "type": "remote",
+      "url": "https://mcp.wix.com/mcp",
+      "headers": {
+        "Authorization": "IST.eyJraWQiOiJQb3pIX2FDMiIsImFsZyI6IlJTMjU2In0.eyJkYXRhIjoie1wiaWRcIjpcIjVlYjhiZDIzLWE3OGItNDQ0Zi04NjU5LTc2ZGE0NzAxY2E0MFwiLFwiaWRlbnRpdHlcIjp7XCJ0eXBlXCI6XCJhcHBsaWNhdGlvblwiLFwiaWRcIjpcImNmZDZiYWE4LWM1NWQtNGYxZi04YmEzLWMyOWQ0ZTIzMGQwM1wifSxcInRlbmFudFwiOntcInR5cGVcIjpcImFjY291bnRcIixcImlkXCI6XCI2MDA1ODIzOS1mMmJkLTQwOGItODlhMi02ZDQ2NGRmZjZlOGFcIn19IiwiaWF0IjoxNzk0OTQwNTIwfQ.hLFLIbggc6uVgUw1Q-eyoRY5QDUztHl68Ddkj7LTmZ2gc4rHYu_FDMarIfdO_4BHCKIdR0gTc5l8tqODhosZSj_oFod00ZWxZC108VPzhNI2VyqZ-U3a2UK87TB5l0d4VuMTGOgumducaZOBEnQ78aAaMCPMXdk4NKtX07Q1Z0icNuZoLtNdO4W85LI4eHtWAUU_txXeH7GAHvGr6J_dfdJ06Zz04m8Pl_6NcZdF_ZKHEcpOQCbfWYNR1d6BdPvZeW1Tfo8GnnSPjjiy2tYGe6zmJEEL-5a9b6_H0mzV0qER2b9yUMUKv0zIG3oKlHZ72gX2eWZzxnCMbHhZIqZCJw",
+        "wix-account-id": "60058239-f2bd-408b-89a2-6d464dff6e8a"
+      }
+    }
+  },
+  "chrome-devtools": {
+    "type": "local",
+    "command": [
+      "npx",
+      "-y",
+      "chrome-devtools-mcp@1.10.1"
+    ],
+    "enabled": true,
+    "timeout": 60000
+  }
+}

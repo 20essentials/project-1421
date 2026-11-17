@@ -1,0 +1,47 @@
+{
+  "name": "wix-astro-blank",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "astro": "astro",
+    "check": "astro check",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "dev": "wix dev",
+    "build": "wix build",
+    "wix": "wix",
+    "preview": "wix preview",
+    "release": "wix release",
+    "generate": "wix generate",
+    "env": "wix env",
+    "skills": "wix skills"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.7",
+    "@wix/astro": "^3.0.0",
+    "@wix/astro-pages": "^3.0.0",
+    "@wix/blog": "^1.0.645",
+    "@wix/dashboard": "^1.3.43",
+    "@wix/essentials": "^1.0.6",
+    "@wix/faq": "^1.0.76",
+    "@wix/forms": "^1.0.501",
+    "@wix/portfolio": "^1.0.229",
+    "@wix/ricos": "^11.17.0",
+    "@wix/sdk": "^1.21.5",
+    "@wix/seo": "^1.0.79",
+    "astro": "^7.3.2",
+    "tailwindcss": "^4.1.7"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@astrojs/react": "^6.0.6",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.1",
+    "@wix/astro-wix-hosting-adapter": "^3.0.0",
+    "@wix/cli": "^1.1.92",
+    "prettier": "3.8.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "typescript": "^6.0.3"
+  }
+}

@@ -1,0 +1,43 @@
+# Roadmap — Stefano Lunardi (Wix Headless)
+
+Sitio live: https://stefano-lunardi-d960960gm-0f09.wix-site-host.com
+Dashboard: https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876
+Stack: Wix-managed Astro · verticales portfolio, blog, faq, forms · idioma actual: italiano.
+
+## Pendientes
+
+### 1. Logos de awards y prensa en Wix Media
+- [ ] Subir a Wix Media los logos que están solo en local:
+  - `stefano-lunardi-assets/awards logo/` (seals IPA, QEP, winner/hmention, colormaster…)
+  - `stefano-lunardi-assets/loghi-home-page/` (Vogue Sposa, Wezoree, color-awards, mifa…)
+- [ ] Mostrarlos en `/awards` (hoy es solo texto) y considerar una banda de "featured in" en la homepage con los logos de `loghi-home-page`.
+- [ ] Recordar regla del proyecto: todo asset de imagen en `.astro`/`.tsx` se llama con `baseUrl(...)` (el CSS puede usar rutas relativas).
+
+### 2. Multi-idioma (DE / EN)
+- [ ] Decidir enfoque (rutas `/de/…`, `/en/…` con astro i18n, o réplicas por página) y qué páginas se traducen primero (home, portfolio, contatti, faq).
+- [ ] Traducir contenido del KB: los textos fuente ya existen en la base de conocimiento (italiano) y el fotógrafo trabaja Italia + Austria.
+- [ ] Actualizar `hreflang` y el JSON-LD si se añaden idiomas.
+
+### 3. Persistir los parches de node_modules
+- [ ] Los fixes para Windows en `node_modules/@astrojs/cloudflare/dist/index.js`, `dist/utils/wrangler-config.js` se pierden con un `npm install` limpio → aplicar `patch-package` (o reponerlos antes del próximo build/release).
+
+### 4. Formularios en vivo
+- [ ] Probar el envío real de "Heart to Heart" desde `/contatti` (validación, otros-valores, mensaje de éxito) y confirmar que la submission llega al dashboard.
+- [ ] Integrar el form "Newsletter" (está sembrado en el sitio pero no está wired en ninguna página): sección en el footer o al final del blog.
+
+### 5. Contenido que depende del cliente
+- [ ] Las 8 "Domande profonde" del KB no tienen respuesta todavía → no se sembraron. Pedirle a Stefano las respuestas y añadirlas a FAQ si quiere.
+- [ ] Revisión humana de la asignación de fotos: los 4 proyectos (venezia, il-velo, hotel-excelsior-venezia, aeree) se agruparon por evidencia de filenames; confirmar que ninguna foto quedó en el proyecto/boda equivocado.
+- [ ] Descargar PDFs referenciados en `stefano-lunardi-assets/pdfs/` si el plan incluye material descargable (menu/dossier).
+
+### 6. Dominio y SEO
+- [ ] Conectar el dominio propio (ahora es el subdominio `wix-site-host.com`).
+- [ ] Alta en Google Search Console + enviar sitemap generado por Wix.
+- [ ] Analytics/píxel si el cliente quiere medir.
+- [ ] Revisar titles/descriptions por página (el layout ya soporta SEO por página; los posts y FAQs usan el servicio de SEO de Wix).
+
+## Hecho (referencia)
+- Scaffold Astro + deploy de verticales, seeds completos (portfolio 4 proyectos/18 items, blog 3 posts, FAQ 13 preguntas reales, forms Heart to Heart + Newsletter).
+- Capa de marca completa (crema/serif, italiano) en home, portfolio, blog, faq, contatti y páginas estáticas.
+- FAQ del sitio limpiada: borradas 2 categorías de ejemplo de Wix y sus 6 preguntas (quedan 1 categoría + 13 preguntas).
+- Build y release verificados en vivo: las 16 rutas responden 200 y la homepage renderiza SSR con contenido real.

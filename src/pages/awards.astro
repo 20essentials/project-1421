@@ -1,0 +1,72 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+
+const personali = [
+  "2012 — TERRA, Casa della Musica, Cervignano (con Slow Food)",
+  "2012 — TERRA, Salone del Gusto, Torino",
+  "2013 — Timeless Woman, Scuola Grande S. Giovanni Evangelista, Venezia",
+  "2015 — Vibrations, La Fortezza art gallery, Gradisca di Isonzo",
+];
+
+const collettive = [
+  "IPA Best Show — New York, Parigi, Mosca, Manila (unico italiano presente)",
+  "Photovisa, Krasnodar (Russia)",
+  "Vivid Foto Gallery, Barcellona (The Gala Awards)",
+  "LUMINA project, Cina",
+  "Convention FIOF, Orvieto",
+  '"Élogie de la féminité", Normal magazine, Parigi',
+];
+---
+
+<SiteLayout title="Awards — Premi e riconoscimenti | Stefano Lunardi" description="Oltre 100 riconoscimenti internazionali: IPA, International Color Awards, MIFA, B&W Spider Awards, qualifica QEP.">
+  <section class="mt-12 border-b border-border pb-12 text-center">
+    <p class="eyebrow">Premi e riconoscimenti</p>
+    <h1 class="font-display mt-3 text-4xl font-medium sm:text-5xl md:text-6xl">Oltre 100 riconoscimenti internazionali</h1>
+    <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">Auszeichnungen und Anerkennungen — un percorso che attraversa fotogiornalismo, fine art e wedding.</p>
+  </section>
+
+  <section class="mx-auto max-w-3xl py-14">
+    <h2 class="font-display text-3xl font-medium">Certificazioni e qualifiche</h2>
+    <p class="mt-4 leading-relaxed text-muted-foreground"><strong class="text-foreground">QEP — Qualified European Photographer</strong>, settore ritratto, della Federation of European Photographers.</p>
+
+    <h2 class="font-display mt-12 text-3xl font-medium">Premi internazionali</h2>
+    <ul class="mt-4 flex flex-col gap-3 text-sm leading-relaxed text-muted-foreground">
+      <li><strong class="text-foreground">IPA International Photo Awards</strong> — 1° place Fine Art, New York 2016; 2° place Wedding 2016; 3° place Wedding 2015; 3° place "Black Heart" 2020</li>
+      <li><strong class="text-foreground">International Color Awards / Color Master</strong> — winner 11th edizione, medaglia 14th; 3° place 2018 "The Tube"; Merit 2022 "Basket Playground"; 3° place 2023 "Tennis Field"</li>
+      <li><strong class="text-foreground">B&W Spider Awards</strong> — finalist 2013, winner 2017 e 2020, Fellow 15th edizione</li>
+      <li><strong class="text-foreground">MIFA Moscow International Foto Awards</strong> — silver 2017</li>
+      <li><strong class="text-foreground">WPGA</strong> — honorable mention 2016</li>
+      <li><strong class="text-foreground">ANFM</strong> — awards 2015</li>
+      <li><strong class="text-foreground">Vienna Photo Awards</strong> — finalist 2020</li>
+      <li><strong class="text-foreground">La Grande Plaque</strong></li>
+    </ul>
+
+    <h2 class="font-display mt-12 text-3xl font-medium">Riconoscimenti wedding</h2>
+    <ul class="mt-4 flex flex-col gap-3 text-sm leading-relaxed text-muted-foreground">
+      <li>IPA, categorie wedding 2015-2017</li>
+      <li>Wezoree — profilo selezionato</li>
+      <li>Vogue Sposa</li>
+    </ul>
+
+    <h2 class="font-display mt-12 text-3xl font-medium">Pubblicazioni e titoli</h2>
+    <ul class="mt-4 flex flex-col gap-3 text-sm leading-relaxed text-muted-foreground">
+      <li>Doho magazine — "The 100 best color photographers of the year 2022"</li>
+      <li>Ambasciatore della fotografia italiana in Cina (2017)</li>
+      <li>Menzioni IPA per il libro "My vision of Kaernten" e il progetto "Mystic Trees" (2023)</li>
+    </ul>
+
+    <h2 class="font-display mt-12 text-3xl font-medium">Mostre personali</h2>
+    <ul class="mt-4 flex flex-col gap-3 text-sm leading-relaxed text-muted-foreground">
+      {personali.map((m) => <li>{m}</li>)}
+    </ul>
+
+    <h2 class="font-display mt-12 text-3xl font-medium">Mostre collettive</h2>
+    <ul class="mt-4 flex flex-col gap-3 text-sm leading-relaxed text-muted-foreground">
+      {collettive.map((m) => <li>{m}</li>)}
+    </ul>
+
+    <div class="mt-14 text-center">
+      <a href="/fine-art" class="inline-block rounded-control border border-foreground px-8 py-3 text-sm font-medium text-foreground no-underline transition-colors hover:border-accent hover:text-accent">Le opere fine art</a>
+    </div>
+  </section>
+</SiteLayout>

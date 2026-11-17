@@ -1,0 +1,46 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+
+const coppie = [
+  { nomi: "Trine e Alexander", luogo: "Wörthersee" },
+  { nomi: "Nicole e Marcus", luogo: "Graz" },
+  { nomi: "Tanja e Mario", luogo: "Graz" },
+  { nomi: "Michaela e Gerhard", luogo: "Linz" },
+  { nomi: "Stefania e Marco", luogo: "Italia" },
+];
+---
+
+<SiteLayout title="Recensioni — La differenza che si vede e si sente | Stefano Lunardi" description="Recensioni di coppie reali su matrimonio.com e Google: foto naturali e mai in posa, emozioni colte.">
+  <section class="mt-12 border-b border-border pb-12 text-center">
+    <p class="eyebrow">Recensioni</p>
+    <h1 class="font-display mt-3 text-4xl font-medium sm:text-5xl md:text-6xl">La differenza che si vede e si sente</h1>
+    <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">Parole di coppie reali, leggibili qui e sui profili pubblici.</p>
+  </section>
+
+  <section class="mx-auto max-w-3xl py-14">
+    <blockquote class="border-l-2 border-accent pl-6">
+      <p class="font-display text-2xl italic leading-snug">"Foto naturali e mai in posa, ha colto tutte le emozioni."</p>
+    </blockquote>
+    <blockquote class="mt-8 border-l-2 border-accent pl-6">
+      <p class="font-display text-2xl italic leading-snug">"Ma chi era il fotografo? Non l'abbiamo nemmeno notato, eppure le foto sono incredibili."</p>
+      <p class="mt-3 text-xs uppercase tracking-widest text-muted-foreground">La frase che gli ospiti pronunciano più spesso</p>
+    </blockquote>
+
+    <h2 class="font-display mt-14 text-3xl font-medium">Le coppie che hanno vissuto questo metodo</h2>
+    <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+      {coppie.map((c) => (
+        <div class="border border-border bg-secondary px-6 py-5">
+          <p class="font-display text-xl">{c.nomi}</p>
+          <p class="mt-1 text-sm text-muted-foreground">{c.luogo}</p>
+        </div>
+      ))}
+    </div>
+
+    <h2 class="font-display mt-14 text-3xl font-medium">Le recensioni complete</h2>
+    <p class="mt-4 leading-relaxed text-muted-foreground">Tutte le recensioni verificate sono su matrimonio.com e sul profilo Google: testo completo, leggibile da tutti — e dai motori di ricerca.</p>
+    <div class="mt-6 flex flex-col gap-3 text-sm">
+      <a href="https://www.matrimonio.com/fotografo-matrimonio/stefanolunardi-photographer--e33485" target="_blank" rel="noopener" class="text-accent underline underline-offset-4">Recensioni su matrimonio.com</a>
+      <a href="https://www.wezoree.com/it/vendors/profile/20527-photographers-stefano-lunardi" target="_blank" rel="noopener" class="text-accent underline underline-offset-4">Profilo Wezoree</a>
+    </div>
+  </section>
+</SiteLayout>

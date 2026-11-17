@@ -1,0 +1,54 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import SchemaForm from "../components/forms/SchemaForm";
+import { getForm } from "../wix/forms/forms";
+import type { FormDto } from "../wix/forms/types";
+
+const FORM_ID = "9ab7aa27-14c9-4278-a9e5-c530df27d1ac";
+
+let form: FormDto | null = null;
+try {
+  form = await getForm(FORM_ID);
+} catch {
+}
+---
+
+<SiteLayout title="Contatti — Heart to Heart | Stefano Lunardi" description="Raccontami la vostra storia: risposta entro 48 ore. Destination wedding tra Italia e Austria.">
+  <section class="mt-12 border-b border-border pb-12 text-center">
+    <p class="eyebrow">Heart to Heart</p>
+    <h1 class="font-display mt-3 text-4xl font-medium sm:text-5xl md:text-6xl">Benvenuto nella tua storia</h1>
+    <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">Raccontami chi siete e come immaginate il vostro giorno: la risposta arriva entro 48 ore.</p>
+  </section>
+
+  <section class="mx-auto max-w-3xl py-14">
+    <h2 class="font-display text-2xl font-medium sm:text-3xl">Il vostro messaggio</h2>
+    <p class="mt-2 text-sm text-muted-foreground">Risposta entro 48 ore, senza fretta e senza pressione commerciale.</p>
+    <div class="mt-8">
+      <SchemaForm client:load formId={FORM_ID} initialForm={form ?? undefined} />
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl border-t border-border py-14">
+    <div class="grid grid-cols-1 gap-10 sm:grid-cols-2">
+      <div>
+        <p class="eyebrow">Contatti diretti</p>
+        <div class="mt-4 flex flex-col gap-2 text-sm">
+          <a href="tel:+393387513113" class="text-foreground no-underline hover:text-accent">+39 338 751 3113 (Italia)</a>
+          <a href="tel:+436767517274" class="text-foreground no-underline hover:text-accent">+43 676 751 7274 (Austria)</a>
+          <a href="mailto:studio@stefanolunardi.com" class="text-foreground no-underline hover:text-accent">studio@stefanolunardi.com</a>
+        </div>
+        <p class="eyebrow mt-8">Zone</p>
+        <p class="mt-3 text-sm text-muted-foreground">Villach (Austria) · Udine (Italia) · Treviso (Italia)</p>
+      </div>
+      <div>
+        <p class="eyebrow">Cosa succede nel primo incontro</p>
+        <ul class="mt-4 flex flex-col gap-3 text-sm leading-relaxed text-muted-foreground">
+          <li>Vedere il portfolio completo e gallery di matrimoni reali</li>
+          <li>Capire il metodo dei tre incontri preparatori</li>
+          <li>Scoprire la differenza tra scatto analogico e digitale</li>
+          <li>Domande libere, senza fretta e senza pressione</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</SiteLayout>

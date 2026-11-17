@@ -1,0 +1,72 @@
+{
+  "collections": [
+    {
+      "title": "Autentiche e naturali",
+      "description": "Candid shot e momenti rubati: emozioni reali, luce corretta, nessuna posa.",
+      "coverImagePath": "stefano-lunardi-assets/foto/autentiche e naturali/_D3S0133.jpg"
+    },
+    {
+      "title": "Eleganti e iconiche",
+      "description": "Ritratti editoriali stile copertina, foto d'autore e aeree: il mix perfetto tra spontaneità e vita reale.",
+      "coverImagePath": "stefano-lunardi-assets/foto/eleganti e iconiche/Z8D_0001.jpg"
+    }
+  ],
+  "projects": [
+    {
+      "title": "Venezia",
+      "description": "Destination wedding a Venezia: la storia vissuta tra calli, acqua e luce naturale.",
+      "collection": "Autentiche e naturali",
+      "details": [{ "label": "Location", "text": "Venezia, Italia" }],
+      "coverImagePath": "stefano-lunardi-assets/foto/autentiche e naturali/VENICEINLOVE02_silverlogo.jpg",
+      "items": [
+        { "sortOrder": 1, "title": "VENICEINLOVE02_silverlogo.jpg", "imagePath": "stefano-lunardi-assets/foto/autentiche e naturali/VENICEINLOVE02_silverlogo.jpg" },
+        { "sortOrder": 2, "title": "stefano lunardi photographer_wedding_Italy, Venice, hotel Excelsior_MIK0206.jpg", "imagePath": "stefano-lunardi-assets/foto/autentiche e naturali/stefano lunardi photographer_wedding_Italy, Venice, hotel Excelsior_MIK0206.jpg" },
+        { "sortOrder": 3, "title": "weddingemotions_sipa2016.jpg", "imagePath": "stefano-lunardi-assets/foto/autentiche e naturali/weddingemotions_sipa2016.jpg" }
+      ]
+    },
+    {
+      "title": "Il velo",
+      "description": "Il momento più intimo dei preparativi, raccontato senza posa: emozioni reali in luce naturale.",
+      "collection": "Autentiche e naturali",
+      "coverImagePath": "stefano-lunardi-assets/foto/autentiche e naturali/01_veillow.jpg",
+      "items": [
+        { "sortOrder": 1, "title": "01_veillow.jpg", "imagePath": "stefano-lunardi-assets/foto/autentiche e naturali/01_veillow.jpg" },
+        { "sortOrder": 2, "title": "04_veil.jpg", "imagePath": "stefano-lunardi-assets/foto/autentiche e naturali/04_veil.jpg" },
+        { "sortOrder": 3, "title": "05_veil.jpg", "imagePath": "stefano-lunardi-assets/foto/autentiche e naturali/05_veil.jpg" },
+        { "sortOrder": 4, "title": "11_veilOKLOW.jpg", "imagePath": "stefano-lunardi-assets/foto/autentiche e naturali/11_veilOKLOW.jpg" },
+        { "sortOrder": 5, "title": "_D3S0133.jpg", "imagePath": "stefano-lunardi-assets/foto/autentiche e naturali/_D3S0133.jpg" },
+        { "sortOrder": 6, "title": "Z8D_6299.jpg", "imagePath": "stefano-lunardi-assets/foto/autentiche e naturali/Z8D_6299.jpg" },
+        { "sortOrder": 7, "title": "Z8D_7106.jpg", "imagePath": "stefano-lunardi-assets/foto/autentiche e naturali/Z8D_7106.jpg" }
+      ]
+    },
+    {
+      "title": "Hotel Excelsior, Venezia",
+      "description": "Ritratti iconici ed eleganti al Grand Hotel Excelsior, Lido di Venezia: ogni scatto è un quadro d'arte.",
+      "collection": "Eleganti e iconiche",
+      "details": [
+        { "label": "Location", "text": "Hotel Excelsior, Venezia" },
+        { "label": "Stile", "text": "Fine Art" }
+      ],
+      "coverImagePath": "stefano-lunardi-assets/foto/eleganti e iconiche/stefano lunardi photographer_wedding_Italy, Venice, hotel Excelsior_212.jpg",
+      "items": [
+        { "sortOrder": 1, "title": "stefano lunardi photographer_wedding_Italy, Venice, hotel Excelsior_212.jpg", "imagePath": "stefano-lunardi-assets/foto/eleganti e iconiche/stefano lunardi photographer_wedding_Italy, Venice, hotel Excelsior_212.jpg" },
+        { "sortOrder": 2, "title": "stefano lunardi photographer_wedding_Italy, Venice, hotel Excelsior_D8D4547.jpg", "imagePath": "stefano-lunardi-assets/foto/eleganti e iconiche/stefano lunardi photographer_wedding_Italy, Venice, hotel Excelsior_D8D4547.jpg" },
+        { "sortOrder": 3, "title": "Venice_2ipa_weblogo.jpg", "imagePath": "stefano-lunardi-assets/foto/eleganti e iconiche/Venice_2ipa_weblogo .jpg" },
+        { "sortOrder": 4, "title": "Z8D_4494.jpg", "imagePath": "stefano-lunardi-assets/foto/eleganti e iconiche/Z8D_4494.jpg" },
+        { "sortOrder": 5, "title": "Z8D_4743_1.jpg", "imagePath": "stefano-lunardi-assets/foto/eleganti e iconiche/Z8D_4743_1.jpg" }
+      ]
+    },
+    {
+      "title": "Aeree",
+      "description": "Prospettive dall'alto: la location diventa parte del racconto visivo.",
+      "collection": "Eleganti e iconiche",
+      "details": [{ "label": "Attrezzatura", "text": "DJI" }],
+      "coverImagePath": "stefano-lunardi-assets/foto/eleganti e iconiche/DJI_0374.jpg",
+      "items": [
+        { "sortOrder": 1, "title": "DJI_0374.jpg", "imagePath": "stefano-lunardi-assets/foto/eleganti e iconiche/DJI_0374.jpg" },
+        { "sortOrder": 2, "title": "DJI_20260612213923_0172_D.jpg", "imagePath": "stefano-lunardi-assets/foto/eleganti e iconiche/DJI_20260612213923_0172_D.jpg" },
+        { "sortOrder": 3, "title": "DJI_20260612230450_0194_D (1).jpg", "imagePath": "stefano-lunardi-assets/foto/eleganti e iconiche/DJI_20260612230450_0194_D (1).jpg" }
+      ]
+    }
+  ]
+}

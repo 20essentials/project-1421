@@ -1,0 +1,27 @@
+{
+  "forms": [
+    {
+      "name": "Heart to Heart",
+      "submitText": "Invia",
+      "thankYou": "Grazie! Ti risponderemo entro 48 ore. Benvenuto nella tua storia.",
+      "fields": [
+        { "label": "Nome", "kind": "firstName", "required": true },
+        { "label": "Cognome", "kind": "lastName", "required": true },
+        { "label": "Email", "kind": "email", "required": true },
+        { "label": "Data del matrimonio", "kind": "date" },
+        { "label": "Location", "kind": "select", "choices": ["Italia", "Austria", "Altra destination"], "other": true },
+        { "label": "Come vi siete conosciuti", "kind": "textarea", "placeholder": "Raccontateci la vostra storia" },
+        { "label": "Messaggio", "kind": "textarea", "required": true }
+      ]
+    },
+    {
+      "name": "Newsletter",
+      "submitText": "Iscriviti",
+      "thankYou": "Iscrizione confermata. Aggiornamenti esclusivi in arrivo.",
+      "fields": [
+        { "label": "Nome", "kind": "firstName" },
+        { "label": "Email", "kind": "email", "required": true }
+      ]
+    }
+  ]
+}
