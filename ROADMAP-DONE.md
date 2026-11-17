@@ -44,3 +44,9 @@ dónde viven. Los pasos siguientes viven en `ROADMAP-NEXT-STEPS.md`.
 - CI: success → https://github.com/20essentials/project-1421/actions
 - Keys: secret `WIX_API_KEY` (GitHub), remote `origin/main`, run verde del workflow CI.
 - Commits clave: `fa81f58` scaffold · `ffe660c` ci auth · `771adbf` peer dep fix · `4d1e3ac` roadmaps.
+
+### Primera release vía tag v0.1.0
+- Tag `v0.1.0` → workflow `Release`: login Wix CLI + `env pull` + build + `wix release`.
+- Fix del workflow: faltaba `wix env pull` en release.yml (fallaba con `Missing environment variable WIX_CLIENT_ID`) → añadido, commit `83fda95`.
+- Release: success → https://github.com/20essentials/project-1421/actions
+- Keys: tag `v0.1.0` (fuerza re-release: `git tag -f v<ver> && git push -f origin v<ver>`), workflow `Release` (manual o por tags `v*`).

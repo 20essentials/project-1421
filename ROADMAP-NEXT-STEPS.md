@@ -4,9 +4,8 @@ Orden sugerido de ejecución. El registro de lo ya hecho (con sus keys) vive en
 `ROADMAP-DONE.md`.
 
 ## 0. Primera release desde CI (listo para ejecutar)
-- [ ] Etiquetar y pushear para disparar el workflow `Release`:
-  `git tag v0.1.0 && git push origin v0.1.0` (o dispararlo manual desde Actions).
-- [ ] Verificar que el sitio live queda actualizado tras la release.
+- [x] Etiquetar y pushear para disparar el workflow `Release`: hecho con `v0.1.0`, success.
+- [ ] Verificar que el sitio live queda actualizado tras la release (comparar con el estado anterior; el release ya corrió con el contenido del repo).
 
 ## 1. Logos de awards y prensa en Wix Media
 - [ ] Subir a Wix Media los logos que están solo en local:
