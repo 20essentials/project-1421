@@ -40,6 +40,9 @@ jobs:
           fi
           npx @wix/cli login --api-key "$WIX_API_KEY"
 
+      - name: Pull Wix env vars
+        run: npx @wix/cli env pull
+
       - name: Wix build
         run: npm run build
 
