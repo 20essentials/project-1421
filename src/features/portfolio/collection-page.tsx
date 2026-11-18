@@ -10,12 +10,12 @@ export default function CollectionPage(props: {
   const { collection, notFound, projects, error } = useCollectionProjects(props.slug, props);
 
   if (notFound) {
-    return <p className="mt-16 text-center text-sm text-muted-foreground">Questa collezione non esiste (più).</p>;
+    return <p className="text-center text-sm text-muted-foreground">Questa collezione non esiste (più).</p>;
   }
 
   return (
-    <div>
-      <header className="mt-12 border-b border-border pb-10 text-center">
+    <div className="mx-auto max-w-7xl px-6">
+      <header className="border-b border-border pb-10 text-center">
         {collection ? (
           <>
             <h1 className="font-display text-4xl font-medium sm:text-5xl">{collection.title}</h1>

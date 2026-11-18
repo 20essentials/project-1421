@@ -79,7 +79,7 @@ const head = seoTagsServiceConfig ? {} : { title: post.seoTitle, description: po
 <SiteLayout {...head}>
   {seoTagsServiceConfig && <SEO.Tags seoTagsServiceConfig={seoTagsServiceConfig} slot="seo-tags" />}
 
-  <article class="mx-auto max-w-3xl pt-10">
+  <article class="mx-auto max-w-3xl px-6">
     {
       postCategories.length > 0 && (
         <p class="eyebrow text-center">

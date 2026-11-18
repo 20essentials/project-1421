@@ -55,7 +55,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
   </head>
   <body>
     <SiteHeader navPrimary={primaryNav} navAll={allNav} current={currentPath} />
-    <main id="contenido" class="pt-28">
+    <main id="contenido">
       <slot />
     </main>
     <footer class="border-t border-border px-6 pb-10 pt-16">

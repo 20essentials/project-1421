@@ -23,14 +23,16 @@ try {
 ---
 
 <SiteLayout title="Storie, location e consigli — Stefano Lunardi" description="Racconti di matrimoni reali, location tra Italia e Austria e consigli per le coppie.">
-  <header class="mt-12 border-b border-border pb-10 text-center">
+  <header class="border-b border-border pb-10 text-center">
     <h1 class="font-display text-4xl font-medium sm:text-5xl">Storie, location e consigli</h1>
     <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">Dietro l'obiettivo: il metodo, le scelte, le storie.</p>
   </header>
-  <Feed
-    client:load
-    initialPage={failed ? undefined : page}
-    initialCategories={categories}
-    initialTags={tags}
-  />
+  <div class="mx-auto max-w-7xl px-6 pt-12 pb-24">
+    <Feed
+      client:load
+      initialPage={failed ? undefined : page}
+      initialCategories={categories}
+      initialTags={tags}
+    />
+  </div>
 </SiteLayout>

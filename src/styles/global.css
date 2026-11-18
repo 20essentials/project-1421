@@ -27,6 +27,19 @@
 }
 
 @layer base {
+  :root {
+    --header-offset: 8.5rem;
+  }
+
+  /* First block of every page clears the fixed nav; full-bleed heroes opt out
+     with [data-bleed] and sit underneath the floating pill instead. */
+  main > :first-child {
+    margin-top: 0;
+  }
+  main > :first-child:not([data-bleed]) {
+    padding-top: var(--header-offset);
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);

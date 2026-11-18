@@ -32,11 +32,13 @@ const description = data.questions.slice(0, 3).map((q) => q.question).join(" · 
 
 <SiteLayout title="FAQ" description={description}>
   <script type="application/ld+json" is:inline slot="seo-tags" set:html={jsonLd} />
-  <header class="mt-12 border-b border-border pb-10 text-center">
+  <header class="border-b border-border pb-10 text-center">
     <h1 class="font-display text-4xl font-medium sm:text-5xl">Domande frequenti</h1>
     <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">Tutte le risposte sono visibili in questa pagina — anche per i motori di ricerca.</p>
   </header>
-  <FaqSearch client:load initialData={data} initialCategoryId={initialCategoryId} />
-  <FaqCategoryNav client:load initialData={data} initialCategoryId={initialCategoryId} />
-  <FaqAccordion client:load initialData={data} initialCategoryId={initialCategoryId} />
+  <div class="mx-auto max-w-3xl px-6 pt-12 pb-20">
+    <FaqSearch client:load initialData={data} initialCategoryId={initialCategoryId} />
+    <FaqCategoryNav client:load initialData={data} initialCategoryId={initialCategoryId} />
+    <FaqAccordion client:load initialData={data} initialCategoryId={initialCategoryId} />
+  </div>
 </SiteLayout>

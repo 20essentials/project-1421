@@ -11,15 +11,15 @@ export default function ProjectPage(props: {
   const { project, notFound, items, error } = useProjectDetail(props.slug, props);
 
   if (notFound) {
-    return <p className="mt-16 text-center text-sm text-muted-foreground">Questo progetto non esiste (più).</p>;
+    return <p className="text-center text-sm text-muted-foreground">Questo progetto non esiste (più).</p>;
   }
   if (!project) {
-    return <div className="mt-12 h-10 w-72 animate-pulse bg-secondary" />;
+    return <div className="h-10 w-72 animate-pulse bg-secondary" />;
   }
 
   return (
-    <article className="mt-10">
-      <header className="mx-auto max-w-3xl text-center">
+    <article>
+      <header className="mx-auto max-w-3xl px-6 text-center">
         <h1 className="font-display text-4xl font-medium sm:text-5xl">{project.title}</h1>
         {project.description && <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">{project.description}</p>}
         {project.details.length > 0 && (
