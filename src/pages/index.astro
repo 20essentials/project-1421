@@ -26,7 +26,7 @@ const latestPosts = posts?.posts.slice(0, 3) ?? [];
   title="Stefano Lunardi — Fotografo di matrimoni | Fine Art | Fotoreporter"
   description="Matrimoni come opere d'arte, non come catene di montaggio. Destination wedding tra Italia e Austria: ogni scatto è un quadro d'arte."
 >
-  <section class="relative min-h-[85vh] overflow-hidden bg-foreground">
+  <section class="relative min-h-screen overflow-hidden bg-foreground" data-bleed>
     {
       heroCollection?.imageUrl && (
         <img
@@ -37,7 +37,7 @@ const latestPosts = posts?.posts.slice(0, 3) ?? [];
       )
     }
     <div class="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/30 to-foreground/20"></div>
-    <div class="relative mx-auto flex min-h-[85vh] max-w-7xl flex-col items-center justify-end px-6 pb-20 pt-40 text-center">
+    <div class="relative mx-auto flex min-h-screen max-w-7xl flex-col items-center justify-end px-6 pb-20 pt-40 text-center">
       <p class="eyebrow text-primary-foreground/80">Fotografo di matrimoni | Fine Art | Fotoreporter</p>
       <h1 class="font-display mt-4 max-w-4xl text-4xl font-medium leading-tight text-primary-foreground sm:text-5xl md:text-6xl">
         Matrimoni come opere d'arte, non come catene di montaggio
