@@ -21,7 +21,7 @@ const smooth = (x: number) => {
 
 interface Scene {
   el: HTMLElement;
-  img: HTMLElement | null;
+  imgs: HTMLElement[];
   copy: HTMLElement | null;
   start: number;
   end: number;
@@ -34,7 +34,7 @@ export function mountScrollWorld() {
 
   const scenes: Scene[] = Array.from(root.querySelectorAll<HTMLElement>(".sw-scene")).map((el) => ({
     el,
-    img: el.querySelector<HTMLElement>(".sw-still img"),
+    imgs: Array.from(el.querySelectorAll<HTMLElement>(".sw-still img")),
     copy: el.querySelector<HTMLElement>(".sw-copy"),
     start: 0,
     end: 0,
@@ -82,10 +82,11 @@ export function mountScrollWorld() {
       s.el.style.clipPath = r >= 0.999 ? "none" : `inset(${((1 - r) * 100).toFixed(2)}% 0 0 0)`;
 
       const local = clamp((y - s.start) / (s.end - s.start), 0, 1);
-      if (s.img) {
+      if (s.imgs.length) {
         const drift = nextReveal[i] * 5;
         const sc = 1.12 + local * 0.05;
-        s.img.style.transform = `translateY(${drift.toFixed(2)}%) scale(${sc.toFixed(3)})`;
+        const transform = `translateY(${drift.toFixed(2)}%) scale(${sc.toFixed(3)})`;
+        for (const img of s.imgs) img.style.transform = transform;
       }
 
       let cop: number;

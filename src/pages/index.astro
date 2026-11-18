@@ -33,6 +33,8 @@ interface ScrollScene {
   imageUrl: string;
   ratio: number;
   alt: string;
+  secondaryImageUrl?: string;
+  secondaryAlt?: string;
   eyebrow?: string;
   title?: string;
   description?: string;
@@ -55,6 +57,8 @@ const heroScene: ScrollScene = {
   imageUrl: HERO_IMAGE,
   ratio: HERO_RATIO,
   alt: "Fotografia di matrimonio fine art — Stefano Lunardi",
+  secondaryImageUrl: "/stefan.jpg",
+  secondaryAlt: "Fotografia d'arte — Stefano Lunardi",
   eyebrow: "Fotografo di matrimoni | Fine Art | Fotoreporter",
   title: "Matrimoni come opere d'arte, non come catene di montaggio",
   description: "Destination wedding tra Italia e Austria. Ogni scatto è un quadro d'arte.",
@@ -149,17 +153,27 @@ const alignFor = (i: number): "center" | "right" | "left" =>
     <div class="sw-viewport">
       {scenes.map((s, i) => (
         <div class="sw-scene">
-          <div class="sw-still">
+          <div class="sw-still" class:list={{ "sw-still--split": !!s.secondaryImageUrl }}>
             <img
               src={imgSrc(s.imageUrl, 1280, Math.round(1280 * s.ratio))}
               srcset={imgSrcSet(s.imageUrl, [640, 960, 1280, 1600, 2000, 2560], s.ratio)}
-              sizes="100vw"
+              sizes={s.secondaryImageUrl ? "50vw" : "100vw"}
               loading={i === 0 ? "eager" : "lazy"}
               fetchpriority={i === 0 ? "high" : undefined}
               decoding="async"
               alt={s.alt}
               class="sw-still__img"
             />
+            {s.secondaryImageUrl && (
+              <img
+                src={s.secondaryImageUrl}
+                loading={i === 0 ? "eager" : "lazy"}
+                fetchpriority={i === 0 ? "high" : undefined}
+                decoding="async"
+                alt={s.secondaryAlt ?? s.alt}
+                class="sw-still__img"
+              />
+            )}
           </div>
           {s.title && (
             <>
@@ -347,6 +361,28 @@ const alignFor = (i: number): "center" | "right" | "left" =>
     height: 100%;
     object-fit: cover;
     object-position: center;
+  }
+  .sw-still--split {
+    display: flex;
+  }
+  .sw-still--split .sw-still__img {
+    flex: 0 0 50%;
+    width: 50%;
+  }
+  .sw-still--split .sw-still__img + .sw-still__img {
+    border-left: 1px solid rgb(255 255 255 / 0.3);
+  }
+  @media (max-width: 767px) {
+    .sw-still--split .sw-still__img:first-child {
+      display: none;
+    }
+    .sw-still--split .sw-still__img {
+      flex: 0 0 100%;
+      width: 100%;
+    }
+    .sw-still--split .sw-still__img + .sw-still__img {
+      border-left: none;
+    }
   }
   .sw-scrim {
     position: absolute;
