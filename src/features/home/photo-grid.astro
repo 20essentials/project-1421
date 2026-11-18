@@ -1,0 +1,155 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import p01 from "@/assets/photos/01-autentiche.webp";
+import p02 from "@/assets/photos/02-autentiche.webp";
+import p03 from "@/assets/photos/03-autentiche.webp";
+import p04 from "@/assets/photos/04-autentiche.webp";
+import p05 from "@/assets/photos/05-autentiche.webp";
+import p06 from "@/assets/photos/06-autentiche.webp";
+import p07 from "@/assets/photos/07-eleganti.webp";
+import p08 from "@/assets/photos/08-eleganti.webp";
+import p09 from "@/assets/photos/09-eleganti.webp";
+import p10 from "@/assets/photos/10-eleganti.webp";
+import p11 from "@/assets/photos/11-eleganti.webp";
+import p12 from "@/assets/photos/12-eleganti.webp";
+import p13 from "@/assets/photos/13-eleganti.webp";
+import p14 from "@/assets/photos/14-autentiche.webp";
+import p15 from "@/assets/photos/15-autentiche.webp";
+import p16 from "@/assets/photos/16-autentiche.webp";
+import p17 from "@/assets/photos/17-autentiche.webp";
+import p18 from "@/assets/photos/18-eleganti.webp";
+
+type BentoSpan = "big" | "wide" | "single";
+
+type BentoTile = {
+  src: ImageMetadata;
+  span: BentoSpan;
+  category: "autentiche e naturali" | "eleganti e iconiche";
+};
+
+const photos: BentoTile[] = [
+  { src: p01, span: "wide", category: "autentiche e naturali" },
+  { src: p02, span: "single", category: "autentiche e naturali" },
+  { src: p03, span: "single", category: "autentiche e naturali" },
+  { src: p04, span: "single", category: "autentiche e naturali" },
+  { src: p05, span: "single", category: "autentiche e naturali" },
+  { src: p06, span: "big", category: "autentiche e naturali" },
+  { src: p07, span: "single", category: "eleganti e iconiche" },
+  { src: p08, span: "single", category: "eleganti e iconiche" },
+  { src: p09, span: "single", category: "eleganti e iconiche" },
+  { src: p10, span: "single", category: "eleganti e iconiche" },
+  { src: p11, span: "wide", category: "eleganti e iconiche" },
+  { src: p12, span: "single", category: "eleganti e iconiche" },
+  { src: p13, span: "single", category: "eleganti e iconiche" },
+  { src: p14, span: "single", category: "autentiche e naturali" },
+  { src: p15, span: "single", category: "autentiche e naturali" },
+  { src: p16, span: "single", category: "autentiche e naturali" },
+  { src: p17, span: "single", category: "autentiche e naturali" },
+  { src: p18, span: "wide", category: "eleganti e iconiche" },
+];
+
+const sizesFor = (span: BentoSpan) =>
+  span === "single" ? "(min-width: 1024px) 25vw, 50vw" : "(min-width: 1024px) 50vw, 100vw";
+---
+
+<section class="bg-foreground px-6 py-20" aria-labelledby="photo-grid-title">
+  <div class="mx-auto max-w-7xl">
+    <div class="mb-10 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-[0.22em] text-primary-foreground/60">Portfolio</p>
+        <h2 id="photo-grid-title" class="font-display mt-3 max-w-2xl text-3xl font-medium leading-tight text-primary-foreground sm:text-4xl">
+          Autentiche e naturali. Eleganti e iconiche.
+        </h2>
+      </div>
+      <a href="/portfolio" class="text-sm text-primary-foreground/80 underline-offset-4 no-underline transition-colors hover:text-primary-foreground hover:underline">
+        Guarda tutto il portfolio
+      </a>
+    </div>
+
+    <div class="bento-grid">
+      {
+        photos.map((photo, i) => (
+          <figure class={`bento-tile bento-tile--${photo.span}`}>
+            <Image
+              src={photo.src}
+              alt={`Fotografia di matrimonio — ${photo.category} — Stefano Lunardi`}
+              widths={[400, 700, 1100, 1400]}
+              sizes={sizesFor(photo.span)}
+              loading={i < 3 ? "eager" : "lazy"}
+              decoding="async"
+              quality={80}
+            />
+          </figure>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-rows: clamp(150px, 15vw, 240px);
+    grid-auto-flow: dense;
+    gap: clamp(10px, 1vw, 16px);
+  }
+
+  .bento-tile {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    border-radius: 2px;
+    border: 1px solid rgb(255 255 255 / 0.08);
+    background-color: var(--color-secondary);
+    transition: border-color 0.4s ease;
+  }
+
+  .bento-tile :global(img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s var(--ease-fluid);
+  }
+
+  .bento-tile:hover {
+    border-color: rgb(255 255 255 / 0.24);
+  }
+
+  .bento-tile:hover :global(img) {
+    transform: scale(1.05);
+  }
+
+  .bento-tile--big {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  .bento-tile--wide {
+    grid-column: span 2;
+  }
+
+  @media (max-width: 900px) {
+    .bento-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-auto-rows: clamp(140px, 30vw, 220px);
+    }
+
+    .bento-tile:last-child {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bento-tile,
+    .bento-tile :global(img) {
+      transition: none;
+    }
+
+    .bento-tile:hover :global(img) {
+      transform: none;
+    }
+  }
+</style>

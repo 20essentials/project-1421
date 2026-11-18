@@ -1,5 +1,6 @@
 ---
 import SiteLayout from "@/app/layout.astro";
+import PhotoGrid from "@/features/home/photo-grid.astro";
 import { fetchCollections } from "@/features/portfolio/portfolio";
 import { fetchPosts, postMetaLine, postPath } from "@/features/blog/posts";
 import { fetchFaq } from "@/features/faq/faq";
@@ -62,6 +63,8 @@ const latestPosts = posts?.posts.slice(0, 3) ?? [];
       <p class="font-display mt-6 text-xl italic text-accent">Benvenuto nella tua storia.</p>
     </div>
   </section>
+
+  <PhotoGrid />
 
   {
     collections.length >= 2 && (
