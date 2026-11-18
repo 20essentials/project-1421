@@ -1,25 +1,57 @@
 ---
 import SiteLayout from "@/app/layout.astro";
 import PhotoGrid from "@/features/home/photo-grid.astro";
-import { fetchCollections } from "@/features/portfolio/portfolio";
+import { fetchCollections, fetchProjects } from "@/features/portfolio/portfolio";
 import { fetchPosts, postMetaLine, postPath } from "@/features/blog/posts";
 import { fetchFaq } from "@/features/faq/faq";
 import { imgAttrs, imgSrc, imgSrcSet } from "@/shared/media";
-import type { CollectionSummary } from "@/features/portfolio/types";
+import type { CollectionSummary, ProjectSummary } from "@/features/portfolio/types";
 import type { PostPage } from "@/features/blog/types";
 import type { FaqData } from "@/features/faq/types";
 
 let collections: CollectionSummary[] = [];
+let projects: ProjectSummary[] = [];
 let posts: PostPage | undefined;
 let faq: FaqData = { categories: [], questions: [], truncated: false };
 try {
-  [collections, posts, faq] = await Promise.all([fetchCollections(), fetchPosts(), fetchFaq()]);
+  [collections, projects, posts, faq] = await Promise.all([fetchCollections(), fetchProjects(), fetchPosts(), fetchFaq()]);
 } catch {
 }
 
 const heroCollection = collections.find((c) => c.slug === "eleganti-e-iconiche") ?? collections[0];
 const faqPreview = faq.questions.slice(0, 3);
 const latestPosts = posts?.posts.slice(0, 3) ?? [];
+
+const MAX_SCENES = 4;
+const collectionTitles = new Map(collections.map((c) => [c.id, c.title]));
+
+const projectScenes = projects
+  .filter((p) => p.imageUrl)
+  .slice(0, MAX_SCENES)
+  .map((p) => ({
+    key: p.id,
+    imageUrl: p.imageUrl,
+    eyebrow: p.collectionIds.map((id) => collectionTitles.get(id)).find(Boolean) ?? "Progetto",
+    title: p.title,
+    description: p.description,
+    href: `/projects/${p.slug}`,
+    cta: "Vedi il progetto",
+  }));
+
+const collectionScenes = collections
+  .filter((c) => c.imageUrl)
+  .slice(0, MAX_SCENES)
+  .map((c) => ({
+    key: c.id,
+    imageUrl: c.imageUrl,
+    eyebrow: "Collezione",
+    title: c.title,
+    description: c.description,
+    href: `/portfolio/${c.slug}`,
+    cta: "Ver la collezione",
+  }));
+
+const scenes = projectScenes.length >= 2 ? projectScenes : collectionScenes;
 ---
 
 <SiteLayout
@@ -67,30 +99,28 @@ const latestPosts = posts?.posts.slice(0, 3) ?? [];
   <PhotoGrid />
 
   {
-    collections.length >= 2 && (
+    scenes.length >= 2 && (
       <section data-scroll-world class="sw-root">
         <div class="sw-viewport">
-          {collections.map((c, i) => (
+          {scenes.map((s, i) => (
             <div class="sw-scene">
               <div class="sw-still">
-                {c.imageUrl && (
-                  <img
-                    src={imgSrc(c.imageUrl, 1280, Math.round(1280 * (2 / 3)))}
-                    srcset={imgSrcSet(c.imageUrl, [640, 960, 1280, 1600, 2000], 2 / 3)}
-                    sizes="100vw"
-                    loading={i === 0 ? "eager" : "lazy"}
-                    decoding="async"
-                    alt={c.title}
-                    class="sw-still__img"
-                  />
-                )}
+                <img
+                  src={imgSrc(s.imageUrl, 1280, Math.round(1280 * (2 / 3)))}
+                  srcset={imgSrcSet(s.imageUrl, [640, 960, 1280, 1600, 2000], 2 / 3)}
+                  sizes="100vw"
+                  loading={i === 0 ? "eager" : "lazy"}
+                  decoding="async"
+                  alt={s.title}
+                  class="sw-still__img"
+                />
               </div>
               <div class="sw-scrim"></div>
               <div class="sw-copy">
-                <p class="eyebrow text-primary-foreground/80">Collezione</p>
-                <h2 class="font-display mt-3 break-words text-4xl font-medium text-primary-foreground sm:text-5xl">{c.title}</h2>
-                {c.description && <p class="mt-4 max-w-xl text-sm leading-relaxed text-primary-foreground/85 sm:text-base">{c.description}</p>}
-                <a href={`/portfolio/${c.slug}`} class="mt-6 inline-block rounded-control border border-primary-foreground/60 px-8 py-3 text-sm font-medium text-primary-foreground no-underline transition-colors hover:border-primary-foreground hover:bg-primary-foreground/10">Ver la collezione</a>
+                <p class="eyebrow text-primary-foreground/80">{s.eyebrow}</p>
+                <h2 class="font-display mt-3 break-words text-4xl font-medium text-primary-foreground sm:text-5xl">{s.title}</h2>
+                {s.description && <p class="mt-4 max-w-xl text-sm leading-relaxed text-primary-foreground/85 sm:text-base">{s.description}</p>}
+                <a href={s.href} class="mt-6 inline-block rounded-control border border-primary-foreground/60 px-8 py-3 text-sm font-medium text-primary-foreground no-underline transition-colors hover:border-primary-foreground hover:bg-primary-foreground/10">{s.cta}</a>
               </div>
             </div>
           ))}
