@@ -1,0 +1,28 @@
+---
+interface Props {
+  event: string;
+  payload?: Record<string, unknown>;
+}
+
+const { event, payload = {} } = Astro.props;
+const marker = JSON.stringify({ event, payload }).replace(/</g, "\\u003c");
+---
+
+<script type="application/json" data-sl-analytics-view is:inline set:html={marker} />
+
+<script>
+  import { trackEvent } from "@/shared/analytics";
+
+  for (const node of document.querySelectorAll<HTMLScriptElement>(
+    "script[data-sl-analytics-view]",
+  )) {
+    try {
+      const data = JSON.parse(node.textContent ?? "") as {
+        event: string;
+        payload?: Record<string, unknown>;
+      };
+      trackEvent(data.event, data.payload ?? {});
+    } catch {
+    }
+  }
+</script>

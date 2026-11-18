@@ -1,5 +1,6 @@
 import { useWixForm, otherValue, FORM_ERROR } from "@/features/forms/use-wix-form";
 import type { FormDto, FormFieldDto } from "@/features/forms/types";
+import { trackEvent } from "@/shared/analytics";
 
 const OTHER_SELECT_VALUE = "__other__";
 
@@ -160,6 +161,7 @@ export default function SchemaForm({ formId, initialForm }: { formId: string; in
       noValidate
       onSubmit={async (e) => {
         const outcome = await f.submit(e);
+        if (outcome) trackEvent("FormSubmit", { form_id: formId });
         if (outcome && (outcome.action === "CHECKOUT" || outcome.action === "REDIRECT") && outcome.url) {
           if (outcome.newTab) window.open(outcome.url);
           else window.location.assign(outcome.url);

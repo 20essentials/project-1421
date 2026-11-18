@@ -8,6 +8,7 @@
 // viewer breaks under SSR. The like row and the comments are client:load islands: both read as
 // the VIEWER (personal like state, the member's own comments), which SSR cannot do.
 import SiteLayout from "@/app/layout.astro";
+import AnalyticsView from "@/shared/analytics-view.astro";
 import RichContent from "@/features/blog/rich-content";
 import PostLikeButton from "@/features/blog/post-like-button";
 import CommentsView from "@/features/blog/comments-view";
@@ -80,6 +81,7 @@ const head = seoTagsServiceConfig ? {} : { title: post.seoTitle, description: po
   {seoTagsServiceConfig && <SEO.Tags seoTagsServiceConfig={seoTagsServiceConfig} slot="seo-tags" />}
 
   <article class="mx-auto max-w-3xl px-6">
+    <AnalyticsView event="ArticleView" payload={{ post_id: post.id, slug: post.slug }} />
     {
       postCategories.length > 0 && (
         <p class="eyebrow text-center">
