@@ -118,13 +118,24 @@ const structuredData = JSON.stringify({
         <p class="mt-6 text-center text-xs uppercase tracking-[0.25em] text-muted-foreground">
           Autenticità · Contemplazione · Relazione · Arte · Emozione
         </p>
-        <div class="mt-12 grid grid-cols-1 gap-10 text-sm sm:grid-cols-3">
+        <div class="mt-12 grid grid-cols-1 gap-10 text-sm sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <p class="eyebrow">Il sito</p>
             <nav class="mt-4 flex flex-col gap-2" aria-label="Footer">
               {allNav.map((l) => (
                 <a href={l.href} class="text-foreground no-underline hover:text-accent">{l.label}</a>
               ))}
+            </nav>
+          </div>
+          <div>
+            <p class="eyebrow">Documenti legali</p>
+            <nav class="mt-4 flex flex-col gap-2" aria-label="Documenti legali">
+              <a href="/legal" class="text-foreground no-underline hover:text-accent">Tutti i documenti</a>
+              <a href="/legal/termini-e-condizioni" class="text-foreground no-underline hover:text-accent">Termini e condizioni</a>
+              <a href="/legal/privacy" class="text-foreground no-underline hover:text-accent">Privacy</a>
+              <a href="/legal/accessibilita" class="text-foreground no-underline hover:text-accent">Accessibilità</a>
+              <a href="/legal/cookie-policy" class="text-foreground no-underline hover:text-accent">Cookie</a>
+              <a href="/impressum" class="text-foreground no-underline hover:text-accent">Avviso legale</a>
             </nav>
           </div>
           <div>
@@ -152,7 +163,7 @@ const structuredData = JSON.stringify({
             <button type="button" data-consent-settings class="no-underline hover:text-accent">
               Preferenze cookie
             </button>
-            <a href="/impressum" class="no-underline hover:text-accent">Impressum</a>
+            <a href="/impressum" class="no-underline hover:text-accent">Avviso legale</a>
           </div>
         </div>
       </div>

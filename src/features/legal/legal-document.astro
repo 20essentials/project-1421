@@ -1,0 +1,51 @@
+---
+import type { LegalDocument } from "./documents";
+
+interface Props {
+  doc: LegalDocument;
+}
+
+const { doc } = Astro.props;
+---
+
+<div class="mx-auto max-w-6xl px-6 pb-24 pt-16">
+  <header class="border-b border-border pb-10">
+    <p class="eyebrow">{doc.eyebrow}</p>
+    <h1 class="font-display mt-4 text-4xl font-medium sm:text-5xl">{doc.title}</h1>
+    <p class="mt-5 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">{doc.summary}</p>
+    <p class="mt-5 text-xs uppercase tracking-[0.2em] text-muted-foreground">{doc.version}</p>
+  </header>
+  <div class="grid gap-12 pt-12 lg:grid-cols-[220px_minmax(0,1fr)]">
+    <aside class="lg:sticky lg:top-28 lg:self-start">
+      <p class="eyebrow">Indice</p>
+      <nav class="mt-4 flex flex-col gap-2 text-sm" aria-label="Indice del documento">
+        {doc.sections.map((section) => (
+          <a href={`#${section.id}`} class="text-muted-foreground no-underline hover:text-accent">{section.title}</a>
+        ))}
+      </nav>
+      <a href="/legal" class="mt-8 inline-block text-xs uppercase tracking-[0.18em] text-muted-foreground no-underline hover:text-accent">← Tutti i documenti</a>
+    </aside>
+    <div>
+      {doc.sections.map((section) => (
+        <section id={section.id} class="border-b border-border py-10 first:pt-0">
+          <h2 class="font-display text-2xl font-medium sm:text-3xl">{section.title}</h2>
+          <div class="mt-5 space-y-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
+            {section.paragraphs?.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+            {section.items && (
+              <ul class="list-disc space-y-2 pl-5">
+                {section.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </section>
+      ))}
+      <p class="mt-10 text-sm leading-relaxed text-muted-foreground">
+        Per richieste, chiarimenti o esercizio dei propri diritti è possibile utilizzare le informazioni di contatto riportate nel footer del sito.
+      </p>
+    </div>
+  </div>
+</div>

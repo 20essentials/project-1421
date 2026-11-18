@@ -1,0 +1,14 @@
+---
+import SiteLayout from "@/app/layout.astro";
+import LegalDocument from "@/features/legal/legal-document.astro";
+import { getLegalDocument } from "@/features/legal/documents";
+
+const doc = getLegalDocument("manifesto-soberania-digitale");
+if (!doc) {
+  return new Response(null, { status: 404 });
+}
+---
+
+<SiteLayout title={`${doc.title} — Documenti legali`} description={doc.summary}>
+  <LegalDocument {doc} />
+</SiteLayout>

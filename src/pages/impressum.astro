@@ -1,17 +1,14 @@
 ---
 import SiteLayout from "@/app/layout.astro";
+import LegalDocument from "@/features/legal/legal-document.astro";
+import { getLegalDocument } from "@/features/legal/documents";
+
+const doc = getLegalDocument("avviso-legale");
+if (!doc) {
+  return new Response(null, { status: 404 });
+}
 ---
 
-<SiteLayout title="Impressum | Stefano Lunardi">
-  <section class="mx-auto max-w-3xl px-6 pb-14">
-    <h1 class="font-display text-4xl font-medium">Impressum</h1>
-    <div class="mt-8 flex flex-col gap-4 text-sm leading-relaxed text-muted-foreground">
-      <p><strong class="text-foreground">Stefano Lunardi</strong> — Fotografo di matrimoni | Fine Art | Fotoreporter</p>
-      <p>Zone di lavoro: Villach (Austria), Udine (Italia), Treviso (Italia)</p>
-      <p>Telefono: +39 338 751 3113 (Italia) · +43 676 751 7274 (Austria)</p>
-      <p>Email: studio@stefanolunardi.com</p>
-      <p>Web: stefanolunardi.com · Arte: lunagallery.com, Singulart</p>
-      <p>Questa pagina va completata con i dati legali richiesti dalla normativa (ragione sociale, partita IVA, registro impresa, sede legale): il proprietario del sito li inserisce dal dashboard.</p>
-    </div>
-  </section>
+<SiteLayout title={`${doc.title} — Documenti legali`} description={doc.summary}>
+  <LegalDocument {doc} />
 </SiteLayout>
