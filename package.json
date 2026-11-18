@@ -36,7 +36,8 @@
     "@wix/services-manager": "1.0.7",
     "@wix/site": "1.68.0",
     "astro": "^7.3.2",
-    "tailwindcss": "^4.1.7"
+    "tailwindcss": "^4.1.7",
+    "three": "0.187.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
@@ -45,6 +46,7 @@
     "@types/node": "16.9.1",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.1",
+    "@types/three": "0.187.0",
     "@wix/astro-wix-hosting-adapter": "^3.0.0",
     "@wix/cli": "^1.1.92",
     "prettier": "3.8.1",
