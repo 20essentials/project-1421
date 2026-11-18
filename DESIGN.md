@@ -32,8 +32,8 @@ Reglas de color: no introducir colores nuevos; usar grises con un toque frío
 
 ## Tipografía
 
-- **Display**: `Cormorant Garamond` — títulos H1/H2, frases destacadas
-  (`.font-display`).
+- **Display**: `Jost` — títulos H1/H2, frases destacadas (`.font-display`);
+  sans-serif geométrico y elegante, con itálica para las citas.
 - **Sans**: `Inter` — cuerpo, UI, navegación.
 - **Eyebrow**: `.eyebrow` — 12px, uppercase, `letter-spacing: 0.22em`,
   `text-muted-foreground`; etiqueta sobre cada título de sección.
