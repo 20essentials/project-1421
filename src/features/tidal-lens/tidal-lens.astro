@@ -1,0 +1,112 @@
+---
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  src: ImageMetadata;
+}
+
+const { src } = Astro.props;
+---
+
+<section
+  class="tidal-stage relative isolate h-dvh w-full select-none overflow-hidden bg-foreground text-white"
+  data-tidal
+  data-tidal-src={src.src}
+  tabindex="0"
+  role="group"
+  aria-label="Lente interattiva prima/dopo: muovi il puntatore, trascina o usa le frecce della tastiera per esplorare la foto. La lente rivela l'immagine a colori."
+>
+  <canvas class="absolute inset-0 z-0 h-full w-full" data-tidal-canvas aria-hidden="true"></canvas>
+
+  <div class="absolute inset-0 z-0" data-tidal-fallback aria-hidden="true">
+    <img
+      class="absolute inset-0 h-full w-full object-cover grayscale"
+      src={src.src}
+      width={src.width}
+      height={src.height}
+      alt=""
+      loading="eager"
+      decoding="async"
+      draggable="false"
+    />
+    <img
+      class="absolute inset-0 h-full w-full object-cover"
+      style={`clip-path: circle(30% at 50% 50%);`}
+      data-tidal-after
+      src={src.src}
+      width={src.width}
+      height={src.height}
+      alt=""
+      loading="eager"
+      decoding="async"
+      draggable="false"
+    />
+  </div>
+
+  <div class="pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center">
+    <p class="font-display text-[clamp(4.5rem,18vw,13rem)] font-medium leading-none mix-blend-difference">404</p>
+    <p class="mt-5 text-xs uppercase tracking-[0.3em] text-white/90 mix-blend-difference sm:text-sm">
+      Pagina non trovata
+    </p>
+    <a
+      href="/"
+      class="pointer-events-auto mt-12 border-b border-white/50 pb-1 text-xs uppercase tracking-[0.25em] text-white mix-blend-difference transition-colors hover:border-white sm:text-sm"
+    >
+      Torna alla home
+    </a>
+  </div>
+
+  <div
+    class="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-4 border border-white/15 bg-black/45 px-4 py-2.5 backdrop-blur-sm sm:gap-5"
+    data-tidal-controls
+  >
+    <label class="text-[0.6rem] uppercase tracking-[0.2em] text-white/70 sm:text-[0.65rem]" for="tidal-diameter">
+      Diametro
+    </label>
+    <input
+      id="tidal-diameter"
+      data-tidal-diameter
+      type="range"
+      min="12"
+      max="55"
+      step="1"
+      value="30"
+      class="tidal-range h-1 w-28 cursor-pointer sm:w-40"
+      aria-label="Diametro della lente"
+    />
+    <button
+      type="button"
+      data-tidal-lock
+      aria-pressed="false"
+      class="rounded-control border border-white/30 px-3 py-1.5 text-[0.6rem] uppercase tracking-[0.2em] text-white/80 hover:text-white sm:text-[0.65rem]"
+    >
+      Blocca posizione
+    </button>
+  </div>
+
+  <style>
+    .tidal-stage {
+      touch-action: none;
+    }
+    .tidal-stage:focus-visible {
+      outline: 2px solid rgb(255 255 255 / 0.7);
+      outline-offset: -4px;
+    }
+    .tidal-stage[data-mode="webgl"] [data-tidal-fallback] {
+      display: none;
+    }
+    .tidal-stage[data-mode="css"] [data-tidal-canvas] {
+      display: none;
+    }
+    .tidal-range {
+      accent-color: #ffffff;
+    }
+  </style>
+
+  <script>
+    import { mountTidalLens } from "@/features/tidal-lens/tidal-lens";
+
+    const el = document.querySelector<HTMLElement>("[data-tidal]");
+    if (el) mountTidalLens(el);
+  </script>
+</section>
