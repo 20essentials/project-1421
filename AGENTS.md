@@ -54,4 +54,7 @@ this project. Workflow:
    this project) and save it to `.screenshots/<feature>-<YYYYMMDD-HHmmss>.png`. Take one per affected
    page or viewport when relevant (e.g. mobile menu: capture closed and open states).
 4. Report the saved file path(s) to the user and stop — never delete or overwrite previous screenshots.
+5. ALWAYS stop the dev server afterwards (`npx astro dev stop`), before finishing the task.
+   Leaving it running blocks the next session's `npm run dev` with "Another astro dev server is
+   already running".
 
