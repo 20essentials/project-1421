@@ -17,9 +17,11 @@ Orden sugerido de ejecución. El registro de lo ya hecho (con sus keys) vive en
 
 ## 6. Dominio y SEO
 - [ ] Conectar el dominio propio (ahora es el subdominio `wix-site-host.com`).
-- [ ] Alta en Google Search Console + enviar sitemap generado por Wix.
-- [ ] Analytics/píxel si el cliente quiere medir.
-- [ ] Revisar titles/descriptions por página (el layout ya soporta SEO por página; los posts y FAQs usan el servicio de SEO de Wix).
+- [ ] Alta en Google Search Console + enviar sitemap generado por Wix (el sitemap/robots ya están activos y cubren todas las rutas).
+- [x] Analytics + consentimiento en código: `trackEvent` con gate de consentimiento, banner granular y eventos `FormSubmit` / `ArticleView`.
+- [ ] Conectar GA4 / GTM / Meta desde el dashboard de Wix si el cliente quiere medir (no añadir SDKs al repo).
+- [x] Canonical, OG/Twitter y JSON-LD de persona en el layout (los posts y FAQs siguen usando el servicio de SEO de Wix).
+- [ ] Revisar titles/descriptions por página con el cliente.
 
 ## Hecho (referencia)
 Ver el detalle completo en `ROADMAP-DONE.md`, sección "Pasos cerrados del roadmap".
@@ -27,3 +29,4 @@ Ver el detalle completo en `ROADMAP-DONE.md`, sección "Pasos cerrados del roadm
 - Paso 1 — Logos de awards y prensa en Wix Media: cerrado (12 URLs en `static.wixstatic.com`, grid en `/awards` + banda en home).
 - Paso 3 — Parches de node_modules: cerrado (innecesarios con `@astrojs/cloudflare@14.3.2`).
 - Paso 4 — Formularios en vivo: cerrado (Heart to Heart probado end-to-end, Newsletter wired en el footer; release `v0.1.2`).
+- Paso 7 — Analytics/consentimiento, SEO base, tests y CI: cerrado en código (14 unitarios + 17 E2E, `astro check` y build OK; CI en `.github/workflows/ci.yml`).
