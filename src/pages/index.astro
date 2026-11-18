@@ -179,7 +179,7 @@ const alignFor = (i: number): "center" | "right" | "left" =>
             <>
               <div class="sw-scrim" data-align={alignFor(i)}></div>
               <div class="sw-copy" data-align={alignFor(i)}>
-                {s.eyebrow && <p class="eyebrow text-primary-foreground/80">{s.eyebrow}</p>}
+                {s.eyebrow && <p class="eyebrow">{s.eyebrow}</p>}
                 {s.heading === "h1" ? (
                   <h1 class="font-display mt-3 max-w-3xl break-words text-4xl font-medium leading-tight text-primary-foreground sm:text-5xl md:text-6xl">{s.title}</h1>
                 ) : (
@@ -415,6 +415,9 @@ const alignFor = (i: number): "center" | "right" | "left" =>
     padding: 0 1.5rem 4.5rem;
     text-align: center;
     pointer-events: none;
+  }
+  .sw-copy .eyebrow {
+    color: var(--color-primary-foreground);
   }
   .sw-ctas {
     align-items: center;
