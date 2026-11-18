@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import p01 from "@/assets/photos/01-autentiche.webp";
 import p02 from "@/assets/photos/02-autentiche.webp";
@@ -48,9 +47,6 @@ const photos: BentoTile[] = [
   { src: p17, span: "single", category: "autentiche e naturali" },
   { src: p18, span: "wide", category: "eleganti e iconiche" },
 ];
-
-const sizesFor = (span: BentoSpan) =>
-  span === "single" ? "(min-width: 1024px) 25vw, 50vw" : "(min-width: 1024px) 50vw, 100vw";
 ---
 
 <section class="bg-foreground px-6 py-20" aria-labelledby="photo-grid-title">
@@ -71,14 +67,13 @@ const sizesFor = (span: BentoSpan) =>
       {
         photos.map((photo, i) => (
           <figure class={`bento-tile bento-tile--${photo.span}`}>
-            <Image
-              src={photo.src}
+            <img
+              src={photo.src.src}
+              width={photo.src.width}
+              height={photo.src.height}
               alt={`Fotografia di matrimonio — ${photo.category} — Stefano Lunardi`}
-              widths={[400, 700, 1100, 1400]}
-              sizes={sizesFor(photo.span)}
               loading={i < 3 ? "eager" : "lazy"}
               decoding="async"
-              quality={80}
             />
           </figure>
         ))
