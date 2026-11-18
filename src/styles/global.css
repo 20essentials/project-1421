@@ -2,17 +2,18 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-background: hsl(38 42% 95%);
-  --color-foreground: hsl(24 12% 17%);
-  --color-primary: hsl(24 12% 17%);
-  --color-primary-foreground: hsl(38 42% 96%);
-  --color-secondary: hsl(37 32% 89%);
-  --color-secondary-foreground: hsl(24 12% 17%);
-  --color-muted-foreground: hsl(25 8% 40%);
-  --color-border: hsl(33 18% 82%);
+  /* Monochrome premium palette: white surfaces, deep cool-gray ink. */
+  --color-background: hsl(0 0% 100%);
+  --color-foreground: hsl(220 15% 12%);
+  --color-primary: hsl(220 15% 12%);
+  --color-primary-foreground: hsl(0 0% 99%);
+  --color-secondary: hsl(220 13% 95%);
+  --color-secondary-foreground: hsl(220 15% 12%);
+  --color-muted-foreground: hsl(220 10% 38%);
+  --color-border: hsl(220 12% 88%);
   --color-destructive: hsl(8 62% 42%);
-  --color-accent: hsl(28 32% 38%);
-  --color-accent-foreground: hsl(38 42% 96%);
+  --color-accent: hsl(220 15% 14%);
+  --color-accent-foreground: hsl(0 0% 100%);
 
   --radius-lg: 2px;
   --radius-md: 2px;
