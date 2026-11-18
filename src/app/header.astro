@@ -13,40 +13,33 @@ const isActive = (href: string) => current === href || current === `${href}/`;
 ---
 
 <a
-  href="#contenido"
-  class="btn fixed top-4 left-4 z-60 -translate-y-24 rounded-full bg-foreground px-4 py-2 text-primary-foreground no-underline transition-transform focus-visible:translate-y-0"
+  href='#contenido'
+  class='btn fixed top-4 left-4 z-60 -translate-y-24 rounded-full bg-foreground px-4 py-2 text-primary-foreground no-underline transition-transform focus-visible:translate-y-0'
 >
   Salta al contenido
 </a>
 
-<header
-  class="pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-5"
->
+<header class='pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-5'>
   <div
-    class="nav-pill pointer-events-auto flex w-max max-w-full items-center gap-5 rounded-full border border-border bg-background/70 p-2 pl-6 shadow-sm backdrop-blur-xl"
+    class='nav-pill pointer-events-auto flex w-max max-w-full items-center gap-5 rounded-full border border-border bg-background/70 p-2 pl-6 shadow-sm backdrop-blur-xl'
   >
-    <a
-      href="/"
-      class="font-display text-base font-semibold tracking-[0.18em] text-foreground uppercase no-underline"
-      aria-label="Stefano Lunardi — Home"
-    >
-      Stefano Lunardi
+    <a href='/' class='tracking-[0.18em] size-8 flex invert object-cover' aria-label='Stefano Lunardi — Home'>
+      <img src={"/logo.png"} />
     </a>
 
-    <nav aria-label="Principale" class="relative hidden xl:block">
+    <nav aria-label='Principale' class='relative hidden xl:block'>
       <span
-        aria-hidden="true"
-        class="nav-indicator absolute top-0 left-0 h-9 rounded-full bg-foreground/10"
-      ></span>
-      <ul class="relative flex items-center text-sm">
+        aria-hidden='true'
+        class='nav-indicator absolute top-0 left-0 h-9 rounded-full bg-foreground/10'></span>
+      <ul class='relative flex items-center text-sm'>
         {
-          navPrimary.map((item) => (
+          navPrimary.map(item => (
             <li>
               <a
                 href={item.href}
                 data-nav-link
                 aria-current={isActive(item.href) ? "true" : undefined}
-                class="flex h-9 items-center rounded-full px-3 text-muted-foreground no-underline transition-colors duration-500 hover:text-foreground aria-[current=true]:text-foreground"
+                class='flex h-9 items-center rounded-full px-3 text-muted-foreground no-underline transition-colors duration-500 hover:text-foreground aria-[current=true]:text-foreground'
               >
                 {item.label}
               </a>
@@ -56,49 +49,49 @@ const isActive = (href: string) => current === href || current === `${href}/`;
       </ul>
     </nav>
 
-    <div class="flex items-center gap-2">
+    <div class='flex items-center gap-2'>
       <a
-        href="/contatti"
-        class="hidden h-9 items-center justify-center rounded-full bg-accent px-4 text-sm font-medium text-accent-foreground no-underline transition-colors hover:bg-foreground sm:inline-flex"
+        href='/contatti'
+        class='hidden h-9 items-center justify-center rounded-full bg-accent px-4 text-sm font-medium text-accent-foreground no-underline transition-colors hover:bg-foreground sm:inline-flex'
       >
         Contatti
       </a>
       <button
-        type="button"
-        class="menu-toggle relative inline-block size-9 rounded-full text-foreground transition-colors hover:bg-foreground/10 xl:hidden"
-        aria-expanded="false"
-        aria-controls="menu"
-        aria-label="Apri menu"
-        data-open-label="Apri menu"
-        data-close-label="Chiudi menu"
+        type='button'
+        class='menu-toggle relative inline-block size-9 rounded-full text-foreground transition-colors hover:bg-foreground/10 xl:hidden'
+        aria-expanded='false'
+        aria-controls='menu'
+        aria-label='Apri menu'
+        data-open-label='Apri menu'
+        data-close-label='Chiudi menu'
       >
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
+        <span aria-hidden='true'></span>
+        <span aria-hidden='true'></span>
       </button>
     </div>
   </div>
 </header>
 
 <div
-  id="menu"
-  class="menu invisible fixed inset-0 z-40 bg-background/95 opacity-0 backdrop-blur-2xl transition-[opacity,visibility] duration-500 xl:hidden"
+  id='menu'
+  class='menu invisible fixed inset-0 z-40 bg-background/95 opacity-0 backdrop-blur-2xl transition-[opacity,visibility] duration-500 xl:hidden'
   inert
 >
-  <div class="menu-scroll h-full overflow-y-auto overscroll-contain px-4 pt-24 pb-8 sm:px-8">
-    <div class="mx-auto flex min-h-full w-full max-w-xl flex-col">
-      <nav aria-label="Menu completo">
-        <ul class="grid grid-cols-1 gap-x-5 border-t border-border sm:grid-cols-2">
+  <div class='menu-scroll h-full overflow-y-auto overscroll-contain px-4 pt-24 pb-8 sm:px-8'>
+    <div class='mx-auto flex min-h-full w-full max-w-xl flex-col'>
+      <nav aria-label='Menu completo'>
+        <ul class='grid grid-cols-1 gap-x-5 border-t border-border sm:grid-cols-2'>
           {
             navAll.map((item, i) => (
-              <li class="menu-item border-b border-border" style={`--i:${i}`}>
+              <li class='menu-item border-b border-border' style={`--i:${i}`}>
                 <a
                   href={item.href}
                   data-menu-link
                   aria-current={isActive(item.href) ? "true" : undefined}
-                  class="group flex min-h-12 items-center justify-between gap-2 py-2 text-foreground no-underline transition-colors duration-500 hover:text-accent aria-[current=true]:text-accent"
+                  class='group flex min-h-12 items-center justify-between gap-2 py-2 text-foreground no-underline transition-colors duration-500 hover:text-accent aria-[current=true]:text-accent'
                 >
-                  <span class="font-display text-2xl leading-tight">{item.label}</span>
-                  <span class="font-mono text-xs text-muted-foreground transition-colors duration-500 group-hover:text-accent">
+                  <span class='font-display text-2xl leading-tight'>{item.label}</span>
+                  <span class='font-mono text-xs text-muted-foreground transition-colors duration-500 group-hover:text-accent'>
                     {String(i + 1).padStart(2, "0")}
                   </span>
                 </a>
@@ -108,40 +101,71 @@ const isActive = (href: string) => current === href || current === `${href}/`;
         </ul>
       </nav>
 
-      <div class="menu-item mt-6" style={`--i:${navAll.length}`}>
+      <div class='menu-item mt-6' style={`--i:${navAll.length}`}>
         <a
-          href="/contatti"
-          class="group flex h-12 w-full items-center justify-between rounded-full bg-accent pr-2 pl-5 text-sm font-medium text-accent-foreground no-underline transition-transform duration-700 hover:scale-101 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          href='/contatti'
+          class='group flex h-12 w-full items-center justify-between rounded-full bg-accent pr-2 pl-5 text-sm font-medium text-accent-foreground no-underline transition-transform duration-700 hover:scale-101 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent'
         >
           <span>Prenota una consulenza</span>
           <span
-            class="grid size-8 place-items-center rounded-full bg-background text-accent transition-transform duration-700 group-hover:translate-x-0.5"
+            class='grid size-8 place-items-center rounded-full bg-background text-accent transition-transform duration-700 group-hover:translate-x-0.5'
           >
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" class="size-4" aria-hidden="true">
-              <path d="M3 8h10M9 4l4 4-4 4"></path>
+            <svg
+              viewBox='0 0 16 16'
+              fill='none'
+              stroke='currentColor'
+              stroke-width='1.5'
+              class='size-4'
+              aria-hidden='true'
+            >
+              <path d='M3 8h10M9 4l4 4-4 4'></path>
             </svg>
           </span>
         </a>
       </div>
 
-      <div class="menu-item mt-auto pt-10" style={`--i:${navAll.length + 1}`}>
-        <div class="grid gap-6 border-t border-border pt-5 sm:grid-cols-2">
-          <div class="flex flex-col gap-1 text-sm">
-            <a href="mailto:studio@stefanolunardi.com" class="text-muted-foreground no-underline transition-colors hover:text-foreground">
+      <div class='menu-item mt-auto pt-10' style={`--i:${navAll.length + 1}`}>
+        <div class='grid gap-6 border-t border-border pt-5 sm:grid-cols-2'>
+          <div class='flex flex-col gap-1 text-sm'>
+            <a
+              href='mailto:studio@stefanolunardi.com'
+              class='text-muted-foreground no-underline transition-colors hover:text-foreground'
+            >
               studio@stefanolunardi.com
             </a>
-            <a href="tel:+393387513113" class="text-muted-foreground no-underline transition-colors hover:text-foreground">
+            <a
+              href='tel:+393387513113'
+              class='text-muted-foreground no-underline transition-colors hover:text-foreground'
+            >
               +39 338 751 3113
             </a>
-            <p class="text-xs text-muted-foreground">Villach · Udine · Treviso</p>
+            <p class='text-xs text-muted-foreground'>Villach · Udine · Treviso</p>
           </div>
-          <nav class="flex items-start justify-end gap-4 text-sm" aria-label="Social">
-            <a href="https://www.instagram.com/stefanolunardiphoto" target="_blank" rel="noopener" class="text-muted-foreground no-underline transition-colors hover:text-accent">Instagram</a>
-            <a href="https://www.facebook.com/StefanoLunardiFotografo" target="_blank" rel="noopener" class="text-muted-foreground no-underline transition-colors hover:text-accent">Facebook</a>
-            <a href="https://www.linkedin.com/in/stefano-lunardi-5b761526" target="_blank" rel="noopener" class="text-muted-foreground no-underline transition-colors hover:text-accent">LinkedIn</a>
+          <nav class='flex items-start justify-end gap-4 text-sm' aria-label='Social'>
+            <a
+              href='https://www.instagram.com/stefanolunardiphoto'
+              target='_blank'
+              rel='noopener'
+              class='text-muted-foreground no-underline transition-colors hover:text-accent'
+              >Instagram</a
+            >
+            <a
+              href='https://www.facebook.com/StefanoLunardiFotografo'
+              target='_blank'
+              rel='noopener'
+              class='text-muted-foreground no-underline transition-colors hover:text-accent'
+              >Facebook</a
+            >
+            <a
+              href='https://www.linkedin.com/in/stefano-lunardi-5b761526'
+              target='_blank'
+              rel='noopener'
+              class='text-muted-foreground no-underline transition-colors hover:text-accent'
+              >LinkedIn</a
+            >
           </nav>
         </div>
-        <p class="mt-4 text-xs text-muted-foreground uppercase tracking-[0.25em]">
+        <p class='mt-4 text-xs text-muted-foreground uppercase tracking-[0.25em]'>
           Autenticità · Contemplazione · Relazione · Arte · Emozione
         </p>
       </div>
@@ -270,7 +294,12 @@ const isActive = (href: string) => current === href || current === `${href}/`;
   const setOpen = (open: boolean) => {
     if (!toggle || !menu) return;
     toggle.setAttribute("aria-expanded", String(open));
-    toggle.setAttribute("aria-label", open ? (toggle.dataset.closeLabel ?? "Chiudi menu") : (toggle.dataset.openLabel ?? "Apri menu"));
+    toggle.setAttribute(
+      "aria-label",
+      open
+        ? (toggle.dataset.closeLabel ?? "Chiudi menu")
+        : (toggle.dataset.openLabel ?? "Apri menu"),
+    );
     menu.toggleAttribute("data-open", open);
     menu.inert = !open;
     document.documentElement.classList.toggle("menu-open", open);
@@ -281,19 +310,19 @@ const isActive = (href: string) => current === href || current === `${href}/`;
     }
   };
 
-  document.addEventListener("keydown", (event) => {
+  document.addEventListener("keydown", event => {
     if (event.key === "Escape" && toggle?.getAttribute("aria-expanded") === "true") {
       setOpen(false);
       toggle.focus();
     }
   });
 
-  document.addEventListener("click", (event) => {
+  document.addEventListener("click", event => {
     const link = (event.target as Element | null)?.closest<HTMLAnchorElement>("a[href]");
     if (link && menu && link.closest("#menu")) setOpen(false);
   });
 
-  window.matchMedia("(min-width: 1280px)").addEventListener("change", (event) => {
+  window.matchMedia("(min-width: 1280px)").addEventListener("change", event => {
     if (event.matches) setOpen(false);
   });
 
@@ -314,10 +343,12 @@ const isActive = (href: string) => current === href || current === `${href}/`;
     if (toggle.dataset.wiredHeader === "1") return;
     toggle.dataset.wiredHeader = "1";
 
-    toggle.addEventListener("click", () => setOpen(toggle?.getAttribute("aria-expanded") !== "true"));
+    toggle.addEventListener("click", () =>
+      setOpen(toggle?.getAttribute("aria-expanded") !== "true"),
+    );
 
-    menu.querySelectorAll<HTMLAnchorElement>("[data-menu-link]").forEach((link) => {
-      link.addEventListener("click", (event) => {
+    menu.querySelectorAll<HTMLAnchorElement>("[data-menu-link]").forEach(link => {
+      link.addEventListener("click", event => {
         if (!link.hash) return;
         const target = document.getElementById(decodeURIComponent(link.hash.slice(1)));
         if (!target) return;
@@ -332,7 +363,7 @@ const isActive = (href: string) => current === href || current === `${href}/`;
 
     const moveIndicator = () => {
       if (!indicator) return;
-      const active = links.find((link) => link.getAttribute("aria-current") === "true");
+      const active = links.find(link => link.getAttribute("aria-current") === "true");
       if (!active) {
         indicator.removeAttribute("data-visible");
         return;
