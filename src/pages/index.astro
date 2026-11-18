@@ -3,7 +3,7 @@ import SiteLayout from "@/app/layout.astro";
 import { fetchCollections } from "@/features/portfolio/portfolio";
 import { fetchPosts, postMetaLine, postPath } from "@/features/blog/posts";
 import { fetchFaq } from "@/features/faq/faq";
-import { imgAttrs } from "@/shared/media";
+import { imgAttrs, imgSrc, imgSrcSet } from "@/shared/media";
 import type { CollectionSummary } from "@/features/portfolio/types";
 import type { PostPage } from "@/features/blog/types";
 import type { FaqData } from "@/features/faq/types";
@@ -63,29 +63,38 @@ const latestPosts = posts?.posts.slice(0, 3) ?? [];
     </div>
   </section>
 
-  <section class="px-6 pb-20">
-    <div class="mx-auto max-w-7xl">
-      <div class="mb-10 flex flex-col items-end justify-between gap-4 sm:flex-row">
-        <h2 class="font-display text-3xl font-medium sm:text-4xl">Le collezioni</h2>
-        <a href="/portfolio" class="text-sm text-accent underline-offset-4 hover:underline no-underline">Tutto il portfolio</a>
-      </div>
-      <div class="grid grid-cols-1 gap-8 sm:grid-cols-2">
-        {
-          collections.map((c) => (
-            <a href={`/portfolio/${c.slug}`} class="group block min-w-0 no-underline">
-              <div class="aspect-[4/3] w-full overflow-hidden bg-secondary">
+  {
+    collections.length >= 2 && (
+      <section data-scroll-world class="sw-root">
+        <div class="sw-viewport">
+          {collections.map((c, i) => (
+            <div class="sw-scene">
+              <div class="sw-still">
                 {c.imageUrl && (
-                  <img {...imgAttrs(c.imageUrl, "(min-width: 640px) 50vw, 100vw", 4 / 3)} alt={c.title} class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
+                  <img
+                    src={imgSrc(c.imageUrl, 1280, Math.round(1280 * (2 / 3)))}
+                    srcset={imgSrcSet(c.imageUrl, [640, 960, 1280, 1600, 2000], 2 / 3)}
+                    sizes="100vw"
+                    loading={i === 0 ? "eager" : "lazy"}
+                    decoding="async"
+                    alt={c.title}
+                    class="sw-still__img"
+                  />
                 )}
               </div>
-              <h3 class="font-display mt-4 break-words text-2xl font-medium text-foreground transition-colors group-hover:text-accent sm:text-3xl">{c.title}</h3>
-              {c.description && <p class="mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">{c.description}</p>}
-            </a>
-          ))
-        }
-      </div>
-    </div>
-  </section>
+              <div class="sw-scrim"></div>
+              <div class="sw-copy">
+                <p class="eyebrow text-primary-foreground/80">Collezione</p>
+                <h2 class="font-display mt-3 break-words text-4xl font-medium text-primary-foreground sm:text-5xl">{c.title}</h2>
+                {c.description && <p class="mt-4 max-w-xl text-sm leading-relaxed text-primary-foreground/85 sm:text-base">{c.description}</p>}
+                <a href={`/portfolio/${c.slug}`} class="mt-6 inline-block rounded-control border border-primary-foreground/60 px-8 py-3 text-sm font-medium text-primary-foreground no-underline transition-colors hover:border-primary-foreground hover:bg-primary-foreground/10">Ver la collezione</a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    )
+  }
 
   <section class="border-y border-border bg-secondary px-6 py-20">
     <div class="mx-auto grid max-w-5xl grid-cols-1 gap-10 md:grid-cols-3">
@@ -201,3 +210,65 @@ const latestPosts = posts?.posts.slice(0, 3) ?? [];
     <a href="/contatti" class="mt-8 inline-block rounded-control border border-foreground bg-foreground px-8 py-3 text-sm font-medium text-primary-foreground no-underline transition-colors hover:border-accent hover:bg-accent">Conosci Stefano</a>
   </section>
 </SiteLayout>
+
+<script>
+  import { mountScrollWorld } from "@/features/home/scroll-world";
+  mountScrollWorld();
+</script>
+
+<style>
+  /* Sin JS o con reduced-motion: escenas apiladas en flujo, una por viewport. */
+  .sw-scene {
+    position: relative;
+    height: 100dvh;
+    overflow: hidden;
+    background: var(--color-secondary, #f5f1ea);
+  }
+  .sw-still {
+    position: absolute;
+    inset: 0;
+  }
+  .sw-still__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  .sw-scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgb(0 0 0 / 0.55), rgb(0 0 0 / 0.15) 45%, rgb(0 0 0 / 0.1));
+  }
+  .sw-copy {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 1.5rem 4.5rem;
+    text-align: center;
+    pointer-events: none;
+  }
+  .sw-copy a {
+    pointer-events: auto;
+  }
+
+  /* Con JS: escenas absolutas en un viewport sticky; el alto del track lo fija el JS en px. */
+  .sw-root[data-ready] .sw-viewport {
+    position: sticky;
+    top: 0;
+    height: 100dvh;
+    overflow: hidden;
+  }
+  .sw-root[data-ready] .sw-scene {
+    position: absolute;
+    inset: 0;
+    height: auto;
+    will-change: clip-path;
+  }
+  .sw-root[data-ready] .sw-still__img {
+    will-change: transform;
+  }
+</style>
