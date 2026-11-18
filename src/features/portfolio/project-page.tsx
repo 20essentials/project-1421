@@ -1,6 +1,6 @@
 import { useProjectDetail } from "@/features/portfolio/use-project-detail";
 import { GalleryLink, GalleryMedia } from "@/features/portfolio/gallery-media";
-import { imgAttrs } from "@/shared/media";
+import { imgFitAttrs } from "@/shared/media";
 import type { GalleryItem, ProjectDetail } from "@/features/portfolio/types";
 
 export default function ProjectPage(props: {
@@ -48,7 +48,7 @@ export default function ProjectPage(props: {
 
       {items !== null && items.length === 0 && project.imageUrl && (
         <div className="mt-10 w-full overflow-hidden bg-secondary">
-          <img {...imgAttrs(project.imageUrl, "100vw", 3 / 2)} alt={project.title} className="h-auto w-full object-cover" />
+          <img {...imgFitAttrs(project.imageUrl, "100vw")} alt={project.title} className="block h-auto w-full" />
         </div>
       )}
 
@@ -61,7 +61,7 @@ export default function ProjectPage(props: {
           {items.map((i) => (
             <figure className="m-0 flex w-full justify-center bg-secondary">
               <GalleryLink item={i}>
-                <GalleryMedia item={i} className="max-h-[70vh] w-auto max-w-full object-contain" />
+                <GalleryMedia item={i} className="block h-auto max-h-[80vh] w-auto max-w-full" />
               </GalleryLink>
             </figure>
           ))}

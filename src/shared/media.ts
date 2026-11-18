@@ -74,6 +74,36 @@ export function imgAttrs(value: MediaLike, sizes: string, ratio = 1): { src: str
   return { src, srcSet: imgSrcSet(value, undefined, ratio), sizes, loading: "lazy", decoding: "async" };
 }
 
+export function imgFitSrc(value: MediaLike, width = 1600, height = 1600): string {
+  const v = rawOf(value);
+  if (!v) return "";
+  if (v.startsWith("wix:image://")) {
+    return media.getScaledToFitImageUrl(v.split("#")[0], width, height, {});
+  }
+  const file = BARE_FILE_ID.test(v) ? v : v.match(/^https:\/\/static\.wixstatic\.com\/media\/([^/?#]+)/)?.[1];
+  if (file) return media.getScaledToFitImageUrl(`https://static.wixstatic.com/media/${file}`, width, height, {});
+  return v;
+}
+
+export function imgFitSrcSet(value: MediaLike, widths: number[] = [320, 480, 640, 960, 1280], maxHeight = 1600): string {
+  const raw = rawOf(value);
+  if (!raw) return "";
+  if (raw.startsWith("wix:image://") || BARE_FILE_ID.test(raw)) {
+    return widths.map((w) => `${imgFitSrc(value, w, maxHeight)} ${w}w`).join(", ");
+  }
+  const FIT = /\/v1\/fit\/w_\d+,h_\d+/;
+  if (/static\.wixstatic\.com\//.test(raw) && FIT.test(raw)) {
+    return widths.map((w) => `${raw.replace(FIT, `/v1/fit/w_${w},h_${maxHeight}`)} ${w}w`).join(", ");
+  }
+  return raw;
+}
+
+export function imgFitAttrs(value: MediaLike, sizes: string, maxWidth = 1600, maxHeight = 1600) {
+  const src = imgFitSrc(value, maxWidth, maxHeight);
+  if (!src) return {};
+  return { src, srcSet: imgFitSrcSet(value, undefined, maxHeight), sizes, loading: "lazy" as const, decoding: "async" as const };
+}
+
 /**
  * Height/width of a Wix image when the value carries its size: a raw
  * `wix:image://…#originWidth=W&originHeight=H` id (the natural size) or a resolved `/v1/fill/w_W,h_H/`

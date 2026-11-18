@@ -102,7 +102,7 @@ export function toGalleryItem(raw: Raw, imgSrc: ImgSrc, videoSrc: VideoSrc): Gal
     linkTarget: raw.link?.target ?? null,
   };
   if (raw.type === "IMAGE") {
-    const imageUrl = imgSrc(imageRef(raw.image?.imageInfo), 1600, 1200);
+    const imageUrl = imgSrc(imageRef(raw.image?.imageInfo), 1600, 1600);
     return imageUrl ? { ...base, kind: "image", imageUrl, videoUrl: null } : null;
   }
   if (raw.type === "VIDEO") {

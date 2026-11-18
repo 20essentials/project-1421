@@ -1,5 +1,5 @@
 import { useCollectionProjects } from "@/features/portfolio/use-collection-projects";
-import { imgAttrs } from "@/shared/media";
+import { imgFitAttrs } from "@/shared/media";
 import type { CollectionSummary, ProjectSummary } from "@/features/portfolio/types";
 
 export default function CollectionPage(props: {
@@ -42,20 +42,20 @@ export default function CollectionPage(props: {
       )}
 
       {projects !== null && projects.length > 0 && (
-        <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
+        <div className="mt-10 columns-1 gap-6 sm:columns-2 sm:gap-8">
           {projects.map((p) => (
-            <a key={p.id} href={`/projects/${p.slug}`} className="group block min-w-0 no-underline">
-              <div className="aspect-[4/3] w-full overflow-hidden bg-secondary">
-                {p.imageUrl ? (
+            <a key={p.id} href={`/projects/${p.slug}`} className="group mb-8 block min-w-0 break-inside-avoid no-underline">
+              {p.imageUrl ? (
+                <div className="overflow-hidden bg-secondary">
                   <img
-                    {...imgAttrs(p.imageUrl, "(min-width: 640px) 50vw, 100vw", 4 / 3)}
+                    {...imgFitAttrs(p.imageUrl, "(min-width: 640px) 50vw, 100vw")}
                     alt={p.title}
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                    className="block h-auto w-full transition-transform duration-700 group-hover:scale-[1.03]"
                   />
-                ) : (
-                  <div className="h-full w-full" />
-                )}
-              </div>
+                </div>
+              ) : (
+                <div className="h-48 bg-secondary" />
+              )}
               <h2 className="font-display mt-4 break-words text-2xl font-medium text-foreground transition-colors group-hover:text-accent">
                 {p.title}
               </h2>

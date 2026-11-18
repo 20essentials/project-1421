@@ -14,7 +14,7 @@ import {
 } from "@wix/portfolio";
 import { media, VideoResolution } from "@wix/sdk";
 import { wixModule } from "@/shared/sdk";
-import { imgSrc } from "@/shared/media";
+import { imgFitSrc } from "@/shared/media";
 import {
   galleryItems,
   visibleCollection,
@@ -44,13 +44,13 @@ const videoSrc: VideoSrc = (ref) => {
 /** List visible collections in the owner's dashboard order (sortOrder). */
 export async function fetchCollections({ limit = 100 } = {}): Promise<CollectionSummary[]> {
   const res = await collections.listCollections({ paging: { limit } });
-  return visibleCollections((res.collections ?? []) as Raw[], imgSrc);
+  return visibleCollections((res.collections ?? []) as Raw[], imgFitSrc);
 }
 
 /** Fetch one visible collection by its URL slug. Null when not found or hidden. */
 export async function fetchCollectionBySlug(slug: string): Promise<CollectionSummary | null> {
   const res = await collections.queryCollections().eq("slug", slug).limit(1).find();
-  return visibleCollection(res.items?.[0] as Raw | undefined, imgSrc);
+  return visibleCollection(res.items?.[0] as Raw | undefined, imgFitSrc);
 }
 
 /** List visible projects (list order), optionally only one collection's. */
@@ -59,13 +59,13 @@ export async function fetchProjects({
   limit = 100,
 }: { collectionId?: string; limit?: number } = {}): Promise<ProjectSummary[]> {
   const res = await projects.listProjects({ paging: { limit } });
-  return visibleProjects((res.projects ?? []) as Raw[], collectionId, imgSrc, videoSrc);
+  return visibleProjects((res.projects ?? []) as Raw[], collectionId, imgFitSrc, videoSrc);
 }
 
 /** Fetch one visible project by its URL slug. Null when not found or hidden. */
 export async function fetchProjectBySlug(slug: string): Promise<ProjectDetail | null> {
   const res = await projects.queryProjects().eq("slug", slug).limit(1).find();
-  return visibleProject(res.items?.[0] as Raw | undefined, imgSrc, videoSrc);
+  return visibleProject(res.items?.[0] as Raw | undefined, imgFitSrc, videoSrc);
 }
 
 /**
@@ -74,5 +74,5 @@ export async function fetchProjectBySlug(slug: string): Promise<ProjectDetail | 
  */
 export async function fetchProjectGallery(projectId: string): Promise<GalleryItem[]> {
   const res = await projectItems.listProjectItems(projectId, { paging: { limit: 100 } });
-  return galleryItems((res.items ?? []) as Raw[], imgSrc, videoSrc);
+  return galleryItems((res.items ?? []) as Raw[], imgFitSrc, videoSrc);
 }
