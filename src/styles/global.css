@@ -49,6 +49,31 @@
   }
 }
 
+@layer components {
+  /* CTA micro-interactions: every rounded-control button/CTA link gets a
+     tactile lift on hover and a press-down on click. */
+  .rounded-control {
+    transition:
+      background-color 350ms var(--ease-fluid, cubic-bezier(0.32, 0.72, 0, 1)),
+      border-color 350ms var(--ease-fluid, cubic-bezier(0.32, 0.72, 0, 1)),
+      color 350ms var(--ease-fluid, cubic-bezier(0.32, 0.72, 0, 1)),
+      box-shadow 350ms var(--ease-fluid, cubic-bezier(0.32, 0.72, 0, 1)),
+      transform 350ms var(--ease-fluid, cubic-bezier(0.32, 0.72, 0, 1));
+  }
+  .rounded-control:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px -12px color-mix(in srgb, var(--color-foreground) 35%, transparent);
+  }
+  .rounded-control:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: none;
+  }
+  .rounded-control:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}
+
 @layer utilities {
   .eyebrow {
     font-size: 0.75rem;
