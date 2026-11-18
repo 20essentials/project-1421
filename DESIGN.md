@@ -77,6 +77,7 @@ Reglas de color: no introducir colores nuevos; usar grises con un toque frío
   `background`, borde `border`, foco `outline-accent`.
 - **Skeletons**: `animate-pulse bg-secondary`.
 - **Iconos**: inline SVG, `stroke-width 1.5`, `size-4`.
+- **Consentimiento**: `src/features/consent/consent-banner.astro` — `<aside data-sl-consent>` fijo abajo con `role="region"`; botones `Accetta` / `Rifiuta` / `Preferenze` y panel granular `data-consent-panel`. Usa solo tokens monocromos; se reabre desde el footer (`Preferenze cookie`).
 
 ## Motion
 
@@ -93,3 +94,5 @@ Reglas de color: no introducir colores nuevos; usar grises con un toque frío
 ## Screenshots de referencia
 
 Capturas por feature en `.screenshots/` (nunca borrar ni sobrescribir).
+
+- Cookie consent: `.screenshots/cookie-consent-banner-20261118-155621.png` y `.screenshots/cookie-consent-panel-20261118-155621.png`.

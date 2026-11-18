@@ -1,0 +1,7 @@
+<script>
+  import { applyConsentPolicy, getConsentState, getGranularPreferences } from "@/shared/consent";
+
+  if (getConsentState() === "accepted") {
+    applyConsentPolicy(getGranularPreferences());
+  }
+</script>

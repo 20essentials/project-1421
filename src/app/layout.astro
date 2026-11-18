@@ -4,6 +4,8 @@ import SiteHeader from "@/app/header.astro";
 import SchemaForm from "@/features/forms/schema-form";
 import { getForm } from "@/features/forms/forms";
 import type { FormDto } from "@/features/forms/types";
+import ConsentBootstrap from "@/features/consent/consent-bootstrap.astro";
+import ConsentBanner from "@/features/consent/consent-banner.astro";
 
 interface Props {
   title?: string;
@@ -35,6 +37,28 @@ const secondaryNav = [
 ];
 const allNav = [...primaryNav.slice(0, 5), ...secondaryNav, ...primaryNav.slice(5)];
 const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
+
+const forwardedUrl = Astro.request.headers.get("x-wix-forwarded-url");
+const publicUrl =
+  forwardedUrl && URL.canParse(forwardedUrl) && /^https?:$/.test(new URL(forwardedUrl).protocol)
+    ? forwardedUrl
+    : Astro.url.href;
+const origin = import.meta.env.PUBLIC_SITE_URL?.replace(/\/$/, "") || new URL(publicUrl).origin;
+const canonical = new URL(Astro.url.pathname, origin).href;
+const resolvedTitle =
+  title ?? "Stefano Lunardi — Fotografo di matrimoni | Fine Art | Fotoreporter";
+const resolvedDescription =
+  description ??
+  "Fotografia di matrimonio fine art in Italia e Austria: storie autentiche, emozioni e ricordi che restano.";
+const hasSeoTags = Astro.slots.has("seo-tags");
+const structuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Stefano Lunardi",
+  url: origin,
+  jobTitle: "Fotografo di matrimoni",
+  knowsAbout: ["Fotografia di matrimonio", "Fine Art", "Fotoreportage"],
+}).replace(/</g, "\\u003c");
 ---
 
 <!doctype html>
@@ -49,9 +73,25 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#1a1d23" />
-    {title && <title>{title}</title>}
-    {description && <meta name="description" content={description} />}
+    <title>{resolvedTitle}</title>
+    <meta name="description" content={resolvedDescription} />
+    {!hasSeoTags && (
+      <>
+        <link rel="canonical" href={canonical} />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="it_IT" />
+        <meta property="og:site_name" content="Stefano Lunardi" />
+        <meta property="og:title" content={resolvedTitle} />
+        <meta property="og:description" content={resolvedDescription} />
+        <meta property="og:url" content={canonical} />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content={resolvedTitle} />
+        <meta name="twitter:description" content={resolvedDescription} />
+        <script type="application/ld+json" is:inline set:html={structuredData} />
+      </>
+    )}
     <slot name="seo-tags" />
+    <ConsentBootstrap />
   </head>
   <body>
     <SiteHeader navPrimary={primaryNav} navAll={allNav} current={currentPath} />
@@ -108,9 +148,15 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
         </div>
         <div class="mt-12 flex flex-col items-center justify-between gap-3 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row">
           <p>© {new Date().getFullYear()} Stefano Lunardi — Fotografo di matrimoni | Fine Art | Fotoreporter</p>
-          <a href="/impressum" class="no-underline hover:text-accent">Impressum</a>
+          <div class="flex items-center gap-4">
+            <button type="button" data-consent-settings class="no-underline hover:text-accent">
+              Preferenze cookie
+            </button>
+            <a href="/impressum" class="no-underline hover:text-accent">Impressum</a>
+          </div>
         </div>
       </div>
     </footer>
+    <ConsentBanner />
   </body>
 </html>

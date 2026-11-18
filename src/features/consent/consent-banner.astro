@@ -1,0 +1,185 @@
+<aside
+  class="invisible fixed inset-x-0 bottom-0 z-40 translate-y-2 px-4 pb-4 opacity-0 transition duration-500 ease-out data-[open]:visible data-[open]:translate-y-0 data-[open]:opacity-100 sm:px-6"
+  data-sl-consent
+  role="region"
+  aria-labelledby="sl-consent-title"
+>
+  <div class="mx-auto max-w-3xl border border-border bg-background px-6 py-5 shadow-lg">
+    <div class="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <h2 id="sl-consent-title" class="font-display text-xl font-medium">Preferenze cookie</h2>
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
+          Usiamo cookie tecnici necessari e, solo con il tuo consenso, cookie di analisi per capire
+          come viene visitato il sito. Puoi cambiare scelta in qualsiasi momento dal footer.
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <button
+          type="button"
+          data-consent-toggle
+          class="rounded-control border border-border px-4 py-2 text-sm text-foreground no-underline transition-colors hover:border-accent"
+        >
+          Preferenze
+        </button>
+        <button
+          type="button"
+          data-consent-reject
+          class="rounded-control border border-border px-4 py-2 text-sm text-foreground no-underline transition-colors hover:border-accent"
+        >
+          Rifiuta
+        </button>
+        <button
+          type="button"
+          data-consent-accept
+          class="rounded-control border border-foreground bg-foreground px-4 py-2 text-sm text-primary-foreground no-underline transition-colors hover:border-accent hover:bg-accent"
+        >
+          Accetta
+        </button>
+      </div>
+    </div>
+
+    <div data-consent-panel hidden class="mt-5 border-t border-border pt-5">
+      <p class="eyebrow">Categorie</p>
+      <div class="mt-3 grid gap-3 sm:grid-cols-2">
+        <label class="flex items-start gap-3 text-sm">
+          <input type="checkbox" checked disabled class="mt-0.5 size-4 accent-foreground" />
+          <span>
+            <span class="font-medium">Necessari</span>
+            <span class="block text-muted-foreground">Sempre attivi.</span>
+          </span>
+        </label>
+        <label class="flex items-start gap-3 text-sm">
+          <input type="checkbox" data-consent-key="functional" class="mt-0.5 size-4 accent-foreground" />
+          <span>
+            <span class="font-medium">Funzionali</span>
+            <span class="block text-muted-foreground">Ricordano le tue preferenze.</span>
+          </span>
+        </label>
+        <label class="flex items-start gap-3 text-sm">
+          <input type="checkbox" data-consent-key="preferences" class="mt-0.5 size-4 accent-foreground" />
+          <span>
+            <span class="font-medium">Preferenze</span>
+            <span class="block text-muted-foreground">Personalizzano la navigazione.</span>
+          </span>
+        </label>
+        <label class="flex items-start gap-3 text-sm">
+          <input type="checkbox" data-consent-key="analytics" class="mt-0.5 size-4 accent-foreground" />
+          <span>
+            <span class="font-medium">Analisi</span>
+            <span class="block text-muted-foreground">Statistiche anonime di visita.</span>
+          </span>
+        </label>
+        <label class="flex items-start gap-3 text-sm">
+          <input type="checkbox" data-consent-key="marketing" class="mt-0.5 size-4 accent-foreground" />
+          <span>
+            <span class="font-medium">Marketing</span>
+            <span class="block text-muted-foreground">Misurazione delle campagne.</span>
+          </span>
+        </label>
+        <label class="flex items-start gap-3 text-sm">
+          <input type="checkbox" data-consent-key="advertising" class="mt-0.5 size-4 accent-foreground" />
+          <span>
+            <span class="font-medium">Pubblicità</span>
+            <span class="block text-muted-foreground">Pixel e annunci personalizzati.</span>
+          </span>
+        </label>
+        <label class="flex items-start gap-3 text-sm sm:col-span-2">
+          <input type="checkbox" data-consent-key="dataToThirdParty" class="mt-0.5 size-4 accent-foreground" />
+          <span>
+            <span class="font-medium">Dati a terze parti</span>
+            <span class="block text-muted-foreground">Trasferimento agli strumenti collegati.</span>
+          </span>
+        </label>
+      </div>
+      <div class="mt-5">
+        <button
+          type="button"
+          data-consent-save
+          class="rounded-control border border-foreground bg-foreground px-5 py-2 text-sm text-primary-foreground no-underline transition-colors hover:border-accent hover:bg-accent"
+        >
+          Salva preferenze
+        </button>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<script>
+  import {
+    getConsentState,
+    getGranularPreferences,
+    saveConsentPreferences,
+    setConsentState,
+    type GranularConsentPreferences,
+  } from "@/shared/consent";
+
+  const banner = document.querySelector<HTMLElement>("[data-sl-consent]");
+
+  if (banner) {
+    const panel = banner.querySelector<HTMLElement>("[data-consent-panel]");
+    const checkboxes = [
+      ...banner.querySelectorAll<HTMLInputElement>("[data-consent-key]"),
+    ];
+
+    const syncCheckboxes = () => {
+      const saved = getGranularPreferences();
+      for (const input of checkboxes) {
+        const key = input.dataset.consentKey as keyof GranularConsentPreferences;
+        input.checked = saved[key] === true;
+      }
+    };
+
+    const open = (withPanel = false) => {
+      banner.setAttribute("data-open", "");
+      if (panel) {
+        panel.hidden = !withPanel;
+        if (withPanel) syncCheckboxes();
+      }
+    };
+
+    const close = () => {
+      banner.removeAttribute("data-open");
+      if (panel) panel.hidden = true;
+    };
+
+    if (!getConsentState()) open();
+
+    banner.querySelector("[data-consent-accept]")?.addEventListener("click", () => {
+      setConsentState("accepted");
+      close();
+    });
+
+    banner.querySelector("[data-consent-reject]")?.addEventListener("click", () => {
+      setConsentState("rejected");
+      close();
+    });
+
+    banner.querySelector("[data-consent-toggle]")?.addEventListener("click", () => {
+      if (!panel) return;
+      if (panel.hidden) syncCheckboxes();
+      panel.hidden = !panel.hidden;
+    });
+
+    banner.querySelector("[data-consent-save]")?.addEventListener("click", () => {
+      const preferences: GranularConsentPreferences = {
+        essential: true,
+        functional: false,
+        preferences: false,
+        analytics: false,
+        marketing: false,
+        advertising: false,
+        dataToThirdParty: false,
+      };
+      for (const input of checkboxes) {
+        const key = input.dataset.consentKey as keyof GranularConsentPreferences;
+        Object.assign(preferences, { [key]: input.checked });
+      }
+      saveConsentPreferences(preferences);
+      close();
+    });
+
+    for (const trigger of document.querySelectorAll("[data-consent-settings]")) {
+      trigger.addEventListener("click", () => open(true));
+    }
+  }
+</script>

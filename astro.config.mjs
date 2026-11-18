@@ -1,6 +1,6 @@
 import tailwindcss from "@tailwindcss/vite";
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, envField } from 'astro/config';
 import wix from "@wix/astro";
 import wixPages from "@wix/astro-pages";
 
@@ -19,4 +19,14 @@ export default defineConfig({
   },
 
   output: "server",
+
+  env: {
+    schema: {
+      PUBLIC_SITE_URL: envField.string({
+        context: "client",
+        access: "public",
+        optional: true,
+      }),
+    },
+  },
 });
