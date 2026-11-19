@@ -108,6 +108,13 @@ browser module that is never executed during SSR:
 </script>
 ```
 
+## Checks — zero hints allowed
+
+`npx astro check` (or `npm run check`) must report **0 errors, 0 warnings AND 0 hints**. Hints are
+not noise to ignore: they are dead code (unused imports, unused declarations) and they must be
+removed before finishing a task, not left as "pre-existing" debt. If a check reports hints, fix
+them in the same change — e.g. delete the unused import instead of leaving it behind.
+
 ## Tests — Vitest + Playwright for every TypeScript logic
 
 Everything that contains TypeScript logic (features, data layers, mappers, stores, parsers —
