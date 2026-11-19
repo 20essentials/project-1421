@@ -1,10 +1,13 @@
 ---
 /**
- * Parallax con rotación automática de imágenes (cada `interval` ms cambia la
+ * Sección con rotación automática de imágenes (cada `interval` ms cambia la
  * imagen con una animación de clip-path) y texto centrado "Foto Artistiche".
  * Dos capas <img> se alternan: la entrante se revela desde inset(50%) hasta
  * cubrir todo, la saliente se recoloca en el índice siguiente precargada.
- * Sin JS o con prefers-reduced-motion: la primera imagen fija, sin ciclo.
+ * El fondo queda anclado al viewport con `position: fixed` en las capas y la
+ * sección lo recorta con `clip-path: inset(0)`: un background-attachment:
+ * fixed que también funciona en iOS. Sin JS/copy: reduced-motion desactiva
+ * el ciclo y deja la primera imagen fija.
  */
 import { imgSrc, imgSrcSet } from "@/shared/media";
 
@@ -29,7 +32,6 @@ const SLIDES: Slide[] = [
 ];
 
 const INTERVAL = 5000;
-const DURATION = 1500;
 const WIDTHS = [1280, 1600, 2000, 2400];
 const slides = SLIDES.map((s) => ({
   src: imgSrc(s.fileId, 2400, Math.round(2400 * s.ratio)),
@@ -147,33 +149,8 @@ const slides = SLIDES.map((s) => ({
 
     const sync = () => (document.hidden || reduced.matches ? stop() : start());
 
-    // Parallax: las capas se desplazan más despacio que el scroll (headroom del
-    // scale(1.2) en CSS), como un background-attachment: fixed pero fiable en móvil.
-    let ticking = false;
-    const parallax = () => {
-      if (reduced.matches) {
-        gallery.style.setProperty("--parallax-y", "0%");
-        return;
-      }
-      const rect = gallery.getBoundingClientRect();
-      const vh = window.innerHeight || 1;
-      const progress = Math.min(1, Math.max(0, (vh - rect.top) / (vh + rect.height)));
-      gallery.style.setProperty("--parallax-y", ((progress - 0.5) * -10).toFixed(3) + "%");
-    };
-    const onScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        parallax();
-        ticking = false;
-      });
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll, { passive: true });
-
     document.addEventListener("visibilitychange", sync);
     reduced.addEventListener?.("change", sync);
-    parallax();
     sync();
   }
 </script>
@@ -185,10 +162,14 @@ const slides = SLIDES.map((s) => ({
     height: 100vh;
     height: 100dvh;
     overflow: hidden;
+    /* El clip-path encierra las capas fixed dentro de la sección: el fondo
+       queda anclado al viewport y la sección lo recorta al pasar. Es el
+       background-attachment: fixed que sí funciona en iOS. */
+    clip-path: inset(0);
     background: #08090b;
   }
   .art-parallax__layer {
-    position: absolute;
+    position: fixed;
     inset: 0;
     width: 100%;
     height: 100%;
@@ -196,8 +177,6 @@ const slides = SLIDES.map((s) => ({
     object-position: center;
     clip-path: inset(50% 50% 50% 50%);
     transition: clip-path 1.5s cubic-bezier(0.16, 1, 0.3, 1);
-    transform: translate3d(0, var(--parallax-y, 0%), 0) scale(1.2);
-    will-change: clip-path, transform;
     pointer-events: none;
   }
   .art-parallax__layer.is-active {
@@ -207,7 +186,6 @@ const slides = SLIDES.map((s) => ({
     .art-parallax__layer {
       transition: none;
       clip-path: none;
-      transform: none;
     }
     .art-parallax__layer:not(.is-active) {
       display: none;
