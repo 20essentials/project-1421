@@ -29,6 +29,7 @@ const COLOR_IMAGE_3 = "wix:image://v1/600582_b922254fd6344b0680202d935d66d8db~mv
 const COLOR_RATIO = 1536 / 2752;
 const faqPreview = faq.questions.slice(0, 3);
 const latestPosts = posts?.posts.slice(0, 3) ?? [];
+const INTRO_VIDEO_ID = "5gY0HgkSVjU";
 
 interface ScrollScene {
   key: string;
@@ -253,6 +254,34 @@ const alignFor = (i: number): "center" | "right" | "left" =>
     </div>
   </section>
 
+  <section id="mi-presento" class="mp-root px-6 py-24">
+    <div class="mx-auto max-w-4xl">
+      <div class="text-center">
+        <p class="eyebrow mp-eyebrow">Mi presento</p>
+        <h2 class="font-display mp-heading mt-4 break-words text-4xl font-medium leading-tight sm:text-5xl">Un volto, una voce, un metodo</h2>
+        <p class="mp-copy mx-auto mt-5 max-w-2xl text-sm leading-relaxed sm:text-base">
+          Prima dei premi e delle fotografie, c'è una persona. In questo minuto vi racconto chi sono
+          e come guardo un giorno di matrimonio — senza filtri, come con il rullino.
+        </p>
+      </div>
+      <div class="mp-frame relative mt-12">
+        <lite-youtube
+          videoid={INTRO_VIDEO_ID}
+          videoTitle="Mi presento — Stefano Lunardi"
+          playlabel="Riproduci: Mi presento — Stefano Lunardi"
+          params="rel=0"
+          class="mp-video"
+        />
+        <p class="mp-frame__caption font-display text-sm italic sm:text-base">
+          «Un minuto per conoscervi, una giornata per raccontarvi.»
+        </p>
+      </div>
+      <div class="mt-10 text-center">
+        <a href="/video" class="mp-link text-sm underline-offset-4 hover:underline no-underline">Guarda i wedding film e i reel</a>
+      </div>
+    </div>
+  </section>
+
   <section class="px-6 py-20">
     <div class="mx-auto max-w-3xl text-center">
       <p class="font-display text-3xl font-medium leading-snug sm:text-4xl">
@@ -385,6 +414,10 @@ const alignFor = (i: number): "center" | "right" | "left" =>
     <a href="/contatti" class="mt-8 inline-block rounded-control border border-foreground bg-foreground px-8 py-3 text-sm font-medium text-primary-foreground no-underline transition-colors hover:border-accent hover:bg-accent">Conosci Stefano</a>
   </section>
 </SiteLayout>
+
+<script>
+  import "@justinribeiro/lite-youtube";
+</script>
 
 <script>
   import { mountScrollWorld } from "@/features/home/scroll-world";
@@ -525,4 +558,51 @@ const alignFor = (i: number): "center" | "right" | "left" =>
   .sw-root[data-ready] .sw-still__img {
     will-change: transform;
   }
+
+  /* "Mi presento": camera oscura. Sezione scura a contrasto con la schermata
+     chiara di "chi siamo": il video diventa una pellicola esposta. */
+  .mp-root {
+    background: #0b0b0d;
+    color: rgb(255 255 255 / 0.92);
+  }
+  .mp-eyebrow {
+    color: rgb(255 255 255 / 0.55);
+  }
+  .mp-heading {
+    color: #ffffff;
+  }
+  .mp-copy {
+    color: rgb(255 255 255 / 0.65);
+  }
+  .mp-frame {
+    padding: clamp(0.75rem, 2.5vw, 1.5rem);
+    background: #101014;
+    border: 1px solid rgb(255 255 255 / 0.14);
+    box-shadow:
+      0 0 0 1px rgb(0 0 0 / 0.6),
+      0 30px 80px rgb(0 0 0 / 0.55);
+  }
+  .mp-video {
+    display: block;
+    width: 100%;
+    max-width: 64rem;
+    margin-inline: auto;
+    border: 1px solid rgb(255 255 255 / 0.2);
+  }
+  .mp-frame__caption {
+    margin-top: 1rem;
+    text-align: center;
+    color: rgb(255 255 255 / 0.55);
+  }
+  .mp-link {
+    color: rgb(255 255 255 / 0.75);
+    border-bottom: 1px solid rgb(255 255 255 / 0.3);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .mp-link:hover {
+    color: #ffffff;
+    border-color: rgb(255 255 255 / 0.8);
+  }
+
 </style>
