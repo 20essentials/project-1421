@@ -31,13 +31,20 @@
     --header-offset: 8.5rem;
   }
 
-  /* First block of every page clears the fixed nav; full-bleed heroes opt out
-     with [data-bleed] and sit underneath the floating pill instead. */
+  /* Every page clears the fixed nav via main's own padding-top: Astro injects
+     <style>/<script> as main's first children on island pages, so a
+     first-child rule would miss the real content, and utility classes (pt-12…)
+     would outrank a base-layer rule on the section itself. Full-bleed heroes
+     opt out with [data-bleed]: the negative margin pulls them back under the
+     floating pill. */
+  main {
+    padding-top: var(--header-offset);
+  }
   main > :first-child {
     margin-top: 0;
   }
-  main > :first-child:not([data-bleed]) {
-    padding-top: var(--header-offset);
+  main > :first-child[data-bleed] {
+    margin-top: calc(-1 * var(--header-offset));
   }
 
   body {
