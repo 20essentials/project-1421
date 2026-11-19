@@ -17,10 +17,15 @@ interface Slide {
 // Obras de "foto artistiche non matrimoni", subidas al Media Manager (hasta 2560px de ancho).
 const SLIDES: Slide[] = [
   { fileId: "600582_25bc6bd1320545ca8a67fa8591e38dc7~mv2.jpg", alt: "Composición abstracta de una cancha de baloncesto en azul y amarillo", ratio: 1709 / 2560 },
+  { fileId: "600582_9cfa5ce560e54fa0b502eedf20c1c032~mv2.jpg", alt: "Doble página del libro con hayas otoñales rojas", ratio: 1938 / 2560 },
   { fileId: "600582_81c8c78d5efc4f658f530e2fce649cbe~mv2.jpg", alt: "Agua turquesa de una piscina con reflejos de luz", ratio: 1707 / 2560 },
+  { fileId: "600582_03973b946ad049e7bd4f01400d73938f~mv2.jpg", alt: "Raíces musgosas de un árbol entre hojas rojas de otoño", ratio: 1000 / 1500 },
   { fileId: "600582_847c6d65e77743a39ff2b6cfcfd6fdcd~mv2.jpg", alt: "Mosaico de asientos de estadio en colores primarios", ratio: 1707 / 2560 },
   { fileId: "600582_aed8667f92a94637929161ff3e119f92~mv2.jpg", alt: "Pinturas de luz enmarcadas expuestas en una galería", ratio: 1920 / 2560 },
+  { fileId: "600582_13df9a5cc79d464da939d88c29fc5401~mv2.jpg", alt: "Obra de un águila real enmarcada en un interior de hormigón", ratio: 1500 / 2000 },
   { fileId: "600582_aca468f1e727401e8f170b90fe9b6405~mv2.jpg", alt: "Árbol nevado en blanco y negro sobre el libro My Vision of Kärnten", ratio: 1920 / 2560 },
+  { fileId: "600582_b806236b4181420b97073ec3a372f30b~mv2.jpg", alt: "Obra abstracta en blanco y negro enmarcada en un interior minimalista", ratio: 1500 / 2000 },
+  { fileId: "600582_47f6d11c0d1b4f1fa8b94410b0dfa619~mv2.jpg", alt: "Río blanco entre rocas oscuras en blanco y negro", ratio: 1153 / 1200 },
 ];
 
 const INTERVAL = 5000;
@@ -142,8 +147,33 @@ const slides = SLIDES.map((s) => ({
 
     const sync = () => (document.hidden || reduced.matches ? stop() : start());
 
+    // Parallax: las capas se desplazan más despacio que el scroll (headroom del
+    // scale(1.2) en CSS), como un background-attachment: fixed pero fiable en móvil.
+    let ticking = false;
+    const parallax = () => {
+      if (reduced.matches) {
+        gallery.style.setProperty("--parallax-y", "0%");
+        return;
+      }
+      const rect = gallery.getBoundingClientRect();
+      const vh = window.innerHeight || 1;
+      const progress = Math.min(1, Math.max(0, (vh - rect.top) / (vh + rect.height)));
+      gallery.style.setProperty("--parallax-y", ((progress - 0.5) * -10).toFixed(3) + "%");
+    };
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        parallax();
+        ticking = false;
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+
     document.addEventListener("visibilitychange", sync);
     reduced.addEventListener?.("change", sync);
+    parallax();
     sync();
   }
 </script>
@@ -166,7 +196,8 @@ const slides = SLIDES.map((s) => ({
     object-position: center;
     clip-path: inset(50% 50% 50% 50%);
     transition: clip-path 1.5s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: clip-path;
+    transform: translate3d(0, var(--parallax-y, 0%), 0) scale(1.2);
+    will-change: clip-path, transform;
     pointer-events: none;
   }
   .art-parallax__layer.is-active {
