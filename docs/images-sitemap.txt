@@ -1,0 +1,10 @@
+# Wix Media Manager image URL sitemap
+# Mapping of every file uploaded to the Wix Media Manager (static.wixstatic.com).
+# public/ file has been deleted after upload; the wixstatic URL replaces it in src/.
+
+public/stefan.jpg        -> https://static.wixstatic.com/media/600582_d2dab189c53b42f1939a8f12810090f0~mv2.jpg
+public/stefano/u1.jpg    -> https://static.wixstatic.com/media/600582_4f4ec030097f4d19b03ee08e8c2b7c1c~mv2.jpg
+public/stefano/u2.jpg    -> https://static.wixstatic.com/media/600582_d6d182ce960c4174b0bd7eda7d5bcf19~mv2.jpg
+public/stefano/u3.avif   -> https://static.wixstatic.com/media/600582_32f00d31636f48a7a5db83199735b97a~mv2.avif
+public/stefano/u4.avif   -> https://static.wixstatic.com/media/600582_cfdcd656e5ee474fb0e29390fea7c9e5~mv2.avif
+public/stefano/logo.png  -> https://static.wixstatic.com/media/600582_1422b130226c44c8814f688985e8438d~mv2.png

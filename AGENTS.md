@@ -42,6 +42,22 @@ its copy, under the same names, in the client's own skills folder.
   with `npx -y @wix/cli@latest token --site <siteId>`, minted inline in each command; the token
   never lands in a file anywhere (not the project, not `/tmp`) nor in client code.
 
+## Images — always Wix Media Manager, never public/
+
+Every image used by the site MUST be uploaded to the Wix Media Manager (per
+`.agents/skills/wix-manage/references/media/upload-media-to-wix.md`, two-step local upload:
+`generate-upload-url` then PUT the bytes) and served from the returned `static.wixstatic.com`
+URL. Never reference files from `public/` in `src/` — `public/` files are slow to serve from the
+site host. Workflow for any image:
+
+1. Upload it to the Media Manager and wait for `operationStatus: READY`.
+2. Record the mapping `public/<path> -> <wixstatic URL>` in `docs/images-sitemap.txt` (the log
+   of every uploaded URL).
+3. Use the wixstatic URL in the code in place of the `public/` path.
+4. Delete the file from `public/` — once uploaded, it must not remain there.
+
+Never ship a site (release) with `public/` images still referenced in `src/`.
+
 ## Visual features — mandatory screenshot
 
 Whenever the user requests a visual/UI feature (layout, component, styling, animation, page change),
