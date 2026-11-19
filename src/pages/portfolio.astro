@@ -3,6 +3,7 @@
 // Keep this frontmatter; swap the island import to YOUR gallery component.
 import SiteLayout from "@/app/layout.astro";
 import Gallery from "@/features/portfolio/gallery";
+import PortfolioCoil from "@/features/portfolio/coil/portfolio-coil.astro";
 import { fetchCollections } from "@/features/portfolio/portfolio";
 import type { CollectionSummary } from "@/features/portfolio/types";
 
@@ -21,7 +22,8 @@ try {
     <h1 class="font-display mt-3 text-4xl font-medium sm:text-5xl">Every frame is a painting</h1>
     <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">Ogni scatto è un quadro d'arte: candid autentici, ritratti editoriali e aeree che raccontano la vostra storia.</p>
   </header>
-  <div class="mx-auto max-w-7xl px-6 pt-12 pb-24">
+  <PortfolioCoil />
+  <div id="galleria" class="mx-auto max-w-7xl px-6 pt-12 pb-24">
     <Gallery client:load initialCollections={collections} />
   </div>
 </SiteLayout>
