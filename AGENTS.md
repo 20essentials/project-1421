@@ -67,6 +67,24 @@ Never rely on an inner `max-w-*` alone for breathing room. Content sections belo
 the convention `mx-auto max-w-* px-6`. The only exception is a full-bleed hero, which opts out via
 `[data-bleed]` (see `src/styles/global.css`).
 
+## Astro rule — no client code in the frontmatter
+
+The frontmatter (`---` block) of every `.astro` file runs on the server during SSR (a Cloudflare
+worker, where browser globals like `HTMLElement` do not exist). Never import browser-only code
+there — web components (e.g. `@justinribeiro/lite-youtube`, `import "@justinribeiro/lite-youtube"`)
+or anything that touches `document`/`window` crash the SSR render with "HTMLElement is not defined".
+Client-side JS goes in a `<script>` tag in the template instead, where Astro bundles it as a
+browser module that is never executed during SSR:
+
+```astro
+---
+// server code only: data fetching, props
+---
+<script>
+  import "@justinribeiro/lite-youtube"; // browser-only: upgrades the custom element on the client
+</script>
+```
+
 ## Release
 
 A code change ends with a release; the live URL shows it, the dev server does not count.
