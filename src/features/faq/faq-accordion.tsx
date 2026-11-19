@@ -1,10 +1,11 @@
-// REFERENCE accordion: the visible questions grouped by category, one expandable answer per question,
-// on the @theme tokens. Correct and complete; per the skill's model you design and build your own on
-// useFaq. Accessible by construction — the question is a <button aria-expanded aria-controls> inside a
-// heading, the answer a role="region" panel labelled by it, collapsed with `hidden` (so a no-JS visitor
-// and a search engine still get every answer in the HTML). No fetching, no routing; the ONLY HTML render
-// is `answerHtml`, which the core sanitized.
-import { useState, type ComponentType, type ReactNode } from "react";
+// FAQ accordion — editorial monochrome UI: hairline rows, a pointer-tracked spotlight
+// hover (ReactBits SpotlightCard pattern, CSS vars only), a smooth 0fr→1fr height
+// transition (grid-template-rows, no measuring) and a rotating plus. SEO and no-JS stay
+// safe: SSR renders every panel collapsed with `hidden` (content is still in the DOM);
+// after hydration the hidden attribute is dropped in favour of the grid collapse and the
+// panel is made `inert` while closed, so nothing inside is focusable. Data and state come
+// from useFaq; the only HTML render is `answerHtml`, which the core sanitized.
+import { useEffect, useRef, useState, type ComponentType, type ReactNode } from "react";
 import { useFaq, type UseFaqOptions } from "@/features/faq/use-faq";
 import { anchorId, faqDeepLink } from "@/features/faq/faq-core";
 import type { FaqQuestion, FaqSection } from "@/features/faq/types";
@@ -24,11 +25,12 @@ const PlainLink = ({ href, className, children }: LinkLikeProps) => (
 // The answer's HTML is plain tags (p, h4, ul/ol/li, blockquote, pre/code, a, img, hr, strong/em/u/s):
 // styled here through Tailwind's arbitrary-descendant variants, on the tokens.
 const ANSWER_CLASS =
-  "text-[15px] leading-relaxed text-foreground [&_p]:my-2 [&_h4]:mt-4 [&_h4]:mb-1 [&_h4]:font-semibold " +
-  "[&_ul]:my-2 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:my-2 [&_ol]:list-decimal [&_ol]:pl-5 [&_li]:my-1 " +
-  "[&_blockquote]:my-3 [&_blockquote]:border-l-2 [&_blockquote]:border-border [&_blockquote]:pl-4 [&_blockquote]:text-muted-foreground " +
-  "[&_pre]:my-3 [&_pre]:overflow-x-auto [&_pre]:rounded-md [&_pre]:bg-secondary [&_pre]:p-3 [&_pre]:text-sm " +
-  "[&_a]:underline [&_a]:underline-offset-2 [&_img]:my-3 [&_img]:max-w-full [&_img]:rounded-lg [&_hr]:my-4 [&_hr]:border-border";
+  "text-[15px] leading-relaxed text-muted-foreground [&_p]:my-2 [&_h4]:mt-4 [&_h4]:mb-1 [&_h4]:font-medium [&_h4]:text-foreground " +
+  "[&_ul]:my-2 [&_ul]:list-none [&_ul]:pl-5 [&_ul]:[&>li]:relative [&_ul]:[&>li]:before:absolute [&_ul]:[&>li]:before:left-0 [&_ul]:[&>li]:before:text-muted-foreground [&_ul]:[&>li]:before:content-['—'] " +
+  "[&_ol]:my-2 [&_ol]:list-decimal [&_ol]:pl-5 [&_li]:my-1 [&_li]:marker:text-muted-foreground " +
+  "[&_blockquote]:my-3 [&_blockquote]:border-l-2 [&_blockquote]:border-foreground/30 [&_blockquote]:pl-4 [&_blockquote]:text-foreground/80 [&_blockquote]:italic " +
+  "[&_pre]:my-3 [&_pre]:overflow-x-auto [&_pre]:rounded-sm [&_pre]:bg-secondary [&_pre]:p-3 [&_pre]:text-sm [&_a]:text-foreground [&_a]:underline [&_a]:decoration-foreground/40 [&_a]:underline-offset-4 " +
+  "[&_a:hover]:decoration-foreground [&_img]:my-3 [&_img]:max-w-full [&_img]:rounded-sm [&_hr]:my-4 [&_hr]:border-border";
 
 export interface FaqAccordionProps extends UseFaqOptions {
   /** The FAQ page's path — the base of every copied deep link (default "/faq"). */
@@ -39,12 +41,50 @@ export interface FaqAccordionProps extends UseFaqOptions {
   LinkComponent?: ComponentType<LinkLikeProps>;
 }
 
+/** One collapsible panel: grid-template-rows 0fr→1fr, `inert` while closed. */
+function Collapse({
+  open,
+  panelId,
+  labelledBy,
+  ssrHidden,
+  children,
+}: {
+  open: boolean;
+  panelId: string;
+  labelledBy: string;
+  /** Before hydration the panel keeps the SSR `hidden` (no-JS and crawlers keep the old guarantee). */
+  ssrHidden: boolean;
+  children: ReactNode;
+}) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    if (ref.current) ref.current.inert = !open;
+  }, [open]);
+  return (
+    <div
+      ref={ref}
+      id={panelId}
+      role="region"
+      aria-labelledby={labelledBy}
+      hidden={ssrHidden && !open}
+      aria-hidden={!open || undefined}
+      className="grid transition-[grid-template-rows] duration-500 ease-fluid"
+      style={{ gridTemplateRows: open ? "1fr" : "0fr" }}
+    >
+      <div className="min-h-0 overflow-hidden">
+        <div className="pb-8 pl-1 pr-2">{children}</div>
+      </div>
+    </div>
+  );
+}
+
 function Skeleton() {
   return (
-    <div aria-busy="true" className="divide-y divide-border">
+    <div aria-busy="true" className="border-b border-border">
       {Array.from({ length: 5 }, (_, i) => (
-        <div key={i} className="py-5">
-          <div className="h-4 w-3/4 animate-pulse rounded bg-secondary" />
+        <div key={i} className="flex items-center justify-between gap-4 border-t border-border py-7">
+          <div className="h-4 w-2/3 max-w-md animate-pulse rounded-sm bg-secondary" />
+          <div className="h-7 w-7 shrink-0 animate-pulse rounded-full border border-border" />
         </div>
       ))}
     </div>
@@ -53,13 +93,15 @@ function Skeleton() {
 
 export default function FaqAccordion({
   base = "/faq",
-  emptyMessage = "No questions yet.",
+  emptyMessage = "Nessuna domanda per ora.",
   showCategoryHeadings,
   LinkComponent = PlainLink,
   ...options
 }: FaqAccordionProps) {
   const { data, sections, visible, query, activeCategoryId, error, loading, isExpanded, toggleQuestion, setQuery, retry } = useFaq(options);
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   const headings = showCategoryHeadings ?? activeCategoryId === null;
 
   // The deep link to one question, absolute when a browser is present. Clipboard access is browser-only
@@ -77,6 +119,14 @@ export default function FaqAccordion({
     );
   };
 
+  // Pointer-tracked spotlight (ReactBits SpotlightCard pattern): CSS vars on the row, no re-render.
+  const spotlight = (e: React.MouseEvent<HTMLDivElement>) => {
+    const row = e.currentTarget;
+    const rect = row.getBoundingClientRect();
+    row.style.setProperty("--spot-x", `${e.clientX - rect.left}px`);
+    row.style.setProperty("--spot-y", `${e.clientY - rect.top}px`);
+  };
+
   if (data === null) return <Skeleton />;
 
   return (
@@ -84,8 +134,8 @@ export default function FaqAccordion({
       {error && (
         <p className="mb-4 flex items-center gap-3 text-sm text-destructive">
           <span>{error}</span>
-          <button type="button" onClick={retry} disabled={loading} className="rounded-md border border-border px-3 py-1 text-foreground hover:bg-secondary disabled:opacity-50">
-            Try again
+          <button type="button" onClick={retry} disabled={loading} className="rounded-sm border border-border px-3 py-1 text-foreground hover:bg-secondary disabled:opacity-50">
+            Riprova
           </button>
         </p>
       )}
@@ -95,9 +145,9 @@ export default function FaqAccordion({
         <p className="py-16 text-center text-muted-foreground">
           {query.trim() ? (
             <>
-              No results for &ldquo;{query.trim()}&rdquo;.{" "}
-              <button type="button" onClick={() => setQuery("")} className="underline underline-offset-2 text-foreground">
-                Clear search
+              Nessun risultato per &ldquo;{query.trim()}&rdquo;.{" "}
+              <button type="button" onClick={() => setQuery("")} className="underline underline-offset-4 text-foreground">
+                Azzera la ricerca
               </button>
             </>
           ) : (
@@ -105,19 +155,31 @@ export default function FaqAccordion({
           )}
         </p>
       ) : (
-        sections.map((section: FaqSection) => (
-          <section key={section.category.id} aria-labelledby={headings ? `faq-cat-${section.category.id}` : undefined} className="mb-10">
+        sections.map((section: FaqSection, sectionIndex: number) => (
+          <section key={section.category.id} aria-labelledby={headings ? `faq-cat-${section.category.id}` : undefined} className="mb-14 last:mb-0">
             {headings && (
-              <h2 id={`faq-cat-${section.category.id}`} className="mb-2 text-xl font-semibold tracking-tight">
-                {section.category.title}
-              </h2>
+              <div id={`faq-cat-${section.category.id}`} className="mb-2 flex items-baseline gap-4">
+                <span aria-hidden="true" className="text-xs tabular-nums text-muted-foreground">
+                  {String(sectionIndex + 1).padStart(2, "0")}
+                </span>
+                <h2 className="eyebrow">{section.category.title}</h2>
+                <span aria-hidden="true" className="h-px flex-1 bg-border" />
+              </div>
             )}
-            <div className="divide-y divide-border border-y border-border">
+            <div className="border-b border-border">
               {section.questions.map((q) => {
                 const expanded = isExpanded(q.id);
                 const id = anchorId(q);
                 return (
-                  <div key={q.id} id={id} className="scroll-mt-24">
+                  <div key={q.id} id={id} onMouseMove={spotlight} className="group relative scroll-mt-28 border-t border-border">
+                    <div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                      style={{
+                        background:
+                          "radial-gradient(340px circle at var(--spot-x, 50%) var(--spot-y, 50%), color-mix(in srgb, var(--color-foreground) 5%, transparent), transparent 72%)",
+                      }}
+                    />
                     <h3 className="m-0">
                       <button
                         type="button"
@@ -125,25 +187,32 @@ export default function FaqAccordion({
                         aria-expanded={expanded}
                         aria-controls={`${id}-panel`}
                         onClick={() => toggleQuestion(q.id)}
-                        className="flex w-full items-start justify-between gap-4 py-4 text-left text-base font-medium text-foreground hover:text-muted-foreground"
+                        className="relative flex w-full items-center justify-between gap-6 px-1 py-7 text-left focus:outline-none"
                       >
-                        <span>{q.question}</span>
-                        <span aria-hidden="true" className={`mt-1 shrink-0 text-muted-foreground transition-transform ${expanded ? "rotate-45" : ""}`}>
+                        <span className="font-display text-lg font-medium leading-snug tracking-tight text-foreground sm:text-xl">{q.question}</span>
+                        <span
+                          aria-hidden="true"
+                          className={`grid h-8 w-8 shrink-0 place-items-center rounded-full border text-sm text-foreground transition-[transform,border-color,background-color] duration-500 ease-fluid ${
+                            expanded ? "rotate-45 border-foreground bg-foreground text-primary-foreground" : "border-border group-hover:border-foreground"
+                          }`}
+                        >
                           +
                         </span>
                       </button>
                     </h3>
-                    <div id={`${id}-panel`} role="region" aria-labelledby={`${id}-button`} hidden={!expanded} className="pb-5">
-                      <div className={ANSWER_CLASS} dangerouslySetInnerHTML={{ __html: q.answerHtml }} />
-                      <p className="mt-3 flex items-center gap-3 text-xs text-muted-foreground">
-                        <LinkComponent href={faqDeepLink(q, base, activeCategoryId)} className="underline underline-offset-2">
-                          Link to this question
-                        </LinkComponent>
-                        <button type="button" onClick={() => copyLink(q)} className="underline underline-offset-2">
-                          {copiedId === q.id ? "Copied" : "Copy link"}
-                        </button>
-                      </p>
-                    </div>
+                    <Collapse open={expanded} panelId={`${id}-panel`} labelledBy={`${id}-button`} ssrHidden={!mounted}>
+                      <div className="max-w-[62ch]">
+                        <div className={ANSWER_CLASS} dangerouslySetInnerHTML={{ __html: q.answerHtml }} />
+                        <p className="mt-4 flex items-center gap-5 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                          <LinkComponent href={faqDeepLink(q, base, activeCategoryId)} className="transition-colors hover:text-foreground no-underline underline-offset-4">
+                            Link a questa domanda
+                          </LinkComponent>
+                          <button type="button" onClick={() => copyLink(q)} className="uppercase tracking-[0.18em] transition-colors hover:text-foreground">
+                            {copiedId === q.id ? "Copiato" : "Copia link"}
+                          </button>
+                        </p>
+                      </div>
+                    </Collapse>
                   </div>
                 );
               })}
@@ -152,7 +221,7 @@ export default function FaqAccordion({
         ))
       )}
       {data.truncated && (
-        <p className="mt-6 text-sm text-muted-foreground">Showing the first {data.questions.length} questions.</p>
+        <p className="mt-6 text-sm text-muted-foreground">Prime {data.questions.length} domande mostrate.</p>
       )}
     </div>
   );
