@@ -101,6 +101,19 @@ browser module that is never executed during SSR:
 </script>
 ```
 
+## Tests — Vitest + Playwright for every TypeScript logic
+
+Everything that contains TypeScript logic (features, data layers, mappers, stores, parsers —
+anything beyond a straight markup template) MUST have tests. Two layers, both already configured:
+
+- **Vitest** (unit/integration, `npm run test`): pure logic — mappers, parsers, stores, core rules,
+  DTO assembly. colocate as `<file>.test.ts` next to the source.
+- **Playwright** (E2E, `npm run test:e2e`): user-visible behaviour — the page renders, interaction
+  works (e.g. an accordion expands, a form submits), data reaches the DOM.
+
+A change to TypeScript logic is not done until its tests pass. New logic ships with its tests in the
+same change; do not leave test debt.
+
 ## Release
 
 A code change ends with a release; the live URL shows it, the dev server does not count.
