@@ -14,7 +14,7 @@ interface Slide {
   ratio: number;
 }
 
-// Obras de "foto artistiche non matrimoni", subidas al Media Manager (2560px de ancho).
+// Obras de "foto artistiche non matrimoni", subidas al Media Manager (hasta 2560px de ancho).
 const SLIDES: Slide[] = [
   { fileId: "600582_25bc6bd1320545ca8a67fa8591e38dc7~mv2.jpg", alt: "Composición abstracta de una cancha de baloncesto en azul y amarillo", ratio: 1709 / 2560 },
   { fileId: "600582_81c8c78d5efc4f658f530e2fce649cbe~mv2.jpg", alt: "Agua turquesa de una piscina con reflejos de luz", ratio: 1707 / 2560 },
@@ -37,7 +37,7 @@ const slides = SLIDES.map((s) => ({
   class="art-parallax"
   data-gallery
   data-interval={INTERVAL}
-  data-slides={JSON.stringify(slides.map(({ src, alt }) => ({ src, alt })))}
+  data-slides={JSON.stringify(slides)}
   aria-label="Galería automática de fotografías artísticas"
 >
   <img
@@ -76,7 +76,7 @@ const slides = SLIDES.map((s) => ({
   const galleries = document.querySelectorAll<ArtParallaxElement>("[data-gallery]");
 
   for (const gallery of galleries) {
-    const slides = JSON.parse(gallery.dataset.slides ?? "[]") as { src: string; alt: string }[];
+    const slides = JSON.parse(gallery.dataset.slides ?? "[]") as { src: string; srcSet?: string; sizes?: string; alt: string }[];
     const layers = Array.from(gallery.querySelectorAll<HTMLImageElement>("[data-layer]"));
     const total = slides.length;
     const interval = Number(gallery.dataset.interval) || 5000;
@@ -86,7 +86,10 @@ const slides = SLIDES.map((s) => ({
     let timer: number | undefined;
     let cleanup: number | undefined;
 
-    const preload = (layer: HTMLImageElement, slide: { src: string; alt: string }) => {
+    const preload = (layer: HTMLImageElement, slide: { src: string; srcSet?: string; sizes?: string; alt: string }) => {
+      // srcset gana sobre src: hay que actualizarlo junto, o el navegador seguiría
+      // sirviendo la imagen inicial del srcset y el ciclo mostraría solo 2 fotos.
+      layer.srcset = slide.srcSet ?? "";
       layer.src = slide.src;
       layer.alt = slide.alt;
     };
@@ -173,6 +176,7 @@ const slides = SLIDES.map((s) => ({
     .art-parallax__layer {
       transition: none;
       clip-path: none;
+      transform: none;
     }
     .art-parallax__layer:not(.is-active) {
       display: none;
