@@ -19,7 +19,7 @@ import type {
   RuleCondition,
   RuleEffect,
 } from "@/features/forms/types";
-import { addressOverrides, addressParts, humanizeSub } from "@/features/forms/forms-address-core";
+import { addressOverrides, addressParts } from "@/features/forms/forms-address-core";
 export { ADDRESS_SUBFIELDS, COUNTRY_CODES, addressPartsForCountry, countryName, humanizeSub } from "@/features/forms/forms-address-core";
 
 /** A raw Form Schemas v4 entity as either transport returns it. */
