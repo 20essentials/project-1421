@@ -2,30 +2,28 @@
 import SiteLayout from "@/app/layout.astro";
 import PhotoGrid from "@/features/home/photo-grid.astro";
 import ArtisticParallax from "@/features/home/artistic-parallax.astro";
-import { fetchCollections, fetchProjects } from "@/features/portfolio/portfolio";
 import { fetchPosts, postMetaLine, postPath } from "@/features/blog/posts";
 import { fetchFaq } from "@/features/faq/faq";
 import { imgAttrs, imgSrc, imgSrcSet } from "@/shared/media";
-import type { CollectionSummary, ProjectSummary } from "@/features/portfolio/types";
 import type { PostPage } from "@/features/blog/types";
 import type { FaqData } from "@/features/faq/types";
 
-let collections: CollectionSummary[] = [];
-let projects: ProjectSummary[] = [];
 let posts: PostPage | undefined;
 let faq: FaqData = { categories: [], questions: [], truncated: false };
 try {
-  [collections, projects, posts, faq] = await Promise.all([fetchCollections(), fetchProjects(), fetchPosts(), fetchFaq()]);
+  [posts, faq] = await Promise.all([fetchPosts(), fetchFaq()]);
 } catch {
 }
 
 // Hero photograph, uploaded to the site's Media Manager (new-hero.avif, 2752×1536).
 const HERO_IMAGE = "wix:image://v1/600582_d3da93d4d8584fd282a085b093fc7b9d~mv2.avif/new-hero.jpg#originWidth=2752&originHeight=1536";
 const HERO_RATIO = 1536 / 2752;
-// Colour interludes, uploaded to the site's Media Manager (new-color-2/3.avif, 2752×1536).
-const COLOR_IMAGE_2 = "wix:image://v1/600582_06d510b40a6d4533849ae100ad4de289~mv2.avif/new-color-2.jpg#originWidth=2752&originHeight=1536";
-const COLOR_IMAGE_3 = "wix:image://v1/600582_b922254fd6344b0680202d935d66d8db~mv2.avif/new-color-3.jpg#originWidth=2752&originHeight=1536";
-const COLOR_RATIO = 1536 / 2752;
+// Art gallery photograph (IMG_7285), uploaded to the site's Media Manager (slide-art-gallery.avif, 4032×3024).
+const ART_GALLERY_IMAGE = "wix:image://v1/600582_52669cad776f4a7e9c9b14d257a2da13~mv2.avif/slide-art-gallery.avif#originWidth=4032&originHeight=3024";
+const ART_GALLERY_RATIO = 3024 / 4032;
+// Black & white couple walking (04_veil), uploaded to the site's Media Manager (slide-veil-bw.avif, 4961×3425).
+const VEIL_IMAGE = "wix:image://v1/600582_d6196421a6164916a081fe5ffd20de27~mv2.avif/slide-veil-bw.avif#originWidth=4961&originHeight=3425";
+const VEIL_RATIO = 3425 / 4961;
 const faqPreview = faq.questions.slice(0, 3);
 const latestPosts = posts?.posts.slice(0, 3) ?? [];
 const INTRO_VIDEO_ID = "5gY0HgkSVjU";
@@ -48,12 +46,8 @@ interface ScrollScene {
   heading?: "h1" | "h2";
 }
 
-// Five full-viewport scenes alternating colour and black & white: the hero
-// photograph, a project, a colour interlude, another project, a colour interlude.
-const MAX_SCENES = 5;
-const PROJECT_SCENES = 4;
-const collectionTitles = new Map(collections.map((c) => [c.id, c.title]));
-
+// Three full-viewport scenes: the hero (two images), an art-gallery photograph
+// (Stefano is also an art photographer), and a fine-art wedding photograph.
 const heroScene: ScrollScene = {
   key: "hero",
   imageUrl: HERO_IMAGE,
@@ -72,76 +66,33 @@ const heroScene: ScrollScene = {
   heading: "h1",
 };
 
-const projectScenes: ScrollScene[] = projects
-  .filter((p) => p.imageUrl)
-  .slice(0, PROJECT_SCENES)
-  .map((p) => ({
-    key: p.id,
-    imageUrl: p.imageUrl,
-    ratio: 2 / 3,
-    alt: p.title,
-    eyebrow: p.collectionIds.map((id) => collectionTitles.get(id)).find(Boolean) ?? "Progetto",
-    title: p.title,
-    description: p.description,
-    href: `/projects/${p.slug}`,
-    cta: "Vedi il progetto",
-    heading: "h2",
-  }));
+const artScene: ScrollScene = {
+  key: "art-gallery",
+  imageUrl: ART_GALLERY_IMAGE,
+  ratio: ART_GALLERY_RATIO,
+  alt: "Fotografia d'arte — opera esposta in galleria, Stefano Lunardi",
+  eyebrow: "Fotografia d'arte",
+  title: "Non solo matrimoni: anche arte",
+  description: "Le opere di Stefano sono esposte e acquistabili su Singulart. Luce, composizione, atmosfera: la stessa ricerca entra in ogni scatto.",
+  href: "/fine-art",
+  cta: "Scopri le opere",
+  heading: "h2",
+};
 
-const collectionScenes: ScrollScene[] = collections
-  .filter((c) => c.imageUrl)
-  .slice(0, PROJECT_SCENES)
-  .map((c) => ({
-    key: c.id,
-    imageUrl: c.imageUrl,
-    ratio: 2 / 3,
-    alt: c.title,
-    eyebrow: "Collezione",
-    title: c.title,
-    description: c.description,
-    href: `/portfolio/${c.slug}`,
-    cta: "Vedi la collezione",
-    heading: "h2",
-  }));
+const veilScene: ScrollScene = {
+  key: "fine-art-wedding",
+  imageUrl: VEIL_IMAGE,
+  ratio: VEIL_RATIO,
+  alt: "Coppia in bianco e nero che cammina — fotografia fine art di matrimonio, Stefano Lunardi",
+  eyebrow: "Fine Art Wedding",
+  title: "Matrimoni come opere d'arte",
+  description: "Ogni scatto è un quadro: la stessa visione delle opere fine art, portata nel vostro giorno.",
+  href: "/portfolio",
+  cta: "Guarda il portfolio",
+  heading: "h2",
+};
 
-// Colour scenes carry their own editorial copy; the images alternate sides with the projects.
-const colorInterludes: ScrollScene[] = [
-  {
-    key: "color-2",
-    imageUrl: COLOR_IMAGE_2,
-    ratio: COLOR_RATIO,
-    alt: "Fotografia di matrimonio fine art a colori — Stefano Lunardi",
-    eyebrow: "Slow photography",
-    title: "La verità, senza filtri",
-    description: "Con il rullino non esiste una versione ottimizzata: ogni fotogramma è una scelta deliberata, con la mente, con gli occhi, con il cuore.",
-    href: "/il-mio-metodo",
-    cta: "Scopri il metodo",
-    heading: "h2",
-  },
-  {
-    key: "color-3",
-    imageUrl: COLOR_IMAGE_3,
-    ratio: COLOR_RATIO,
-    alt: "Fotografia di matrimonio fine art a colori — Stefano Lunardi",
-    eyebrow: "Fine Art",
-    title: "Ogni scena è un'opera",
-    description: "La stessa ricerca delle opere fine art — luce, composizione, atmosfera — entra in ogni scatto del vostro matrimonio.",
-    href: "/portfolio",
-    cta: "Guarda il portfolio",
-    heading: "h2",
-  },
-];
-
-const bodyScenes = projectScenes.length >= 2 ? projectScenes : collectionScenes;
-const scenes: ScrollScene[] = [heroScene];
-let interlude = 0;
-for (const scene of bodyScenes) {
-  if (scenes.length >= MAX_SCENES) break;
-  scenes.push(scene);
-  if (interlude < colorInterludes.length && scenes.length < MAX_SCENES) {
-    scenes.push(colorInterludes[interlude++]);
-  }
-}
+const scenes: ScrollScene[] = [heroScene, artScene, veilScene];
 
 const alignFor = (i: number): "center" | "right" | "left" =>
   i === 0 ? "center" : i % 2 === 1 ? "right" : "left";

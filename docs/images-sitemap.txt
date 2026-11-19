@@ -21,3 +21,5 @@ public/stefano/logo.png  -> https://static.wixstatic.com/media/600582_1422b13022
 600582_847c6d65e77743a39ff2b6cfcfd6fdcd~mv2.jpg (1.2MB) -> 600582_1c73e1038d4e4090921619cfbbb95527~mv2.avif (590KB)  # artistic-parallax estadio
 600582_b669998523e74ce89c899fb59ace2296~mv2.jpg (1.0MB) -> 600582_80c45dbd1ab64857867f8605a0c9f26b~mv2.avif (303KB)  # portfolio-coil ultima-corsa
 600582_6aab161063104487b901c6e807a4e9e8~mv2.jpg (1.3MB) -> 600582_8c0d69abfea148c988bc5442b08f7055~mv2.avif (681KB)  # CMS portfolio cover hotel-excelsior-venezia
+stefano-lunardi-assets/.../IMG_7285.jpg (2.1MB) -> 600582_52669cad776f4a7e9c9b14d257a2da13~mv2.avif (921KB)  # index slide 2 art gallery
+stefano-lunardi-assets/.../04_veil.jpg (8.2MB) -> 600582_d6196421a6164916a081fe5ffd20de27~mv2.avif (1204KB)  # index slide 3 fine-art wedding
