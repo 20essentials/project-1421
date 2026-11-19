@@ -58,3 +58,17 @@ this project. Workflow:
    Leaving it running blocks the next session's `npm run dev` with "Another astro dev server is
    already running".
 
+## Layout rule — mobile horizontal padding
+
+Every full-width page header/hero (the `<section>`/`<header>` that sits directly under `<main>`
+and holds the eyebrow, `h1` and intro paragraph, typically `border-b border-border pb-* text-center`)
+MUST include horizontal padding, e.g. `px-6`, or its text touches the viewport edges on mobile.
+Never rely on an inner `max-w-*` alone for breathing room. Content sections below the hero follow
+the convention `mx-auto max-w-* px-6`. The only exception is a full-bleed hero, which opts out via
+`[data-bleed]` (see `src/styles/global.css`).
+
+## Release
+
+A code change ends with a release; the live URL shows it, the dev server does not count.
+(Use the wix-headless-kit skill's deploy/release flow.)
+
