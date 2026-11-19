@@ -52,7 +52,7 @@ const slides = SLIDES.map((s) => ({
   data-gallery
   data-interval={INTERVAL}
   data-slides={JSON.stringify(slides)}
-  aria-label="Galería automática de fotografías artísticas"
+  aria-label="Galleria automatica di fotografie artistiche"
 >
   <img
     class="art-parallax__layer is-active"
@@ -79,6 +79,11 @@ const slides = SLIDES.map((s) => ({
     <p class="eyebrow">Fine Art</p>
     <h2 class="font-display art-parallax__title">Foto Artistiche</h2>
     <p class="art-parallax__line">Opere che portano l'invisibile nel visibile: luce, composizione, atmosfera.</p>
+    <p class="art-parallax__where">
+      Opere esposte e acquistabili su
+      <a href="https://www.singulart.com/it/artista/stefano-lunardi-37102" target="_blank" rel="noopener">Singulart</a> e
+      <a href="https://www.artlunagallery.com/fine-art-portrait" target="_blank" rel="noopener">LunaGallery</a>.
+    </p>
     {ctaHref && ctaLabel && <a href={ctaHref} class="art-parallax__cta">{ctaLabel}</a>}
   </div>
 </section>
@@ -241,6 +246,23 @@ const slides = SLIDES.map((s) => ({
     .art-parallax__line {
       font-size: 1.05rem;
     }
+  }
+  .art-parallax__where {
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: rgb(255 255 255 / 0.75);
+    text-shadow: 0 1px 12px rgb(0 0 0 / 0.4);
+  }
+  .art-parallax__where a {
+    pointer-events: auto;
+    color: #ffffff;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: color 0.3s;
+  }
+  .art-parallax__where a:hover {
+    color: rgb(255 255 255 / 0.7);
   }
   .art-parallax__cta {
     pointer-events: auto;
