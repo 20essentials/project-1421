@@ -50,6 +50,13 @@ Every image used by the site MUST be uploaded to the Wix Media Manager (per
 URL. Never reference files from `public/` in `src/` — `public/` files are slow to serve from the
 site host. Workflow for any image:
 
+1. Convert the image to **AVIF before uploading** (mimeType `image/avif`). Never upload a
+   JPEG/PNG original when an AVIF version will do: Wix Media Manager stores whatever bytes
+   are uploaded, so a 2.2 MB JPEG stays a 2.2 MB JPEG forever. Losslessly (or with an
+   acceptable quality, e.g. quality ~55-70 for photos) convert first, then upload the AVIF
+   and reference the `.avif` wixstatic URL. Only fall back to JPEG/PNG when AVIF encoding
+   is genuinely unavailable, and note it in `docs/images-sitemap.txt`.
+
 1. Upload it to the Media Manager and wait for `operationStatus: READY`.
 2. Record the mapping `public/<path> -> <wixstatic URL>` in `docs/images-sitemap.txt` (the log
    of every uploaded URL).
