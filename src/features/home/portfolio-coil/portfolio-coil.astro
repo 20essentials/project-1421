@@ -151,6 +151,18 @@ const projects: ReelProject[] = [
     outline-offset: -2px;
   }
 
+  @media (max-width: 767px) {
+    .coil {
+      top: 0;
+      height: 100dvh;
+      min-height: 100dvh;
+    }
+
+    .coil-headline {
+      font-size: clamp(2.6rem, 11vw, 4rem);
+    }
+  }
+
   .coil-headline {
     position: absolute;
     left: 50%;
