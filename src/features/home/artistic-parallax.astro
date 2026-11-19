@@ -31,6 +31,13 @@ const SLIDES: Slide[] = [
   { fileId: "600582_47f6d11c0d1b4f1fa8b94410b0dfa619~mv2.jpg", alt: "Río blanco entre rocas oscuras en blanco y negro", ratio: 1153 / 1200 },
 ];
 
+interface Props {
+  ctaHref?: string;
+  ctaLabel?: string;
+}
+
+const { ctaHref = "/fine-art", ctaLabel = "Scopri le opere" } = Astro.props;
+
 const INTERVAL = 5000;
 const WIDTHS = [1280, 1600, 2000, 2400];
 const slides = SLIDES.map((s) => ({
@@ -72,7 +79,7 @@ const slides = SLIDES.map((s) => ({
     <p class="eyebrow">Fine Art</p>
     <h2 class="font-display art-parallax__title">Foto Artistiche</h2>
     <p class="art-parallax__line">Opere che portano l'invisibile nel visibile: luce, composizione, atmosfera.</p>
-    <a href="/fine-art" class="art-parallax__cta">Scopri le opere</a>
+    {ctaHref && ctaLabel && <a href={ctaHref} class="art-parallax__cta">{ctaLabel}</a>}
   </div>
 </section>
 
