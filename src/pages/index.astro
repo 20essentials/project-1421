@@ -2,6 +2,7 @@
 import SiteLayout from "@/app/layout.astro";
 import PhotoGrid from "@/features/home/photo-grid.astro";
 import PortfolioCoil from "@/features/home/portfolio-coil/portfolio-coil.astro";
+import ArtisticParallax from "@/features/home/artistic-parallax.astro";
 import { fetchCollections, fetchProjects } from "@/features/portfolio/portfolio";
 import { fetchPosts, postMetaLine, postPath } from "@/features/blog/posts";
 import { fetchFaq } from "@/features/faq/faq";
@@ -374,6 +375,8 @@ const alignFor = (i: number): "center" | "right" | "left" =>
       </section>
     )
   }
+
+  <ArtisticParallax />
 
   <section class="px-6 py-24 text-center">
     <p class="eyebrow">Heart to Heart</p>

@@ -1,0 +1,240 @@
+---
+/**
+ * Parallax con rotación automática de imágenes (cada `interval` ms cambia la
+ * imagen con una animación de clip-path) y texto centrado "Foto Artistiche".
+ * Dos capas <img> se alternan: la entrante se revela desde inset(50%) hasta
+ * cubrir todo, la saliente se recoloca en el índice siguiente precargada.
+ * Sin JS o con prefers-reduced-motion: la primera imagen fija, sin ciclo.
+ */
+import { imgSrc, imgSrcSet } from "@/shared/media";
+
+interface Slide {
+  fileId: string;
+  alt: string;
+  ratio: number;
+}
+
+// Obras de "foto artistiche non matrimoni", subidas al Media Manager (2560px de ancho).
+const SLIDES: Slide[] = [
+  { fileId: "600582_25bc6bd1320545ca8a67fa8591e38dc7~mv2.jpg", alt: "Composición abstracta de una cancha de baloncesto en azul y amarillo", ratio: 1709 / 2560 },
+  { fileId: "600582_81c8c78d5efc4f658f530e2fce649cbe~mv2.jpg", alt: "Agua turquesa de una piscina con reflejos de luz", ratio: 1707 / 2560 },
+  { fileId: "600582_847c6d65e77743a39ff2b6cfcfd6fdcd~mv2.jpg", alt: "Mosaico de asientos de estadio en colores primarios", ratio: 1707 / 2560 },
+  { fileId: "600582_aed8667f92a94637929161ff3e119f92~mv2.jpg", alt: "Pinturas de luz enmarcadas expuestas en una galería", ratio: 1920 / 2560 },
+  { fileId: "600582_aca468f1e727401e8f170b90fe9b6405~mv2.jpg", alt: "Árbol nevado en blanco y negro sobre el libro My Vision of Kärnten", ratio: 1920 / 2560 },
+];
+
+const INTERVAL = 5000;
+const DURATION = 1500;
+const WIDTHS = [1280, 1600, 2000, 2400];
+const slides = SLIDES.map((s) => ({
+  src: imgSrc(s.fileId, 2400, Math.round(2400 * s.ratio)),
+  srcSet: imgSrcSet(s.fileId, WIDTHS, s.ratio),
+  alt: s.alt,
+}));
+---
+
+<section
+  class="art-parallax"
+  data-gallery
+  data-interval={INTERVAL}
+  data-slides={JSON.stringify(slides.map(({ src, alt }) => ({ src, alt })))}
+  aria-label="Galería automática de fotografías artísticas"
+>
+  <img
+    class="art-parallax__layer is-active"
+    data-layer="0"
+    src={slides[0].src}
+    srcset={slides[0].srcSet}
+    sizes="100vw"
+    fetchpriority="high"
+    decoding="async"
+    alt={slides[0].alt}
+  />
+  <img
+    class="art-parallax__layer"
+    data-layer="1"
+    src={slides[1].src}
+    srcset={slides[1].srcSet}
+    sizes="100vw"
+    aria-hidden="true"
+    decoding="async"
+    alt={slides[1].alt}
+  />
+  <div class="art-parallax__scrim"></div>
+  <div class="art-parallax__copy">
+    <p class="eyebrow">Fine Art</p>
+    <h2 class="font-display art-parallax__title">Foto Artistiche</h2>
+    <p class="art-parallax__line">Opere che portano l'invisibile nel visibile: luce, composizione, atmosfera.</p>
+    <a href="/fine-art" class="art-parallax__cta">Scopri le opere</a>
+  </div>
+</section>
+
+<script>
+  import type { ArtParallaxElement } from "./artistic-parallax-types";
+
+  const DURATION = 1500;
+  const galleries = document.querySelectorAll<ArtParallaxElement>("[data-gallery]");
+
+  for (const gallery of galleries) {
+    const slides = JSON.parse(gallery.dataset.slides ?? "[]") as { src: string; alt: string }[];
+    const layers = Array.from(gallery.querySelectorAll<HTMLImageElement>("[data-layer]"));
+    const total = slides.length;
+    const interval = Number(gallery.dataset.interval) || 5000;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let index = 0;
+    let active = 0;
+    let timer: number | undefined;
+    let cleanup: number | undefined;
+
+    const preload = (layer: HTMLImageElement, slide: { src: string; alt: string }) => {
+      layer.src = slide.src;
+      layer.alt = slide.alt;
+    };
+
+    layers[0] && (layers[0].style.zIndex = "1");
+    layers[1] && (layers[1].style.zIndex = "0");
+    layers[1] && total > 1 && preload(layers[1], slides[1]);
+
+    const reveal = () => {
+      if (total < 2) return;
+
+      const outgoing = layers[active];
+      const incoming = layers[1 - active];
+      if (!outgoing || !incoming) return;
+
+      index = (index + 1) % total;
+      incoming.style.zIndex = "2";
+      outgoing.style.zIndex = "1";
+      incoming.style.transition = "none";
+      incoming.classList.remove("is-active");
+      void incoming.offsetWidth;
+      incoming.style.transition = "";
+      incoming.classList.add("is-active");
+      incoming.setAttribute("aria-hidden", "false");
+      outgoing.setAttribute("aria-hidden", "true");
+      active = 1 - active;
+
+      if (cleanup !== undefined) window.clearTimeout(cleanup);
+      cleanup = window.setTimeout(() => {
+        outgoing.style.transition = "none";
+        outgoing.classList.remove("is-active");
+        outgoing.style.zIndex = "0";
+        void outgoing.offsetWidth;
+        outgoing.style.transition = "";
+        preload(outgoing, slides[(index + 1) % total]);
+        cleanup = undefined;
+      }, DURATION);
+    };
+
+    const stop = () => {
+      if (timer === undefined) return;
+      window.clearInterval(timer);
+      timer = undefined;
+    };
+
+    const start = () => {
+      stop();
+      timer = window.setInterval(reveal, interval);
+    };
+
+    const sync = () => (document.hidden || reduced.matches ? stop() : start());
+
+    document.addEventListener("visibilitychange", sync);
+    reduced.addEventListener?.("change", sync);
+    sync();
+  }
+</script>
+
+<style>
+  .art-parallax {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    background: #08090b;
+  }
+  .art-parallax__layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    clip-path: inset(50% 50% 50% 50%);
+    transition: clip-path 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: clip-path;
+    pointer-events: none;
+  }
+  .art-parallax__layer.is-active {
+    clip-path: inset(-25% -25% -25% -25%);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .art-parallax__layer {
+      transition: none;
+      clip-path: none;
+    }
+    .art-parallax__layer:not(.is-active) {
+      display: none;
+    }
+  }
+  .art-parallax__scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    background: radial-gradient(ellipse at center, rgb(0 0 0 / 0.55) 0%, rgb(0 0 0 / 0.25) 45%, transparent 72%);
+    pointer-events: none;
+  }
+  .art-parallax__copy {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 1.5rem;
+    color: var(--color-primary-foreground, #fff);
+    pointer-events: none;
+  }
+  .art-parallax__copy .eyebrow {
+    color: rgb(255 255 255 / 0.85);
+  }
+  .art-parallax__title {
+    margin-top: 0.75rem;
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+    text-shadow: 0 2px 24px rgb(0 0 0 / 0.45);
+  }
+  .art-parallax__line {
+    margin-top: 1rem;
+    max-width: 34rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgb(255 255 255 / 0.9);
+    text-shadow: 0 1px 12px rgb(0 0 0 / 0.4);
+  }
+  @media (min-width: 640px) {
+    .art-parallax__line {
+      font-size: 1.05rem;
+    }
+  }
+  .art-parallax__cta {
+    pointer-events: auto;
+    margin-top: 1.75rem;
+    padding: 0.75rem 2rem;
+    border: 1px solid rgb(255 255 255 / 0.6);
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: border-color 0.3s, background-color 0.3s;
+  }
+  .art-parallax__cta:hover {
+    border-color: rgb(255 255 255 / 1);
+    background: rgb(255 255 255 / 0.1);
+  }
+</style>
