@@ -116,3 +116,8 @@
     font-family: var(--font-display);
   }
 }
+
+/* Oculta el banner "Built on Wix Headless" inyectado por el hosting de Wix */
+#wixheadless-banner-container {
+  display: none !important;
+}

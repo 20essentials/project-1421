@@ -92,6 +92,19 @@ const structuredData = JSON.stringify({
     )}
     <slot name="seo-tags" />
     <ConsentBootstrap />
+    <script is:inline>
+      (() => {
+        const removeBanner = () => {
+          const el = document.getElementById('wixheadless-banner-container');
+          if (el) el.remove();
+        };
+        removeBanner();
+        const observer = new MutationObserver(() => {
+          requestAnimationFrame(removeBanner);
+        });
+        observer.observe(document.documentElement, { childList: true, subtree: true });
+      })();
+    </script>
   </head>
   <body>
     <SiteHeader navPrimary={primaryNav} navAll={allNav} current={currentPath} />
