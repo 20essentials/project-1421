@@ -267,9 +267,9 @@ const isActive = (href: string) => current === href || current === `${href}/`;
     translate: var(--x, 0) 0;
     opacity: 0;
     transition:
-      translate 700ms var(--ease-fluid, cubic-bezier(0.32, 0.72, 0, 1)),
-      width 700ms var(--ease-fluid, cubic-bezier(0.32, 0.72, 0, 1)),
-      opacity 700ms var(--ease-fluid, cubic-bezier(0.32, 0.72, 0, 1));
+      translate 450ms var(--ease-fluid, cubic-bezier(0.32, 0.72, 0, 1)),
+      width 450ms var(--ease-fluid, cubic-bezier(0.32, 0.72, 0, 1)),
+      opacity 400ms var(--ease-fluid, cubic-bezier(0.32, 0.72, 0, 1));
   }
 
   .nav-indicator[data-visible] {
@@ -369,25 +369,51 @@ const isActive = (href: string) => current === href || current === `${href}/`;
     const links = [...document.querySelectorAll<HTMLAnchorElement>("[data-nav-link]")];
     const indicator = document.querySelector<HTMLElement>(".nav-indicator");
 
-    const moveIndicator = () => {
+    const placeIndicator = (link: HTMLAnchorElement) => {
       if (!indicator) return;
-      const active = links.find(link => link.getAttribute("aria-current") === "true");
-      if (!active) {
-        indicator.removeAttribute("data-visible");
-        return;
-      }
       indicator.toggleAttribute("data-instant", !indicator.hasAttribute("data-visible"));
-      indicator.style.setProperty("--x", `${active.offsetLeft}px`);
-      indicator.style.setProperty("--w", `${active.offsetWidth}px`);
+      indicator.style.setProperty("--x", `${link.offsetLeft}px`);
+      indicator.style.setProperty("--w", `${link.offsetWidth}px`);
       void indicator.offsetWidth;
       indicator.removeAttribute("data-instant");
       indicator.setAttribute("data-visible", "");
     };
 
+    const hideIndicator = () => {
+      indicator?.removeAttribute("data-visible");
+    };
+
+    const moveIndicator = () => {
+      const active = links.find(link => link.getAttribute("aria-current") === "true");
+      if (active) placeIndicator(active);
+      else hideIndicator();
+    };
+
     moveIndicator();
 
     const list = links[0]?.closest("ul");
-    if (list) new ResizeObserver(moveIndicator).observe(list);
+    if (list) {
+      new ResizeObserver(moveIndicator).observe(list);
+
+      const hovered = (event: Event) =>
+        (event.target as Element | null)?.closest<HTMLAnchorElement>("[data-nav-link]") ?? null;
+
+      list.addEventListener("mouseover", event => {
+        const link = hovered(event);
+        if (link) placeIndicator(link);
+      });
+      list.addEventListener("mouseleave", moveIndicator);
+
+      list.addEventListener("focusin", event => {
+        const link = hovered(event);
+        if (link) placeIndicator(link);
+      });
+      list.addEventListener("focusout", () => {
+        requestAnimationFrame(() => {
+          if (!list.contains(document.activeElement)) moveIndicator();
+        });
+      });
+    }
   };
 
   initHeader();
