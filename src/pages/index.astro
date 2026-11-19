@@ -392,6 +392,7 @@ const alignFor = (i: number): "center" | "right" | "left" =>
   /* Sin JS o con reduced-motion: escenas apiladas en flujo, una por viewport. */
   .sw-scene {
     position: relative;
+    height: 100vh;
     height: 100dvh;
     overflow: hidden;
     background: var(--color-secondary, #f5f1ea);
@@ -502,10 +503,13 @@ const alignFor = (i: number): "center" | "right" | "left" =>
     pointer-events: auto;
   }
 
-  /* Con JS: escenas absolutas en un viewport sticky; el alto del track lo fija el JS en px. */
+  /* Con JS: escenas absolutas en un viewport sticky; el alto del track y del
+     viewport los fija el JS en px (el dvh dentro de un sticky no se repinta
+     fiable en mobile). */
   .sw-root[data-ready] .sw-viewport {
     position: sticky;
     top: 0;
+    height: 100vh;
     height: 100dvh;
     overflow: hidden;
   }

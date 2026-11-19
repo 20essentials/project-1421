@@ -44,12 +44,19 @@ export function mountScrollWorld() {
 
   root.dataset.ready = "";
 
+  const viewport = root.querySelector<HTMLElement>(".sw-viewport");
+
   let vh = window.innerHeight;
   let laidOutW = window.innerWidth;
 
   const layout = () => {
     vh = window.innerHeight;
     laidOutW = window.innerWidth;
+    // El viewport sticky en px, no 100dvh: el `dvh` dentro de un sticky no
+    // se repinta a tiempo en WebKit/Chrome cuando la barra de URL colapsa
+    // al scrollear, y la escena queda más corta que la pantalla (banda en
+    // blanco abajo). Sincronizado con el mismo innerHeight que mide el track.
+    if (viewport) viewport.style.height = `${vh}px`;
     // La altura del track en px (no vh): los segmentos quedan anclados aunque
     // la barra de URL mobile cambie el 100vh del CSS.
     root.style.height = `${Math.round(n * SCROLL_PER_SCENE * vh)}px`;
@@ -112,9 +119,15 @@ export function mountScrollWorld() {
 
   // Los browsers mobile disparan `resize` al deslizar la barra de URL; rehacer
   // el layout ahi moveria el scroll. Solo re-layout cuando cambia el ancho
-  // (rotacion incluida); para cambios de altura alcanza re-leer.
+  // (rotacion incluida); para cambios de altura alcanza re-leer. El alto del
+  // viewport sticky sí se actualiza siempre (los segmentos quedan anclados en
+  // scrollY, el alto no los mueve).
   window.addEventListener("resize", () => {
-    if (window.innerWidth !== laidOutW) layout();
+    if (window.innerWidth !== laidOutW) {
+      layout();
+    } else if (viewport && window.innerHeight !== vh) {
+      viewport.style.height = `${window.innerHeight}px`;
+    }
     onScroll();
   });
   window.addEventListener("orientationchange", () => layout());
