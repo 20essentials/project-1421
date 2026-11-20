@@ -118,6 +118,24 @@
   .font-display {
     font-family: var(--font-display);
   }
+
+  /* Dot-grid texture: the portfolio coil's dotted backdrop as a reusable
+     background-image, so monochrome sections gain the same dotted depth
+     instead of a flat single-color fill. Default ink dots suit light
+     surfaces; .dot-grid-light switches to faint white dots for dark ones. */
+  .dot-grid {
+    position: relative;
+    background-image: radial-gradient(
+      circle,
+      var(--dot-grid-color, rgb(28 32 42 / 0.07)) 0.6px,
+      transparent 0.8px
+    );
+    background-size: 6px 6px;
+  }
+
+  .dot-grid-light {
+    --dot-grid-color: rgb(255 255 255 / 0.1);
+  }
 }
 
 /* Oculta el banner "Built on Wix Headless" inyectado por el hosting de Wix */
