@@ -195,6 +195,59 @@ const alignFor = (i: number): "center" | "right" | "left" =>
     </div>
   </section>
 
+  <section id="arte" class="px-6 py-24">
+    <div class="mx-auto max-w-5xl">
+      <div class="text-center">
+        <p class="eyebrow">Fotografia artistica</p>
+        <h2 class="font-display mt-3 text-3xl font-medium sm:text-4xl">Oltre i matrimoni: le opere</h2>
+        <p class="mx-auto mt-4 max-w-2xl leading-relaxed text-muted-foreground">
+          Ogni scatto nasce dalla stessa ricerca delle opere d'arte — luce, composizione, atmosfera.
+          Il lavoro personale di Stefano è esposto e acquistabile nelle gallerie online.
+        </p>
+      </div>
+      <div class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <a
+          href="https://www.singulart.com/it/artista/stefano-lunardi-37102"
+          target="_blank"
+          rel="noopener"
+          class="fa-card group block no-underline"
+        >
+          <span class="fa-card__logo-box">
+            <img
+              src="https://static.wixstatic.com/media/600582_69556f102c7c4109b35799dda4f34a70~mv2.png"
+              alt="Singulart"
+              loading="lazy"
+              decoding="async"
+              class="fa-card__logo fa-card__logo--wide"
+            />
+          </span>
+          <h3 class="font-display fa-card__title">Singulart</h3>
+          <p class="fa-card__label">Opere originali esposte e acquistabili</p>
+          <span class="fa-card__cta">Visita la pagina dell'artista →</span>
+        </a>
+        <a
+          href="https://www.artlunagallery.com/fine-art-portrait"
+          target="_blank"
+          rel="noopener"
+          class="fa-card group block no-underline"
+        >
+          <span class="fa-card__logo-box">
+            <img
+              src="https://static.wixstatic.com/media/600582_eb36bc46a1c240ea8c4629a013cdb253~mv2.avif"
+              alt="LunaGallery"
+              loading="lazy"
+              decoding="async"
+              class="fa-card__logo fa-card__logo--square"
+            />
+          </span>
+          <h3 class="font-display fa-card__title">LunaGallery</h3>
+          <p class="fa-card__label">Fine art portrait in edizione limitata</p>
+          <span class="fa-card__cta">Esplora LunaGallery →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <section id="mi-presento" class="mp-root px-6 py-24">
     <div class="mx-auto max-w-4xl">
       <div class="text-center">
@@ -542,6 +595,94 @@ const alignFor = (i: number): "center" | "right" | "left" =>
   .mp-link:hover {
     color: #ffffff;
     border-color: rgb(255 255 255 / 0.8);
+  }
+
+  /* "Fotografia artistica": dos tarjetas oscuras de galería sobre fondo claro,
+     como las placas expuestas: el logo blanco de cada galería sobre negro. */
+  .fa-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: clamp(1.75rem, 4vw, 2.75rem);
+    background: #101014;
+    border: 1px solid rgb(255 255 255 / 0.14);
+    box-shadow:
+      0 0 0 1px rgb(0 0 0 / 0.6),
+      0 30px 80px rgb(0 0 0 / 0.35);
+    transition: transform 0.5s cubic-bezier(0.25, 0.6, 0.3, 1), border-color 0.5s;
+  }
+  .fa-card:hover {
+    transform: translateY(-4px);
+    border-color: rgb(255 255 255 / 0.35);
+  }
+  .fa-card__logo-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 5.5rem;
+  }
+  .fa-card__logo {
+    object-fit: contain;
+    transition: opacity 0.4s;
+  }
+  .fa-card__logo--wide {
+    height: 2.25rem;
+    width: auto;
+  }
+  .fa-card__logo--square {
+    height: 4.5rem;
+    width: auto;
+    border-radius: 0.25rem;
+    box-shadow: 0 0 0 1px rgb(255 255 255 / 0.35);
+  }
+  .fa-card__title {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    color: #ffffff;
+    background: linear-gradient(
+      100deg,
+      #ffffff 0%,
+      #ffffff 40%,
+      rgb(255 255 255 / 0.3) 50%,
+      #ffffff 60%,
+      #ffffff 100%
+    );
+    background-size: 250% 100%;
+    background-position: 100% 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: background-position 0.9s ease;
+  }
+  .fa-card:hover .fa-card__title {
+    background-position: 0 0;
+  }
+  .fa-card__label {
+    margin: 0;
+    color: rgb(255 255 255 / 0.65);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    text-align: center;
+  }
+  .fa-card__cta {
+    color: rgb(255 255 255 / 0.85);
+    font-size: 0.8125rem;
+    letter-spacing: 0.08em;
+    border-bottom: 1px solid rgb(255 255 255 / 0.3);
+    padding-bottom: 2px;
+    transition: color 0.3s, border-color 0.3s;
+  }
+  .fa-card:hover .fa-card__cta {
+    color: #ffffff;
+    border-color: rgb(255 255 255 / 0.8);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fa-card {
+      transition: none;
+    }
   }
 
 </style>
