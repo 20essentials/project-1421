@@ -25,7 +25,7 @@ export default function ProjectPage(props: {
         {project.details.length > 0 && (
           <dl className="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm">
             {project.details.map((d) => (
-              <div className="flex gap-2">
+              <div key={d.label} className="flex gap-2">
                 <dt className="eyebrow">{d.label}</dt>
                 <dd>
                   {d.url ? (
@@ -59,7 +59,7 @@ export default function ProjectPage(props: {
       {items !== null && items.length > 0 && (
         <div className="mt-10 flex flex-col gap-4 sm:gap-6">
           {items.map((i) => (
-            <figure className="m-0 flex w-full justify-center bg-secondary">
+            <figure key={i.id} className="m-0 flex w-full justify-center bg-secondary">
               <GalleryLink item={i}>
                 <GalleryMedia item={i} className="block h-auto max-h-[80vh] w-auto max-w-full" />
               </GalleryLink>
