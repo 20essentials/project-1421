@@ -1,6 +1,5 @@
 ---
 description: Crea los commits pendientes con mensajes Conventional Commits bien escritos
-model: opencode/beam-free (Beam Free)
 ---
 
 Haz los commits pendientes del repo, agrupando el trabajo y escribiendo buenos mensajes. NO hagas push salvo que el usuario lo pida.
