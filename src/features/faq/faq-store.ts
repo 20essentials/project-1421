@@ -16,6 +16,7 @@
 import { fetchFaq } from "@/features/faq/faq";
 import { anchorId, findByAnchor, parseDeepLink, visibleQuestions } from "@/features/faq/faq-core";
 import type { FaqData, FaqQuestion } from "@/features/faq/types";
+import { scrollToTarget } from "@/shared/smooth-scroll";
 
 export interface FaqState {
   /** null while the first load is in flight and nothing was seeded — render skeletons, not an empty state. */
@@ -106,7 +107,10 @@ function applyDeepLink(): void {
   }
   if (Object.keys(patch).length) setState(patch);
   if (target && typeof document !== "undefined") {
-    requestAnimationFrame(() => document.getElementById(anchorId(target))?.scrollIntoView({ block: "start" }));
+    requestAnimationFrame(() => {
+      const el = document.getElementById(anchorId(target));
+      if (el) scrollToTarget(el);
+    });
   }
 }
 

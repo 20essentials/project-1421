@@ -294,6 +294,8 @@ const isActive = (href: string) => current === href || current === `${href}/`;
 </style>
 
 <script>
+  import { scrollToTarget } from "@/shared/smooth-scroll";
+
   let toggle: HTMLButtonElement | null = null;
   let menu: HTMLElement | null = null;
   let main: HTMLElement | null = null;
@@ -362,7 +364,7 @@ const isActive = (href: string) => current === href || current === `${href}/`;
         if (!target) return;
         event.preventDefault();
         setOpen(false);
-        target.scrollIntoView();
+        scrollToTarget(target);
       });
     });
 
