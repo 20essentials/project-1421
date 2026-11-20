@@ -105,6 +105,22 @@
       opacity: 0;
     }
   }
+
+  /* Ghost button: a secondary CTA that must read as an action, not as body
+     copy — outlined so it sits below the solid .rounded-control primary.
+     Pair with .rounded-control for the lift + ripple; it supplies colors. */
+  .btn-ghost {
+    border: 1px solid var(--color-foreground);
+    padding: 0.75rem 2rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-foreground);
+    background: transparent;
+  }
+  .btn-ghost:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
 }
 
 @layer utilities {
