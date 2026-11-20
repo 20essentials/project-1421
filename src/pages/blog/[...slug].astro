@@ -6,12 +6,14 @@
 // Keep all three SEO pieces, the [...slug] rest param (a slug may contain "/"), and this
 // frontmatter; restyle the template below freely. The body island is client:only — the ricos
 // viewer breaks under SSR. The like row and the comments are client:load islands: both read as
-// the VIEWER (personal like state, the member's own comments), which SSR cannot do.
+// the VIEWER (personal like state, the member's own comments); the current member's id itself is
+// resolved here and passed down, so the comments island never repeats that read client-side.
 import SiteLayout from "@/app/layout.astro";
 import AnalyticsView from "@/shared/analytics-view.astro";
 import RichContent from "@/features/blog/rich-content";
 import PostLikeButton from "@/features/blog/post-like-button";
 import CommentsView from "@/features/blog/comments-view";
+import { fetchCurrentMemberId } from "@/features/blog/authors";
 import { PostCard } from "@/features/blog/blog-feed-view";
 import { categoryPath, fetchPostBySlug, fetchRelatedPosts, postMetaLine, tagPath } from "@/features/blog/posts";
 import { fetchBlogCategories, fetchTagsByIds, inIdOrder } from "@/features/blog/taxonomy";
@@ -48,8 +50,9 @@ let allCategories: BlogCategory[] = [];
 let postTags: BlogTag[] = [];
 let related: PostSummary[] = [];
 let seoTagsServiceConfig = null;
+let currentMemberId: string | null = null;
 try {
-  [post, allCategories, seoTagsServiceConfig] = await Promise.all([
+  [post, allCategories, seoTagsServiceConfig, currentMemberId] = await Promise.all([
     fetchPostBySlug(slug),
     fetchBlogCategories(),
     loadSEOTagsServiceConfig({
@@ -57,6 +60,10 @@ try {
       itemType: seoTags.ItemType.BLOG_POST,
       itemData: { slug },
     }).catch(() => null),
+    // Server-side the ambient session IS the request's cookies: a logged-in member resolves, an
+    // anonymous visitor's 403 stays here and never reaches the browser console. The null (or the
+    // id) is passed to the comments island, which then skips its own failing client-side read.
+    fetchCurrentMemberId().catch(() => null),
   ]);
   if (post) {
     // Tags are read BY ID (a blog's tags run to hundreds); the related strip needs the post's ids.
@@ -142,7 +149,7 @@ const head = seoTagsServiceConfig ? {} : { title: post.seoTitle, description: po
     {
       post.commentingEnabled && post.referenceId && (
         <div class="mt-14">
-          <CommentsView client:load referenceId={post.referenceId} />
+          <CommentsView client:load referenceId={post.referenceId} currentMemberId={currentMemberId} />
         </div>
       )
     }

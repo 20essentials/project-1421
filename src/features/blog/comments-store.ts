@@ -21,6 +21,14 @@ export interface CommentsStoreOptions {
   referenceId: string;
   pageSize?: number;
   sort?: CommentSort;
+  /**
+   * The current member's id, resolved during SSR (ambient auth reads the session cookie there) and
+   * passed down as an island prop. When given — even as null, meaning anonymous — the store trusts
+   * it and skips its own client-side read, whose 403 for an anonymous visitor is a console error
+   * the browser logs before any catch can see it. Omitted (the React-only stacks) → the store
+   * reads it itself as before.
+   */
+  currentMemberId?: string | null;
 }
 
 export interface ReplyThreadState extends CommentThread {
@@ -68,14 +76,14 @@ export interface CommentsStore {
   remove(commentId: string): Promise<void>;
 }
 
-export function createCommentsStore({ referenceId, pageSize, sort: initialSort = DEFAULT_COMMENT_SORT }: CommentsStoreOptions): CommentsStore {
+export function createCommentsStore({ referenceId, pageSize, sort: initialSort = DEFAULT_COMMENT_SORT, currentMemberId: ssrMemberId }: CommentsStoreOptions): CommentsStore {
   let comments: BlogComment[] | null = null;
   let replies: Record<string, ReplyThreadState> = {};
   let cursor: string | null = null;
   let loadingMore = false;
   let saving = false;
   let needsSignIn = false;
-  let currentMemberId: string | null = null;
+  let currentMemberId: string | null = ssrMemberId ?? null;
   let sort: CommentSort = initialSort;
   let error: string | null = null;
   let started = false;
@@ -118,13 +126,16 @@ export function createCommentsStore({ referenceId, pageSize, sort: initialSort =
       if (started) return;
       started = true;
       // The member read and the list run in parallel; ownership is re-marked once the id is known.
-      fetchCurrentMemberId().then((mid) => {
-        if (!started) return;
-        currentMemberId = mid;
-        if (comments) comments = markOwn(comments, mid);
-        replies = Object.fromEntries(Object.entries(replies).map(([k, t]) => [k, { ...t, comments: markOwn(t.comments, mid) }]));
-        emit();
-      });
+      // An SSR-provided id (even null) is already known — no read, so no 403 noise for a visitor.
+      if (ssrMemberId === undefined) {
+        fetchCurrentMemberId().then((mid) => {
+          if (!started) return;
+          currentMemberId = mid;
+          if (comments) comments = markOwn(comments, mid);
+          replies = Object.fromEntries(Object.entries(replies).map(([k, t]) => [k, { ...t, comments: markOwn(t.comments, mid) }]));
+          emit();
+        });
+      }
       void load();
     },
     stop() { started = false; generation++; },

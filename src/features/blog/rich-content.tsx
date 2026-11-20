@@ -8,10 +8,21 @@
 // `.ricos-content` forcing the foreground token (in Astro use <style is:global> — React
 // islands don't inherit scoped Astro styles).
 import { quickStartViewerPlugins, RicosViewer } from "@wix/ricos/viewer";
+import type { RicosViewerProps } from "@wix/ricos/viewer";
+import { fetchWithAuth } from "@wix/sdk/context";
 import "@wix/ricos/css/all-plugins-viewer.css";
 
 // Module-level, once — never rebuild the plugin list per render.
 const plugins = quickStartViewerPlugins();
+
+// RicosViewer warns and makes unauthenticated requests without a wixClient. There is no client
+// object under ambient auth; this bridge routes the viewer's calls through the same ambient
+// fetchWithAuth every other client island uses (the viewer only calls fetchWithAuth and
+// auth.getAuthHeaders, which the ambient layer handles itself — hence empty headers).
+const ricosWixClient = {
+  fetchWithAuth: (url: string | URL, init?: RequestInit) => fetchWithAuth(url, init),
+  auth: { getAuthHeaders: async () => ({ headers: {} as Record<string, string> }) },
+} as unknown as NonNullable<RicosViewerProps["wixClient"]>;
 
 export interface RichContentProps {
   /** PostDetail.richContent — the Ricos document (plain JSON). */
@@ -24,7 +35,7 @@ export default function RichContent({ content, fallbackParagraphs = [] }: RichCo
   if (content) {
     return (
       <div className="ricos-content">
-        <RicosViewer content={content as any} plugins={plugins} />
+        <RicosViewer content={content as any} plugins={plugins} wixClient={ricosWixClient} />
       </div>
     );
   }

@@ -10,6 +10,8 @@ import type { BlogComment } from "@/features/blog/types";
 export interface CommentsViewProps {
   /** `PostDetail.referenceId`. */
   referenceId: string;
+  /** The current member's id, resolved during SSR and passed as an island prop (null = anonymous). */
+  currentMemberId?: string | null;
   /** Where "sign in" points when the server refuses a guest's comment (omit to show text only). */
   signInHref?: string;
 }
@@ -83,9 +85,9 @@ function CommentHeader({ comment }: { comment: BlogComment }) {
   );
 }
 
-export default function CommentsView({ referenceId, signInHref }: CommentsViewProps) {
+export default function CommentsView({ referenceId, currentMemberId, signInHref }: CommentsViewProps) {
   const { comments, replies, hasMore, loadingMore, saving, needsSignIn, sort, error, loadMore, loadReplies, setSort, create, remove } =
-    useComments({ referenceId });
+    useComments({ referenceId, currentMemberId });
   const [replyTo, setReplyTo] = useState<{ parentId: string; topLevelId: string } | null>(null);
 
   const signIn = needsSignIn && (
