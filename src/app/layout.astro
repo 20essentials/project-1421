@@ -67,6 +67,33 @@ const structuredData = JSON.stringify({
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {import.meta.env.DEV && (
+      <script is:inline>
+        (() => {
+          const href = (u) => (u instanceof URL ? u.href : u);
+          const upgrade = (raw) => {
+            const url = href(raw);
+            if (typeof url !== "string") return url;
+            if (url.startsWith("//frog.wix.com")) return "https:" + url;
+            if (url.startsWith("http://frog.wix.com")) return "https://" + url.slice(7);
+            return url;
+          };
+          const sendBeacon = navigator.sendBeacon?.bind(navigator);
+          if (sendBeacon) {
+            navigator.sendBeacon = (url, data) => sendBeacon(upgrade(url), data);
+          }
+          const doFetch = window.fetch?.bind(window);
+          if (doFetch) {
+            window.fetch = (input, init) =>
+              doFetch(typeof input === "string" ? upgrade(input) : input, init);
+          }
+          const open = XMLHttpRequest.prototype.open;
+          XMLHttpRequest.prototype.open = function (method, url, ...rest) {
+            return open.call(this, method, upgrade(url), ...rest);
+          };
+        })();
+      </script>
+    )}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png" />
     <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png" />
