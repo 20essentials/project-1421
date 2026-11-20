@@ -81,6 +81,22 @@ this project. Workflow:
    Leaving it running blocks the next session's `npm run dev` with "Another astro dev server is
    already running".
 
+## Browser console — zero warnings / zero errors (mandatory after complex work)
+
+After implementing anything complex (data fetching, client scripts, iframes/embeds, forms,
+images, layout changes — anything beyond trivial markup), ALWAYS verify the browser console has
+NO warnings and NO errors before declaring the task done. Examples that must never appear:
+`failed to load resource: net::ERR_CONNECTION_REFUSED`, 404s, CORS errors, hydration errors,
+unhandled promise rejections. Workflow:
+
+1. Start the dev server if not running (`npm run dev`, default `http://localhost:4321`).
+2. Visit every affected page (or all pages for a site-wide change) with Playwright:
+   collect `page.on('console')` (type `error` AND `warning`) and `page.on('pageerror')` events
+   while the page loads and after its client scripts settle.
+3. Fix every reported warning/error in the same change, then re-verify. An empty console is
+   the pass condition; "it renders fine" is not.
+4. Report what was checked and the result to the user.
+
 ## Layout rule — mobile horizontal padding
 
 Every full-width page header/hero (the `<section>`/`<header>` that sits directly under `<main>`
