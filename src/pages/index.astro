@@ -171,7 +171,7 @@ const alignFor = (i: number): "center" | "right" | "left" =>
           alt="Stefano Lunardi, fotografo di matrimoni fine art, con la sua macchina fotografica"
           loading="lazy"
           decoding="async"
-          class="aspect-[4/5] w-full bg-background object-cover object-top"
+          class="aspect-4/5 w-full bg-background object-cover object-top"
         />
       </figure>
       <div>
@@ -358,9 +358,9 @@ const alignFor = (i: number): "center" | "right" | "left" =>
           <div class="grid grid-cols-1 gap-8 sm:grid-cols-3">
             {latestPosts.map((p) => (
               <a href={postPath(p.slug)} class="group block min-w-0 no-underline">
-                <div class="aspect-[4/3] w-full overflow-hidden bg-secondary">
+                <div class="aspect-4/3 w-full overflow-hidden bg-secondary">
                   {p.coverUrl && (
-                    <img {...imgAttrs(p.coverUrl, "(min-width: 640px) 33vw, 100vw", 4 / 3)} alt={p.coverAlt} class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
+                    <img {...imgAttrs(p.coverUrl, "(min-width: 640px) 33vw, 100vw", 4 / 3)} alt={p.coverAlt} class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-103" />
                   )}
                 </div>
                 <h3 class="font-display mt-4 break-words text-xl font-medium leading-snug text-foreground transition-colors group-hover:text-accent">{p.title}</h3>

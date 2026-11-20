@@ -11,8 +11,8 @@ export default function Gallery(props: { initialCollections?: CollectionSummary[
   if (collections === null) {
     return (
       <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">
-        <div className="aspect-[3/4] animate-pulse bg-secondary" />
-        <div className="aspect-[3/4] animate-pulse bg-secondary" />
+        <div className="aspect-3/4 animate-pulse bg-secondary" />
+        <div className="aspect-3/4 animate-pulse bg-secondary" />
       </div>
     );
   }
@@ -29,7 +29,7 @@ export default function Gallery(props: { initialCollections?: CollectionSummary[
               <img
                 {...imgFitAttrs(c.imageUrl, "(min-width: 640px) 50vw, 100vw")}
                 alt={c.title}
-                className="block h-auto w-full transition-transform duration-700 group-hover:scale-[1.03]"
+                className="block h-auto w-full transition-transform duration-700 group-hover:scale-103"
               />
             </div>
           ) : (

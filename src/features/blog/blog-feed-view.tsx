@@ -48,12 +48,12 @@ export function PostCard({ post, postHref = postPath, LinkComponent = PlainLink 
   return (
     <LinkComponent href={postHref(post.slug)} className="group block no-underline">
       {post.coverUrl && (
-        <div className="aspect-[16/9] overflow-hidden rounded-lg bg-secondary">
+        <div className="aspect-16/9 overflow-hidden rounded-lg bg-secondary">
           <img
             src={post.coverUrl}
             alt={post.coverAlt}
             loading="lazy"
-            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-103"
           />
         </div>
       )}
@@ -157,7 +157,7 @@ export default function BlogFeedView({
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3" aria-busy="true">
           {Array.from({ length: 6 }, (_, i) => (
             <div key={i}>
-              <div className="aspect-[16/9] animate-pulse rounded-lg bg-secondary" />
+              <div className="aspect-16/9 animate-pulse rounded-lg bg-secondary" />
               <div className="mt-3 h-3.5 w-2/3 animate-pulse rounded bg-secondary" />
             </div>
           ))}

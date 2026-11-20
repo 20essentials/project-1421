@@ -44,7 +44,7 @@ export default function ProjectPage(props: {
 
       {error && <p className="mt-10 text-center text-sm text-muted-foreground">Non è stato possibile caricare la galleria. Riprova tra poco.</p>}
 
-      {items === null && <div className="mt-10 aspect-[3/2] w-full animate-pulse bg-secondary" />}
+      {items === null && <div className="mt-10 aspect-3/2 w-full animate-pulse bg-secondary" />}
 
       {items !== null && items.length === 0 && project.imageUrl && (
         <div className="mt-10 w-full overflow-hidden bg-secondary">

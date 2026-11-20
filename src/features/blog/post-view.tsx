@@ -68,7 +68,7 @@ export default function PostView({
     return (
       <div aria-busy="true">
         <div className="h-8 w-2/3 animate-pulse rounded bg-secondary" />
-        <div className="mt-6 aspect-[16/9] animate-pulse rounded-lg bg-secondary" />
+        <div className="mt-6 aspect-16/9 animate-pulse rounded-lg bg-secondary" />
       </div>
     );
   }
@@ -100,7 +100,7 @@ export default function PostView({
         )}
       </p>
       {post.coverUrl && (
-        <div className="mt-6 aspect-[16/9] overflow-hidden rounded-xl bg-secondary">
+        <div className="mt-6 aspect-16/9 overflow-hidden rounded-xl bg-secondary">
           <img src={post.coverUrl} alt={post.coverAlt} className="h-full w-full object-cover" />
         </div>
       )}

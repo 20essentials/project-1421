@@ -30,12 +30,12 @@ export function CollectionCard({
 }: CollectionCardProps) {
   return (
     <LinkComponent href={collectionHref(collection.slug)} className="group block no-underline">
-      <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-secondary">
+      <div className="relative aspect-4/3 overflow-hidden rounded-lg bg-secondary">
         {collection.imageUrl && (
           <img
             {...imgAttrs(collection.imageUrl, "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw", 0.75)}
             alt={collection.title}
-            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-103"
           />
         )}
       </div>
@@ -71,7 +71,7 @@ export default function CollectionsView({
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3" aria-busy="true">
           {Array.from({ length: 6 }, (_, i) => (
             <div key={i}>
-              <div className="aspect-[4/3] animate-pulse rounded-lg bg-secondary" />
+              <div className="aspect-4/3 animate-pulse rounded-lg bg-secondary" />
               <div className="mt-3 h-3.5 w-2/3 animate-pulse rounded bg-secondary" />
             </div>
           ))}

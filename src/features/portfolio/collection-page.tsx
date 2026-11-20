@@ -32,8 +32,8 @@ export default function CollectionPage(props: {
 
       {projects === null && (
         <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">
-          <div className="aspect-[4/3] animate-pulse bg-secondary" />
-          <div className="aspect-[4/3] animate-pulse bg-secondary" />
+          <div className="aspect-4/3 animate-pulse bg-secondary" />
+          <div className="aspect-4/3 animate-pulse bg-secondary" />
         </div>
       )}
 
@@ -50,7 +50,7 @@ export default function CollectionPage(props: {
                   <img
                     {...imgFitAttrs(p.imageUrl, "(min-width: 640px) 50vw, 100vw")}
                     alt={p.title}
-                    className="block h-auto w-full transition-transform duration-700 group-hover:scale-[1.03]"
+                    className="block h-auto w-full transition-transform duration-700 group-hover:scale-103"
                   />
                 </div>
               ) : (

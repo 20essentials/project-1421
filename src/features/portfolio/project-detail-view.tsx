@@ -23,7 +23,7 @@ export default function ProjectDetailView({ slug, initialProject, initialItems }
     return (
       <div aria-busy="true">
         <div className="h-7 w-64 animate-pulse rounded bg-secondary" />
-        <div className="mt-6 aspect-[4/3] animate-pulse rounded-lg bg-secondary" />
+        <div className="mt-6 aspect-4/3 animate-pulse rounded-lg bg-secondary" />
       </div>
     );
   }
@@ -57,7 +57,7 @@ export default function ProjectDetailView({ slug, initialProject, initialItems }
       {error && <p className="mb-4 text-sm text-destructive">{error}</p>}
       {items === null ? (
         <div className="flex flex-col gap-6" aria-busy="true">
-          <div className="aspect-[4/3] animate-pulse rounded-lg bg-secondary" />
+          <div className="aspect-4/3 animate-pulse rounded-lg bg-secondary" />
         </div>
       ) : items.length === 0 ? (
         // No gallery items — the cover is the project's only real media; text-only otherwise.

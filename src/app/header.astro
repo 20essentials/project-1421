@@ -39,7 +39,7 @@ const isActive = (href: string) => current === href || current === `${href}/`;
                 href={item.href}
                 data-nav-link
                 aria-current={isActive(item.href) ? "true" : undefined}
-                class='flex h-9 items-center rounded-full px-3 text-muted-foreground no-underline transition-colors duration-500 hover:text-foreground aria-[current=true]:text-foreground'
+                class='flex h-9 items-center rounded-full px-3 text-muted-foreground no-underline transition-colors duration-500 hover:text-foreground aria-current:text-foreground'
               >
                 {item.label}
               </a>
@@ -89,7 +89,7 @@ const isActive = (href: string) => current === href || current === `${href}/`;
                   href={item.href}
                   data-menu-link
                   aria-current={isActive(item.href) ? "true" : undefined}
-                  class='group flex min-h-12 items-center justify-between gap-2 py-2 text-foreground no-underline transition-colors duration-500 hover:text-accent aria-[current=true]:text-accent'
+                  class='group flex min-h-12 items-center justify-between gap-2 py-2 text-foreground no-underline transition-colors duration-500 hover:text-accent aria-current:text-accent'
                 >
                   <span class='font-display text-2xl leading-tight'>{item.label}</span>
                   <span class='font-mono text-xs text-muted-foreground transition-colors duration-500 group-hover:text-accent'>

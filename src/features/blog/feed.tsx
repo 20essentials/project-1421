@@ -45,9 +45,9 @@ export default function Feed(props: {
 
       {posts === null && (
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          <div className="aspect-[3/4] animate-pulse bg-secondary" />
-          <div className="aspect-[3/4] animate-pulse bg-secondary" />
-          <div className="aspect-[3/4] animate-pulse bg-secondary" />
+          <div className="aspect-3/4 animate-pulse bg-secondary" />
+          <div className="aspect-3/4 animate-pulse bg-secondary" />
+          <div className="aspect-3/4 animate-pulse bg-secondary" />
         </div>
       )}
 
@@ -59,12 +59,12 @@ export default function Feed(props: {
         <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {posts.map((p) => (
             <a key={p.id} href={postPath(p.slug)} className="group block min-w-0 no-underline">
-              <div className="aspect-[3/4] w-full overflow-hidden bg-secondary">
+              <div className="aspect-3/4 w-full overflow-hidden bg-secondary">
                 {p.coverUrl ? (
                   <img
                     {...imgAttrs(p.coverUrl, "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw", 4 / 3)}
                     alt={p.coverAlt}
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-103"
                   />
                 ) : (
                   <div className="h-full w-full" />
