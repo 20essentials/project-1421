@@ -3,6 +3,24 @@
 All CLI instructions can be found at:
 node_modules/@wix/cli/agents/instructions.md
 
+### Dev server — use `npm run dev:fg`, never `npm run dev`
+
+`wix dev` (and plain `astro dev`) aborts when run by an agent: the Wix fork of Astro
+(`node_modules/astro/dist/cli/dev/index.js`) detects the agent via `am-i-vibing` and forces
+background mode with a hardcoded 30s readiness timeout. Cold starts on this machine take
+~25s, so it is a coin flip: the parent gives up ("Dev server failed to start within 30s."),
+kills nothing reliably, and leaves an orphaned server holding port 4321. The aborts are
+expected behavior, not a bug in the project.
+
+The fix: `npm run dev:fg` = `astro dev --ignore-lock`, which short-circuits the forced
+background branch and runs the server in the foreground of the calling shell (use the bash
+tool's `background: true`), output streaming directly to the session. Wait for the
+"ready in ... ms" banner before polling; cold start is slow (~25s), warm start is fast.
+Stop it by killing the listening PID (`netstat -ano | grep :4321` → `taskkill //PID <pid> //F`);
+`npx astro dev stop` only manages background servers. If port 4321 is already busy, an orphan
+from an aborted attempt is holding it — kill that PID first instead of letting Vite drift to
+another port.
+
 ## This app
 
 A Wix Headless app built on the live Wix site named in `wix.config.json`. The site owns the

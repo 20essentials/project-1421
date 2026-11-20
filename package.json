@@ -12,6 +12,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "dev": "wix dev",
+    "dev:fg": "astro dev --ignore-lock",
     "build": "wix build",
     "wix": "wix",
     "preview": "wix preview",
