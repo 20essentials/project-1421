@@ -73,9 +73,13 @@ this project. Workflow:
 
 1. Implement the feature and verify it compiles (`npx astro check`).
 2. Start the dev server if not running (`npm run dev`, default `http://localhost:4321`).
-3. Capture a full-page screenshot of the affected page(s) with Playwright (Chromium, already used by
-   this project) and save it to `.screenshots/<feature>-<YYYYMMDD-HHmmss>.png`. Take one per affected
-   page or viewport when relevant (e.g. mobile menu: capture closed and open states).
+3. Capture a screenshot of ONLY what you modified — the affected component/section, not the
+   whole page. A full-page screenshot of a long page is useless as proof: scroll to the changed
+   section (Playwright `locator.scrollIntoViewIfNeeded()` + `page.screenshot({ clip })` or
+   element screenshot) with a normal viewport (e.g. 1280×800). Full page only when the change
+   genuinely affects the entire page. Save it to `.screenshots/<feature>-<YYYYMMDD-HHmmss>.png`.
+   Take one per affected section, page or viewport when relevant (e.g. mobile menu: capture
+   closed and open states).
 4. Report the saved file path(s) to the user and stop — never delete or overwrite previous screenshots.
 5. ALWAYS stop the dev server afterwards (`npx astro dev stop`), before finishing the task.
    Leaving it running blocks the next session's `npm run dev` with "Another astro dev server is
@@ -96,6 +100,23 @@ unhandled promise rejections. Workflow:
 3. Fix every reported warning/error in the same change, then re-verify. An empty console is
    the pass condition; "it renders fine" is not.
 4. Report what was checked and the result to the user.
+
+## Tailwind moderno (v4, 2026) — siempre clases canónicas
+
+El proyecto usa Tailwind CSS v4. Escribe siempre la forma canónica moderna; nunca la sintaxis
+arbitraria vieja cuando existe un equivalente canónico (el editor los marca con la alerta
+`tailwindcss(suggestCanonicalClasses)`):
+
+- `aspect-[4/5]` → `aspect-4/5` (las fracciones van sin corchetes)
+- `scale-[1.03]` → `scale-103` (número bare = porcentaje)
+- `data-[open]:visible` → `data-open:visible` (variantes booleanas `data-*` sin corchetes)
+- `aria-[current=true]:text-accent` → `aria-current:text-accent` (aria booleano `true` sin corchetes)
+- `w-[50%]`/`h-[33.333%]` → `w-1/2`/`h-1/3`, `gap-[10px]` → `gap-2.5`, `p-[20px]` → `p-5`
+
+Los valores arbitrarios sin equivalente en la escala (`text-[15px]`, `tracking-[0.22em]`,
+`max-h-[45vh]`, `grid-cols-[3fr_4fr]`, `transition-[opacity,visibility]`, `align-[-2px]`,
+`text-[clamp(...)]`) SÍ son válidos y se quedan así. Antes de escribir un valor arbitrario,
+comprueba si la escala o un bare value de v4 lo cubre; si no, usa corchetes.
 
 ## Layout rule — mobile horizontal padding
 
