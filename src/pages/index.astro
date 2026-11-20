@@ -346,10 +346,13 @@ const alignFor = (i: number): "center" | "right" | "left" =>
 
   {
     latestPosts.length > 0 && (
-      <section class="px-6 pb-20">
+      <section class="px-6 pb-20 pt-20">
         <div class="mx-auto max-w-7xl">
           <div class="mb-10 flex flex-col items-end justify-between gap-4 sm:flex-row">
-            <h2 class="font-display text-3xl font-medium sm:text-4xl">Dietro l'obiettivo</h2>
+            <div>
+              <p class="eyebrow text-muted-foreground">Ultime storie</p>
+              <h2 class="font-display mt-3 text-3xl font-medium sm:text-4xl">Dietro l'obiettivo</h2>
+            </div>
             <a href="/blog" class="text-sm text-accent underline-offset-4 hover:underline no-underline">Tutti gli articoli</a>
           </div>
           <div class="grid grid-cols-1 gap-8 sm:grid-cols-3">
