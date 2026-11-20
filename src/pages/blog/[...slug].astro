@@ -105,7 +105,7 @@ const head = seoTagsServiceConfig ? {} : { title: post.seoTitle, description: po
     }
     <h1 class="font-display mt-4 text-center text-4xl font-medium leading-tight sm:text-5xl">{post.title}</h1>
     <p class="mt-5 flex flex-wrap items-center justify-center gap-2 text-sm text-muted-foreground">
-      {post.authorAvatarUrl && <img src={post.authorAvatarUrl} alt="" width="24" height="24" class="h-6 w-6 rounded-full object-cover" />}
+      {post.authorAvatarUrl && <img src={post.authorAvatarUrl} alt="" width="24" height="24" class="h-6 w-6 rounded-full object-cover" onerror="this.remove()" />}
       {post.authorName && <span>{post.authorName}</span>}
       {post.authorName && postMetaLine(post) && <span aria-hidden="true">·</span>}
       <time datetime={post.dateISO}>{postMetaLine(post)}</time>
