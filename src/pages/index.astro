@@ -310,11 +310,37 @@ const alignFor = (i: number): "center" | "right" | "left" =>
     </div>
   </section>
 
-  <section class="px-6 py-20">
-    <div class="mx-auto max-w-3xl text-center">
-      <p class="eyebrow">Foto e video</p>
-      <h2 class="font-display mt-3 text-3xl font-medium sm:text-4xl">Foto e video nascono dallo stesso sguardo</h2>
-      <p class="mt-4 leading-relaxed text-muted-foreground">Un videomaker interno, stesso metodo: presenza discreta, nessuna messa in scena. Non due fornitori che si incontrano quel giorno.</p>
+  <section id="foto-e-video" class="fv-root px-6 py-24">
+    <div class="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 md:grid-cols-[3fr_4fr] md:gap-16">
+      <div>
+        <p class="eyebrow fv-eyebrow">L'opera in divenire</p>
+        <h2 class="font-display fv-heading mt-3 text-3xl font-medium leading-tight sm:text-4xl">
+          La tela si dipinge, l'obbiettivo <em class="font-light italic">racconta</em>
+        </h2>
+        <p class="fv-copy mt-5 leading-relaxed">
+          A volte la macchina da presa si punta su di me: registro la nascita delle mie opere,
+          dalla prima pennellata all'ultima luce. Lo stesso sguardo che segue un matrimonio
+          guarda anche la tela.
+        </p>
+        <a href="/video" class="fv-cta mt-8 inline-block no-underline">Guarda i wedding film e i reel →</a>
+      </div>
+      <figure class="fv-frame">
+        <video
+          autoplay
+          loop
+          muted
+          playsinline
+          preload="metadata"
+          poster="https://static.wixstatic.com/media/600582_7aee14ecf9714020be28dcff3d7a17a2~mv2.avif"
+          aria-label="Clip in loop: Stefano dipinge e registra la nascita di una sua opera"
+          class="fv-video"
+        >
+          <source src="https://video.wixstatic.com/video/600582_ebf55de548bd485d860b78ad136c87e4/file" type="video/mp4" />
+        </video>
+        <figcaption class="fv-frame__caption font-display text-sm italic sm:text-base">
+          «Ogni opera nasce dallo stesso sguardo.»
+        </figcaption>
+      </figure>
     </div>
   </section>
 
@@ -679,9 +705,68 @@ const alignFor = (i: number): "center" | "right" | "left" =>
     color: #ffffff;
     border-color: rgb(255 255 255 / 0.8);
   }
+
+  /* "La tela si dipinge, l'obbiettivo racconta": cámara oscura como "Mi presento",
+     con la ventana activa de la clip que gira (autoplay + loop + muted). */
+  .fv-root {
+    background: #0b0b0d;
+    color: rgb(255 255 255 / 0.92);
+  }
+  .fv-eyebrow {
+    color: rgb(255 255 255 / 0.55);
+  }
+  .fv-heading {
+    color: #ffffff;
+  }
+  .fv-copy {
+    color: rgb(255 255 255 / 0.65);
+  }
+  .fv-cta {
+    color: rgb(255 255 255 / 0.75);
+    border-bottom: 1px solid rgb(255 255 255 / 0.3);
+    padding-bottom: 2px;
+    font-size: 0.875rem;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .fv-cta:hover {
+    color: #ffffff;
+    border-color: rgb(255 255 255 / 0.8);
+  }
+  .fv-frame {
+    margin: 0;
+    padding: clamp(0.75rem, 2.5vw, 1.5rem);
+    background: #101014;
+    border: 1px solid rgb(255 255 255 / 0.14);
+    box-shadow:
+      0 0 0 1px rgb(0 0 0 / 0.6),
+      0 30px 80px rgb(0 0 0 / 0.55);
+  }
+  .fv-video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #0b0b0d;
+    border: 1px solid rgb(255 255 255 / 0.2);
+    object-fit: cover;
+  }
+  .fv-frame__caption {
+    margin-top: 1rem;
+    text-align: center;
+    color: rgb(255 255 255 / 0.55);
+  }
   @media (prefers-reduced-motion: reduce) {
     .fa-card {
       transition: none;
+    }
+    .fv-video {
+      display: none;
+    }
+    .fv-frame::after {
+      content: "";
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: url("https://static.wixstatic.com/media/600582_7aee14ecf9714020be28dcff3d7a17a2~mv2.avif") center / cover no-repeat;
     }
   }
 

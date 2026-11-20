@@ -24,8 +24,14 @@ public/stefano/logo.png  -> https://static.wixstatic.com/media/600582_1422b13022
 stefano-lunardi-assets/.../IMG_7285.jpg (2.1MB) -> 600582_52669cad776f4a7e9c9b14d257a2da13~mv2.avif (921KB)  # index slide 2 art gallery
 stefano-lunardi-assets/.../04_veil.jpg (8.2MB) -> 600582_d6196421a6164916a081fe5ffd20de27~mv2.avif (1204KB)  # index slide 3 fine-art wedding
 
-# Gallery logos (2026-11-20): Singulart logo rasterized from the official site SVG
-# via Playwright (PNG kept because ffmpeg drops the alpha channel in AVIF);
+# Video + gallery logos (2026-11-20): clip = YouTube DbVHLD2JoYc only (the second
+# video MjtBIZUCkC0 was dropped: YouTube delivered it at 360p only, user rejected it;
+# 1080p h264, 8.4s, remuxed faststart, 4.9MB); Singulart logo rasterized from the official
+# site SVG via Playwright (PNG kept because ffmpeg drops the alpha channel in AVIF);
 # LunaGallery logo taken from the gallery's own Wix media as AVIF (lossless-looking, cq 10).
+# Old merged 12.5s clip (600582_02d0a56024ca418c9b8bf9e09f529a62) deleted from the Media Manager.
+video.wixstatic.com/video/600582_ebf55de548bd485d860b78ad136c87e4/file                -> index.astro sezione video (finestra attiva, autoplay loop muted)
+https://static.wixstatic.com/media/600582_02d0a56024ca418c9b8bf9e09f529a62f002.jpg   -> miniatura del clip viejo, ya sin uso
+https://static.wixstatic.com/media/600582_7aee14ecf9714020be28dcff3d7a17a2~mv2.avif  -> index.astro poster video "nasce dallo stesso sguardo"
 https://static.wixstatic.com/media/600582_69556f102c7c4109b35799dda4f34a70~mv2.png   -> index.astro logo Singulart (PNG: AVIF perde alpha, fallback documentato)
 https://static.wixstatic.com/media/600582_eb36bc46a1c240ea8c4629a013cdb253~mv2.avif -> index.astro logo LunaGallery
