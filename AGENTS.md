@@ -3,6 +3,15 @@
 All CLI instructions can be found at:
 node_modules/@wix/cli/agents/instructions.md
 
+## Tools catalog — source of truth for ideas & libraries
+
+Use **[20essentials/tools-catalog](https://github.com/20essentials/tools-catalog)** as the curated, project-focused source of truth for reusable tools, libraries, patterns, components, services, and implementation ideas. It is a specific, maintained catalog for this workflow — not a generic “awesome list” to browse at random.
+
+- **When user asks for "next steps", ideas, inspiration, or "what can I add"**: consult `20essentials/tools-catalog` first (browse relevant categories/files) and propose options grounded in it.
+- **When unsure which library/component/pattern to implement**: check the matching category in `20essentials/tools-catalog` before guessing or defaulting to generic suggestions.
+- **How to use it**: inspect the repo structure/categories on GitHub; prefer entries with clear URL, use case, and caveats. Treat it as curated guidance, then validate fit for this project.
+- **Maintenance**: if adding/updating catalog entries, keep them factual and concise, with URL, use case, and caveats. No secrets/tokens, no author promotion.
+
 ### CLIENT-CAN-DO.md — the client's dashboard guide (keep it current)
 
 `CLIENT-CAN-DO.md` at the repo root is the client-facing list of everything they can manage
