@@ -1,46 +1,146 @@
 ---
 import SiteLayout from "@/app/layout.astro";
 
-const coppie = [
-  { nomi: "Trine e Alexander", luogo: "Wörthersee" },
-  { nomi: "Nicole e Marcus", luogo: "Graz" },
-  { nomi: "Tanja e Mario", luogo: "Graz" },
-  { nomi: "Michaela e Gerhard", luogo: "Linz" },
-  { nomi: "Stefania e Marco", luogo: "Italia" },
+const rating = { value: "5.0", max: 5, count: 10, consigliato: "100%" };
+
+const recensioni = [
+  {
+    nomi: "Valentina Oliviero",
+    data: "13 settembre 2026",
+    luogo: "Castel Formentini",
+    testo:
+      "Abbiamo avuto la fortuna di lavorare assieme a Stefano, un fotografo bravissimo, professionale che sa farti sentire a tuo agio. Grazie alla nostra location, il castel formentini abbiamo avuto l'onore di conoscerlo e sceglierlo per il nostro grande giorno. Rimarrà la scelta migliore che potessimo fare. Consigliamo a tutti gli sposi di affidarsi a lui.",
+  },
+  {
+    nomi: "Felix & Jess",
+    data: "22 agosto 2026",
+    luogo: "Castello di Spessa",
+    testo:
+      "We couldn't be happier with our decision to have Stefano photograph our wedding at Castello di Spessa. From our very first conversation, he was incredibly responsive, easy to communicate with, and genuinely invested in getting to know us. When we happened to be in the area before the wedding, he even invited us to his home so we could meet in person, which was such a thoughtful gesture. In the days leading up to the wedding, he checked in to make sure everything was on track and even offered help beyond photography, which we really appreciated.\n\nOne of our biggest concerns when choosing a wedding photographer was ending up with photos that felt too staged or cliché and simply weren't \"us.\" Stefano immediately put those fears to rest. His style captured the atmosphere, emotions, and joy of the day in such a natural and authentic way.\n\nBecause Stefano knows both the venue and weddings so well, we never had to worry about what to do or where to go. He confidently guided us throughout the day, allowing us to relax, enjoy the moment, and trust that he would create something beautiful.\n\nOne thing that truly exceeded our expectations was how quickly he shared a selection of preview photos. Receiving those beautiful images just days after the wedding allowed us to relive the day while everything was still so fresh, and it meant so much to us.\n\nThe final photographs are everything we had hoped for and more. We are incredibly grateful to Stefano for capturing our wedding so beautifully and would recommend him without hesitation to any couple looking for authentic, timeless wedding photography.",
+  },
+  {
+    nomi: "Denny Perrelli",
+    data: "11 luglio 2026",
+    luogo: "Friuli Venezia Giulia",
+    testo:
+      "Scegliere il fotografo per il matrimonio è sempre una decisione difficile, ma con Stefano c'è stata subito una sintonia perfetta. Ci ha colpito fin da subito il suo modo di ascoltare: voleva capire davvero chi fossimo noi come coppia, a differenza di chi affronta gli sposi come l'ennesimo servizio fotografico di routine. Non abbiamo avuto un semplice fotografo al nostro fianco, ma un vero e proprio alleato.\n\nNel vivo della festa, in mezzo al caos più bello tra abbracci, baci e invitati che volevano fare selfie nel bel mezzo degli scatti, Stefano non ha mai perso la pazienza. Anzi, ha dimostrato una calma e una diplomazia fuori dal comune, gestendo tutto quell'entusiasmo con un'eleganza incredibile. È stato proprio questo il suo superpotere: ci ha permesso di vivere la giornata con un'immensa tranquillità. Fin dai primi scatti si vedeva chiaramente la differenza tra un professionista con la \"P\" maiuscola e chi fa le foto \"giusto per\".\n\nSe non avessimo scelto Stefano, probabilmente avremmo vissuto la giornata con molta più ansia. Lui ha letteralmente protetto la nostra serenità.\n\nA chi è ancora indeciso vogliamo dare un consiglio: non guardate solo la resa delle foto, ma valutate soprattutto come il fotografo sa stare in mezzo alla gente e gestire i momenti imprevedibili. Se tornassimo indietro, lo sceglieremmo altre mille volte!",
+  },
+  {
+    nomi: "Mattia Mirolo",
+    data: "4 luglio 2026",
+    luogo: "Friuli Venezia Giulia",
+    testo:
+      "Penso che la mia recensione sia molto meno importante che andare a vedere il suo lavoro sui suoi canali. Meritano una visita perché si può vedere l'arte di Stefano come lui la intende. Noi l'abbiamo scelto per il nostro matrimonio perché condividiamo la sua idea di reportage della giornata, dinamico, ma che mette le persone al centro (sempre sotto una bella luce!). Siamo molto soddisfatti delle emozioni che ha saputo catturare sull'obiettivo, certi che accarezzando le foto tra qualche decennio ci riporteranno lì, allora.",
+  },
+  {
+    nomi: "Marta Casarin",
+    data: "27 giugno 2026",
+    luogo: "Veneto",
+    testo:
+      "Abbiamo scelto Stefano Lunardi come fotografo per il nostro matrimonio e, col senno di poi, possiamo dire con certezza che non avremmo potuto fare scelta migliore.\n\nFin dal primo momento si è dimostrato una persona estremamente professionale, disponibile e capace di metterci a nostro agio. Durante tutta la giornata ci ha seguiti con una presenza costante ma mai invadente, sempre con grande competenza, pazienza e con il sorriso sulle labbra, riuscendo a trasmetterci tranquillità anche nei momenti più emozionanti e frenetici.\n\nUna delle cose che ci ha colpito di più è stata la sua capacità di guidarci davanti all'obiettivo. Noi non siamo assolutamente abituati a fare foto o pose, eppure Stefano è riuscito a tirar fuori da noi spontaneità, naturalezza ed emozioni vere. Ci ha suggerito pose, movenze e sguardi che non avremmo mai immaginato di riuscire a fare, facendoci sentire sempre a nostro agio e mai \"costruiti\".\n\nStefano è una persona dinamica, simpatica e molto empatica, ma allo stesso tempo è un professionista serio e preparato, attento a ogni dettaglio. Sa lavorare con discrezione, catturando momenti autentici senza essere invadente, ma quando serve sa anche essere deciso e coinvolgente per ottenere il meglio dagli sposi e dagli invitati.\n\nE sì... ci ha \"torchiato\" parecchio durante gli scatti! Ma oggi possiamo dire che aveva assolutamente ragione lui: vedere il risultato finale ci ha fatto capire quanto impegno, esperienza e passione metta nel suo lavoro. Ogni fotografia trasmette emozione, eleganza e autenticità.\n\nNon è semplicemente un fotografo, ma una persona che riesce davvero a raccontare una giornata speciale attraverso le immagini. Per questo lo consigliamo senza alcun dubbio a chi cerca un professionista di alto livello, capace di creare ricordi meravigliosi che resteranno per sempre.",
+  },
+  {
+    nomi: "Silke & Stefan",
+    data: "11 ottobre 2024",
+    luogo: "The St. Regis Venice",
+    testo:
+      "I was particularly struck by one thing: Stefano manages to be, at the same time, a discreet photojournalist and a fashion photographer.\n\nOn one hand, he captures fleeting, unrepeatable moments: a heartfelt hug, an emotion, a look between me and my parents, the guests. On the other, he can recreate a scene with a modern, editorial, fashion feel: he builds a set and gives you fairytale images. That day I felt like a princess, and with my husband we looked like two Vogue cover models.\n\nOn top of that, he is perfectly able to manage and coordinate the whole day. If you don't have a wedding planner, Stefano offers to coordinate all the suppliers, from the make-up artist to the DJ, including the venue. Thanks to his experience, any hiccups are avoided and the timeline and the light are used to their best, always respecting the needs of every supplier.",
+  },
+  {
+    nomi: "Maximilian Formentini",
+    data: "5 maggio 2023",
+    luogo: "Castello di Spessa",
+    testo:
+      "An Outstanding Wedding Photographer – Highly Recommended!\n\nWe couldn't have been happier with our experience with Stefano Lunardi!\n\nStefano was the photographer for our wedding, and we are truly grateful for the beautiful memories he captured of such an important day in our lives.\n\nThe wedding album he created for us is absolutely stunning. Every photograph beautifully captures the emotions, atmosphere, and unforgettable moments of our special day. His attention to detail and artistic talent are truly exceptional.\n\nThe wedding video was equally wonderful. Watching it allows us to relive the magic of our wedding day, bringing back all the emotions and happiness we experienced.\n\nBeyond his incredible work, Stefano was a pleasure to work with, making the entire experience enjoyable and memorable.\n\nWe wholeheartedly recommend Stefano Lunardi to any couple looking for a talented wedding photographer who can transform their most precious memories into something they will treasure for a lifetime.\n\nThank you, Stefano, for giving us such beautiful memories that we will cherish forever!",
+  },
+  {
+    nomi: "Trine e Alexander",
+    data: "18 febbraio 2023",
+    luogo: "Venezia",
+    testo:
+      "We chose Mr Lunardi as our Wedding Photographer because of his outstanding and incredible work. Stefano Lunardi caught all the right moments and expressions at all the correct times, and the quality of the pictures is excellent. He photographed in colour and in black/white, and they are all incredibly edited. He works extraordinarily with shadows and light and makes every photo live. He chose no less than the very best of his work to return to us perfectly edited and highly thought through. He cared a great deal about us and was very easy to talk to and work with after the wedding, as during the wedding day, to decide which photos to choose for the fantastic photo book he creates. We will highly recommend Stefano Lunardi to any couple who is getting married and of course, to anyone who just wants beautiful photos to keep for life. There is no fear of a rainy day; Stefano Lunardi will make the rain light up the picture!",
+  },
+  {
+    nomi: "Kurt",
+    data: "13 agosto 2022",
+    luogo: "Grado",
+    testo:
+      "Thanks for the amazing photos of our marriage in Grado (Italy). Stefano has outperformed our expectations by far and we are so happy to have so many incredible pictures of our most important day. We met Stefano first time 30 minutes before our wedding ceremony started (Stefano was arranged by our wedding planner). He was so professional and friendly which really helped us to calm down at this exciting moment. We really enjoyed our photo shoot in a pleasant and relaxed way. Again, thank you Stefano for being our photographer - you did a great job!",
+  },
+  {
+    nomi: "Deborah",
+    data: "9 luglio 2022",
+    luogo: "Sposi dall'estero",
+    testo:
+      "A great professional who perfectly knows the value of the \"moment\". Present and discreet during the whole day, he caught every emotion in a very natural way. Since me and my husband were (and still) live abroad, we could not meet Stefano in person before the wedding day but, no worries: he took care of us by email/chat and together we defined the details of the shooting and the general arrangements. In the shooting he is very attentive and meticulous, I loved his work at first sight especially for the naturalness, dynamic yet timeless style.",
+  },
+];
+
+const profili = [
+  { href: "https://www.matrimonio.com/fotografo-matrimonio/stefanolunardi-photographer--e33485/opinioni", label: "Opinioni su matrimonio.com" },
+  { href: "https://wezoree.com/it/vendors/profile/20527-photographers-stefano-lunardi/reviews", label: "Recensioni su Wezoree" },
+  { href: "https://5starweddingdirectory.com/wedding-photographers/austria/stefano-lunardi/reviews/", label: "Recensioni su 5 Star Wedding Directory" },
 ];
 ---
 
-<SiteLayout title="Recensioni — La differenza che si vede e si sente | Stefano Lunardi" description="Recensioni di coppie reali su matrimonio.com e Google: foto naturali e mai in posa, emozioni colte.">
+<SiteLayout
+  title="Recensioni delle coppie — 5.0 su 5 | Stefano Lunardi"
+  description="Le recensioni verificate delle coppie: 5.0 su 5, consigliato dal 100% degli sposi. Testo completo di ogni recensione, leggibile qui e sui profili pubblici."
+>
   <section class="border-b border-border px-6 pb-12 text-center">
     <p class="eyebrow">Recensioni</p>
     <h1 class="font-display mt-3 text-4xl font-medium sm:text-5xl md:text-6xl">La differenza che si vede e si sente</h1>
-    <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">Parole di coppie reali, leggibili qui e sui profili pubblici.</p>
+    <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+      Parole di coppie reali, copiate qui dal testo originale. Nessuna sintesi: ogni recensione è integrale.
+    </p>
+    <p class="mt-6 flex items-center justify-center gap-3 text-sm text-muted-foreground">
+      <span class="font-display text-2xl text-accent">{rating.value}</span>
+      <span aria-hidden="true" class="text-accent">★★★★★</span>
+      <span>{rating.count} recensioni verificate · consigliato dal {rating.consigliato} delle coppie</span>
+    </p>
   </section>
 
   <section class="mx-auto max-w-3xl px-6 py-14">
-    <blockquote class="border-l-2 border-accent pl-6">
-      <p class="font-display text-2xl italic leading-snug">"Foto naturali e mai in posa, ha colto tutte le emozioni."</p>
-    </blockquote>
-    <blockquote class="mt-8 border-l-2 border-accent pl-6">
-      <p class="font-display text-2xl italic leading-snug">"Ma chi era il fotografo? Non l'abbiamo nemmeno notato, eppure le foto sono incredibili."</p>
-      <p class="mt-3 text-xs uppercase tracking-widest text-muted-foreground">La frase che gli ospiti pronunciano più spesso</p>
-    </blockquote>
-
-    <h2 class="font-display mt-14 text-3xl font-medium">Le coppie che hanno vissuto questo metodo</h2>
-    <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-      {coppie.map((c) => (
-        <div class="border border-border bg-secondary px-6 py-5">
-          <p class="font-display text-xl">{c.nomi}</p>
-          <p class="mt-1 text-sm text-muted-foreground">{c.luogo}</p>
-        </div>
-      ))}
+    <h2 class="font-display text-3xl font-medium">Le recensioni, una per una</h2>
+    <div class="mt-8 flex flex-col gap-4">
+      {
+        recensioni.map((r) => (
+          <article class="border border-border bg-secondary px-6 py-6">
+            <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+              <p class="font-display text-xl">{r.nomi}</p>
+              <p class="text-xs uppercase tracking-widest text-muted-foreground">
+                Sposi · {r.data} · {r.luogo}
+              </p>
+            </div>
+            <p class="mt-1 text-sm text-accent" aria-hidden="true">
+              ★★★★★
+            </p>
+            {r.testo.split("\n\n").map((p) => (
+              <p class="mt-3 leading-relaxed text-muted-foreground first-of-type:mt-4">{p}</p>
+            ))}
+          </article>
+        ))
+      }
     </div>
 
-    <h2 class="font-display mt-14 text-3xl font-medium">Le recensioni complete</h2>
-    <p class="mt-4 leading-relaxed text-muted-foreground">Tutte le recensioni verificate sono su matrimonio.com e sul profilo Google: testo completo, leggibile da tutti — e dai motori di ricerca.</p>
+    <h2 class="font-display mt-14 text-3xl font-medium">I profili pubblici</h2>
+    <p class="mt-4 leading-relaxed text-muted-foreground">
+      Tutte le recensioni verificate sono leggibili anche sui profili: testo originale, voti e risposte.
+    </p>
     <div class="mt-6 flex flex-col gap-3 text-sm">
-      <a href="https://www.matrimonio.com/fotografo-matrimonio/stefanolunardi-photographer--e33485" target="_blank" rel="noopener" class="text-accent underline underline-offset-4">Recensioni su matrimonio.com</a>
-      <a href="https://www.wezoree.com/it/vendors/profile/20527-photographers-stefano-lunardi" target="_blank" rel="noopener" class="text-accent underline underline-offset-4">Profilo Wezoree</a>
+      {
+        profili.map((p) => (
+          <a href={p.href} target="_blank" rel="noopener" class="text-accent underline underline-offset-4">
+            {p.label}
+          </a>
+        ))
+      }
+    </div>
+
+    <div class="mt-14 text-center">
+      <a href="/contatti" class="inline-block rounded-control border border-foreground px-8 py-3 text-sm font-medium text-foreground no-underline transition-colors hover:border-accent hover:text-accent">
+        Verifica la tua data
+      </a>
     </div>
   </section>
 </SiteLayout>
