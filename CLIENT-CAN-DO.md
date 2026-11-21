@@ -52,6 +52,10 @@ Las colecciones de proyectos y sus páginas se gestionan desde la app **Wix Port
   <https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-forms>
 - Las **respuestas** de los visitantes llegan a Wix Forms (submissions) y a la lista de contactos:
   <https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/contacts>
+- El campo **Location** del formulario "Heart to Heart" guarda la lista completa de países (246 +
+  "Altra destination") y en la web se muestra como un selector con buscador y banderas. Si
+  añades/quitas opciones desde el dashboard el picker se sigue alimentando en vivo (las opciones
+  ≥20 pasan a modo buscador; los nombres nuevos que no sean países simplemente salen sin bandera).
 
 ## SEO y analítica
 
