@@ -30,6 +30,19 @@ export function mountSmoothScroll(): void {
   });
 }
 
+/**
+ * Locks or unlocks page scroll while a modal overlay is open (lightbox,
+ * fullscreen menus). Stops Lenis when it is running and pins the document,
+ * falling back to the same CSS pin everywhere else (SSR, tests, reduced-motion
+ * visitors, Lenis not mounted yet).
+ */
+export function setScrollLocked(locked: boolean): void {
+  if (typeof document === "undefined") return;
+  document.documentElement.style.overflow = locked ? "hidden" : "";
+  if (locked) lenis?.stop();
+  else lenis?.start();
+}
+
 export function scrollToTarget(target: Element, block: ScrollLogicalPosition = "start"): void {
   if (lenis && block === "start") {
     lenis.scrollTo(target as HTMLElement);
