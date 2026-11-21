@@ -1,7 +1,11 @@
 ---
 import "@/styles/global.css";
+import SiteHeader from "@/app/header.astro";
+import { allNav, primaryNav } from "@/app/nav";
 import tidalPhoto from "@/assets/photos/01-autentiche.webp";
 import TidalLens from "@/features/tidal-lens/tidal-lens.astro";
+
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
 ---
 
 <!doctype html>
@@ -17,6 +21,7 @@ import TidalLens from "@/features/tidal-lens/tidal-lens.astro";
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   </head>
   <body class="bg-foreground">
+    <SiteHeader navPrimary={primaryNav} navAll={allNav} current={currentPath} />
     <TidalLens src={tidalPhoto} />
   </body>
 </html>

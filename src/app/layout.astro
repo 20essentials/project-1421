@@ -6,6 +6,7 @@ import { getForm } from "@/features/forms/forms";
 import type { FormDto } from "@/features/forms/types";
 import ConsentBootstrap from "@/features/consent/consent-bootstrap.astro";
 import ConsentBanner from "@/features/consent/consent-banner.astro";
+import { allNav, primaryNav } from "@/app/nav";
 
 interface Props {
   title?: string;
@@ -21,22 +22,6 @@ try {
 } catch {
 }
 
-const primaryNav = [
-  { href: "/portfolio", label: "Portfolio" },
-  { href: "/video", label: "Video" },
-  { href: "/il-mio-metodo", label: "Il metodo" },
-  { href: "/chi-sono", label: "Chi sono" },
-  { href: "/location", label: "Location" },
-  { href: "/investimento", label: "Investimento" },
-  { href: "/blog", label: "Storie" },
-  { href: "/faq", label: "FAQ" },
-];
-const secondaryNav = [
-  { href: "/recensioni", label: "Recensioni" },
-  { href: "/awards", label: "Awards" },
-  { href: "/fine-art", label: "Fine Art" },
-];
-const allNav = [...primaryNav.slice(0, 5), ...secondaryNav, ...primaryNav.slice(5)];
 const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
 
 const forwardedUrl = Astro.request.headers.get("x-wix-forwarded-url");
