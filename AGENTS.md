@@ -3,6 +3,22 @@
 All CLI instructions can be found at:
 node_modules/@wix/cli/agents/instructions.md
 
+### CLIENT-CAN-DO.md — the client's dashboard guide (keep it current)
+
+`CLIENT-CAN-DO.md` at the repo root is the client-facing list of everything they can manage
+themselves from the Wix dashboard (blog posts/categories/tags/comments, FAQ, portfolio, form
+submissions, SEO, invoices…). Rules:
+
+- Any change that touches or reveals a dashboard-managed capability (a new app installed on the
+  site, a new collection/app surfaced by the frontend, a changed authoring flow) must be reflected
+  in `CLIENT-CAN-DO.md` in the same session — one short section with the direct dashboard links.
+- When the client asks how to do something in the dashboard, answer from `CLIENT-CAN-DO.md`; if
+  the answer isn't there, verify the route with the wix-manage `dashboard-navigation` recipe (or
+  the app-ID fallback `…/dashboard/{siteId}/app/{appDefId}`) and add it to the file before
+  finishing. Routes are recipe data — never invent `manage.wix.com` paths from memory.
+- When you hand the client any "you can do this yourself" instruction, add it to the file too.
+- Never put secrets, tokens or member emails in the file; it may be shared as-is with the client.
+
 ### Dev server — use `npm run dev:fg`, never `npm run dev`
 
 `wix dev` (and plain `astro dev`) aborts when run by an agent: the Wix fork of Astro
