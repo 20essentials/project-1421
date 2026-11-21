@@ -35,3 +35,26 @@ https://static.wixstatic.com/media/600582_02d0a56024ca418c9b8bf9e09f529a62f002.j
 https://static.wixstatic.com/media/600582_7aee14ecf9714020be28dcff3d7a17a2~mv2.avif  -> index.astro poster video "nasce dallo stesso sguardo"
 https://static.wixstatic.com/media/600582_69556f102c7c4109b35799dda4f34a70~mv2.png   -> index.astro logo Singulart (PNG: AVIF perde alpha, fallback documentato)
 https://static.wixstatic.com/media/600582_eb36bc46a1c240ea8c4629a013cdb253~mv2.avif -> index.astro logo LunaGallery
+# 2026-11-21T00:02:28.431Z — migrated Stefano's old blog images (AVIF)
+https://static.wixstatic.com/media/469e72_bb5e71e228c948fea7571013f152595e~mv2.jpg -> https://static.wixstatic.com/media/600582_5aeefb037a1545b0bd661ae55081e0d0~mv2.avif
+https://static.wixstatic.com/media/469e72_4f78ec0626d943f9aef2c5557ba539f7~mv2.jpg -> https://static.wixstatic.com/media/600582_3b29eb46644444a1ac1a9cd1b6391b9d~mv2.avif
+https://static.wixstatic.com/media/469e72_b64ff3c7f3ff490ca8dc36e6281f338e~mv2.jpg -> https://static.wixstatic.com/media/600582_90c5c3973bbb464aa7614d501cd2ae1d~mv2.avif
+https://static.wixstatic.com/media/469e72_8fc018133eb34a8294c0a6b1b7dcd387~mv2.jpg -> https://static.wixstatic.com/media/600582_680f414c5118465aa2bb01b497c1e2ba~mv2.avif
+https://static.wixstatic.com/media/469e72_b7783b8cc71a4bff9d18274663e148d7~mv2.jpg -> https://static.wixstatic.com/media/600582_25ac6688a3514567acd33637473b5f1e~mv2.avif
+https://static.wixstatic.com/media/469e72_928700d5a9f64fd7b144b1178d97ae3a~mv2.jpg -> https://static.wixstatic.com/media/600582_d9b122c664df4bc3b376538b8180db6c~mv2.avif
+https://static.wixstatic.com/media/469e72_1c0157120fec4f4194762cf093883d25~mv2.jpg -> https://static.wixstatic.com/media/600582_73af2ef24a9a4459848a1c67c44bfcf2~mv2.avif
+https://static.wixstatic.com/media/469e72_0fd7cdd32a3d4f2bac32c427cee58aab~mv2.jpg -> https://static.wixstatic.com/media/600582_54362ed245b04d31ab50556e32cd44e0~mv2.avif
+https://static.wixstatic.com/media/469e72_2c6f910677d14b60b8b64e26e74a9adf~mv2.jpg -> https://static.wixstatic.com/media/600582_d89e70c75d5f42658890754f586fb701~mv2.avif
+https://static.wixstatic.com/media/469e72_41569176eaed4b219bfb3376fa126815~mv2.jpg -> https://static.wixstatic.com/media/600582_2183c3e7afb142b0940b038b17f77009~mv2.avif
+https://static.wixstatic.com/media/469e72_a044f1e43f104b4da7f95b17df3f1b63~mv2.png -> https://static.wixstatic.com/media/600582_a86200b11fe64c31870cf6959937f8e5~mv2.avif
+https://static.wixstatic.com/media/469e72_ee6a0d3b4a6e40ccb94250bc836f3829~mv2.jpg -> https://static.wixstatic.com/media/600582_eff5700e0f684c8590de7e26dd3fafa7~mv2.avif
+https://static.wixstatic.com/media/469e72_b7d7588a66d44dd189cfbb889337bc47~mv2.jpg -> https://static.wixstatic.com/media/600582_db9f2329b5f14616903db6a2c126e1fc~mv2.avif
+https://static.wixstatic.com/media/469e72_75a8a8ade7214fed917f044209d2bdc3~mv2.jpg -> https://static.wixstatic.com/media/600582_2195afa820b0462685703a62535a2ac5~mv2.avif
+https://static.wixstatic.com/media/469e72_a72431062a2548a09ac606aba489f152~mv2.jpg -> https://static.wixstatic.com/media/600582_fa3e23530c964a578a84f7131f53160c~mv2.avif
+https://static.wixstatic.com/media/469e72_95a48226d5a14587965e348b4e9e3507~mv2.jpg -> https://static.wixstatic.com/media/600582_dac1f7a58d8546a69c5c6c71973d619e~mv2.avif
+https://static.wixstatic.com/media/469e72_51b0895ea6d3406984eb3b24c17addc9~mv2.jpg -> https://static.wixstatic.com/media/600582_0696f1111f224b1fad93d547f56ba3a4~mv2.avif
+https://static.wixstatic.com/media/469e72_a8e7051a58a142ab8ded3f124a1c35ef~mv2.jpg -> https://static.wixstatic.com/media/600582_a14ca27b778a49b5b082e85dbd1d1d50~mv2.avif
+https://static.wixstatic.com/media/469e72_4f50f62e6d0d44619aa3b1bf12bc4e49~mv2.jpg -> https://static.wixstatic.com/media/600582_224e014550ea44838fbaf4ecd082e9e7~mv2.avif
+https://static.wixstatic.com/media/469e72_61748146082f428ebde5205aa11335b3~mv2.jpg -> https://static.wixstatic.com/media/600582_180a3ef848814c3db4faeab81e1ffecf~mv2.avif
+https://i.ytimg.com/vi/JUkLNUDQdyI/maxresdefault.jpg -> https://static.wixstatic.com/media/600582_4ad278624934499bb29cf2eaa74ea8fa~mv2.avif
+https://static.wixstatic.com/media/469e72_c2feff7c0a2f4668855ebe52d8ff5671~mv2.jpg -> https://static.wixstatic.com/media/600582_53a1f4788cb042ada2ef15df75031b3f~mv2.avif
