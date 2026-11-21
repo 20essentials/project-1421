@@ -34,17 +34,19 @@ if (!tag) {
 ---
 
 <SiteLayout title={tag.label}>
-  <header class="mb-10 mt-12 text-center">
+  <header class="mb-10 mt-12 px-6 text-center">
     <p class="eyebrow">Tema</p>
     <h1 class="font-display mt-3 text-4xl font-medium sm:text-5xl">{tag.label}</h1>
   </header>
 
-  <Feed
-    client:load
-    initialPage={page}
-    initialTagId={tag.id}
-    initialCategories={categories}
-    initialTags={tags}
-    emptyMessage="Nessun articolo con questo tema ancora."
-  />
+  <div class="mx-auto max-w-7xl px-6 pb-24">
+    <Feed
+      client:load
+      initialPage={page}
+      initialTagId={tag.id}
+      initialCategories={categories}
+      initialTags={tags}
+      emptyMessage="Nessun articolo con questo tema ancora."
+    />
+  </div>
 </SiteLayout>

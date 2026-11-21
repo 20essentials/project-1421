@@ -72,18 +72,20 @@ const head = seoTagsServiceConfig ? {} : { title: category.title || category.lab
 <SiteLayout {...head}>
   {seoTagsServiceConfig && <SEO.Tags seoTagsServiceConfig={seoTagsServiceConfig} slot="seo-tags" />}
 
-  <header class="mb-10 mt-12 text-center">
+  <header class="mb-10 mt-12 px-6 text-center">
     <p class="eyebrow">Categoria</p>
     <h1 class="font-display mt-3 text-4xl font-medium sm:text-5xl">{category.label}</h1>
     {category.description && <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">{category.description}</p>}
   </header>
 
-  <Feed
-    client:load
-    initialPage={page}
-    initialCategoryId={category.id}
-    initialCategories={categories}
-    initialTags={tags}
-    emptyMessage="Nessun articolo in questa categoria ancora."
-  />
+  <div class="mx-auto max-w-7xl px-6 pb-24">
+    <Feed
+      client:load
+      initialPage={page}
+      initialCategoryId={category.id}
+      initialCategories={categories}
+      initialTags={tags}
+      emptyMessage="Nessun articolo in questa categoria ancora."
+    />
+  </div>
 </SiteLayout>
