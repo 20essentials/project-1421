@@ -1,0 +1,159 @@
+---
+const VIDEO_SRC = "https://video.wixstatic.com/video/600582_ccb3b46553c94796a7288a800f3bea70/file";
+const POSTER_SRC = "https://static.wixstatic.com/media/600582_3f61e6bd350a4347962d8e33b2ae813c~mv2.jpg";
+---
+
+<section
+  class="camera-hero"
+  data-camera-hero
+  data-video-src={VIDEO_SRC}
+  aria-label="Fotocamera che segue il movimento del puntatore"
+>
+  <video
+    class="camera-hero__video"
+    data-camera-hero-video
+    muted
+    playsinline
+    preload="auto"
+    poster={POSTER_SRC}
+    disablepictureinpicture
+  ></video>
+</section>
+
+<style>
+  .camera-hero {
+    display: flex;
+    width: 100%;
+    height: 100svh;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #ffffff;
+    touch-action: pan-y;
+  }
+
+  .camera-hero__video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    background: #ffffff;
+  }
+</style>
+
+<script>
+  import { $, $$ } from "@/shared/dom";
+
+  const SELECTOR = "[data-camera-hero]";
+  const SMOOTHING = 0.06;
+  const SEEK_EPSILON = 1 / 48;
+
+  function mount(section: HTMLElement): void {
+    if (section.dataset.cameraHeroReady === "true") return;
+    const video = $<HTMLVideoElement>("[data-camera-hero-video]", section);
+    if (!video) return;
+
+    section.dataset.cameraHeroReady = "true";
+    const player = video;
+    const source = section.dataset.videoSrc ?? "";
+    if (!source) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const controller = new AbortController();
+    const { signal } = controller;
+    let objectUrl: string | undefined;
+    let frameId = 0;
+    let lastFrameTime = 0;
+    let duration = 0;
+    let shown = 0;
+    let target = 0;
+    let ready = false;
+
+    function seek(): void {
+      if (!ready || player.seeking) return;
+      if (Math.abs(player.currentTime - shown) < SEEK_EPSILON) return;
+      player.currentTime = Math.min(Math.max(shown, 0), Math.max(duration - 1 / 24, 0));
+    }
+
+    function tick(now: number): void {
+      frameId = 0;
+      const dt = lastFrameTime ? Math.min((now - lastFrameTime) / 1000, 0.1) : 1 / 60;
+      lastFrameTime = now;
+      shown += (target - shown) * (1 - Math.exp(-dt / SMOOTHING));
+      if (Math.abs(target - shown) < 0.0001) shown = target;
+      seek();
+      if (shown !== target) frameId = requestAnimationFrame(tick);
+      else lastFrameTime = 0;
+    }
+
+    function schedule(): void {
+      if (frameId) return;
+      lastFrameTime = 0;
+      frameId = requestAnimationFrame(tick);
+    }
+
+    function onPointerMove(event: PointerEvent): void {
+      if (!duration) return;
+      const ratio = event.clientX / Math.max(window.innerWidth, 1);
+      const progress = Math.min(Math.max((ratio - 0.1) / 0.8, 0), 1);
+      target = progress * duration;
+      schedule();
+    }
+
+    function onLoadedMetadata(): void {
+      duration = Number.isFinite(player.duration) && player.duration > 0 ? player.duration : 10;
+      if (ready) return;
+      ready = true;
+      shown = target = duration / 2;
+      player.currentTime = shown;
+    }
+
+    function onSeeked(): void {
+      seek();
+    }
+
+    function onError(): void {
+      if (!objectUrl) return;
+      URL.revokeObjectURL(objectUrl);
+      objectUrl = undefined;
+      player.src = source;
+      player.load();
+    }
+
+    function cleanup(): void {
+      controller.abort();
+      if (frameId) cancelAnimationFrame(frameId);
+      if (objectUrl) URL.revokeObjectURL(objectUrl);
+      objectUrl = undefined;
+      delete section.dataset.cameraHeroReady;
+    }
+
+    window.addEventListener("pointermove", onPointerMove, { signal, passive: true });
+    video.addEventListener("loadedmetadata", onLoadedMetadata, { signal });
+    video.addEventListener("seeked", onSeeked, { signal });
+    video.addEventListener("error", onError, { signal });
+    window.addEventListener("pagehide", cleanup, { signal });
+    document.addEventListener("astro:before-swap", cleanup, { signal });
+
+    fetch(source)
+      .then((response) => {
+        if (!response.ok) throw new Error(`Video request failed: ${response.status}`);
+        return response.blob();
+      })
+      .then((blob) => {
+        if (signal.aborted) return;
+        objectUrl = URL.createObjectURL(blob);
+        player.src = objectUrl;
+        player.load();
+      })
+      .catch(() => {
+        if (signal.aborted) return;
+        player.src = source;
+        player.load();
+      });
+  }
+
+  $$(SELECTOR).forEach(mount);
+</script>

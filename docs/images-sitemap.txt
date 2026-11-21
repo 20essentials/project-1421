@@ -58,3 +58,8 @@ https://static.wixstatic.com/media/469e72_4f50f62e6d0d44619aa3b1bf12bc4e49~mv2.j
 https://static.wixstatic.com/media/469e72_61748146082f428ebde5205aa11335b3~mv2.jpg -> https://static.wixstatic.com/media/600582_180a3ef848814c3db4faeab81e1ffecf~mv2.avif
 https://i.ytimg.com/vi/JUkLNUDQdyI/maxresdefault.jpg -> https://static.wixstatic.com/media/600582_4ad278624934499bb29cf2eaa74ea8fa~mv2.avif
 https://static.wixstatic.com/media/469e72_c2feff7c0a2f4668855ebe52d8ff5671~mv2.jpg -> https://static.wixstatic.com/media/600582_53a1f4788cb042ada2ef15df75031b3f~mv2.avif
+
+# 2026-11-21 — camera hero (il-mio-metodo): video 16:9 10s re-codificado con todos los frames
+# como keyframes y poster del frame central. Publicados en Wix Media Manager, copias de public/ borradas.
+https://video.wixstatic.com/video/600582_ccb3b46553c94796a7288a800f3bea70/file -> src/components/camera-hero.astro (video, 240 frames, source public/nikon-video.mp4)
+https://static.wixstatic.com/media/600582_3f61e6bd350a4347962d8e33b2ae813c~mv2.jpg -> src/components/camera-hero.astro (poster, frame central, source public/images/camera-poster.jpg)
