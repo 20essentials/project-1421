@@ -783,12 +783,24 @@
           "type": "TEXT"
         },
         {
+          "key": "heroImage",
+          "type": "IMAGE"
+        },
+        {
+          "key": "heroImage2",
+          "type": "IMAGE"
+        },
+        {
           "key": "heroCta",
           "type": "TEXT"
         },
         {
           "key": "heroCta2",
           "type": "TEXT"
+        },
+        {
+          "key": "slide2Image",
+          "type": "IMAGE"
         },
         {
           "key": "slide2Eyebrow",
@@ -807,6 +819,10 @@
           "type": "TEXT"
         },
         {
+          "key": "slide3Image",
+          "type": "IMAGE"
+        },
+        {
           "key": "slide3Eyebrow",
           "type": "TEXT"
         },
@@ -820,6 +836,14 @@
         },
         {
           "key": "slide3Cta",
+          "type": "TEXT"
+        },
+        {
+          "key": "aboutImage",
+          "type": "IMAGE"
+        },
+        {
+          "key": "aboutIntro",
           "type": "TEXT"
         },
         {
@@ -859,12 +883,20 @@
           "type": "TEXT"
         },
         {
+          "key": "singulartLogo",
+          "type": "IMAGE"
+        },
+        {
           "key": "arteLunagalleryLabel",
           "type": "TEXT"
         },
         {
           "key": "arteLunagalleryCta",
           "type": "TEXT"
+        },
+        {
+          "key": "lunagalleryLogo",
+          "type": "IMAGE"
         },
         {
           "key": "presentoEyebrow",
@@ -876,6 +908,10 @@
         },
         {
           "key": "presentoIntro",
+          "type": "TEXT"
+        },
+        {
+          "key": "presentoVideoId",
           "type": "TEXT"
         },
         {
@@ -939,11 +975,43 @@
           "type": "TEXT"
         },
         {
+          "key": "fvVideoUrl",
+          "type": "TEXT"
+        },
+        {
+          "key": "fvPoster",
+          "type": "IMAGE"
+        },
+        {
           "key": "fvCta",
           "type": "TEXT"
         },
         {
           "key": "fvCaption",
+          "type": "TEXT"
+        },
+        {
+          "key": "gridEyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "gridTitle",
+          "type": "TEXT"
+        },
+        {
+          "key": "gridCta",
+          "type": "TEXT"
+        },
+        {
+          "key": "parallaxEyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "parallaxTitle",
+          "type": "TEXT"
+        },
+        {
+          "key": "parallaxLine",
           "type": "TEXT"
         },
         {
@@ -969,6 +1037,30 @@
         {
           "key": "awardsText",
           "type": "TEXT"
+        },
+        {
+          "key": "awardLogo1",
+          "type": "IMAGE"
+        },
+        {
+          "key": "awardLogo2",
+          "type": "IMAGE"
+        },
+        {
+          "key": "awardLogo3",
+          "type": "IMAGE"
+        },
+        {
+          "key": "awardLogo4",
+          "type": "IMAGE"
+        },
+        {
+          "key": "awardLogo5",
+          "type": "IMAGE"
+        },
+        {
+          "key": "awardLogo6",
+          "type": "IMAGE"
         },
         {
           "key": "awardsCta",
@@ -1013,98 +1105,6 @@
         {
           "key": "ctaButton",
           "type": "TEXT"
-        },
-        {
-          "key": "aboutIntro",
-          "type": "TEXT"
-        },
-        {
-          "key": "presentoVideoId",
-          "type": "TEXT"
-        },
-        {
-          "key": "fvVideoUrl",
-          "type": "TEXT"
-        },
-        {
-          "key": "gridEyebrow",
-          "type": "TEXT"
-        },
-        {
-          "key": "gridTitle",
-          "type": "TEXT"
-        },
-        {
-          "key": "gridCta",
-          "type": "TEXT"
-        },
-        {
-          "key": "parallaxEyebrow",
-          "type": "TEXT"
-        },
-        {
-          "key": "parallaxTitle",
-          "type": "TEXT"
-        },
-        {
-          "key": "parallaxLine",
-          "type": "TEXT"
-        },
-        {
-          "key": "heroImage",
-          "type": "IMAGE"
-        },
-        {
-          "key": "heroImage2",
-          "type": "IMAGE"
-        },
-        {
-          "key": "slide2Image",
-          "type": "IMAGE"
-        },
-        {
-          "key": "slide3Image",
-          "type": "IMAGE"
-        },
-        {
-          "key": "aboutImage",
-          "type": "IMAGE"
-        },
-        {
-          "key": "fvPoster",
-          "type": "IMAGE"
-        },
-        {
-          "key": "singulartLogo",
-          "type": "IMAGE"
-        },
-        {
-          "key": "lunagalleryLogo",
-          "type": "IMAGE"
-        },
-        {
-          "key": "awardLogo1",
-          "type": "IMAGE"
-        },
-        {
-          "key": "awardLogo2",
-          "type": "IMAGE"
-        },
-        {
-          "key": "awardLogo3",
-          "type": "IMAGE"
-        },
-        {
-          "key": "awardLogo4",
-          "type": "IMAGE"
-        },
-        {
-          "key": "awardLogo5",
-          "type": "IMAGE"
-        },
-        {
-          "key": "awardLogo6",
-          "type": "IMAGE"
         }
       ],
       "items": [
