@@ -1,0 +1,34 @@
+{
+  "collections": [
+    {
+      "id": "SiteContent",
+      "displayName": "Site Content",
+      "fields": [
+        { "key": "slug", "type": "TEXT" },
+        { "key": "titleIt", "type": "TEXT" },
+        { "key": "titleEn", "type": "TEXT" },
+        { "key": "eyebrowIt", "type": "TEXT" },
+        { "key": "eyebrowEn", "type": "TEXT" },
+        { "key": "introIt", "type": "TEXT" },
+        { "key": "introEn", "type": "TEXT" },
+        { "key": "bodyIt", "type": "RICH_TEXT" },
+        { "key": "bodyEn", "type": "RICH_TEXT" },
+        { "key": "seoTitleIt", "type": "TEXT" },
+        { "key": "seoTitleEn", "type": "TEXT" },
+        { "key": "seoDescriptionIt", "type": "TEXT" },
+        { "key": "seoDescriptionEn", "type": "TEXT" }
+      ],
+      "items": [
+        {
+          "slug": "il-mio-metodo",
+          "titleIt": "Non più fotografie. Opere.",
+          "eyebrowIt": "Il mio metodo",
+          "introIt": "Il giorno del matrimonio non è il regista che muove marionette: è un testimone silenzioso, un osservatore contemplativo.",
+          "bodyIt": "<h2>Cos'è il Metodo Fusion</h2><p>L'eleganza della fotografia di moda e la naturalezza del reportage. Vengo dal fotogiornalismo: gran parte della giornata scorre senza intervenire — nessun \"guardate qui\", nessuna posa. Poi un momento breve e dedicato ai ritratti, con luce e composizione editoriali. Il resto del sito è allineato a questa verità: reportage tutto il giorno, più un breve momento di ritratti curati.</p><h2>Analogico + digitale: la scelta slow</h2><p>Circa 20 rullini per matrimonio per le foto iconiche. Ogni fotogramma è una scelta deliberata: con la mente, con gli occhi, con il cuore. In un'epoca in cui tutto può essere generato dall'AI, il rullino è l'opposto assoluto — un processo chimico-fisico che cattura la realtà senza filtri. Ciò che cattura il rullino è ciò che ricevi: non una versione ottimizzata. La verità. Il digitale è supporto e backup: un assistente scatta in digitale mentre io creo gli scatti iconici in analogico.</p><h2>Le tre tipologie di scatto</h2><ul><li><strong>La foto iconica naturale</strong> — non forzata, non posata, ma tecnicamente perfetta: il soggetto nella luce giusta, composizione giusta, momento giusto — e non lo sa.</li><li><strong>La candid foto</strong> — interazione vera, impostata a livello tecnico: una risata, un abbraccio, uno sguardo.</li><li><strong>Lo snapshot</strong> — catturato totalmente in real-time senza alcun intervento: il livello più intimo, i momenti che gli sposi stessi non sapevano di stare vivendo.</li></ul><h2>I tre incontri preparatori</h2><ul><li><strong>La Mappa Emotiva</strong> — l'incontro conoscitivo ed empatico: la vostra storia, le persone che contano.</li><li><strong>Il Protocollo Invisibile</strong> — le dinamiche familiari, i gesti che risalgono all'infanzia, ciò che non va perduto.</li><li><strong>L'incontro tecnico</strong> — pochi giorni prima: timeline, location, coordinamento con i fornitori.</li></ul><h2>Il vostro viaggio con me</h2><p>Quello che vedrete il giorno del matrimonio è solo la punta dell'iceberg di un lavoro molto più ampio.</p><div class=\"site-content-table\"><table><thead><tr><th>Fase</th><th>Ore</th></tr></thead><tbody><tr><td>Incontri e consulenze pre-matrimonio</td><td>4-6</td></tr><tr><td>Coordinamento con fornitori e location</td><td>2-3</td></tr><tr><td>Preparazione e briefing del team</td><td>2-3</td></tr><tr><td>Check attrezzatura e logistica</td><td>3-4</td></tr><tr><td>Cura dell'immagine professionale</td><td>1-2</td></tr><tr><td>Il giorno del matrimonio</td><td>12-14</td></tr><tr><td>Post-produzione e consegna</td><td>25-40</td></tr><tr class=\"site-content-total\"><td>Totale di dedizione</td><td>50-70</td></tr></tbody></table></div><h2>I valori che guidano ogni scatto</h2><ul><li><strong>Autenticità</strong> — ogni foto è vera o non esiste: mai una posa forzata, mai un momento ricostruito.</li><li><strong>Empatia</strong> — fotografare una coppia con cui hai costruito una relazione è raccontare una storia d'amore.</li><li><strong>Eccellenza</strong> — la spontaneità non è mai una scusa per la mediocrità tecnica: con 20 rullini, ogni fotogramma conta.</li></ul><div class=\"site-content-cta\"><blockquote>Poche foto, ma straordinarie</blockquote><a href=\"/investimento\">Guarda l'investimento</a></div>",
+          "seoTitleIt": "Il mio metodo — Non più fotografie. Opere. | Stefano Lunardi",
+          "seoDescriptionIt": "Il Metodo Fusion: reportage tutto il giorno, un momento di ritratti editoriali, analogico e digitale. 50-70 ore di dedizione a ogni matrimonio."
+        }
+      ]
+    }
+  ]
+}
