@@ -40,12 +40,12 @@ update on their own.
 - Open the FAQ app: <https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/app/14c92d28-031e-7910-c9a8-a670011e062d>
 - Add/edit/reorder questions and categories; the /faq page (and its SEO) is populated live.
 
-## Portfolio — /portfolio and /projects
+## Portfolio — /portfolio and the project pages
 
 Project collections and their pages are managed from the **Wix Portfolio** app.
 
 - Open the Portfolio app: <https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/app/d90652a2-f5a1-4c7c-84c4-d4cdcc41f130>
-- Add collections and projects (images, texts, order); /portfolio and /projects update live.
+- Add collections and projects (images, texts, order); the /portfolio gallery and the project pages (`/projects/<project-slug>`) update live. `/projects` on its own does not exist: it redirects to /portfolio.
 
 ## CMS-managed page text
 

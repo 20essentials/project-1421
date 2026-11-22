@@ -1,0 +1,5 @@
+---
+// /projects on its own has no index page: the gallery lives at /portfolio and the
+// project detail pages at /projects/[slug]. Visitors landing here go to the gallery.
+return Astro.redirect("/portfolio", 301);
+---

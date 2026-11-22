@@ -40,12 +40,12 @@ página se actualizan solos.
 - Abrir la app FAQ: <https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/app/14c92d28-031e-7910-c9a8-a670011e062d>
 - Añadir/editar/reordenar preguntas y categorías; la página /faq (y su SEO) se alimenta en vivo.
 
-## Portfolio — /portfolio y /projects
+## Portfolio — /portfolio y las páginas de proyecto
 
 Las colecciones de proyectos y sus páginas se gestionan desde la app **Wix Portfolio**.
 
 - Abrir la app Portfolio: <https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/app/d90652a2-f5a1-4c7c-84c4-d4cdcc41f130>
-- Añadir colecciones y proyectos (imágenes, textos, orden); /portfolio y /projects se actualizan en vivo.
+- Añadir colecciones y proyectos (imágenes, textos, orden); la galería /portfolio y las páginas de proyecto (`/projects/<slug-proyecto>`) se actualizan en vivo. `/projects` sola no existe: redirige a /portfolio.
 
 ## Textos de página gestionados por CMS
 
