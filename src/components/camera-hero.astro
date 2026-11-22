@@ -40,6 +40,19 @@ const POSTER_SRC = "https://static.wixstatic.com/media/600582_3f61e6bd350a434796
     object-fit: contain;
     background: #ffffff;
   }
+
+  /* Mobile: no pinned 100svh stage — the section wraps the video's own size
+     (max-content) with a floor, and the video loops instead of scrubbing. */
+  @media (max-width: 767px) {
+    .camera-hero {
+      height: auto;
+      min-height: min(60svh, 480px);
+    }
+
+    .camera-hero__video {
+      height: auto;
+    }
+  }
 </style>
 
 <script>
@@ -60,6 +73,10 @@ const POSTER_SRC = "https://static.wixstatic.com/media/600582_3f61e6bd350a434796
     if (!source) return;
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    // Mobile (≤767px): the video loops on its own — no touch-scrub, no pinned
+    // 100svh stage (see the media query above). Desktop keeps the pointer scrub.
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
 
     const controller = new AbortController();
     const { signal } = controller;
@@ -108,6 +125,10 @@ const POSTER_SRC = "https://static.wixstatic.com/media/600582_3f61e6bd350a434796
       ready = true;
       shown = target = duration / 2;
       player.currentTime = shown;
+      if (isMobile) {
+        player.loop = true;
+        player.play().catch(() => {});
+      }
     }
 
     function onSeeked(): void {
@@ -130,7 +151,7 @@ const POSTER_SRC = "https://static.wixstatic.com/media/600582_3f61e6bd350a434796
       delete section.dataset.cameraHeroReady;
     }
 
-    window.addEventListener("pointermove", onPointerMove, { signal, passive: true });
+    if (!isMobile) window.addEventListener("pointermove", onPointerMove, { signal, passive: true });
     video.addEventListener("loadedmetadata", onLoadedMetadata, { signal });
     video.addEventListener("seeked", onSeeked, { signal });
     video.addEventListener("error", onError, { signal });
