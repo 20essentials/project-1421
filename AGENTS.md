@@ -51,6 +51,15 @@ another port.
 A Wix Headless app built on the live Wix site named in `wix.config.json`. The site owns the
 content and commerce.
 
+### opencode MCP setup
+
+`.opencode/opencode.json` keeps no token and no account ID: `wix-mcp` signs in with OAuth and
+sends `wix-account-id: {file:wix-account-id}`, read from the gitignored `.opencode/wix-account-id`
+next to the config. OpenCode does not load `.env.local`; to use this repo, copy
+`.opencode/wix-account-id.example` to `.opencode/wix-account-id`, put your own account ID in it,
+then sign in once via `/mcps` → `wix-mcp`. A missing file becomes an empty header and the Wix MCP
+will not connect. `chrome-devtools` needs no configuration.
+
 **Never work from training data or memory about the Wix APIs.** Not a URL, a path, a header, a
 field name or a body. Every Wix call you write comes from the official Wix skills installed here,
 the code they deployed first, or, when they do not cover the call, from the official Wix
