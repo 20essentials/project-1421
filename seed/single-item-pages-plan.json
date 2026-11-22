@@ -332,12 +332,12 @@
           "type": "TEXT"
         },
         {
-          "key": "body",
-          "type": "RICH_TEXT"
-        },
-        {
           "key": "version",
           "type": "TEXT"
+        },
+        {
+          "key": "body",
+          "type": "RICH_TEXT"
         }
       ],
       "items": [
@@ -373,12 +373,12 @@
           "type": "TEXT"
         },
         {
-          "key": "body",
-          "type": "RICH_TEXT"
-        },
-        {
           "key": "version",
           "type": "TEXT"
+        },
+        {
+          "key": "body",
+          "type": "RICH_TEXT"
         }
       ],
       "items": [
@@ -414,12 +414,12 @@
           "type": "TEXT"
         },
         {
-          "key": "body",
-          "type": "RICH_TEXT"
-        },
-        {
           "key": "version",
           "type": "TEXT"
+        },
+        {
+          "key": "body",
+          "type": "RICH_TEXT"
         }
       ],
       "items": [
@@ -455,12 +455,12 @@
           "type": "TEXT"
         },
         {
-          "key": "body",
-          "type": "RICH_TEXT"
-        },
-        {
           "key": "version",
           "type": "TEXT"
+        },
+        {
+          "key": "body",
+          "type": "RICH_TEXT"
         }
       ],
       "items": [
@@ -496,12 +496,12 @@
           "type": "TEXT"
         },
         {
-          "key": "body",
-          "type": "RICH_TEXT"
-        },
-        {
           "key": "version",
           "type": "TEXT"
+        },
+        {
+          "key": "body",
+          "type": "RICH_TEXT"
         }
       ],
       "items": [
@@ -537,12 +537,12 @@
           "type": "TEXT"
         },
         {
-          "key": "body",
-          "type": "RICH_TEXT"
-        },
-        {
           "key": "version",
           "type": "TEXT"
+        },
+        {
+          "key": "body",
+          "type": "RICH_TEXT"
         }
       ],
       "items": [
@@ -578,12 +578,12 @@
           "type": "TEXT"
         },
         {
-          "key": "body",
-          "type": "RICH_TEXT"
-        },
-        {
           "key": "version",
           "type": "TEXT"
+        },
+        {
+          "key": "body",
+          "type": "RICH_TEXT"
         }
       ],
       "items": [
@@ -619,12 +619,12 @@
           "type": "TEXT"
         },
         {
-          "key": "body",
-          "type": "RICH_TEXT"
-        },
-        {
           "key": "version",
           "type": "TEXT"
+        },
+        {
+          "key": "body",
+          "type": "RICH_TEXT"
         }
       ],
       "items": [
@@ -660,12 +660,12 @@
           "type": "TEXT"
         },
         {
-          "key": "body",
-          "type": "RICH_TEXT"
-        },
-        {
           "key": "version",
           "type": "TEXT"
+        },
+        {
+          "key": "body",
+          "type": "RICH_TEXT"
         }
       ],
       "items": [
@@ -701,12 +701,12 @@
           "type": "TEXT"
         },
         {
-          "key": "body",
-          "type": "RICH_TEXT"
-        },
-        {
           "key": "version",
           "type": "TEXT"
+        },
+        {
+          "key": "body",
+          "type": "RICH_TEXT"
         }
       ],
       "items": [
@@ -742,12 +742,12 @@
           "type": "TEXT"
         },
         {
-          "key": "body",
-          "type": "RICH_TEXT"
-        },
-        {
           "key": "version",
           "type": "TEXT"
+        },
+        {
+          "key": "body",
+          "type": "RICH_TEXT"
         }
       ],
       "items": [
