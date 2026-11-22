@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { toSitePageContent } from "@/features/site-content/site-content-core";
+import { toHomeContent, toSitePageContent } from "@/features/site-content/site-content-core";
 
 const item = {
   eyebrow: "Occhiello",
@@ -38,5 +38,30 @@ describe("toSitePageContent", () => {
   it("returns null when there is no item", () => {
     expect(toSitePageContent(null)).toBeNull();
     expect(toSitePageContent(undefined)).toBeNull();
+  });
+});
+
+describe("toHomeContent", () => {
+  it("maps the base fields plus every home section field", () => {
+    const home = toHomeContent({
+      eyebrow: "Hero",
+      title: "Titolo hero",
+      intro: "Descrizione hero",
+      heroCta: "Contattami",
+      slide2Title: "Slide 2",
+      fvVideoUrl: "https://video.wixstatic.com/video/x/file",
+      heroImage:
+        "https://static.wixstatic.com/media/600582_x~mv2.avif/v1/fill/w_1200,h_675/600582_x~mv2.avif",
+    });
+    expect(home?.heroCta).toBe("Contattami");
+    expect(home?.slide2Title).toBe("Slide 2");
+    expect(home?.fvVideoUrl).toBe("https://video.wixstatic.com/video/x/file");
+    expect(home?.heroImage).toContain("static.wixstatic.com");
+    expect(home?.ctaButton).toBe("");
+  });
+
+  it("returns null when there is no item", () => {
+    expect(toHomeContent(null)).toBeNull();
+    expect(toHomeContent(undefined)).toBeNull();
   });
 });

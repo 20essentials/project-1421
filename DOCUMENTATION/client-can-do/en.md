@@ -49,13 +49,14 @@ Project collections and their pages are managed from the **Wix Portfolio** app.
 
 ## CMS-managed page text
 
-These pages are **Single Item** collections: one record each, edited like a form. The fields
-are `eyebrow`, `title`, `intro` and `body` (rich text). Every save appears on the site live,
-without a redeploy.
+These pages are **Single Item** collections: one record each, edited like a form. The base
+fields are `eyebrow`, `title` and `intro`; the pages with full text also have `body` (rich
+text) and the legal ones a `version` field. Every save appears on the site live, without a
+redeploy.
 
 | Page              | Collection     | Where                                                                                                          |
 | ----------------- | -------------- | -------------------------------------------------------------------------------------------------------------- |
-| `/` (hero)        | `Home`         | [Home](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Home)                |
+| `/`              | `Home`         | [Home](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Home)                |
 | `/il-mio-metodo`  | `IlMetodo`     | [Il Metodo](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/IlMetodo)       |
 | `/chi-sono`       | `ChiSono`      | [Chi Sono](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/ChiSono)         |
 | `/contatti`       | `Contatti`     | [Contatti](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Contatti)        |
@@ -68,12 +69,15 @@ without a redeploy.
 | `/legal` (header) | `LegalIndex`   | [Documenti legali](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/LegalIndex) |
 | `/404`            | `NotFound`     | [404](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/NotFound)             |
 
-Scope per page: on `/` only the hero text is editable (the slides, galleries and sections below
-stay fixed); on `/contatti`, `/video` and `/recensioni` you edit the header text (the form,
-the video embeds and the review cards stay fixed); on `/awards` the awards lists and exhibitions
-are editable, the seals grid stays fixed; `/fine-art`, `/location`, `/investimento`,
-`/il-mio-metodo` and `/chi-sono` are fully editable. The page SEO (title and description for
-Google) is NOT in the CMS anymore: it is managed in the SEO settings, see below.
+Scope per page: on `/` every section's text, images and videos are editable (hero slides,
+about, art galleries intro, intro video, the three shot types, photo/video section, blog
+preview header, awards strip, quotes, FAQ header and the final call to action — the gallery
+grids themselves keep their layout); on `/contatti`, `/video` and `/recensioni` you edit the
+header text (the form, the video embeds and the review cards stay fixed); on `/awards` the
+awards lists and exhibitions are editable, the seals grid stays fixed; `/fine-art`,
+`/location`, `/investimento`, `/il-mio-metodo` and `/chi-sono` are fully editable. The page
+SEO (title and description for Google) is NOT in the CMS anymore: it is managed in the SEO
+settings, see below.
 
 ## Legal documents (CMS)
 

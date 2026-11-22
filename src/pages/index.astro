@@ -4,8 +4,8 @@ import PhotoGrid from "@/features/home/photo-grid.astro";
 import ArtisticParallax from "@/features/home/artistic-parallax.astro";
 import { fetchPosts, postMetaLine, postPath } from "@/features/blog/posts";
 import { fetchFaq } from "@/features/faq/faq";
-import { getSitePageContent } from "@/features/site-content/site-content";
-import { imgAttrs, imgSrc, imgSrcSet } from "@/shared/media";
+import { getHomeContent } from "@/features/site-content/site-content";
+import { imgAttrs, imgSrc, imgSrcSet, mediaKey } from "@/shared/media";
 import type { PostPage } from "@/features/blog/types";
 import type { FaqData } from "@/features/faq/types";
 
@@ -16,20 +16,15 @@ try {
 } catch {
 }
 
-const heroContent = await getSitePageContent("home");
+const heroContent = await getHomeContent();
 
-// Hero photograph, uploaded to the site's Media Manager (new-hero.avif, 2752×1536).
-const HERO_IMAGE = "wix:image://v1/600582_d3da93d4d8584fd282a085b093fc7b9d~mv2.avif/new-hero.jpg#originWidth=2752&originHeight=1536";
+// Slide aspect ratios (height/width) — layout facts; the CMS supplies the images themselves.
 const HERO_RATIO = 1536 / 2752;
-// Art gallery photograph (IMG_7285), uploaded to the site's Media Manager (slide-art-gallery.avif, 4032×3024).
-const ART_GALLERY_IMAGE = "wix:image://v1/600582_52669cad776f4a7e9c9b14d257a2da13~mv2.avif/slide-art-gallery.avif#originWidth=4032&originHeight=3024";
 const ART_GALLERY_RATIO = 3024 / 4032;
-// Black & white couple walking (04_veil), uploaded to the site's Media Manager (slide-veil-bw.avif, 4961×3425).
-const VEIL_IMAGE = "wix:image://v1/600582_d6196421a6164916a081fe5ffd20de27~mv2.avif/slide-veil-bw.avif#originWidth=4961&originHeight=3425";
 const VEIL_RATIO = 3425 / 4961;
+
 const faqPreview = faq.questions.slice(0, 3);
 const latestPosts = posts?.posts.slice(0, 3) ?? [];
-const INTRO_VIDEO_ID = "5gY0HgkSVjU";
 
 interface ScrollScene {
   key: string;
@@ -53,45 +48,45 @@ interface ScrollScene {
 // (Stefano is also an art photographer), and a fine-art wedding photograph.
 const heroScene: ScrollScene = {
   key: "hero",
-  imageUrl: HERO_IMAGE,
+  imageUrl: heroContent.heroImage,
   ratio: HERO_RATIO,
   alt: "Fotografia di matrimonio fine art — Stefano Lunardi",
-  secondaryImageUrl: "https://static.wixstatic.com/media/600582_29f0dfe738694177b687ea3b4af8dcbb~mv2.avif",
+  secondaryImageUrl: heroContent.heroImage2,
   secondaryAlt: "Fotografia d'arte — Stefano Lunardi",
   eyebrow: heroContent.eyebrow,
   title: heroContent.title,
   description: heroContent.intro,
   href: "/contatti",
-  cta: "Raccontami la vostra storia",
+  cta: heroContent.heroCta,
   secondaryHref: "/portfolio",
-  secondaryCta: "Guarda il portfolio",
+  secondaryCta: heroContent.heroCta2,
   solid: true,
   heading: "h1",
 };
 
 const artScene: ScrollScene = {
   key: "art-gallery",
-  imageUrl: ART_GALLERY_IMAGE,
+  imageUrl: heroContent.slide2Image,
   ratio: ART_GALLERY_RATIO,
   alt: "Fotografia d'arte — opera esposta in galleria, Stefano Lunardi",
-  eyebrow: "Fotografia d'arte",
-  title: "Non solo matrimoni: anche arte",
-  description: "Le opere di Stefano sono esposte e acquistabili su Singulart. Luce, composizione, atmosfera: la stessa ricerca entra in ogni scatto.",
+  eyebrow: heroContent.slide2Eyebrow,
+  title: heroContent.slide2Title,
+  description: heroContent.slide2Intro,
   href: "/fine-art",
-  cta: "Scopri le opere",
+  cta: heroContent.slide2Cta,
   heading: "h2",
 };
 
 const veilScene: ScrollScene = {
   key: "fine-art-wedding",
-  imageUrl: VEIL_IMAGE,
+  imageUrl: heroContent.slide3Image,
   ratio: VEIL_RATIO,
   alt: "Coppia in bianco e nero che cammina — fotografia fine art di matrimonio, Stefano Lunardi",
-  eyebrow: "Fine Art Wedding",
-  title: "Matrimoni come opere d'arte",
-  description: "Ogni scatto è un quadro: la stessa visione delle opere fine art, portata nel vostro giorno.",
+  eyebrow: heroContent.slide3Eyebrow,
+  title: heroContent.slide3Title,
+  description: heroContent.slide3Intro,
   href: "/portfolio",
-  cta: "Guarda il portfolio",
+  cta: heroContent.slide3Cta,
   heading: "h2",
 };
 
@@ -167,7 +162,7 @@ const alignFor = (i: number): "center" | "right" | "left" =>
     <div class="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 md:grid-cols-[2fr_3fr] md:gap-16">
       <figure class="relative">
         <img
-          src="https://static.wixstatic.com/media/600582_4f4ec030097f4d19b03ee08e8c2b7c1c~mv2.jpg"
+          src={imgSrc(heroContent.aboutImage, 640, 800)}
           alt="Stefano Lunardi, fotografo di matrimoni fine art, con la sua macchina fotografica"
           loading="lazy"
           decoding="async"
@@ -177,19 +172,15 @@ const alignFor = (i: number): "center" | "right" | "left" =>
       <div>
         <h2 class="font-display text-4xl font-medium sm:text-5xl">Stefano Lunardi</h2>
         <p class="mt-5 text-lg font-medium leading-relaxed text-foreground">
-          Fotografo con oltre trent'anni di esperienza: fotogiornalista per le maggiori testate italiane, artista fine art premiato in tutto il mondo, fotografo di matrimoni dal 2012.
+          {heroContent.aboutIntro}
         </p>
         <div class="mt-5 flex flex-col gap-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
-          <p>
-            Quindici anni di fotogiornalismo gli hanno insegnato a leggere una scena prima che accada e a diventare invisibile. La ricerca delle opere d'arte — luce, composizione, atmosfera, oltre 100 premi internazionali e qualifica QEP — gli ha dato la visione. Dal 2012 unisce i due mondi in un unico metodo, portato nei matrimoni tra Italia e Austria.
-          </p>
-          <p>
-            Le sue opere sono esposte e acquistabili su Singulart. Vive tra Italia e Austria e parla italiano, tedesco e inglese: parlare con tutti gli ospiti nella loro lingua cambia le fotografie.
-          </p>
+          <p>{heroContent.aboutText1}</p>
+          <p>{heroContent.aboutText2}</p>
         </div>
         <div class="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-          <a href="/chi-sono" class="rounded-control border border-foreground bg-foreground px-8 py-3 text-sm font-medium text-primary-foreground no-underline transition-colors hover:border-accent hover:bg-accent">Scopri la sua storia</a>
-          <a href="/awards" class="rounded-control btn-ghost no-underline">Premi e riconoscimenti</a>
+          <a href="/chi-sono" class="rounded-control border border-foreground bg-foreground px-8 py-3 text-sm font-medium text-primary-foreground no-underline transition-colors hover:border-accent hover:bg-accent">{heroContent.aboutCta}</a>
+          <a href="/awards" class="rounded-control btn-ghost no-underline">{heroContent.aboutCta2}</a>
         </div>
       </div>
     </div>
@@ -198,11 +189,10 @@ const alignFor = (i: number): "center" | "right" | "left" =>
   <section id="arte" class="px-6 py-24">
     <div class="mx-auto max-w-5xl">
       <div class="text-center">
-        <p class="eyebrow">Fotografia artistica</p>
-        <h2 class="font-display mt-3 text-3xl font-medium sm:text-4xl">Oltre i matrimoni: le opere</h2>
+        <p class="eyebrow">{heroContent.arteEyebrow}</p>
+        <h2 class="font-display mt-3 text-3xl font-medium sm:text-4xl">{heroContent.arteTitle}</h2>
         <p class="mx-auto mt-4 max-w-2xl leading-relaxed text-muted-foreground">
-          Ogni scatto nasce dalla stessa ricerca delle opere d'arte — luce, composizione, atmosfera.
-          Il lavoro personale di Stefano è esposto e acquistabile nelle gallerie online.
+          {heroContent.arteIntro}
         </p>
       </div>
       <div class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
@@ -214,7 +204,7 @@ const alignFor = (i: number): "center" | "right" | "left" =>
         >
           <span class="fa-card__logo-box">
             <img
-              src="https://static.wixstatic.com/media/600582_69556f102c7c4109b35799dda4f34a70~mv2.png"
+              src={`https://static.wixstatic.com/media/${mediaKey(heroContent.singulartLogo)}`}
               alt="Singulart"
               loading="lazy"
               decoding="async"
@@ -222,8 +212,8 @@ const alignFor = (i: number): "center" | "right" | "left" =>
             />
           </span>
           <h3 class="font-display fa-card__title">Singulart</h3>
-          <p class="fa-card__label">Opere originali esposte e acquistabili</p>
-          <span class="fa-card__cta">Visita la pagina dell'artista →</span>
+          <p class="fa-card__label">{heroContent.arteSingulartLabel}</p>
+          <span class="fa-card__cta">{heroContent.arteSingulartCta}</span>
         </a>
         <a
           href="https://www.artlunagallery.com/fine-art-portrait"
@@ -233,7 +223,7 @@ const alignFor = (i: number): "center" | "right" | "left" =>
         >
           <span class="fa-card__logo-box">
             <img
-              src="https://static.wixstatic.com/media/600582_eb36bc46a1c240ea8c4629a013cdb253~mv2.avif"
+              src={`https://static.wixstatic.com/media/${mediaKey(heroContent.lunagalleryLogo)}`}
               alt="LunaGallery"
               loading="lazy"
               decoding="async"
@@ -241,8 +231,8 @@ const alignFor = (i: number): "center" | "right" | "left" =>
             />
           </span>
           <h3 class="font-display fa-card__title">LunaGallery</h3>
-          <p class="fa-card__label">Fine art portrait in edizione limitata</p>
-          <span class="fa-card__cta">Esplora LunaGallery →</span>
+          <p class="fa-card__label">{heroContent.arteLunagalleryLabel}</p>
+          <span class="fa-card__cta">{heroContent.arteLunagalleryCta}</span>
         </a>
       </div>
     </div>
@@ -251,27 +241,26 @@ const alignFor = (i: number): "center" | "right" | "left" =>
   <section id="mi-presento" class="mp-root px-6 py-24">
     <div class="mx-auto max-w-4xl">
       <div class="text-center">
-        <p class="eyebrow mp-eyebrow">Mi presento</p>
-        <h2 class="font-display mp-heading mt-4 break-words text-4xl font-medium leading-tight sm:text-5xl">Un volto, una voce, un metodo</h2>
+        <p class="eyebrow mp-eyebrow">{heroContent.presentoEyebrow}</p>
+        <h2 class="font-display mp-heading mt-4 break-words text-4xl font-medium leading-tight sm:text-5xl">{heroContent.presentoTitle}</h2>
         <p class="mp-copy mx-auto mt-5 max-w-2xl text-sm leading-relaxed sm:text-base">
-          Prima dei premi e delle fotografie, c'è una persona. In questo minuto vi racconto chi sono
-          e come guardo un giorno di matrimonio — senza filtri, come con il rullino.
+          {heroContent.presentoIntro}
         </p>
       </div>
       <div class="mp-frame relative mt-12">
         <lite-youtube
-          videoid={INTRO_VIDEO_ID}
+          videoid={heroContent.presentoVideoId}
           videoTitle="Mi presento — Stefano Lunardi"
           playlabel="Riproduci: Mi presento — Stefano Lunardi"
           params="rel=0"
           class="mp-video"
         />
         <p class="mp-frame__caption font-display text-sm italic sm:text-base">
-          «Un minuto per conoscervi, una giornata per raccontarvi.»
+          {heroContent.presentoCaption}
         </p>
       </div>
       <div class="mt-10 text-center">
-        <a href="/video" class="mp-link text-sm underline-offset-4 hover:underline no-underline">Guarda i wedding film e i reel</a>
+        <a href="/video" class="mp-link text-sm underline-offset-4 hover:underline no-underline">{heroContent.presentoLink}</a>
       </div>
     </div>
   </section>
@@ -279,50 +268,56 @@ const alignFor = (i: number): "center" | "right" | "left" =>
   <section class="px-6 py-20">
     <div class="mx-auto max-w-3xl text-center">
       <p class="font-display text-3xl font-medium leading-snug sm:text-4xl">
-        "Ti hanno detto che deve essere il giorno più bello della tua vita. Nessuno ti ha detto che deve essere il tuo."
+        {heroContent.manifestoQuote}
       </p>
       <p class="mt-6 leading-relaxed text-muted-foreground">
-        Esiste un'altra strada. Più lenta. Più rara. Più umana. Una fotografia che si prende il tempo di conoscerti prima di fotografarti, che consegna cento immagini straordinarie invece di mille dimenticabili, che tratta il matrimonio per quello che è: un'opera d'arte.
+        {heroContent.manifestoText}
       </p>
-      <p class="font-display mt-6 text-xl italic text-accent">Benvenuto nella tua storia.</p>
+      <p class="font-display mt-6 text-xl italic text-accent">{heroContent.manifestoWelcome}</p>
     </div>
   </section>
 
-  <PhotoGrid />
+  <PhotoGrid
+    eyebrow={heroContent.gridEyebrow}
+    title={heroContent.gridTitle}
+    ctaLabel={heroContent.gridCta}
+  />
 
-  <ArtisticParallax />
+  <ArtisticParallax
+    eyebrow={heroContent.parallaxEyebrow}
+    title={heroContent.parallaxTitle}
+    line={heroContent.parallaxLine}
+  />
 
   <section class="border-y border-border bg-secondary px-6 py-20">
     <div class="mx-auto grid max-w-5xl grid-cols-1 gap-10 md:grid-cols-3">
       <div>
-        <p class="eyebrow">La foto iconica naturale</p>
-        <p class="mt-3 text-sm leading-relaxed text-muted-foreground">Non forzata, non posata, ma tecnicamente perfetta: il soggetto nella luce giusta — e non lo sa.</p>
+        <p class="eyebrow">{heroContent.shot1Eyebrow}</p>
+        <p class="mt-3 text-sm leading-relaxed text-muted-foreground">{heroContent.shot1Text}</p>
       </div>
       <div>
-        <p class="eyebrow">La candid foto</p>
-        <p class="mt-3 text-sm leading-relaxed text-muted-foreground">Interazione vera — una risata, un abbraccio, uno sguardo — impostata a livello tecnico.</p>
+        <p class="eyebrow">{heroContent.shot2Eyebrow}</p>
+        <p class="mt-3 text-sm leading-relaxed text-muted-foreground">{heroContent.shot2Text}</p>
       </div>
       <div>
-        <p class="eyebrow">Lo snapshot</p>
-        <p class="mt-3 text-sm leading-relaxed text-muted-foreground">Catturato in real-time senza alcun intervento: il livello più intimo.</p>
+        <p class="eyebrow">{heroContent.shot3Eyebrow}</p>
+        <p class="mt-3 text-sm leading-relaxed text-muted-foreground">{heroContent.shot3Text}</p>
       </div>
-      <a href="/il-mio-metodo" class="md:col-span-3 justify-self-center rounded-control btn-ghost no-underline">Scopri il Metodo Fusion</a>
+      <a href="/il-mio-metodo" class="md:col-span-3 justify-self-center rounded-control btn-ghost no-underline">{heroContent.shotsCta}</a>
     </div>
   </section>
 
   <section id="foto-e-video" class="fv-root px-6 py-24">
     <div class="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 md:grid-cols-[3fr_4fr] md:gap-16">
       <div>
-        <p class="eyebrow fv-eyebrow">L'opera in divenire</p>
+        <p class="eyebrow fv-eyebrow">{heroContent.fvEyebrow}</p>
         <h2 class="font-display fv-heading mt-3 text-3xl font-medium leading-tight sm:text-4xl">
-          La tela si dipinge, l'obbiettivo <em class="font-light italic">racconta</em>
+          {heroContent.fvTitle}
         </h2>
         <p class="fv-copy mt-5 leading-relaxed">
-          A volte la macchina da presa si punta su di me: registro la nascita delle mie opere,
-          dalla prima pennellata all'ultima luce. Lo stesso sguardo che segue un matrimonio
-          guarda anche la tela.
+          {heroContent.fvText}
         </p>
-        <a href="/video" class="fv-cta mt-8 inline-block no-underline">Guarda i wedding film e i reel →</a>
+        <a href="/video" class="fv-cta mt-8 inline-block no-underline">{heroContent.fvCta}</a>
       </div>
       <figure class="fv-frame">
         <video
@@ -331,14 +326,14 @@ const alignFor = (i: number): "center" | "right" | "left" =>
           muted
           playsinline
           preload="metadata"
-          poster="https://static.wixstatic.com/media/600582_7aee14ecf9714020be28dcff3d7a17a2~mv2.avif"
+          poster={imgSrc(heroContent.fvPoster, 1280, 720)}
           aria-label="Clip in loop: Stefano dipinge e registra la nascita di una sua opera"
           class="fv-video"
         >
-          <source src="https://video.wixstatic.com/video/600582_ebf55de548bd485d860b78ad136c87e4/file" type="video/mp4" />
+          <source src={heroContent.fvVideoUrl} type="video/mp4" />
         </video>
         <figcaption class="fv-frame__caption font-display text-sm italic sm:text-base">
-          «Ogni opera nasce dallo stesso sguardo.»
+          {heroContent.fvCaption}
         </figcaption>
       </figure>
     </div>
@@ -350,10 +345,10 @@ const alignFor = (i: number): "center" | "right" | "left" =>
         <div class="mx-auto max-w-7xl">
           <div class="mb-10 flex flex-col items-end justify-between gap-4 sm:flex-row">
             <div>
-              <p class="eyebrow text-muted-foreground">Ultime storie</p>
-              <h2 class="font-display mt-3 text-3xl font-medium sm:text-4xl">Dietro l'obiettivo</h2>
+              <p class="eyebrow text-muted-foreground">{heroContent.storiesEyebrow}</p>
+              <h2 class="font-display mt-3 text-3xl font-medium sm:text-4xl">{heroContent.storiesTitle}</h2>
             </div>
-            <a href="/blog" class="rounded-control btn-ghost no-underline">Tutti gli articoli</a>
+            <a href="/blog" class="rounded-control btn-ghost no-underline">{heroContent.storiesCta}</a>
           </div>
           <div class="grid grid-cols-1 gap-8 sm:grid-cols-3">
             {latestPosts.map((p) => (
@@ -379,28 +374,38 @@ const alignFor = (i: number): "center" | "right" | "left" =>
 
   <section class="border-y border-border px-6 py-20">
     <div class="mx-auto max-w-4xl text-center">
-      <p class="eyebrow">Riconoscimenti</p>
-      <p class="font-display mt-3 text-3xl font-medium sm:text-4xl">Oltre 100 premi internazionali</p>
-      <p class="mt-4 text-sm leading-relaxed text-muted-foreground">IPA International Photo Awards · International Color Awards · B&W Spider Awards · MIFA Moscow · WPGA · ANFM · Qualifica QEP</p>
+      <p class="eyebrow">{heroContent.awardsEyebrow}</p>
+      <p class="font-display mt-3 text-3xl font-medium sm:text-4xl">{heroContent.awardsTitle}</p>
+      <p class="mt-4 text-sm leading-relaxed text-muted-foreground">{heroContent.awardsText}</p>
       <div class="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
-        <img src="https://static.wixstatic.com/media/600582_c6b21435075c4f75a2e85ae788bd40f8~mv2.png" alt="Vogue Sposa" loading="lazy" decoding="async" class="h-12 w-auto object-contain opacity-80" />
-        <img src="https://static.wixstatic.com/media/600582_ddc10a9178a043be98339105c08ea8d5~mv2.png" alt="Wezoree" loading="lazy" decoding="async" class="h-10 w-auto object-contain opacity-80" />
-        <img src="https://static.wixstatic.com/media/600582_02a8c1efe51347b6b7f588636d848557~mv2.png" alt="IPA International Photo Awards — 1° place Fine Art 2016" loading="lazy" decoding="async" class="h-14 w-auto object-contain opacity-80" />
-        <img src="https://static.wixstatic.com/media/600582_fbdd14dd878d401890627eb7f701cd66~mv2.png" alt="MIFA Moscow International Foto Awards" loading="lazy" decoding="async" class="h-14 w-auto object-contain opacity-80" />
-        <img src="https://static.wixstatic.com/media/600582_3bc5573e9969414b839d337d95269b6f~mv2.png" alt="International Color Awards" loading="lazy" decoding="async" class="h-14 w-auto object-contain opacity-80" />
-        <img src="https://static.wixstatic.com/media/600582_0334b4cb9a1b4846963c5c3631d83b47~mv2.png" alt="IPA International Photo Awards — 2° place Wedding 2016" loading="lazy" decoding="async" class="h-14 w-auto object-contain opacity-80" />
+        {[
+          { src: heroContent.awardLogo1, alt: "Vogue Sposa", class: "h-12 w-auto" },
+          { src: heroContent.awardLogo2, alt: "Wezoree", class: "h-10 w-auto" },
+          { src: heroContent.awardLogo3, alt: "IPA International Photo Awards — 1° place Fine Art 2016", class: "h-14 w-auto" },
+          { src: heroContent.awardLogo4, alt: "MIFA Moscow International Foto Awards", class: "h-14 w-auto" },
+          { src: heroContent.awardLogo5, alt: "International Color Awards", class: "h-14 w-auto" },
+          { src: heroContent.awardLogo6, alt: "IPA International Photo Awards — 2° place Wedding 2016", class: "h-14 w-auto" },
+        ].map((logo) => (
+          <img
+            src={`https://static.wixstatic.com/media/${mediaKey(logo.src)}`}
+            alt={logo.alt}
+            loading="lazy"
+            decoding="async"
+            class={`object-contain opacity-80 ${logo.class}`}
+          />
+        ))}
       </div>
-      <a href="/awards" class="mt-8 rounded-control btn-ghost no-underline">Tutti i premi e le mostre</a>
+      <a href="/awards" class="mt-8 rounded-control btn-ghost no-underline">{heroContent.awardsCta}</a>
     </div>
   </section>
 
   <section class="px-6 py-20">
     <div class="mx-auto max-w-3xl text-center">
       <blockquote class="border-l-2 border-accent pl-6 text-left">
-        <p class="font-display text-2xl italic leading-snug">"Ma chi era il fotografo? Non l'abbiamo nemmeno notato, eppure le foto sono incredibili."</p>
-        <p class="mt-3 text-xs uppercase tracking-widest text-muted-foreground">Gli ospiti, a ogni matrimonio</p>
+        <p class="font-display text-2xl italic leading-snug">{heroContent.quoteText}</p>
+        <p class="mt-3 text-xs uppercase tracking-widest text-muted-foreground">{heroContent.quoteSource}</p>
       </blockquote>
-      <a href="/recensioni" class="mt-6 rounded-control btn-ghost no-underline">Leggi le recensioni delle coppie</a>
+      <a href="/recensioni" class="mt-6 rounded-control btn-ghost no-underline">{heroContent.quoteCta}</a>
     </div>
   </section>
 
@@ -409,8 +414,8 @@ const alignFor = (i: number): "center" | "right" | "left" =>
       <section class="border-y border-border bg-secondary px-6 py-24">
         <div class="mx-auto max-w-3xl">
           <div class="text-center">
-            <p class="eyebrow text-muted-foreground">FAQ</p>
-            <h2 class="font-display mt-3 text-3xl font-medium tracking-tight sm:text-4xl">Domande frequenti</h2>
+            <p class="eyebrow text-muted-foreground">{heroContent.faqEyebrow}</p>
+            <h2 class="font-display mt-3 text-3xl font-medium tracking-tight sm:text-4xl">{heroContent.faqTitle}</h2>
           </div>
           <dl class="mt-14 border-b border-border">
             {faqPreview.map((q) => (
@@ -421,7 +426,7 @@ const alignFor = (i: number): "center" | "right" | "left" =>
             ))}
           </dl>
           <div class="mt-12 text-center">
-            <a href="/faq" class="rounded-control border border-foreground px-8 py-3 text-sm font-medium no-underline transition-colors hover:bg-foreground hover:text-primary-foreground">Tutte le domande e le risposte</a>
+              <a href="/faq" class="rounded-control border border-foreground px-8 py-3 text-sm font-medium no-underline transition-colors hover:bg-foreground hover:text-primary-foreground">{heroContent.faqCta}</a>
           </div>
         </div>
       </section>
@@ -429,10 +434,10 @@ const alignFor = (i: number): "center" | "right" | "left" =>
   }
 
   <section class="px-6 py-24 text-center">
-    <p class="eyebrow">Heart to Heart</p>
-    <h2 class="font-display mx-auto mt-4 max-w-3xl text-4xl font-medium leading-tight sm:text-5xl">Quando sarete pronti, basterà un messaggio</h2>
-    <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">Risposta entro 48 ore. Nessuna fretta, nessuna pressione: solo una conversazione sulla vostra storia.</p>
-    <a href="/contatti" class="mt-8 inline-block rounded-control border border-foreground bg-foreground px-8 py-3 text-sm font-medium text-primary-foreground no-underline transition-colors hover:border-accent hover:bg-accent">Conosci Stefano</a>
+    <p class="eyebrow">{heroContent.ctaEyebrow}</p>
+    <h2 class="font-display mx-auto mt-4 max-w-3xl text-4xl font-medium leading-tight sm:text-5xl">{heroContent.ctaTitle}</h2>
+    <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">{heroContent.ctaText}</p>
+    <a href="/contatti" class="mt-8 inline-block rounded-control border border-foreground bg-foreground px-8 py-3 text-sm font-medium text-primary-foreground no-underline transition-colors hover:border-accent hover:bg-accent">{heroContent.ctaButton}</a>
   </section>
 </SiteLayout>
 

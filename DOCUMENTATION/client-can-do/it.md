@@ -50,12 +50,13 @@ Le collezioni di progetti e le loro pagine si gestiscono dall'app **Wix Portfoli
 ## Testi di pagina gestiti da CMS
 
 Queste pagine sono collection **Single Item**: un solo record ciascuna, modificabile come un
-modulo. I campi sono `eyebrow`, `title`, `intro` e `body` (testo formattato). Ogni salvataggio
-appare sul sito in tempo reale, senza redeploy.
+modulo. I campi di base sono `eyebrow`, `title` e `intro`; le pagine con testo completo hanno
+anche `body` (testo formattato) e quelle legali un campo `version`. Ogni salvataggio appare sul
+sito in tempo reale, senza redeploy.
 
 | Pagina            | Collezione     | Dove                                                                                                            |
 | ----------------- | -------------- | --------------------------------------------------------------------------------------------------------------- |
-| `/` (hero)        | `Home`         | [Home](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Home)                 |
+| `/`               | `Home`         | [Home](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Home)                 |
 | `/il-mio-metodo`  | `IlMetodo`     | [Il Metodo](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/IlMetodo)        |
 | `/chi-sono`       | `ChiSono`      | [Chi Sono](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/ChiSono)          |
 | `/contatti`       | `Contatti`     | [Contatti](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Contatti)         |
@@ -68,13 +69,15 @@ appare sul sito in tempo reale, senza redeploy.
 | `/legal` (testata)| `LegalIndex`   | [Documenti legali](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/LegalIndex) |
 | `/404`            | `NotFound`     | [404](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/NotFound)              |
 
-Perimetro per pagina: in `/` modifichi solo il testo dell'hero (slide, gallerie e sezioni
-sottostanti restano fisse); in `/contatti`, `/video` e `/recensioni` modifichi il testo
-dell'intestazione (il modulo, i video e le card delle recensioni restano fissi); in `/awards`
-sono modificabili gli elenchi di premi e mostre, la griglia dei sigilli resta fissa;
-`/fine-art`, `/location`, `/investimento`, `/il-mio-metodo` e `/chi-sono` sono completamente
-modificabili. Il SEO della pagina (titolo e descrizione per Google) NON è più nel CMS: si
-gestisce nelle impostazioni SEO, vedi sotto.
+Perimetro per pagina: in `/` sono modificabili testo, immagini e video di ogni sezione (slide
+hero, presentazione, intro delle gallerie, video di presentazione, i tre tipi di foto, sezione
+foto/video, testata del blog, riconoscimenti, citazioni, testata FAQ e invito finale — le
+griglie delle gallerie mantengono il loro layout); in `/contatti`, `/video` e `/recensioni`
+modifichi il testo dell'intestazione (il modulo, i video e le card delle recensioni restano
+fissi); in `/awards` sono modificabili gli elenchi di premi e mostre, la griglia dei sigilli
+resta fissa; `/fine-art`, `/location`, `/investimento`, `/il-mio-metodo` e `/chi-sono` sono
+completamente modificabili. Il SEO della pagina (titolo e descrizione per Google) NON è più
+nel CMS: si gestisce nelle impostazioni SEO, vedi sotto.
 
 ## Documenti legali (CMS)
 

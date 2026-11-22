@@ -1,5 +1,10 @@
 import { queryItems } from "@/wix/cms/items";
-import { toSitePageContent, type SitePageContent } from "./site-content-core";
+import {
+  toHomeContent,
+  toSitePageContent,
+  type HomeContent,
+  type SitePageContent,
+} from "./site-content-core";
 
 const SITE_PAGE_COLLECTIONS = {
   home: "Home",
@@ -34,5 +39,12 @@ export async function getSitePageContent(page: SitePageId): Promise<SitePageCont
   const content = toSitePageContent(result.items[0] ?? null);
   if (!content)
     throw new Error(`SiteContent: no item in collection "${SITE_PAGE_COLLECTIONS[page]}".`);
+  return content;
+}
+
+export async function getHomeContent(): Promise<HomeContent> {
+  const result = await queryItems("Home", { limit: 1 });
+  const content = toHomeContent(result.items[0] ?? null);
+  if (!content) throw new Error('SiteContent: no item in collection "Home".');
   return content;
 }

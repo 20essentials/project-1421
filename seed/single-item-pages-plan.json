@@ -93,18 +93,13 @@
         {
           "key": "intro",
           "type": "TEXT"
-        },
-        {
-          "key": "body",
-          "type": "RICH_TEXT"
         }
       ],
       "items": [
         {
           "eyebrow": "Heart to Heart",
           "title": "Benvenuto nella tua storia",
-          "intro": "Raccontami chi siete e come immaginate il vostro giorno: la risposta arriva entro 48 ore.",
-          "body": ""
+          "intro": "Raccontami chi siete e come immaginate il vostro giorno: la risposta arriva entro 48 ore."
         }
       ]
     },
@@ -129,18 +124,13 @@
         {
           "key": "intro",
           "type": "TEXT"
-        },
-        {
-          "key": "body",
-          "type": "RICH_TEXT"
         }
       ],
       "items": [
         {
           "eyebrow": "Wedding films",
           "title": "Le storie in movimento",
-          "intro": "Oltre alla fotografia: reel e film di matrimonio che restituiscono ritmo, sguardi e atmosfera della giornata.",
-          "body": ""
+          "intro": "Oltre alla fotografia: reel e film di matrimonio che restituiscono ritmo, sguardi e atmosfera della giornata."
         }
       ]
     },
@@ -309,18 +299,13 @@
         {
           "key": "intro",
           "type": "TEXT"
-        },
-        {
-          "key": "body",
-          "type": "RICH_TEXT"
         }
       ],
       "items": [
         {
           "eyebrow": "Recensioni",
           "title": "La differenza che si vede e si sente",
-          "intro": "Parole di coppie reali, copiate qui dal testo originale. Nessuna sintesi: ogni recensione è integrale.",
-          "body": ""
+          "intro": "Parole di coppie reali, copiate qui dal testo originale. Nessuna sintesi: ogni recensione è integrale."
         }
       ]
     },
@@ -798,8 +783,328 @@
           "type": "TEXT"
         },
         {
-          "key": "body",
-          "type": "RICH_TEXT"
+          "key": "heroCta",
+          "type": "TEXT"
+        },
+        {
+          "key": "heroCta2",
+          "type": "TEXT"
+        },
+        {
+          "key": "slide2Eyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "slide2Title",
+          "type": "TEXT"
+        },
+        {
+          "key": "slide2Intro",
+          "type": "TEXT"
+        },
+        {
+          "key": "slide2Cta",
+          "type": "TEXT"
+        },
+        {
+          "key": "slide3Eyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "slide3Title",
+          "type": "TEXT"
+        },
+        {
+          "key": "slide3Intro",
+          "type": "TEXT"
+        },
+        {
+          "key": "slide3Cta",
+          "type": "TEXT"
+        },
+        {
+          "key": "aboutText1",
+          "type": "TEXT"
+        },
+        {
+          "key": "aboutText2",
+          "type": "TEXT"
+        },
+        {
+          "key": "aboutCta",
+          "type": "TEXT"
+        },
+        {
+          "key": "aboutCta2",
+          "type": "TEXT"
+        },
+        {
+          "key": "arteEyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "arteTitle",
+          "type": "TEXT"
+        },
+        {
+          "key": "arteIntro",
+          "type": "TEXT"
+        },
+        {
+          "key": "arteSingulartLabel",
+          "type": "TEXT"
+        },
+        {
+          "key": "arteSingulartCta",
+          "type": "TEXT"
+        },
+        {
+          "key": "arteLunagalleryLabel",
+          "type": "TEXT"
+        },
+        {
+          "key": "arteLunagalleryCta",
+          "type": "TEXT"
+        },
+        {
+          "key": "presentoEyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "presentoTitle",
+          "type": "TEXT"
+        },
+        {
+          "key": "presentoIntro",
+          "type": "TEXT"
+        },
+        {
+          "key": "presentoCaption",
+          "type": "TEXT"
+        },
+        {
+          "key": "presentoLink",
+          "type": "TEXT"
+        },
+        {
+          "key": "manifestoQuote",
+          "type": "TEXT"
+        },
+        {
+          "key": "manifestoText",
+          "type": "TEXT"
+        },
+        {
+          "key": "manifestoWelcome",
+          "type": "TEXT"
+        },
+        {
+          "key": "shot1Eyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "shot1Text",
+          "type": "TEXT"
+        },
+        {
+          "key": "shot2Eyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "shot2Text",
+          "type": "TEXT"
+        },
+        {
+          "key": "shot3Eyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "shot3Text",
+          "type": "TEXT"
+        },
+        {
+          "key": "shotsCta",
+          "type": "TEXT"
+        },
+        {
+          "key": "fvEyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "fvTitle",
+          "type": "TEXT"
+        },
+        {
+          "key": "fvText",
+          "type": "TEXT"
+        },
+        {
+          "key": "fvCta",
+          "type": "TEXT"
+        },
+        {
+          "key": "fvCaption",
+          "type": "TEXT"
+        },
+        {
+          "key": "storiesEyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "storiesTitle",
+          "type": "TEXT"
+        },
+        {
+          "key": "storiesCta",
+          "type": "TEXT"
+        },
+        {
+          "key": "awardsEyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "awardsTitle",
+          "type": "TEXT"
+        },
+        {
+          "key": "awardsText",
+          "type": "TEXT"
+        },
+        {
+          "key": "awardsCta",
+          "type": "TEXT"
+        },
+        {
+          "key": "quoteText",
+          "type": "TEXT"
+        },
+        {
+          "key": "quoteSource",
+          "type": "TEXT"
+        },
+        {
+          "key": "quoteCta",
+          "type": "TEXT"
+        },
+        {
+          "key": "faqEyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "faqTitle",
+          "type": "TEXT"
+        },
+        {
+          "key": "faqCta",
+          "type": "TEXT"
+        },
+        {
+          "key": "ctaEyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "ctaTitle",
+          "type": "TEXT"
+        },
+        {
+          "key": "ctaText",
+          "type": "TEXT"
+        },
+        {
+          "key": "ctaButton",
+          "type": "TEXT"
+        },
+        {
+          "key": "aboutIntro",
+          "type": "TEXT"
+        },
+        {
+          "key": "presentoVideoId",
+          "type": "TEXT"
+        },
+        {
+          "key": "fvVideoUrl",
+          "type": "TEXT"
+        },
+        {
+          "key": "gridEyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "gridTitle",
+          "type": "TEXT"
+        },
+        {
+          "key": "gridCta",
+          "type": "TEXT"
+        },
+        {
+          "key": "parallaxEyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "parallaxTitle",
+          "type": "TEXT"
+        },
+        {
+          "key": "parallaxLine",
+          "type": "TEXT"
+        },
+        {
+          "key": "heroImage",
+          "type": "IMAGE"
+        },
+        {
+          "key": "heroImage2",
+          "type": "IMAGE"
+        },
+        {
+          "key": "slide2Image",
+          "type": "IMAGE"
+        },
+        {
+          "key": "slide3Image",
+          "type": "IMAGE"
+        },
+        {
+          "key": "aboutImage",
+          "type": "IMAGE"
+        },
+        {
+          "key": "fvPoster",
+          "type": "IMAGE"
+        },
+        {
+          "key": "singulartLogo",
+          "type": "IMAGE"
+        },
+        {
+          "key": "lunagalleryLogo",
+          "type": "IMAGE"
+        },
+        {
+          "key": "awardLogo1",
+          "type": "IMAGE"
+        },
+        {
+          "key": "awardLogo2",
+          "type": "IMAGE"
+        },
+        {
+          "key": "awardLogo3",
+          "type": "IMAGE"
+        },
+        {
+          "key": "awardLogo4",
+          "type": "IMAGE"
+        },
+        {
+          "key": "awardLogo5",
+          "type": "IMAGE"
+        },
+        {
+          "key": "awardLogo6",
+          "type": "IMAGE"
         }
       ],
       "items": [
@@ -807,7 +1112,87 @@
           "eyebrow": "Fotografo di matrimoni | Fine Art | Fotoreporter",
           "title": "Matrimoni come opere d'arte, non come catene di montaggio",
           "intro": "Destination wedding tra Italia e Austria. Ogni scatto è un quadro d'arte.",
-          "body": ""
+          "heroCta": "Raccontami la vostra storia",
+          "heroCta2": "Guarda il portfolio",
+          "slide2Eyebrow": "Fotografia d'arte",
+          "slide2Title": "Non solo matrimoni: anche arte",
+          "slide2Intro": "Le opere di Stefano sono esposte e acquistabili su Singulart. Luce, composizione, atmosfera: la stessa ricerca entra in ogni scatto.",
+          "slide2Cta": "Scopri le opere",
+          "slide3Eyebrow": "Fine Art Wedding",
+          "slide3Title": "Matrimoni come opere d'arte",
+          "slide3Intro": "Ogni scatto è un quadro: la stessa visione delle opere fine art, portata nel vostro giorno.",
+          "slide3Cta": "Guarda il portfolio",
+          "aboutText1": "Quindici anni di fotogiornalismo gli hanno insegnato a leggere una scena prima che accada e a diventare invisibile. La ricerca delle opere d'arte — luce, composizione, atmosfera, oltre 100 premi internazionali e qualifica QEP — gli ha dato la visione. Dal 2012 unisce i due mondi in un unico metodo, portato nei matrimoni tra Italia e Austria.",
+          "aboutText2": "Le sue opere sono esposte e acquistabili su Singulart. Vive tra Italia e Austria e parla italiano, tedesco e inglese: parlare con tutti gli ospiti nella loro lingua cambia le fotografie.",
+          "aboutCta": "Scopri la sua storia",
+          "aboutCta2": "Premi e riconoscimenti",
+          "arteEyebrow": "Fotografia artistica",
+          "arteTitle": "Oltre i matrimoni: le opere",
+          "arteIntro": "Ogni scatto nasce dalla stessa ricerca delle opere d'arte — luce, composizione, atmosfera. Il lavoro personale di Stefano è esposto e acquistabile nelle gallerie online.",
+          "arteSingulartLabel": "Opere originali esposte e acquistabili",
+          "arteSingulartCta": "Visita la pagina dell'artista →",
+          "arteLunagalleryLabel": "Fine art portrait in edizione limitata",
+          "arteLunagalleryCta": "Esplora LunaGallery →",
+          "presentoEyebrow": "Mi presento",
+          "presentoTitle": "Un volto, una voce, un metodo",
+          "presentoIntro": "Prima dei premi e delle fotografie, c'è una persona. In questo minuto vi racconto chi sono e come guardo un giorno di matrimonio — senza filtri, come con il rullino.",
+          "presentoCaption": "«Un minuto per conoscervi, una giornata per raccontarvi.»",
+          "presentoLink": "Guarda i wedding film e i reel",
+          "manifestoQuote": "\"Ti hanno detto che deve essere il giorno più bello della tua vita. Nessuno ti ha detto che deve essere il tuo.\"",
+          "manifestoText": "Esiste un'altra strada. Più lenta. Più rara. Più umana. Una fotografia che si prende il tempo di conoscerti prima di fotografarti, che consegna cento immagini straordinarie invece di mille dimenticabili, che tratta il matrimonio per quello che è: un'opera d'arte.",
+          "manifestoWelcome": "Benvenuto nella tua storia.",
+          "shot1Eyebrow": "La foto iconica naturale",
+          "shot1Text": "Non forzata, non posata, ma tecnicamente perfetta: il soggetto nella luce giusta — e non lo sa.",
+          "shot2Eyebrow": "La candid foto",
+          "shot2Text": "Interazione vera — una risata, un abbraccio, uno sguardo — impostata a livello tecnico.",
+          "shot3Eyebrow": "Lo snapshot",
+          "shot3Text": "Catturato in real-time senza alcun intervento: il livello più intimo.",
+          "shotsCta": "Scopri il Metodo Fusion",
+          "fvEyebrow": "L'opera in divenire",
+          "fvTitle": "La tela si dipinge, l'obbiettivo racconta",
+          "fvText": "A volte la macchina da presa si punta su di me: registro la nascita delle mie opere, dalla prima pennellata all'ultima luce. Lo stesso sguardo che segue un matrimonio guarda anche la tela.",
+          "fvCta": "Guarda i wedding film e i reel →",
+          "fvCaption": "«Ogni opera nasce dallo stesso sguardo.»",
+          "storiesEyebrow": "Ultime storie",
+          "storiesTitle": "Dietro l'obiettivo",
+          "storiesCta": "Tutti gli articoli",
+          "awardsEyebrow": "Riconoscimenti",
+          "awardsTitle": "Oltre 100 premi internazionali",
+          "awardsText": "IPA International Photo Awards · International Color Awards · B&W Spider Awards · MIFA Moscow · WPGA · ANFM · Qualifica QEP",
+          "awardsCta": "Tutti i premi e le mostre",
+          "quoteText": "\"Ma chi era il fotografo? Non l'abbiamo nemmeno notato, eppure le foto sono incredibili.\"",
+          "quoteSource": "Gli ospiti, a ogni matrimonio",
+          "quoteCta": "Leggi le recensioni delle coppie",
+          "faqEyebrow": "FAQ",
+          "faqTitle": "Domande frequenti",
+          "faqCta": "Tutte le domande e le risposte",
+          "ctaEyebrow": "Heart to Heart",
+          "ctaTitle": "Quando sarete pronti, basterà un messaggio",
+          "ctaText": "Risposta entro 48 ore. Nessuna fretta, nessuna pressione: solo una conversazione sulla vostra storia.",
+          "ctaButton": "Conosci Stefano",
+          "aboutIntro": "Fotografo con oltre trent'anni di esperienza: fotogiornalista per le maggiori testate italiane, artista fine art premiato in tutto il mondo, fotografo di matrimoni dal 2012.",
+          "presentoVideoId": "5gY0HgkSVjU",
+          "fvVideoUrl": "https://video.wixstatic.com/video/600582_ebf55de548bd485d860b78ad136c87e4/file",
+          "gridEyebrow": "Portfolio",
+          "gridTitle": "Autentiche e naturali. Eleganti e iconiche.",
+          "gridCta": "Guarda tutto il portfolio",
+          "parallaxEyebrow": "Fine Art",
+          "parallaxTitle": "Foto Artistiche",
+          "parallaxLine": "Opere che portano l'invisibile nel visibile: luce, composizione, atmosfera.",
+          "heroImage": "wix:image://v1/600582_d3da93d4d8584fd282a085b093fc7b9d~mv2.avif/new-hero.jpg#originWidth=2752&originHeight=1536",
+          "heroImage2": "wix:image://v1/600582_29f0dfe738694177b687ea3b4af8dcbb~mv2.avif/slide-secondary.avif",
+          "slide2Image": "wix:image://v1/600582_52669cad776f4a7e9c9b14d257a2da13~mv2.avif/slide-art-gallery.avif#originWidth=4032&originHeight=3024",
+          "slide3Image": "wix:image://v1/600582_d6196421a6164916a081fe5ffd20de27~mv2.avif/slide-veil-bw.avif#originWidth=4961&originHeight=3425",
+          "aboutImage": "wix:image://v1/600582_4f4ec030097f4d19b03ee08e8c2b7c1c~mv2.jpg/stefano-u1.jpg",
+          "fvPoster": "wix:image://v1/600582_7aee14ecf9714020be28dcff3d7a17a2~mv2.avif/poster.avif",
+          "singulartLogo": "wix:image://v1/600582_69556f102c7c4109b35799dda4f34a70~mv2.png/singulart.png",
+          "lunagalleryLogo": "wix:image://v1/600582_eb36bc46a1c240ea8c4629a013cdb253~mv2.avif/lunagallery.avif",
+          "awardLogo1": "wix:image://v1/600582_c6b21435075c4f75a2e85ae788bd40f8~mv2.png/vogue-sposa.png",
+          "awardLogo2": "wix:image://v1/600582_ddc10a9178a043be98339105c08ea8d5~mv2.png/wezoree.png",
+          "awardLogo3": "wix:image://v1/600582_02a8c1efe51347b6b7f588636d848557~mv2.png/ipa-1st.png",
+          "awardLogo4": "wix:image://v1/600582_fbdd14dd878d401890627eb7f701cd66~mv2.png/mifa.png",
+          "awardLogo5": "wix:image://v1/600582_3bc5573e9969414b839d337d95269b6f~mv2.png/ica.png",
+          "awardLogo6": "wix:image://v1/600582_0334b4cb9a1b4846963c5c3631d83b47~mv2.png/ipa-2nd.png"
         }
       ]
     },
@@ -832,18 +1217,13 @@
         {
           "key": "intro",
           "type": "TEXT"
-        },
-        {
-          "key": "body",
-          "type": "RICH_TEXT"
         }
       ],
       "items": [
         {
           "eyebrow": "Errore 404",
           "title": "Pagina non trovata",
-          "intro": "La pagina che cerchi non esiste o è stata spostata.",
-          "body": ""
+          "intro": "La pagina che cerchi non esiste o è stata spostata."
         }
       ]
     },
@@ -868,18 +1248,13 @@
         {
           "key": "intro",
           "type": "TEXT"
-        },
-        {
-          "key": "body",
-          "type": "RICH_TEXT"
         }
       ],
       "items": [
         {
           "eyebrow": "Documenti legali",
           "title": "Informazioni e impegni",
-          "intro": "Un unico punto di accesso ai documenti che regolano l'utilizzo del sito, il trattamento dei dati e l'impegno verso un'esperienza accessibile.",
-          "body": ""
+          "intro": "Un unico punto di accesso ai documenti che regolano l'utilizzo del sito, il trattamento dei dati e l'impegno verso un'esperienza accessibile."
         }
       ]
     }

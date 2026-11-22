@@ -34,9 +34,18 @@ const SLIDES: Slide[] = [
 interface Props {
   ctaHref?: string;
   ctaLabel?: string;
+  eyebrow?: string;
+  title?: string;
+  line?: string;
 }
 
-const { ctaHref = "/fine-art", ctaLabel = "Scopri le opere" } = Astro.props;
+const {
+  ctaHref = "/fine-art",
+  ctaLabel = "Scopri le opere",
+  eyebrow = "Fine Art",
+  title = "Foto Artistiche",
+  line = "Opere che portano l'invisibile nel visibile: luce, composizione, atmosfera.",
+} = Astro.props;
 
 const INTERVAL = 5000;
 const WIDTHS = [1280, 1600, 2000, 2400];
@@ -76,9 +85,9 @@ const slides = SLIDES.map((s) => ({
   />
   <div class="art-parallax__scrim"></div>
   <div class="art-parallax__copy">
-    <p class="eyebrow">Fine Art</p>
-    <h2 class="font-display art-parallax__title">Foto Artistiche</h2>
-    <p class="art-parallax__line">Opere che portano l'invisibile nel visibile: luce, composizione, atmosfera.</p>
+    <p class="eyebrow">{eyebrow}</p>
+    <h2 class="font-display art-parallax__title">{title}</h2>
+    <p class="art-parallax__line">{line}</p>
     <p class="art-parallax__where">Opere esposte e acquistabili su <a href="https://www.singulart.com/it/artista/stefano-lunardi-37102" target="_blank" rel="noopener">Singulart</a> e <a href="https://www.artlunagallery.com/fine-art-portrait" target="_blank" rel="noopener">LunaGallery</a>.</p>
     {ctaHref && ctaLabel && <a href={ctaHref} class="art-parallax__cta">{ctaLabel}</a>}
   </div>
