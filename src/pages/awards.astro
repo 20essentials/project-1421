@@ -4,16 +4,16 @@ import { getSitePageContent } from "@/features/site-content/site-content";
 import "@/features/site-content/site-content.css";
 
 const seals = [
-  { src: "https://static.wixstatic.com/media/600582_fba6dd2ca035494cb920338e825adfa2~mv2.jpg", alt: "Qualifica QEP — Qualified European Photographer" },
-  { src: "https://static.wixstatic.com/media/600582_02a8c1efe51347b6b7f588636d848557~mv2.png", alt: "IPA International Photo Awards — winner seal" },
-  { src: "https://static.wixstatic.com/media/600582_0334b4cb9a1b4846963c5c3631d83b47~mv2.png", alt: "IPA International Photo Awards — 2° place Wedding 2016" },
-  { src: "https://static.wixstatic.com/media/600582_8a308e530faa45cfbcdf8ea49c438de9~mv2.png", alt: "IPA International Photo Awards — 3° place \"Black Heart\" 2020" },
-  { src: "https://static.wixstatic.com/media/600582_bd28daabcca94357bd6e3a41e0d4ea3a~mv2.jpg", alt: "B&W Spider Awards — honorable mention" },
-  { src: "https://static.wixstatic.com/media/600582_3bc5573e9969414b839d337d95269b6f~mv2.png", alt: "International Color Awards — winner 11th edizione" },
-  { src: "https://static.wixstatic.com/media/600582_6b844f98f59f4792af43ce1483106b65~mv2.jpg", alt: "International Color Awards — Color Master nominee" },
-  { src: "https://static.wixstatic.com/media/600582_fbdd14dd878d401890627eb7f701cd66~mv2.png", alt: "MIFA Moscow International Foto Awards — silver 2017" },
-  { src: "https://static.wixstatic.com/media/600582_c44541e7e73d4a8aad75998536353639~mv2.png", alt: "WPGA — honorable mention 2016" },
-  { src: "https://static.wixstatic.com/media/600582_e670259e22cb4eec80d2b88f434b4584~mv2.jpeg", alt: "La Grande Plaque" },
+  { src: "https://static.wixstatic.com/media/600582_fba6dd2ca035494cb920338e825adfa2~mv2.jpg", alt: "Qualifica QEP — Qualified European Photographer", width: 1029, height: 1004 },
+  { src: "https://static.wixstatic.com/media/600582_02a8c1efe51347b6b7f588636d848557~mv2.png", alt: "IPA International Photo Awards — winner seal", width: 800, height: 790 },
+  { src: "https://static.wixstatic.com/media/600582_0334b4cb9a1b4846963c5c3631d83b47~mv2.png", alt: "IPA International Photo Awards — 2° place Wedding 2016", width: 800, height: 790 },
+  { src: "https://static.wixstatic.com/media/600582_8a308e530faa45cfbcdf8ea49c438de9~mv2.png", alt: "IPA International Photo Awards — 3° place \"Black Heart\" 2020", width: 2000, height: 2061 },
+  { src: "https://static.wixstatic.com/media/600582_bd28daabcca94357bd6e3a41e0d4ea3a~mv2.jpg", alt: "B&W Spider Awards — honorable mention", width: 483, height: 837 },
+  { src: "https://static.wixstatic.com/media/600582_3bc5573e9969414b839d337d95269b6f~mv2.png", alt: "International Color Awards — winner 11th edizione", width: 250, height: 251 },
+  { src: "https://static.wixstatic.com/media/600582_6b844f98f59f4792af43ce1483106b65~mv2.jpg", alt: "International Color Awards — Color Master nominee", width: 250, height: 245 },
+  { src: "https://static.wixstatic.com/media/600582_fbdd14dd878d401890627eb7f701cd66~mv2.png", alt: "MIFA Moscow International Foto Awards — silver 2017", width: 702, height: 702 },
+  { src: "https://static.wixstatic.com/media/600582_c44541e7e73d4a8aad75998536353639~mv2.png", alt: "WPGA — honorable mention 2016", width: 800, height: 300 },
+  { src: "https://static.wixstatic.com/media/600582_e670259e22cb4eec80d2b88f434b4584~mv2.jpeg", alt: "La Grande Plaque", width: 360, height: 360 },
 ];
 
 const content = await getSitePageContent("awards");
@@ -32,7 +32,7 @@ const content = await getSitePageContent("awards");
       {
         seals.map((s) => (
           <div class="flex h-32 items-center justify-center border border-border bg-background p-3">
-            <img src={s.src} alt={s.alt} loading="lazy" decoding="async" class="max-h-full max-w-full object-contain" />
+            <img src={s.src} alt={s.alt} loading="lazy" decoding="async" class="max-h-full max-w-full object-contain" width={s.width} height={s.height} style={`aspect-ratio: ${s.width} / ${s.height}`} />
           </div>
         ))
       }

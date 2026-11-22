@@ -209,6 +209,9 @@ const alignFor = (i: number): "center" | "right" | "left" =>
               loading="lazy"
               decoding="async"
               class="fa-card__logo fa-card__logo--wide"
+              style="aspect-ratio: 2222 / 393"
+              width="2222"
+              height="393"
             />
           </span>
           <h3 class="font-display fa-card__title">Singulart</h3>
@@ -228,6 +231,9 @@ const alignFor = (i: number): "center" | "right" | "left" =>
               loading="lazy"
               decoding="async"
               class="fa-card__logo fa-card__logo--square"
+              style="aspect-ratio: 2252 / 2126"
+              width="2252"
+              height="2126"
             />
           </span>
           <h3 class="font-display fa-card__title">LunaGallery</h3>
@@ -379,12 +385,12 @@ const alignFor = (i: number): "center" | "right" | "left" =>
       <p class="mt-4 text-sm leading-relaxed text-muted-foreground">{heroContent.awardsText}</p>
       <div class="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
         {[
-          { src: heroContent.awardLogo1, alt: "Vogue Sposa", class: "h-12 w-auto" },
-          { src: heroContent.awardLogo2, alt: "Wezoree", class: "h-10 w-auto" },
-          { src: heroContent.awardLogo3, alt: "IPA International Photo Awards — 1° place Fine Art 2016", class: "h-14 w-auto" },
-          { src: heroContent.awardLogo4, alt: "MIFA Moscow International Foto Awards", class: "h-14 w-auto" },
-          { src: heroContent.awardLogo5, alt: "International Color Awards", class: "h-14 w-auto" },
-          { src: heroContent.awardLogo6, alt: "IPA International Photo Awards — 2° place Wedding 2016", class: "h-14 w-auto" },
+          { src: heroContent.awardLogo1, alt: "Vogue Sposa", class: "h-12 w-auto", width: 600, height: 600 },
+          { src: heroContent.awardLogo2, alt: "Wezoree", class: "h-10 w-auto", width: 5552, height: 1700 },
+          { src: heroContent.awardLogo3, alt: "IPA International Photo Awards — 1° place Fine Art 2016", class: "h-14 w-auto", width: 800, height: 790 },
+          { src: heroContent.awardLogo4, alt: "MIFA Moscow International Foto Awards", class: "h-14 w-auto", width: 702, height: 702 },
+          { src: heroContent.awardLogo5, alt: "International Color Awards", class: "h-14 w-auto", width: 250, height: 251 },
+          { src: heroContent.awardLogo6, alt: "IPA International Photo Awards — 2° place Wedding 2016", class: "h-14 w-auto", width: 800, height: 790 },
         ].map((logo) => (
           <img
             src={`https://static.wixstatic.com/media/${mediaKey(logo.src)}`}
@@ -392,6 +398,9 @@ const alignFor = (i: number): "center" | "right" | "left" =>
             loading="lazy"
             decoding="async"
             class={`object-contain opacity-80 ${logo.class}`}
+            style={`aspect-ratio: ${logo.width} / ${logo.height}`}
+            width={logo.width}
+            height={logo.height}
           />
         ))}
       </div>
