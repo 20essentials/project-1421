@@ -54,10 +54,17 @@ export function imgSrcSet(value: MediaLike, widths: number[] = [320, 480, 640, 9
   if (raw.startsWith("wix:image://") || BARE_FILE_ID.test(raw)) {
     return widths.map((w) => `${imgSrc(value, w, Math.round(w * ratio))} ${w}w`).join(", ");
   }
-  // A resolved Wix URL: …/v1/fill/w_800,h_800,al_c,… — swap the size for each width.
-  const FILL = /\/v1\/fill\/w_\d+,h_\d+/;
-  if (/static\.wixstatic\.com\//.test(raw) && FILL.test(raw)) {
-    return widths.map((w) => `${raw.replace(FILL, `/v1/fill/w_${w},h_${Math.round(w * ratio)}`)} ${w}w`).join(", ");
+  if (/static\.wixstatic\.com\//.test(raw)) {
+    // A resolved Wix URL: …/v1/fill/w_800,h_800,al_c,… — swap the size for each width.
+    const FILL = /\/v1\/fill\/w_\d+,h_\d+/;
+    if (FILL.test(raw)) {
+      return widths.map((w) => `${raw.replace(FILL, `/v1/fill/w_${w},h_${Math.round(w * ratio)}`)} ${w}w`).join(", ");
+    }
+    // A bare /media/<fileId> URL (what IMAGE fields store): issue the width candidates like a bare id.
+    const file = raw.match(/^https:\/\/static\.wixstatic\.com\/media\/([^/?#]+)/)?.[1];
+    if (file) {
+      return widths.map((w) => `${imgSrc(value, w, Math.round(w * ratio))} ${w}w`).join(", ");
+    }
   }
   return raw; // one candidate, never an empty srcset for a real image
 }
