@@ -6,13 +6,19 @@ test.describe("CMS Single Item pages", () => {
     expect(response?.status()).toBeLessThan(500);
 
     await expect(
-      page.getByRole("heading", { level: 1, name: "Matrimoni come opere d'arte, non come catene di montaggio" }),
+      page.getByRole("heading", {
+        level: 1,
+        name: "Matrimoni come opere d'arte, non come catene di montaggio",
+      }),
     ).toBeVisible();
-    await expect(page.getByRole("heading", { name: "Un volto, una voce, un metodo" })).toBeVisible();
-    await expect(page.getByRole("heading", { name: "Dietro l'obiettivo" })).toBeVisible();
     await expect(
-      page.getByRole("link", { name: "Guarda tutto il portfolio" }),
-    ).toHaveAttribute("href", "/portfolio");
+      page.getByRole("heading", { name: "Un volto, una voce, un metodo" }),
+    ).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Dietro l'obiettivo" })).toBeVisible();
+    await expect(page.getByRole("link", { name: "Guarda tutto il portfolio" })).toHaveAttribute(
+      "href",
+      "/portfolio",
+    );
   });
 
   test("il mio metodo renders the seeded page content", async ({ page }) => {
@@ -28,6 +34,32 @@ test.describe("CMS Single Item pages", () => {
       "href",
       "/investimento",
     );
+  });
+
+  test("legal page aligns its column and renders CMS lists as bullets", async ({ page }) => {
+    const response = await page.goto("/legal/termini-e-condizioni", {
+      waitUntil: "domcontentloaded",
+    });
+    expect(response?.status()).toBeLessThan(500);
+
+    const header = page.locator("main header");
+    const body = page.locator("main section.site-content-body");
+    const note = page.locator("main section.site-content-body + p");
+
+    const [headerBox, bodyBox, noteBox] = await Promise.all([
+      header.boundingBox(),
+      body.boundingBox(),
+      note.boundingBox(),
+    ]);
+    expect(headerBox).not.toBeNull();
+    expect(bodyBox).not.toBeNull();
+    expect(noteBox).not.toBeNull();
+    expect(Math.abs(headerBox!.x - bodyBox!.x)).toBeLessThan(1);
+    expect(Math.abs(noteBox!.x - bodyBox!.x)).toBeLessThan(1);
+
+    const list = body.locator("ul").first();
+    await expect(list).toHaveCSS("list-style-type", "disc");
+    await expect(list.locator("li").first()).toBeVisible();
   });
 
   test("chi sono renders the seeded page content", async ({ page }) => {
