@@ -1,0 +1,887 @@
+{
+  "collections": [
+    {
+      "id": "IlMetodo",
+      "displayName": "Il Metodo",
+      "plugins": [
+        {
+          "type": "SINGLE_ITEM",
+          "singleItemOptions": {}
+        }
+      ],
+      "fields": [
+        {
+          "key": "eyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "title",
+          "type": "TEXT"
+        },
+        {
+          "key": "intro",
+          "type": "TEXT"
+        },
+        {
+          "key": "body",
+          "type": "RICH_TEXT"
+        }
+      ],
+      "items": [
+        {
+          "eyebrow": "Il mio metodo",
+          "title": "Non più fotografie. Opere.",
+          "intro": "Il giorno del matrimonio non è il regista che muove marionette: è un testimone silenzioso, un osservatore contemplativo.",
+          "body": "<h2>Cos'è il Metodo Fusion</h2><p>L'eleganza della fotografia di moda e la naturalezza del reportage. Vengo dal fotogiornalismo: gran parte della giornata scorre senza intervenire — nessun \"guardate qui\", nessuna posa. Poi un momento breve e dedicato ai ritratti, con luce e composizione editoriali. Il resto del sito è allineato a questa verità: reportage tutto il giorno, più un breve momento di ritratti curati.</p><h2>Analogico + digitale: la scelta slow</h2><p>Circa 20 rullini per matrimonio per le foto iconiche. Ogni fotogramma è una scelta deliberata: con la mente, con gli occhi, con il cuore. In un'epoca in cui tutto può essere generato dall'AI, il rullino è l'opposto assoluto — un processo chimico-fisico che cattura la realtà senza filtri. Ciò che cattura il rullino è ciò che ricevi: non una versione ottimizzata. La verità. Il digitale è supporto e backup: un assistente scatta in digitale mentre io creo gli scatti iconici in analogico.</p><h2>Le tre tipologie di scatto</h2><ul><li><strong>La foto iconica naturale</strong> — non forzata, non posata, ma tecnicamente perfetta: il soggetto nella luce giusta, composizione giusta, momento giusto — e non lo sa.</li><li><strong>La candid foto</strong> — interazione vera, impostata a livello tecnico: una risata, un abbraccio, uno sguardo.</li><li><strong>Lo snapshot</strong> — catturato totalmente in real-time senza alcun intervento: il livello più intimo, i momenti che gli sposi stessi non sapevano di stare vivendo.</li></ul><h2>I tre incontri preparatori</h2><ul><li><strong>La Mappa Emotiva</strong> — l'incontro conoscitivo ed empatico: la vostra storia, le persone che contano.</li><li><strong>Il Protocollo Invisibile</strong> — le dinamiche familiari, i gesti che risalgono all'infanzia, ciò che non va perduto.</li><li><strong>L'incontro tecnico</strong> — pochi giorni prima: timeline, location, coordinamento con i fornitori.</li></ul><h2>Il vostro viaggio con me</h2><p>Quello che vedrete il giorno del matrimonio è solo la punta dell'iceberg di un lavoro molto più ampio.</p><div class=\"site-content-table\"><table><thead><tr><th>Fase</th><th>Ore</th></tr></thead><tbody><tr><td>Incontri e consulenze pre-matrimonio</td><td>4-6</td></tr><tr><td>Coordinamento con fornitori e location</td><td>2-3</td></tr><tr><td>Preparazione e briefing del team</td><td>2-3</td></tr><tr><td>Check attrezzatura e logistica</td><td>3-4</td></tr><tr><td>Cura dell'immagine professionale</td><td>1-2</td></tr><tr><td>Il giorno del matrimonio</td><td>12-14</td></tr><tr><td>Post-produzione e consegna</td><td>25-40</td></tr><tr class=\"site-content-total\"><td>Totale di dedizione</td><td>50-70</td></tr></tbody></table></div><h2>I valori che guidano ogni scatto</h2><ul><li><strong>Autenticità</strong> — ogni foto è vera o non esiste: mai una posa forzata, mai un momento ricostruito.</li><li><strong>Empatia</strong> — fotografare una coppia con cui hai costruito una relazione è raccontare una storia d'amore.</li><li><strong>Eccellenza</strong> — la spontaneità non è mai una scusa per la mediocrità tecnica: con 20 rullini, ogni fotogramma conta.</li></ul><div class=\"site-content-cta\"><blockquote>Poche foto, ma straordinarie</blockquote><a href=\"/investimento\">Guarda l'investimento</a></div>"
+        }
+      ]
+    },
+    {
+      "id": "ChiSono",
+      "displayName": "Chi Sono",
+      "plugins": [
+        {
+          "type": "SINGLE_ITEM",
+          "singleItemOptions": {}
+        }
+      ],
+      "fields": [
+        {
+          "key": "eyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "title",
+          "type": "TEXT"
+        },
+        {
+          "key": "intro",
+          "type": "TEXT"
+        },
+        {
+          "key": "body",
+          "type": "RICH_TEXT"
+        }
+      ],
+      "items": [
+        {
+          "eyebrow": "Chi sono",
+          "title": "La tua storia, la sua visione",
+          "intro": "L'occhio del fotoreporter e la visione dell'artista fine art, al servizio della vostra storia.",
+          "body": "<h2>Il fotoreporter che ha trovato l'arte nei matrimoni</h2><p>Quindici anni di fotogiornalismo per le maggiori testate italiane: reportage da tutto il mondo. Leggere una scena prima che accada, diventare invisibile, aspettare il momento vero invece di costruirne uno finto. Dal 2012 porto questo sguardo nei matrimoni.</p><h2>L'artista fine art</h2><p>Oltre 100 premi e riconoscimenti internazionali. Qualifica QEP — Qualified European Photographer, settore ritratto — della Federation of European Photographers. Le mie opere sono visibili e acquistabili su <a href=\"https://www.singulart.com/it/artista/stefano-lunardi-37102\" target=\"_blank\" rel=\"noopener\">Singulart</a>.</p><h2>La convergenza</h2><p>Pochissimi fotografi uniscono in un unico metodo la sensibilità del fotoreporter, la visione dell'artista fine art, il rigore dell'analogico e la cura della relazione umana. Il risultato: foto che sono documenti di verità e opere d'arte.</p><h2>Vivo tra Italia e Austria</h2><p>Credo nei valori della famiglia. Vivo tra Italia e Austria — moglie austriaca — e parlo italiano, tedesco e inglese: parlare con tutti gli ospiti nella loro lingua cambia le fotografie.</p><h2>Curriculum</h2><ul><li><strong>1993</strong> — Diploma John Kaverdash School of Photography</li><li><strong>1999-2008</strong> — Fotoreporter per le maggiori testate italiane, reportage da tutto il mondo</li><li><strong>2008-2012</strong> — Fotografo commerciale e pubblicitario (DeLonghi, Calligaris)</li><li><strong>2011</strong> — Qualifica QEP, settore ritratto</li><li><strong>2012-2023</strong> — Oltre 100 premi: IPA, International Color Awards, MIFA, B&W Spider Awards, WPGA, ANFM</li><li><strong>2017</strong> — Ambasciatore della fotografia italiana in Cina</li><li><strong>Mostre personali</strong> — TERRA (Cervignano, Torino), Timeless Woman (Venezia), Vibrations (Gradisca)</li><li><strong>Mostre collettive</strong> — IPA Best Show New York, Parigi, Mosca, Manila; Photovisa Krasnodar; Vivid Foto Gallery Barcellona; LUMINA project Cina; Normal magazine Parigi</li></ul><h2>La mia coppia ideale</h2><p>Coppie straniere o italiane che sognano un matrimonio elegante in Italia e cercano un fotografo che catturi le emozioni con stile autentico, senza tempo e senza stress.</p><div class=\"site-content-cta\"><a href=\"/contatti\">Raccontami la vostra storia</a></div>"
+        }
+      ]
+    },
+    {
+      "id": "Contatti",
+      "displayName": "Contatti",
+      "plugins": [
+        {
+          "type": "SINGLE_ITEM",
+          "singleItemOptions": {}
+        }
+      ],
+      "fields": [
+        {
+          "key": "eyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "title",
+          "type": "TEXT"
+        },
+        {
+          "key": "intro",
+          "type": "TEXT"
+        },
+        {
+          "key": "body",
+          "type": "RICH_TEXT"
+        }
+      ],
+      "items": [
+        {
+          "eyebrow": "Heart to Heart",
+          "title": "Benvenuto nella tua storia",
+          "intro": "Raccontami chi siete e come immaginate il vostro giorno: la risposta arriva entro 48 ore.",
+          "body": ""
+        }
+      ]
+    },
+    {
+      "id": "Video",
+      "displayName": "Video",
+      "plugins": [
+        {
+          "type": "SINGLE_ITEM",
+          "singleItemOptions": {}
+        }
+      ],
+      "fields": [
+        {
+          "key": "eyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "title",
+          "type": "TEXT"
+        },
+        {
+          "key": "intro",
+          "type": "TEXT"
+        },
+        {
+          "key": "body",
+          "type": "RICH_TEXT"
+        }
+      ],
+      "items": [
+        {
+          "eyebrow": "Wedding films",
+          "title": "Le storie in movimento",
+          "intro": "Oltre alla fotografia: reel e film di matrimonio che restituiscono ritmo, sguardi e atmosfera della giornata.",
+          "body": ""
+        }
+      ]
+    },
+    {
+      "id": "FineArt",
+      "displayName": "Fine Art",
+      "plugins": [
+        {
+          "type": "SINGLE_ITEM",
+          "singleItemOptions": {}
+        }
+      ],
+      "fields": [
+        {
+          "key": "eyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "title",
+          "type": "TEXT"
+        },
+        {
+          "key": "intro",
+          "type": "TEXT"
+        },
+        {
+          "key": "body",
+          "type": "RICH_TEXT"
+        }
+      ],
+      "items": [
+        {
+          "eyebrow": "Fine Art",
+          "title": "Modern Elegance",
+          "intro": "Oltre ai matrimoni, espongo e vendo il mio lavoro personale.",
+          "body": "<h2>Continuare a fotografare è come respirare</h2><p>Mi permette di vedere, ogni volta, qualcosa di nuovo nella vostra storia. Le mie opere sono ricerca su luce, composizione e rapporto tra soggetto e spazio: portano l'invisibile nel visibile. Non foto decorative, ma opere che esplorano atmosfera e sentimento.</p><h2>Dove vederle e acquistarle</h2><p><a href=\"https://www.singulart.com/it/artista/stefano-lunardi-37102\" target=\"_blank\" rel=\"noopener\">Singulart — le mie opere</a></p><p><a href=\"https://www.artlunagallery.com/fine-art-portrait\" target=\"_blank\" rel=\"noopener\">LunaGallery — fine art portrait</a></p><h2>Perché conta per il tuo matrimonio</h2><p>La visione artistica entra in ogni scatto del giorno del matrimonio: ogni scena diventa una potenziale opera. È lo stesso sguardo riconosciuto da oltre 100 riconoscimenti internazionali — <a href=\"/awards\">premi e riconoscimenti</a>.</p>"
+        }
+      ]
+    },
+    {
+      "id": "Location",
+      "displayName": "Location",
+      "plugins": [
+        {
+          "type": "SINGLE_ITEM",
+          "singleItemOptions": {}
+        }
+      ],
+      "fields": [
+        {
+          "key": "eyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "title",
+          "type": "TEXT"
+        },
+        {
+          "key": "intro",
+          "type": "TEXT"
+        },
+        {
+          "key": "body",
+          "type": "RICH_TEXT"
+        }
+      ],
+      "items": [
+        {
+          "eyebrow": "Location e destination",
+          "title": "Ovunque mi porti la vostra storia",
+          "intro": "Destination wedding tra Italia e Austria, per le coppie più esigenti.",
+          "body": "<h2>Italia</h2><p>Nord-Est Italia, tra Friuli e Veneto: ville venete, castelli friulani, Dolomiti come sfondo, vigneti collinari, borghi medievali, affacci sul mare. E poi lago di Como, lago di Garda, Toscana, Sicilia, Puglia e Venezia.</p><h2>Austria</h2><p>Kärnten: Faakersee (con l'Islandhotel, raggiungibile solo in barca), Wörthersee, Stift Sankt Georgen am Längsee. Steiermark: Graz, Schloss Kornberg, Schloss Ottersbach. E Lienz / Schloss Linz.</p><h2>Destination wedding</h2><p>Coppie da Inghilterra, America, Spagna, Francia e soprattutto Austria. Matrimoni italo-austriaci, famiglie di lingue e tradizioni diverse: parlo italiano, tedesco e inglese. Le trasferte si concordano al primo incontro.</p><h2>Il territorio come valore</h2><p>Ogni location è già un'opera d'arte naturale. Ho partnership consolidate con le location più prestigiose: conosco già gli spazi, gli angoli migliori, la luce di ogni stagione e ora del giorno, le soluzioni per ogni condizione meteo. Meno stress per gli sposi. Foto migliori.</p>"
+        }
+      ]
+    },
+    {
+      "id": "Investimento",
+      "displayName": "Investimento",
+      "plugins": [
+        {
+          "type": "SINGLE_ITEM",
+          "singleItemOptions": {}
+        }
+      ],
+      "fields": [
+        {
+          "key": "eyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "title",
+          "type": "TEXT"
+        },
+        {
+          "key": "intro",
+          "type": "TEXT"
+        },
+        {
+          "key": "body",
+          "type": "RICH_TEXT"
+        }
+      ],
+      "items": [
+        {
+          "eyebrow": "Investimento e servizi",
+          "title": "Non state comprando 12 ore di foto",
+          "intro": "State investendo in 50-70 ore di dedizione esclusiva al vostro giorno.",
+          "body": "<h2>Cosa include il servizio</h2><ul><li>12-14 ore di copertura full-day, dai preparativi all'ultimo ballo</li><li>Fotografia analogica e digitale: circa 20 rullini per gli scatti iconici</li><li>Video del matrimonio con videomaker interno, stesso metodo e stesso sguardo</li><li>Album fine art: impaginazione personalizzata, stampa su carta museale</li><li>Secondo fotografo e team briefato</li></ul><h2>Investimento</h2><p>Il servizio completo — fotografia, video, album — parte da <strong>5.400 € per il 2027</strong>. Ogni matrimonio è diverso: il preventivo definitivo arriva dopo il primo incontro. Trasparenza totale, nessun costo nascosto.</p><h2>Tempi di consegna</h2><ul><li>Anteprima online entro pochi giorni</li><li>Gallery completa entro 30 giorni</li><li>Provini analogici con pre-selezione: gli sposi scelgono circa 30 foto definitive</li><li>Consultazione album dedicata: un libro fotografico d'autore</li></ul><h2>Poche foto, ma straordinarie</h2><p>Tremila foto indifferenziate non sono un tesoro: sono un archivio ingestibile che non guarderai mai. Consegno centinaia di immagini accuratamente selezionate — non migliaia — e circa 30 stampe analogiche iconiche scelte insieme a voi. Ogni foto consegnata ha una ragione per esistere. La bellezza dell'essenziale.</p><h2>Garanzia pioggia (opzionale)</h2><p>Tornare in location per gli scatti impediti dal maltempo. Alcuni degli scatti più memorabili sono nati proprio sotto la pioggia — ma la scelta resta vostra.</p>"
+        }
+      ]
+    },
+    {
+      "id": "Awards",
+      "displayName": "Awards",
+      "plugins": [
+        {
+          "type": "SINGLE_ITEM",
+          "singleItemOptions": {}
+        }
+      ],
+      "fields": [
+        {
+          "key": "eyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "title",
+          "type": "TEXT"
+        },
+        {
+          "key": "intro",
+          "type": "TEXT"
+        },
+        {
+          "key": "body",
+          "type": "RICH_TEXT"
+        }
+      ],
+      "items": [
+        {
+          "eyebrow": "Premi e riconoscimenti",
+          "title": "Oltre 100 riconoscimenti internazionali",
+          "intro": "Auszeichnungen und Anerkennungen — un percorso che attraversa fotogiornalismo, fine art e wedding.",
+          "body": "<h2>Certificazioni e qualifiche</h2><p><strong>QEP — Qualified European Photographer</strong>, settore ritratto, della Federation of European Photographers.</p><h2>Premi internazionali</h2><ul><li><strong>IPA International Photo Awards</strong> — 1° place Fine Art, New York 2016; 2° place Wedding 2016; 3° place Wedding 2015; 3° place \"Black Heart\" 2020</li><li><strong>International Color Awards / Color Master</strong> — winner 11th edizione, medaglia 14th; 3° place 2018 \"The Tube\"; Merit 2022 \"Basket Playground\"; 3° place 2023 \"Tennis Field\"</li><li><strong>B&W Spider Awards</strong> — finalist 2013, winner 2017 e 2020, Fellow 15th edizione</li><li><strong>MIFA Moscow International Foto Awards</strong> — silver 2017</li><li><strong>WPGA</strong> — honorable mention 2016</li><li><strong>ANFM</strong> — awards 2015</li><li><strong>Vienna Photo Awards</strong> — finalist 2020</li><li><strong>La Grande Plaque</strong></li></ul><h2>Riconoscimenti wedding</h2><ul><li>IPA, categorie wedding 2015-2017</li><li>Wezoree — profilo selezionato</li><li>Vogue Sposa</li></ul><h2>Pubblicazioni e titoli</h2><ul><li>Doho magazine — \"The 100 best color photographers of the year 2022\"</li><li>Ambasciatore della fotografia italiana in Cina (2017)</li><li>Menzioni IPA per il libro \"My vision of Kaernten\" e il progetto \"Mystic Trees\" (2023)</li></ul><h2>Mostre personali</h2><ul><li>2012 — TERRA, Casa della Musica, Cervignano (con Slow Food)</li><li>2012 — TERRA, Salone del Gusto, Torino</li><li>2013 — Timeless Woman, Scuola Grande S. Giovanni Evangelista, Venezia</li><li>2015 — Vibrations, La Fortezza art gallery, Gradisca di Isonzo</li></ul><h2>Mostre collettive</h2><ul><li>IPA Best Show — New York, Parigi, Mosca, Manila (unico italiano presente)</li><li>Photovisa, Krasnodar (Russia)</li><li>Vivid Foto Gallery, Barcellona (The Gala Awards)</li><li>LUMINA project, Cina</li><li>Convention FIOF, Orvieto</li><li>\"Élogie de la féminité\", Normal magazine, Parigi</li></ul>"
+        }
+      ]
+    },
+    {
+      "id": "Recensioni",
+      "displayName": "Recensioni",
+      "plugins": [
+        {
+          "type": "SINGLE_ITEM",
+          "singleItemOptions": {}
+        }
+      ],
+      "fields": [
+        {
+          "key": "eyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "title",
+          "type": "TEXT"
+        },
+        {
+          "key": "intro",
+          "type": "TEXT"
+        },
+        {
+          "key": "body",
+          "type": "RICH_TEXT"
+        }
+      ],
+      "items": [
+        {
+          "eyebrow": "Recensioni",
+          "title": "La differenza che si vede e si sente",
+          "intro": "Parole di coppie reali, copiate qui dal testo originale. Nessuna sintesi: ogni recensione è integrale.",
+          "body": ""
+        }
+      ]
+    },
+    {
+      "id": "TerminiECondizioni",
+      "displayName": "Termini e condizioni",
+      "plugins": [
+        {
+          "type": "SINGLE_ITEM",
+          "singleItemOptions": {}
+        }
+      ],
+      "fields": [
+        {
+          "key": "eyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "title",
+          "type": "TEXT"
+        },
+        {
+          "key": "intro",
+          "type": "TEXT"
+        },
+        {
+          "key": "body",
+          "type": "RICH_TEXT"
+        },
+        {
+          "key": "version",
+          "type": "TEXT"
+        }
+      ],
+      "items": [
+        {
+          "eyebrow": "Documenti legali",
+          "title": "Termini e condizioni",
+          "intro": "Le condizioni generali che regolano l'accesso e l'utilizzo del sito da parte degli utenti.",
+          "version": "Versione 1.0",
+          "body": "<h2>Premessa</h2><p>Il presente documento definisce i termini e le condizioni generali che regolano l'accesso al sito e l'utilizzo dei suoi contenuti. Il soggetto che gestisce il sito è indicato di seguito come “il Titolare”.</p><p>L'accesso al sito implica la lettura e l'accettazione delle disposizioni riportate nel presente documento. Gli utenti che non intendono accettarle devono interrompere l'utilizzo del sito.</p><h2>Finalità del sito</h2><p>Il sito ha finalità informative e, ove previsto, può consentire la richiesta di informazioni, l'iscrizione ad aggiornamenti o l'utilizzo di servizi dedicati. Le funzionalità disponibili possono variare nel tempo.</p><p>I contenuti pubblicati sono offerti a scopo generale e non costituiscono, di per sé, un'offerta contrattuale o una garanzia di risultato.</p><h2>Utilizzo consentito</h2><p>L'utente si impegna a utilizzare il sito in modo lecito, corretto e rispettoso degli altri utenti e del Titolare.</p><ul><li>non alterare, copiare o distribuire contenuti senza autorizzazione;</li><li>non introdurre codici, script o strumenti che possano danneggiare il sito o interferire con il suo funzionamento;</li><li>non utilizzare il sito per attività illegali, offensive o contrarie all'ordine pubblico;</li><li>non aggirare misure di protezione o limitazioni d'accesso.</li></ul><h2>Proprietà intellettuale</h2><p>Testi, immagini, grafiche, loghi e ogni altro elemento presente sul sito sono protetti dalle normative applicabili e restano di titolarità del Titolare o dei rispettivi aventi diritto.</p><p>È consentita la consultazione per uso personale e non commerciale. Ogni utilizzo diverso richiede autorizzazione preventiva.</p><h2>Limitazioni di responsabilità</h2><p>Il Titolare si impegna a mantenere il sito aggiornato e funzionante, ma non può garantire disponibilità continua o assenza di interruzioni dovute a fattori esterni.</p><p>Le informazioni pubblicate sono fornite con cura; il Titolare non risponde di danni derivanti da decisioni prese esclusivamente sulla base dei contenuti del sito.</p><h2>Modifiche alle condizioni</h2><p>Il Titolare può aggiornare il presente documento per adeguarlo a esigenze organizzative, tecniche o normative. La versione pubblicata sul sito è quella applicabile.</p><h2>Contatti</h2><p>Per chiarimenti relative alle presenti condizioni è possibile utilizzare le informazioni di contatto riportate nel footer del sito.</p>"
+        }
+      ]
+    },
+    {
+      "id": "Privacy",
+      "displayName": "Informativa sulla privacy",
+      "plugins": [
+        {
+          "type": "SINGLE_ITEM",
+          "singleItemOptions": {}
+        }
+      ],
+      "fields": [
+        {
+          "key": "eyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "title",
+          "type": "TEXT"
+        },
+        {
+          "key": "intro",
+          "type": "TEXT"
+        },
+        {
+          "key": "body",
+          "type": "RICH_TEXT"
+        },
+        {
+          "key": "version",
+          "type": "TEXT"
+        }
+      ],
+      "items": [
+        {
+          "eyebrow": "Privacy",
+          "title": "Informativa sulla privacy",
+          "intro": "Come vengono trattati i dati personali degli utenti, quali finalità perseguono e quali diritti spettano agli interessati.",
+          "version": "Versione 1.0",
+          "body": "<h2>Premessa</h2><p>La presente informativa descrive il trattamento dei dati personali effettuato tramite il sito. Il Titolare del trattamento è il soggetto che gestisce il sito e le relative attività.</p><p>Il documento è redatto in modo da poter essere riutilizzato su siti diversi: l'identificazione del Titolare e i recapiti sono disponibili nel footer del sito.</p><h2>Tipologie di dati raccolti</h2><p>Possono essere raccolti dati che l'utente inserisce volontariamente, dati tecnici di navigazione e dati generati dall'utilizzo delle funzionalità disponibili.</p><ul><li>dati identificativi e di contatto inseriti in moduli o richieste;</li><li>contenuti dei messaggi inviati tramite il sito;</li><li>indirizzo IP, tipo di browser, dispositivo e informazioni sulla visita;</li><li>preferenze espresse in materia di cookie e privacy.</li></ul><h2>Finalità e basi giuridiche</h2><p>I dati sono trattati per rispondere alle richieste dell'utente, erogare i servizi richiesti, migliorare l'esperienza di navigazione, adempiere a obblighi di legge e tutelare la sicurezza del sito.</p><p>Le basi giuridiche applicabili sono, a seconda dei casi, il consenso dell'interessato, l'esecuzione di misure precontrattuali o contrattuali, il legittimo interesse del Titolare e l'adempimento di obblighi normativi.</p><h2>Modalità di raccolta</h2><p>I dati vengono raccolti principalmente tramite moduli compilati dall'utente, interazioni con il sito e strumenti tecnici necessari al suo funzionamento. I campi obbligatori sono indicati nelle relative sezioni.</p><p>L'utente è responsabile della veridicità delle informazioni fornite e deve evitare l'inserimento di dati non pertinenti o appartenenti a terzi senza autorizzazione.</p><h2>Conservazione dei dati</h2><p>I dati sono conservati per il tempo necessario alle finalità per cui sono stati raccolti, nel rispetto dei principi di minimizzazione e limitazione della conservazione.</p><p>Al termine del periodo applicabile, i dati vengono cancellati o resi anonimi, salvo diverso obbligo di legge.</p><h2>Destinatari e comunicazione</h2><p>I dati possono essere trattati da soggetti autorizzati che operano sotto la responsabilità del Titolare e da fornitori di servizi tecnici necessari al funzionamento del sito.</p><p>Non sono previste comunicazioni a soggetti non autorizzati né diffusione dei dati per finalità diverse da quelle indicate.</p><h2>Diritti dell'interessato</h2><p>L'interessato può esercitare i diritti previsti dalla normativa applicabile, tra cui l'accesso, la rettifica, la cancellazione, la limitazione, la portabilità e l'opposizione al trattamento.</p><ul><li>richiedere conferma dell'esistenza dei propri dati e delle relative informazioni;</li><li>ottenere la correzione di dati inesatti o incompleti;</li><li>richiedere la cancellazione dei dati quando ricorrano i presupposti;</li><li>opporsi al trattamento fondato su legittimo interesse;</li><li>revocare il consenso prestato, senza pregiudizio per la liceità del trattamento precedente.</li></ul><h2>Cookie e strumenti simili</h2><p>Il sito può utilizzare cookie tecnici necessari al funzionamento e, previo consenso, cookie per preferenze, statistiche o integrazioni con servizi di terze parti.</p><p>Le modalità di gestione sono descritte nella pagina dedicata all'informativa sui cookie.</p><h2>Sicurezza</h2><p>Il Titolare adotta misure tecniche e organizzative Appropriate per proteggere i dati da accessi non autorizzati, perdita, alterazione o distruzione.</p><p>Nessun sistema, tuttavia, può garantire sicurezza assoluta: in caso di incidente saranno adottate le iniziative previste dalla normativa applicabile.</p><h2>Aggiornamenti</h2><p>La presente informativa può essere aggiornata per riflettere cambiamenti nel sito, nei servizi offerti o nel quadro normativo. La versione pubblicata è quella di riferimento.</p><h2>Contatti</h2><p>Per esercitare i propri diritti o ottenere chiarimenti è possibile utilizzare le informazioni di contatto riportate nel footer del sito.</p>"
+        }
+      ]
+    },
+    {
+      "id": "Accessibilita",
+      "displayName": "Dichiarazione sull'accessibilità",
+      "plugins": [
+        {
+          "type": "SINGLE_ITEM",
+          "singleItemOptions": {}
+        }
+      ],
+      "fields": [
+        {
+          "key": "eyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "title",
+          "type": "TEXT"
+        },
+        {
+          "key": "intro",
+          "type": "TEXT"
+        },
+        {
+          "key": "body",
+          "type": "RICH_TEXT"
+        },
+        {
+          "key": "version",
+          "type": "TEXT"
+        }
+      ],
+      "items": [
+        {
+          "eyebrow": "Accessibilità",
+          "title": "Dichiarazione sull'accessibilità",
+          "intro": "L'impegno del sito verso un'esperienza consultabile da tutte le persone e le misure adottate in tale direzione.",
+          "version": "Versione 1.0",
+          "body": "<h2>Impegno</h2><p>Il Titolare si impegna a rendere il sito accessibile, comprensibile e utilizzabile dal maggior numero di persone possibile, indipendentemente da dispositivo, abilità o condizione.</p><p>L'accessibilità è trattata come parte della qualità complessiva del sito e non come un intervento conclusivo.</p><h2>Ambito di applicazione</h2><p>La presente dichiarazione si applica alle pagine e alle funzionalità rese disponibili tramite il sito. Può non includere contenuti ospitati su domini o piattaforme di terze parti.</p><h2>Misure adottate</h2><p>Le scelte di progettazione e sviluppo seguono i principi generali delle linee guida per l'accessibilità dei contenuti web.</p><ul><li>struttura dei contenuti con titoli e punti di riferimento coerenti;</li><li>contrasto tra testo e sfondo sufficiente per la lettura;</li><li>navigazione utilizzabile da tastiera e indicatori di focus visibili;</li><li>testi alternativi per le immagini significative;</li><li>link con etichette comprensibili e descrittive;</li><li>layout adattivo per diverse dimensioni di schermo.</li></ul><h2>Principi di riferimento</h2><p>I contenuti dovrebbero essere percepibili, utilizzabili, comprensibili e robusti. Questi principi guidano le verifiche periodiche e gli interventi di miglioramento.</p><h2>Limitazioni note</h2><p>Alcune funzionalità o contenuti di terze parti possono non essere pienamente conformi agli standard di accessibilità. Il Titolare monitora tali situazioni e interviene quando possibile.</p><p>Se si incontra una barriera, è segnalato il difetto riscontrato e il contesto in cui si è verificato, in modo da consentire una valutazione accurata.</p><h2>Segnalazioni e feedback</h2><p>Le segnalazioni relative all'accessibilità del sito sono accolte con attenzione e trattate con priorità. È possibile inviarle utilizzando le informazioni di contatto riportate nel footer del sito.</p><h2>Aggiornamenti della dichiarazione</h2><p>Il presente documento può essere rivisto a seguito di verifiche, miglioramenti o cambiamenti tecnici. La versione pubblicata riflette lo stato più recente.</p>"
+        }
+      ]
+    },
+    {
+      "id": "CartaAccordoPrivacy",
+      "displayName": "Carta di accordo sulla privacy",
+      "plugins": [
+        {
+          "type": "SINGLE_ITEM",
+          "singleItemOptions": {}
+        }
+      ],
+      "fields": [
+        {
+          "key": "eyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "title",
+          "type": "TEXT"
+        },
+        {
+          "key": "intro",
+          "type": "TEXT"
+        },
+        {
+          "key": "body",
+          "type": "RICH_TEXT"
+        },
+        {
+          "key": "version",
+          "type": "TEXT"
+        }
+      ],
+      "items": [
+        {
+          "eyebrow": "Privacy",
+          "title": "Carta di accordo sulla privacy",
+          "intro": "I principi che ispirano il rapporto tra il sito e gli utenti in materia di riservatezza e dati personali.",
+          "version": "Versione 1.0",
+          "body": "<h2>Natura del documento</h2><p>La presente carta riassume, in forma accessibile, l'impostazione del Titolare in materia di privacy. Non sostituisce l'informativa dettagliata, ma ne condivide i principi essenziali.</p><h2>Principi fondamentali</h2><p>La gestione dei dati si basa su trasparenza, minimizzazione, finalità determinate e rispetto dei diritti delle persone.</p><ul><li>raccogliere solo ciò che è realmente necessario;</li><li>spiegare in modo chiaro perché i dati vengono richiesti;</li><li>non utilizzare i dati per scopi diversi da quelli dichiarati;</li><li>consentire all'interessato di intervenire sui propri dati;</li><li>mantenere misure di protezione proporzionate.</li></ul><h2>Raccolta e utilizzo</h2><p>I dati inseriti tramite moduli o richieste vengono impiegati per dare seguito alla richiesta e per le attività ad essa collegate. Le informazioni tecniche di navigazione sono usate per garantire funzionalità e sicurezza.</p><h2>Condivisione</h2><p>I dati non vengono venduti né ceduti per finalità promozionali di terzi. Possono essere coinvolti solo soggetti che forniscono servizi necessari e che operano nel rispetto delle istruzioni ricevute.</p><h2>Conservazione</h2><p>I dati vengono mantenuti per il tempo utile a perseguire le finalità indicate e poi cancellati o anonimizzati, salvo obblighi diversi.</p><h2>Diritti delle persone</h2><p>L'interessato può chiedere accesso, rettifica, cancellazione, limitazione, portabilità o opposizione, secondo le condizioni previste dalla normativa applicabile.</p><h2>Contatti</h2><p>Per domande su questa carta è possibile utilizzare le informazioni di contatto riportate nel footer del sito.</p>"
+        }
+      ]
+    },
+    {
+      "id": "ManifestoSoberaniaDigitale",
+      "displayName": "Manifesto di sovranità digitale",
+      "plugins": [
+        {
+          "type": "SINGLE_ITEM",
+          "singleItemOptions": {}
+        }
+      ],
+      "fields": [
+        {
+          "key": "eyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "title",
+          "type": "TEXT"
+        },
+        {
+          "key": "intro",
+          "type": "TEXT"
+        },
+        {
+          "key": "body",
+          "type": "RICH_TEXT"
+        },
+        {
+          "key": "version",
+          "type": "TEXT"
+        }
+      ],
+      "items": [
+        {
+          "eyebrow": "Principi",
+          "title": "Manifesto di sovranità digitale",
+          "intro": "I valori che guidano la gestione consapevole di dati, strumenti e relazioni digitali.",
+          "version": "Versione 1.0",
+          "body": "<h2>Premessa</h2><p>La sovranità digitale è la capacità di scegliere con consapevolezza gli strumenti utilizzati, di controllare le proprie informazioni e di non dipendere da un unico soggetto per le attività quotidiane.</p><p>Questo manifesto descrive l'impostazione che il Titolare intende seguire nella gestione del sito e dei servizi connessi.</p><h2>Possesso dei dati</h2><p>Le persone devono poter comprendere quali dati vengono raccolti, perché lo sono e come intervenire. Le informazioni non sono un bene accessorio, ma parte della relazione di fiducia con gli utenti.</p><h2>Scelta consapevole</h2><p>Le funzionalità non essenziali che comportano trattamenti di dati dovrebbero essere attivate solo dopo una scelta informata. Le preferenze devono essere modificabili nel tempo.</p><h2>Trasparenza dei processi</h2><p>La documentazione relativa a privacy, cookie e utilizzo del sito deve essere comprensibile e facilmente raggiungibile. Un testo chiaro è preferibile a una formula generica.</p><h2>Interoperabilità e portabilità</h2><p>I dati forniti devono, ove possibile, essere restituibili in formato utilizzabile. L'obiettivo è evitare che l'utente sia costretto a restare in un sistema per motivi tecnici.</p><h2>Riduzione della dipendenza</h2><p>L'adozione di strumenti esterni deve essere valutata con attenzione. Ove esistano alternative adeguate, si privilegiano soluzioni che limitano la raccolta di dati e la dipendenza da terze parti.</p><h2>Responsabilità</h2><p>La sovranità digitale non è solo un diritto, ma anche una responsabilità: usare servizi in modo critico, rispettare il lavoro altrui e segnalare problemi quando si riscontrano.</p><h2>Applicazione</h2><p>I principi di questo manifesto orientano le scelte del sito e possono essere aggiornati nel tempo. Il confronto con gli utenti è parte del processo.</p>"
+        }
+      ]
+    },
+    {
+      "id": "TerminiDiUtilizzo",
+      "displayName": "Termini di utilizzo",
+      "plugins": [
+        {
+          "type": "SINGLE_ITEM",
+          "singleItemOptions": {}
+        }
+      ],
+      "fields": [
+        {
+          "key": "eyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "title",
+          "type": "TEXT"
+        },
+        {
+          "key": "intro",
+          "type": "TEXT"
+        },
+        {
+          "key": "body",
+          "type": "RICH_TEXT"
+        },
+        {
+          "key": "version",
+          "type": "TEXT"
+        }
+      ],
+      "items": [
+        {
+          "eyebrow": "Documenti legali",
+          "title": "Termini di utilizzo",
+          "intro": "Regole di comportamento, limiti d'uso e tutela dei contenuti nell'interazione con il sito.",
+          "version": "Versione 1.0",
+          "body": "<h2>Ambito</h2><p>Le presenti regole si applicano a tutte le persone che accedono al sito o utilizzano una delle sue funzionalità.</p><h2>Regole di comportamento</h2><p>Ogni utente è tenuto a rispettare le altre persone, la proprietà intellettuale e le regole tecniche del sito.</p><ul><li>non pubblicare contenuti diffamatori, discriminatori o illegali;</li><li>non inviare messaggi automatici o richieste ripetitive senza motivo;</li><li>non tentare di ottenere accessi non autorizzati;</li><li>non alterare l'aspetto o il comportamento del sito per altri utenti.</li></ul><h2>Divieti specifici</h2><p>È vietato utilizzare il sito per attività che possano comprometterne la sicurezza, la disponibilità o la reputazione, oppure per aggirare le misure di protezione adottate.</p><h2>Contenuti degli utenti</h2><p>I contenuti inviati tramite moduli o strumenti interattivi devono essere pertinenti e leciti. L'utente resta responsabile di quanto invia e garantisce di avere il diritto di farlo.</p><p>Il Titolare può rimuovere contenuti che violano le presenti regole o che risultano dannosi per il sito o per terzi.</p><h2>Collegamenti a siti terzi</h2><p>Il sito può rimandare a risorse esterne. Il Titolare non controlla tali risorse e non risponde dei loro contenuti o delle loro pratiche.</p><h2>Proprietà intellettuale</h2><p>I marchi, le immagini e i testi presenti sul sito non possono essere riprodotti o riutilizzati senza autorizzazione, salvo quanto espressamente consentito dalla legge.</p><h2>Limitazioni di responsabilità</h2><p>Il Titolare non è responsabile per danni derivanti da un utilizzo del sito non conforme alle presenti regole o da eventi fuori dal proprio controllo.</p><h2>Modifiche e cessazione</h2><p>Il Titolare può modificare le regole o sospendere temporaneamente l'accesso al sito per motivi tecnici, di sicurezza o organizzativi.</p>"
+        }
+      ]
+    },
+    {
+      "id": "CookiePolicy",
+      "displayName": "Informativa sui cookie",
+      "plugins": [
+        {
+          "type": "SINGLE_ITEM",
+          "singleItemOptions": {}
+        }
+      ],
+      "fields": [
+        {
+          "key": "eyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "title",
+          "type": "TEXT"
+        },
+        {
+          "key": "intro",
+          "type": "TEXT"
+        },
+        {
+          "key": "body",
+          "type": "RICH_TEXT"
+        },
+        {
+          "key": "version",
+          "type": "TEXT"
+        }
+      ],
+      "items": [
+        {
+          "eyebrow": "Cookie",
+          "title": "Informativa sui cookie",
+          "intro": "Quali cookie possono essere utilizzati, a cosa servono e come gestire le relative preferenze.",
+          "version": "Versione 1.0",
+          "body": "<h2>Cosa sono i cookie</h2><p>I cookie sono piccoli file di testo che i siti possono memorizzare sul dispositivo dell'utente. Possono servire a far funzionare il sito, ricordare preferenze o raccogliere informazioni sull'utilizzo.</p><h2>Cookie tecnici</h2><p>I cookie tecnici sono necessari per funzionalità di base come la navigazione, la sicurezza e la memorizzazione delle preferenze espresse in materia di privacy.</p><p>Questi cookie non richiedono consenso perché sono indispensabili per il funzionamento del sito.</p><h2>Cookie di preferenza</h2><p>Possono essere utilizzati per ricordare scelte dell'utente, come la lingua o impostazioni di visualizzazione. Se non vengono accettati, alcune funzionalità potrebbero non essere personalizzate.</p><h2>Cookie statistici</h2><p>I cookie statistici aiutano a comprendere in forma aggregata come viene utilizzato il sito, ad esempio quali pagine sono più consultate. Vengono attivati solo previo consenso.</p><h2>Cookie di terze parti</h2><p>Alcune integrazioni possono installare cookie gestiti da soggetti esterni. L'installazione avviene solo dopo una scelta consapevole dell'utente, quando richiesta.</p><h2>Gestione delle preferenze</h2><p>Le preferenze possono essere modificate in qualsiasi momento tramite l'apposito strumento presente nel sito. La revoca del consenso non pregiudica la liceità dei trattamenti effettuati in precedenza.</p><p>È possibile, inoltre, intervenire dalle impostazioni del browser per bloccare o rimuovere i cookie memorizzati.</p><h2>Durata</h2><p>La durata dei cookie dipende dalla loro funzione: alcuni scadono alla chiusura della sessione, altri restano memorizzati fino alla scadenza impostata o fino alla rimozione da parte dell'utente.</p><h2>Aggiornamenti</h2><p>La presente informativa può cambiare se vengono introdotti nuovi strumenti o se mutano le modalità di utilizzo dei cookie.</p>"
+        }
+      ]
+    },
+    {
+      "id": "ResiERimborsi",
+      "displayName": "Politica di resi e rimborsi",
+      "plugins": [
+        {
+          "type": "SINGLE_ITEM",
+          "singleItemOptions": {}
+        }
+      ],
+      "fields": [
+        {
+          "key": "eyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "title",
+          "type": "TEXT"
+        },
+        {
+          "key": "intro",
+          "type": "TEXT"
+        },
+        {
+          "key": "body",
+          "type": "RICH_TEXT"
+        },
+        {
+          "key": "version",
+          "type": "TEXT"
+        }
+      ],
+      "items": [
+        {
+          "eyebrow": "Acquisti",
+          "title": "Politica di resi e rimborsi",
+          "intro": "Le condizioni generali relative a resi, recesso e rimborsi per prodotti o servizi acquistati tramite il sito.",
+          "version": "Versione 1.0",
+          "body": "<h2>Ambito</h2><p>La presente politica si applica agli acquisti effettuati tramite il sito, qualora siano disponibili prodotti fisici, servizi digitali o prestazioni personalizzate.</p><p>Le condizioni specifiche indicate al momento dell'acquisto prevalgono sulle disposizioni generali riportate di seguito.</p><h2>Prodotti e servizi</h2><p>Per i prodotti fisici è previsto, ove applicabile, il diritto di recesso nei termini stabiliti dalla normativa vigente. Per i servizi digitali e le prestazioni personalizzate possono sussistere eccezioni.</p><h2>Eccezioni</h2><p>Il diritto di recesso può non applicarsi, a titolo esemplificativo, a beni personalizzati, contenuti digitali forniti in forma immediata o servizi la cui esecuzione è iniziata con il consenso dell'acquirente.</p><h2>Modalità di richiesta</h2><p>Per richiedere un reso o un rimborso è necessario indicare l'ordine di riferimento, la ragione della richiesta e, quando previsto, la documentazione fotografica del prodotto.</p><p>Le richieste vengono inviate utilizzando le informazioni di contatto riportate nel footer del sito.</p><h2>Tempi di lavorazione</h2><p>Le richieste complete vengono esaminate entro un termine ragionevole. Il rimborso viene disposto dopo la verifica dei presupposti e secondo le tempistiche del metodo di pagamento utilizzato.</p><h2>Spese di spedizione</h2><p>Le spese di restituzione sono a carico dell'acquirente, salvo diversa disposizione di legge o indicazione contraria al momento dell'acquisto.</p><h2>Contestazioni</h2><p>In caso di disaccordo sull'esito della richiesta, è possibile fornire ulteriori elementi a supporto. Il Titolare valuta ogni segnalazione con attenzione e cerca una soluzione congrua.</p>"
+        }
+      ]
+    },
+    {
+      "id": "ProtezioneDati",
+      "displayName": "Informativa sulla protezione dei dati",
+      "plugins": [
+        {
+          "type": "SINGLE_ITEM",
+          "singleItemOptions": {}
+        }
+      ],
+      "fields": [
+        {
+          "key": "eyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "title",
+          "type": "TEXT"
+        },
+        {
+          "key": "intro",
+          "type": "TEXT"
+        },
+        {
+          "key": "body",
+          "type": "RICH_TEXT"
+        },
+        {
+          "key": "version",
+          "type": "TEXT"
+        }
+      ],
+      "items": [
+        {
+          "eyebrow": "Sicurezza",
+          "title": "Informativa sulla protezione dei dati",
+          "intro": "Le misure tecniche e organizzative adottate per proteggere i dati trattati tramite il sito.",
+          "version": "Versione 1.0",
+          "body": "<h2>Finalità del documento</h2><p>Il presente documento integra l'informativa sulla privacy descrivendo l'impostazione generale del Titolare in materia di sicurezza dei dati.</p><h2>Misure tecniche</h2><p>Le misure tecniche possono includere crittografia delle comunicazioni, gestione degli accessi, separazione degli ambienti, copie di sicurezza regolari e strumenti di monitoraggio.</p><h2>Misure organizzative</h2><p>L'accesso ai dati è limitato alle persone che ne hanno bisogno per svolgere le proprie attività. Le responsabilità sono definite e le procedure vengono riviste periodicamente.</p><h2>Gestione degli accessi</h2><p>Gli accessi vengono concessi secondo il principio del minimo privilegio e possono essere revocati quando non sono più necessari.</p><h2>Conservazione e cancellazione</h2><p>I dati vengono conservati solo per il tempo necessario e successivamente cancellati o anonimizzati, nel rispetto delle disposizioni applicabili.</p><h2>Incidenti di sicurezza</h2><p>In caso di sospetto incidente, vengono adottate misure di contenimento, analisi e ripristino. Le comunicazioni agli interessati e alle autorità avvengono quando previsto dalla legge.</p><h2>Revisione</h2><p>Le misure descritte possono evolvere nel tempo. La versione pubblicata riflette l'impostazione più recente.</p><h2>Contatti</h2><p>Segnalazioni relative alla sicurezza dei dati possono essere inviate utilizzando le informazioni di contatto riportate nel footer del sito.</p>"
+        }
+      ]
+    },
+    {
+      "id": "AccordoUtente",
+      "displayName": "Accordo dell'utente",
+      "plugins": [
+        {
+          "type": "SINGLE_ITEM",
+          "singleItemOptions": {}
+        }
+      ],
+      "fields": [
+        {
+          "key": "eyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "title",
+          "type": "TEXT"
+        },
+        {
+          "key": "intro",
+          "type": "TEXT"
+        },
+        {
+          "key": "body",
+          "type": "RICH_TEXT"
+        },
+        {
+          "key": "version",
+          "type": "TEXT"
+        }
+      ],
+      "items": [
+        {
+          "eyebrow": "Documenti legali",
+          "title": "Accordo dell'utente",
+          "intro": "I termini che regolano l'eventuale registrazione e l'uso delle funzionalità riservate agli utenti.",
+          "version": "Versione 1.0",
+          "body": "<h2>Parti</h2><p>L'accordo si conclude tra il Titolare del sito e l'utente che utilizza le funzionalità disponibili, inclusa l'eventuale creazione di un account.</p><h2>Accettazione</h2><p>L'utente accetta il presente accordo utilizzando le funzionalità riservate o confermando l'iscrizione. Se non intende aderire, deve interrompere l'utilizzo.</p><h2>Registrazione</h2><p>Quando è prevista la registrazione, l'utente deve fornire informazioni accurate e mantenere aggiornate le proprie credenziali.</p><h2>Obblighi dell'utente</h2><p>L'utente si impegna a usare le funzionalità in modo lecito, a non condividere le proprie credenziali e a segnalare eventuali utilizzi non autorizzati.</p><h2>Licenza d'uso</h2><p>A titolo gratuito, il Titolare concede all'utente una licenza limitata, non esclusiva e revocabile per utilizzare le funzionalità del sito conformemente al presente accordo.</p><h2>Contenuti dell'utente</h2><p>L'utente conserva la titolarità dei contenuti che inserisce e concede al Titolare il diritto di trattarli per fornire il servizio, nel rispetto della normativa applicabile.</p><h2>Sospensione e chiusura</h2><p>Il Titolare può sospendere o chiudere un account in caso di violazione delle regole, richiesta dell'utente o esigenze tecniche e di sicurezza.</p><h2>Limitazioni di responsabilità</h2><p>Il Titolare non risponde di danni derivanti da un uso non conforme alle regole o da circostanze indipendenti dalla propria volontà.</p><h2>Recesso</h2><p>L'utente può recedere dall'accordo in qualsiasi momento interrompendo l'uso delle funzionalità e, dove previsto, richiedendo la chiusura dell'account.</p><h2>Disposizioni finali</h2><p>Il presente accordo può essere aggiornato; la versione pubblicata sul sito è applicabile. Per chiarimenti è possibile utilizzare le informazioni di contatto riportate nel footer del sito.</p>"
+        }
+      ]
+    },
+    {
+      "id": "AvvisoLegale",
+      "displayName": "Avviso legale",
+      "plugins": [
+        {
+          "type": "SINGLE_ITEM",
+          "singleItemOptions": {}
+        }
+      ],
+      "fields": [
+        {
+          "key": "eyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "title",
+          "type": "TEXT"
+        },
+        {
+          "key": "intro",
+          "type": "TEXT"
+        },
+        {
+          "key": "body",
+          "type": "RICH_TEXT"
+        },
+        {
+          "key": "version",
+          "type": "TEXT"
+        }
+      ],
+      "items": [
+        {
+          "eyebrow": "Documenti legali",
+          "title": "Avviso legale",
+          "intro": "Informazioni generali, titolarità dei contenuti e limiti di responsabilità relativi al sito.",
+          "version": "Versione 1.0",
+          "body": "<h2>Informazioni generali</h2><p>Il presente avviso fornisce le informazioni essenziali relative al sito e all'attività del Titolare. I recapiti sono disponibili nel footer del sito.</p><h2>Titolare del sito</h2><p>Il Titolare del sito è il soggetto che gestisce la pubblicazione dei contenuti e le attività connesse. L'identificazione completa è riportata nelle informazioni di contatto del sito.</p><h2>Contenuti pubblicati</h2><p>Le informazioni presenti sul sito vengono aggiornate con cura, ma non costituiscono garanzia di completezza o adeguatezza a ogni specifica esigenza.</p><h2>Proprietà intellettuale</h2><p>I contenuti del sito sono protetti e non possono essere riprodotti integralmente o parzialmente senza autorizzazione, salvo quanto consentito dalla legge.</p><h2>Collegamenti esterni</h2><p>I link verso siti esterni sono forniti a scopo informativo. Il Titolare non esercita controllo su tali siti e non risponde dei loro contenuti.</p><h2>Responsabilità</h2><p>Il Titolare non risponde per danni derivanti dall'utilizzo del sito non conforme al presente avviso o a eventi al di fuori del proprio controllo.</p><h2>Legge applicabile</h2><p>Il rapporto tra il Titolare e gli utenti è regolato dalla legge applicabile, fatto salvo il rispetto di eventuali disposizioni imperative.</p><h2>Contatti</h2><p>Per richieste o segnalazioni è possibile utilizzare le informazioni di contatto riportate nel footer del sito.</p>"
+        }
+      ]
+    },
+    {
+      "id": "Home",
+      "displayName": "Home",
+      "plugins": [
+        {
+          "type": "SINGLE_ITEM",
+          "singleItemOptions": {}
+        }
+      ],
+      "fields": [
+        {
+          "key": "eyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "title",
+          "type": "TEXT"
+        },
+        {
+          "key": "intro",
+          "type": "TEXT"
+        },
+        {
+          "key": "body",
+          "type": "RICH_TEXT"
+        }
+      ],
+      "items": [
+        {
+          "eyebrow": "Fotografo di matrimoni | Fine Art | Fotoreporter",
+          "title": "Matrimoni come opere d'arte, non come catene di montaggio",
+          "intro": "Destination wedding tra Italia e Austria. Ogni scatto è un quadro d'arte.",
+          "body": ""
+        }
+      ]
+    },
+    {
+      "id": "NotFound",
+      "displayName": "404",
+      "plugins": [
+        {
+          "type": "SINGLE_ITEM",
+          "singleItemOptions": {}
+        }
+      ],
+      "fields": [
+        {
+          "key": "eyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "title",
+          "type": "TEXT"
+        },
+        {
+          "key": "intro",
+          "type": "TEXT"
+        },
+        {
+          "key": "body",
+          "type": "RICH_TEXT"
+        }
+      ],
+      "items": [
+        {
+          "eyebrow": "Errore 404",
+          "title": "Pagina non trovata",
+          "intro": "La pagina che cerchi non esiste o è stata spostata.",
+          "body": ""
+        }
+      ]
+    },
+    {
+      "id": "LegalIndex",
+      "displayName": "Documenti legali",
+      "plugins": [
+        {
+          "type": "SINGLE_ITEM",
+          "singleItemOptions": {}
+        }
+      ],
+      "fields": [
+        {
+          "key": "eyebrow",
+          "type": "TEXT"
+        },
+        {
+          "key": "title",
+          "type": "TEXT"
+        },
+        {
+          "key": "intro",
+          "type": "TEXT"
+        },
+        {
+          "key": "body",
+          "type": "RICH_TEXT"
+        }
+      ],
+      "items": [
+        {
+          "eyebrow": "Documenti legali",
+          "title": "Informazioni e impegni",
+          "intro": "Un unico punto di accesso ai documenti che regolano l'utilizzo del sito, il trattamento dei dati e l'impegno verso un'esperienza accessibile.",
+          "body": ""
+        }
+      ]
+    }
+  ]
+}
