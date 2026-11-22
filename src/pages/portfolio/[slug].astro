@@ -25,6 +25,6 @@ if (!collection) {
 }
 ---
 
-<SiteLayout title={collection.title} description={collection.description}>
+<SiteLayout headFallback title={collection.title} description={collection.description}>
   <CollectionPage client:load slug={slug} initialCollection={collection} initialProjects={projects} />
 </SiteLayout>

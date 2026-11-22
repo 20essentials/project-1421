@@ -4,6 +4,7 @@ import PhotoGrid from "@/features/home/photo-grid.astro";
 import ArtisticParallax from "@/features/home/artistic-parallax.astro";
 import { fetchPosts, postMetaLine, postPath } from "@/features/blog/posts";
 import { fetchFaq } from "@/features/faq/faq";
+import { getSitePageContent } from "@/features/site-content/site-content";
 import { imgAttrs, imgSrc, imgSrcSet } from "@/shared/media";
 import type { PostPage } from "@/features/blog/types";
 import type { FaqData } from "@/features/faq/types";
@@ -14,6 +15,8 @@ try {
   [posts, faq] = await Promise.all([fetchPosts(), fetchFaq()]);
 } catch {
 }
+
+const heroContent = await getSitePageContent("home");
 
 // Hero photograph, uploaded to the site's Media Manager (new-hero.avif, 2752×1536).
 const HERO_IMAGE = "wix:image://v1/600582_d3da93d4d8584fd282a085b093fc7b9d~mv2.avif/new-hero.jpg#originWidth=2752&originHeight=1536";
@@ -55,9 +58,9 @@ const heroScene: ScrollScene = {
   alt: "Fotografia di matrimonio fine art — Stefano Lunardi",
   secondaryImageUrl: "https://static.wixstatic.com/media/600582_29f0dfe738694177b687ea3b4af8dcbb~mv2.avif",
   secondaryAlt: "Fotografia d'arte — Stefano Lunardi",
-  eyebrow: "Fotografo di matrimoni | Fine Art | Fotoreporter",
-  title: "Matrimoni come opere d'arte, non come catene di montaggio",
-  description: "Destination wedding tra Italia e Austria. Ogni scatto è un quadro d'arte.",
+  eyebrow: heroContent.eyebrow,
+  title: heroContent.title,
+  description: heroContent.intro,
   href: "/contatti",
   cta: "Raccontami la vostra storia",
   secondaryHref: "/portfolio",
@@ -98,10 +101,7 @@ const alignFor = (i: number): "center" | "right" | "left" =>
   i === 0 ? "center" : i % 2 === 1 ? "right" : "left";
 ---
 
-<SiteLayout
-  title="Stefano Lunardi — Fotografo di matrimoni | Fine Art | Fotoreporter"
-  description="Matrimoni come opere d'arte, non come catene di montaggio. Destination wedding tra Italia e Austria: ogni scatto è un quadro d'arte."
->
+<SiteLayout title={heroContent.title} description={heroContent.intro}>
   <section data-scroll-world data-bleed class="sw-root">
     <div class="sw-viewport">
       {scenes.map((s, i) => (

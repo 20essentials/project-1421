@@ -1,14 +1,11 @@
 ---
 import SiteLayout from "@/app/layout.astro";
-import LegalDocument from "@/features/legal/legal-document.astro";
-import { getLegalDocument } from "@/features/legal/documents";
+import LegalPage from "@/features/legal/legal-page.astro";
+import { getSitePageContent } from "@/features/site-content/site-content";
 
-const doc = getLegalDocument("accessibilita");
-if (!doc) {
-  return new Response(null, { status: 404 });
-}
+const content = await getSitePageContent("accessibilita");
 ---
 
-<SiteLayout title={`${doc.title} — Documenti legali`} description={doc.summary}>
-  <LegalDocument {doc} />
+<SiteLayout title={content.title} description={content.intro}>
+  <LegalPage content={content} />
 </SiteLayout>

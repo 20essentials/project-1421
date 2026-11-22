@@ -1,44 +1,22 @@
 ---
 import SiteLayout from "@/app/layout.astro";
+import { getSitePageContent } from "@/features/site-content/site-content";
+import "@/features/site-content/site-content.css";
+
+const content = await getSitePageContent("investimento");
 ---
 
-<SiteLayout title="Investimento — Non state comprando 12 ore di foto | Stefano Lunardi" description="Il servizio completo (fotografia, video, album) parte da 5.400 € per il 2027. 50-70 ore di dedizione esclusiva al vostro giorno.">
+<SiteLayout title={content.title} description={content.intro}>
   <section class="border-b border-border px-6 pb-12 text-center">
-    <p class="eyebrow">Investimento e servizi</p>
-    <h1 class="font-display mt-3 text-4xl font-medium sm:text-5xl md:text-6xl">Non state comprando 12 ore di foto</h1>
-    <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">State investendo in 50-70 ore di dedizione esclusiva al vostro giorno.</p>
+    <p class="eyebrow">{content.eyebrow}</p>
+    <h1 class="font-display mt-3 text-4xl font-medium sm:text-5xl md:text-6xl">{content.title}</h1>
+    <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">{content.intro}</p>
   </section>
 
-  <section class="mx-auto max-w-3xl px-6 py-14">
-    <h2 class="font-display text-3xl font-medium">Cosa include il servizio</h2>
-    <ul class="mt-4 flex flex-col gap-3 leading-relaxed text-muted-foreground">
-      <li>12-14 ore di copertura full-day, dai preparativi all'ultimo ballo</li>
-      <li>Fotografia analogica e digitale: circa 20 rullini per gli scatti iconici</li>
-      <li>Video del matrimonio con videomaker interno, stesso metodo e stesso sguardo</li>
-      <li>Album fine art: impaginazione personalizzata, stampa su carta museale</li>
-      <li>Secondo fotografo e team briefato</li>
-    </ul>
+  <section class="site-content-body mx-auto max-w-3xl px-6 py-14" set:html={content.bodyHtml} />
 
-    <h2 class="font-display mt-12 text-3xl font-medium">Investimento</h2>
-    <p class="mt-4 leading-relaxed text-muted-foreground">Il servizio completo — fotografia, video, album — parte da <strong class="text-foreground">5.400 € per il 2027</strong>. Ogni matrimonio è diverso: il preventivo definitivo arriva dopo il primo incontro. Trasparenza totale, nessun costo nascosto.</p>
-
-    <h2 class="font-display mt-12 text-3xl font-medium">Tempi di consegna</h2>
-    <ul class="mt-4 flex flex-col gap-3 leading-relaxed text-muted-foreground">
-      <li>Anteprima online entro pochi giorni</li>
-      <li>Gallery completa entro 30 giorni</li>
-      <li>Provini analogici con pre-selezione: gli sposi scelgono circa 30 foto definitive</li>
-      <li>Consultazione album dedicata: un libro fotografico d'autore</li>
-    </ul>
-
-    <h2 class="font-display mt-12 text-3xl font-medium">Poche foto, ma straordinarie</h2>
-    <p class="mt-4 leading-relaxed text-muted-foreground">Tremila foto indifferenziate non sono un tesoro: sono un archivio ingestibile che non guarderai mai. Consegno centinaia di immagini accuratamente selezionate — non migliaia — e circa 30 stampe analogiche iconiche scelte insieme a voi. Ogni foto consegnata ha una ragione per esistere. La bellezza dell'essenziale.</p>
-
-    <h2 class="font-display mt-12 text-3xl font-medium">Garanzia pioggia (opzionale)</h2>
-    <p class="mt-4 leading-relaxed text-muted-foreground">Tornare in location per gli scatti impediti dal maltempo. Alcuni degli scatti più memorabili sono nati proprio sotto la pioggia — ma la scelta resta vostra.</p>
-
-    <div class="mt-14 text-center">
-      <p class="font-display text-2xl italic">Quando sarete pronti, basterà un messaggio per bloccare la data</p>
-      <a href="/contatti" class="mt-6 inline-block rounded-control border border-foreground bg-foreground px-8 py-3 text-sm font-medium text-primary-foreground no-underline transition-colors hover:border-accent hover:bg-accent">Bloccare la data</a>
-    </div>
-  </section>
+  <div class="mx-auto max-w-3xl px-6 pb-24 text-center">
+    <p class="font-display text-2xl italic">Quando sarete pronti, basterà un messaggio per bloccare la data</p>
+    <a href="/contatti" class="mt-6 inline-block rounded-control border border-foreground bg-foreground px-8 py-3 text-sm font-medium text-primary-foreground no-underline transition-colors hover:border-accent hover:bg-accent">Bloccare la data</a>
+  </div>
 </SiteLayout>

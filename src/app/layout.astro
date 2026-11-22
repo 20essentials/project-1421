@@ -13,8 +13,13 @@ import { SITE_INFO_FALLBACKS, type SiteInfo } from "@/features/site-info/site-in
 interface Props {
   title?: string;
   description?: string;
+  /** Opt-in for pages WITHOUT dashboard-managed tags (dynamic app pages): emit the
+   * fallback head tags in production too. Static pages never pass it — behind Wix
+   * hosting their head tags are injected server-side from the dashboard's SEO
+   * settings (Item SEO Tags), and emitting them here would duplicate every tag. */
+  headFallback?: boolean;
 }
-const { title, description } = Astro.props;
+const { title, description, headFallback = false } = Astro.props;
 
 const NEWSLETTER_FORM_ID = "99167414-c329-4e8f-8f02-db033652f376";
 
@@ -51,6 +56,9 @@ const resolvedDescription =
   description ??
   "Fotografia di matrimonio fine art in Italia e Austria: storie autentiche, emozioni e ricordi che restano.";
 const hasSeoTags = Astro.slots.has("seo-tags");
+// Static pages behind Wix hosting get their head tags injected server-side from the
+// dashboard's SEO settings; local dev has no injection, so it emits the fallbacks.
+const emitFallbackHead = import.meta.env.DEV || headFallback;
 const structuredData = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "Person",
@@ -99,10 +107,10 @@ const structuredData = JSON.stringify({
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#1a1d23" />
-    <title>{resolvedTitle}</title>
-    <meta name="description" content={resolvedDescription} />
-    {!hasSeoTags && (
+    {emitFallbackHead && !hasSeoTags && (
       <>
+        <title>{resolvedTitle}</title>
+        <meta name="description" content={resolvedDescription} />
         <link rel="canonical" href={canonical} />
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="it_IT" />

@@ -1,71 +1,20 @@
 ---
 import SiteLayout from "@/app/layout.astro";
 import CameraHero from "@/components/camera-hero.astro";
+import { getSitePageContent } from "@/features/site-content/site-content";
+import "@/features/site-content/site-content.css";
+
+const content = await getSitePageContent("il-mio-metodo");
 ---
 
-<SiteLayout title="Il mio metodo — Non più fotografie. Opere. | Stefano Lunardi" description="Il Metodo Fusion: reportage tutto il giorno, un momento di ritratti editoriali, analogico e digitale. 50-70 ore di dedizione a ogni matrimonio.">
+<SiteLayout title={content.title} description={content.intro}>
   <section class="border-b border-border px-6 pb-12 text-center">
-    <p class="eyebrow">Il mio metodo</p>
-    <h1 class="font-display mt-3 text-4xl font-medium sm:text-5xl md:text-6xl">Non più fotografie. Opere.</h1>
-    <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">Il giorno del matrimonio non è il regista che muove marionette: è un testimone silenzioso, un osservatore contemplativo.</p>
+    <p class="eyebrow">{content.eyebrow}</p>
+    <h1 class="font-display mt-3 text-4xl font-medium sm:text-5xl md:text-6xl">{content.title}</h1>
+    <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">{content.intro}</p>
   </section>
 
-  <section class="mx-auto max-w-3xl px-6 py-14">
-    <h2 class="font-display text-3xl font-medium">Cos'è il Metodo Fusion</h2>
-    <p class="mt-4 leading-relaxed text-muted-foreground">L'eleganza della fotografia di moda e la naturalezza del reportage. Vengo dal fotogiornalismo: gran parte della giornata scorre senza intervenire — nessun "guardate qui", nessuna posa. Poi un momento breve e dedicato ai ritratti, con luce e composizione editoriali. Il resto del sito è allineato a questa verità: reportage tutto il giorno, più un breve momento di ritratti curati.</p>
-
-    <h2 class="font-display mt-12 text-3xl font-medium">Analogico + digitale: la scelta slow</h2>
-    <p class="mt-4 leading-relaxed text-muted-foreground">Circa 20 rullini per matrimonio per le foto iconiche. Ogni fotogramma è una scelta deliberata: con la mente, con gli occhi, con il cuore. In un'epoca in cui tutto può essere generato dall'AI, il rullino è l'opposto assoluto — un processo chimico-fisico che cattura la realtà senza filtri. Ciò che cattura il rullino è ciò che ricevi: non una versione ottimizzata. La verità. Il digitale è supporto e backup: un assistente scatta in digitale mentre io creo gli scatti iconici in analogico.</p>
-
-    <h2 class="font-display mt-12 text-3xl font-medium">Le tre tipologie di scatto</h2>
-    <ul class="mt-4 flex flex-col gap-4 leading-relaxed text-muted-foreground">
-      <li><strong class="text-foreground">La foto iconica naturale</strong> — non forzata, non posata, ma tecnicamente perfetta: il soggetto nella luce giusta, composizione giusta, momento giusto — e non lo sa.</li>
-      <li><strong class="text-foreground">La candid foto</strong> — interazione vera, impostata a livello tecnico: una risata, un abbraccio, uno sguardo.</li>
-      <li><strong class="text-foreground">Lo snapshot</strong> — catturato totalmente in real-time senza alcun intervento: il livello più intimo, i momenti che gli sposi stessi non sapevano di stare vivendo.</li>
-    </ul>
-
-    <h2 class="font-display mt-12 text-3xl font-medium">I tre incontri preparatori</h2>
-    <ul class="mt-4 flex flex-col gap-4 leading-relaxed text-muted-foreground">
-      <li><strong class="text-foreground">La Mappa Emotiva</strong> — l'incontro conoscitivo ed empatico: la vostra storia, le persone che contano.</li>
-      <li><strong class="text-foreground">Il Protocollo Invisibile</strong> — le dinamiche familiari, i gesti che risalgono all'infanzia, ciò che non va perduto.</li>
-      <li><strong class="text-foreground">L'incontro tecnico</strong> — pochi giorni prima: timeline, location, coordinamento con i fornitori.</li>
-    </ul>
-
-    <h2 class="font-display mt-12 text-3xl font-medium">Il vostro viaggio con me</h2>
-    <p class="mt-4 leading-relaxed text-muted-foreground">Quello che vedrete il giorno del matrimonio è solo la punta dell'iceberg di un lavoro molto più ampio.</p>
-    <div class="mt-6 overflow-x-auto">
-      <table class="w-full text-left text-sm">
-        <thead>
-          <tr class="border-b border-border text-xs uppercase tracking-widest text-muted-foreground">
-            <th class="py-3 pr-4 font-medium">Fase</th>
-            <th class="py-3 font-medium">Ore</th>
-          </tr>
-        </thead>
-        <tbody class="text-muted-foreground">
-          <tr class="border-b border-border"><td class="py-3 pr-4">Incontri e consulenze pre-matrimonio</td><td class="py-3">4-6</td></tr>
-          <tr class="border-b border-border"><td class="py-3 pr-4">Coordinamento con fornitori e location</td><td class="py-3">2-3</td></tr>
-          <tr class="border-b border-border"><td class="py-3 pr-4">Preparazione e briefing del team</td><td class="py-3">2-3</td></tr>
-          <tr class="border-b border-border"><td class="py-3 pr-4">Check attrezzatura e logistica</td><td class="py-3">3-4</td></tr>
-          <tr class="border-b border-border"><td class="py-3 pr-4">Cura dell'immagine professionale</td><td class="py-3">1-2</td></tr>
-          <tr class="border-b border-border"><td class="py-3 pr-4">Il giorno del matrimonio</td><td class="py-3">12-14</td></tr>
-          <tr class="border-b border-border"><td class="py-3 pr-4">Post-produzione e consegna</td><td class="py-3">25-40</td></tr>
-          <tr class="border-b border-border"><td class="py-3 pr-4 font-medium text-foreground">Totale di dedizione</td><td class="py-3 font-medium text-foreground">50-70</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <h2 class="font-display mt-12 text-3xl font-medium">I valori che guidano ogni scatto</h2>
-    <ul class="mt-4 flex flex-col gap-4 leading-relaxed text-muted-foreground">
-      <li><strong class="text-foreground">Autenticità</strong> — ogni foto è vera o non esiste: mai una posa forzata, mai un momento ricostruito.</li>
-      <li><strong class="text-foreground">Empatia</strong> — fotografare una coppia con cui hai costruito una relazione è raccontare una storia d'amore.</li>
-      <li><strong class="text-foreground">Eccellenza</strong> — la spontaneità non è mai una scusa per la mediocrità tecnica: con 20 rullini, ogni fotogramma conta.</li>
-    </ul>
-
-    <div class="mt-14 text-center">
-      <p class="font-display text-2xl italic">Poche foto, ma straordinarie</p>
-      <a href="/investimento" class="mt-6 inline-block rounded-control border border-foreground bg-foreground px-8 py-3 text-sm font-medium text-primary-foreground no-underline transition-colors hover:border-accent hover:bg-accent">Guarda l'investimento</a>
-    </div>
-  </section>
+  <section class="site-content-body mx-auto max-w-3xl px-6 py-14" set:html={content.bodyHtml} />
 
   <CameraHero />
 </SiteLayout>

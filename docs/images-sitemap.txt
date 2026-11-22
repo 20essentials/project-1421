@@ -63,3 +63,8 @@ https://static.wixstatic.com/media/469e72_c2feff7c0a2f4668855ebe52d8ff5671~mv2.j
 # como keyframes y poster del frame central. Publicados en Wix Media Manager, copias de public/ borradas.
 https://video.wixstatic.com/video/600582_ccb3b46553c94796a7288a800f3bea70/file -> src/components/camera-hero.astro (video, 240 frames, source public/nikon-video.mp4)
 https://static.wixstatic.com/media/600582_3f61e6bd350a4347962d8e33b2ae813c~mv2.jpg -> src/components/camera-hero.astro (poster, frame central, source public/images/camera-poster.jpg)
+
+# 2026-11-22 — og:image social (1200x630 JPEG desde el hero del index, sharp cover q82).
+# og:image NO puede ser AVIF (los crawlers sociales no lo renderizan): siempre JPEG.
+# Se usa como tag og:image en los Item SEO Tags de todas las STATIC_PAGE (dashboard SEO).
+tmp-og/og-image.jpg -> https://static.wixstatic.com/media/600582_f5d32dbab14745eabc17b44e1efc6d3e~mv2.jpg

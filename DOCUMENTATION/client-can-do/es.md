@@ -47,6 +47,54 @@ Las colecciones de proyectos y sus páginas se gestionan desde la app **Wix Port
 - Abrir la app Portfolio: <https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/app/d90652a2-f5a1-4c7c-84c4-d4cdcc41f130>
 - Añadir colecciones y proyectos (imágenes, textos, orden); /portfolio y /projects se actualizan en vivo.
 
+## Textos de página gestionados por CMS
+
+Estas páginas son colecciones **Single Item**: un solo registro cada una, editable como un
+formulario. Los campos son `eyebrow`, `title`, `intro` y `body` (texto enriquecido). Cada
+guardado aparece en el sitio en vivo, sin redeploy.
+
+| Página           | Colección      | Dónde                                                                                                           |
+| ----------------- | -------------- | --------------------------------------------------------------------------------------------------------------- |
+| `/` (hero)        | `Home`         | [Home](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Home)                 |
+| `/il-mio-metodo`  | `IlMetodo`     | [Il Metodo](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/IlMetodo)        |
+| `/chi-sono`       | `ChiSono`      | [Chi Sono](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/ChiSono)          |
+| `/contatti`       | `Contatti`     | [Contatti](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Contatti)         |
+| `/video`          | `Video`        | [Video](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Video)               |
+| `/fine-art`       | `FineArt`      | [Fine Art](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/FineArt)          |
+| `/location`       | `Location`     | [Location](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Location)         |
+| `/investimento`   | `Investimento` | [Investimento](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Investimento) |
+| `/awards`         | `Awards`       | [Awards](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Awards)             |
+| `/recensioni`     | `Recensioni`   | [Recensioni](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Recensioni)     |
+| `/legal` (cabecera)| `LegalIndex`  | [Documenti legali](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/LegalIndex) |
+| `/404`            | `NotFound`     | [404](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/NotFound)              |
+
+Alcance por página: en `/` solo el texto del hero es editable (las diapositivas, galerías y
+secciones de abajo quedan fijas); en `/contatti`, `/video` y `/recensioni` editas el texto de la
+cabecera (el formulario, los vídeos y las tarjetas de reseñas quedan fijos); en `/awards` son
+editables las listas de premios y exposiciones, la cuadrícula de sellos queda fija; `/fine-art`,
+`/location`, `/investimento`, `/il-mio-metodo` y `/chi-sono` son totalmente editables. El SEO de
+la página (título y descripción para Google) ya NO está en el CMS: se gestiona en los ajustes
+SEO, ver abajo.
+
+## Documentos legales (CMS)
+
+Cada documento legal tiene su propia colección **Single Item**: cabecera, versión y cuerpo
+completo son editables. El listado de `/legal` se actualiza solo desde estas colecciones.
+
+| Página                          | Colección               | Dónde                                                                                                              |
+| ------------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `/legal/termini-e-condizioni`   | `TerminiECondizioni`    | [Termini e condizioni](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/TerminiECondizioni) |
+| `/legal/privacy`                | `Privacy`               | [Privacy](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Privacy)               |
+| `/legal/accessibilita`          | `Accessibilita`         | [Accessibilità](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Accessibilita)   |
+| `/legal/carta-accordo-privacy`  | `CartaAccordoPrivacy`   | [Carta di accordo](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/CartaAccordoPrivacy) |
+| `/legal/manifesto-soberania-digitale` | `ManifestoSoberaniaDigitale` | [Manifesto](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/ManifestoSoberaniaDigitale) |
+| `/legal/termini-di-utilizzo`    | `TerminiDiUtilizzo`     | [Termini di utilizzo](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/TerminiDiUtilizzo) |
+| `/legal/accordo-utente`         | `AccordoUtente`         | [Accordo utente](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/AccordoUtente)  |
+| `/legal/cookie-policy`          | `CookiePolicy`          | [Cookie policy](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/CookiePolicy)    |
+| `/legal/resi-e-rimborsi`        | `ResiERimborsi`         | [Resi e rimborsi](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/ResiERimborsi) |
+| `/legal/protezione-dati`        | `ProtezioneDati`        | [Protezione dati](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/ProtezioneDati) |
+| `/legal/avviso-legale` y `/impressum` | `AvvisoLegale`    | [Avviso legale](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/AvvisoLegale)    |
+
 ## Formulario de contacto — /contatti
 
 - El formulario es una app **Wix Forms**; para editar el formulario:
@@ -60,9 +108,13 @@ Las colecciones de proyectos y sus páginas se gestionan desde la app **Wix Port
 
 ## SEO y analítica
 
-- SEO del sitio y por página: app Promote SEO —
-  <https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/app/1480c568-5cbd-9392-5604-1148f5faffa0>
-- Las páginas de post y de categoría del blog también tienen su SEO editable item por item.
+- **SEO de cada página estática — título, descripción para Google y compartir en redes** — se
+  edita en los ajustes SEO:
+  <https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/seo-home/seo-settings/static-page>
+  Elige la página y edita título y descripción; la imagen social que se usa al compartir la
+  página (og:image) también se gestiona ahí. Los cambios salen en vivo.
+- Las páginas de post y de categoría del blog también tienen su SEO editable item por item (en el
+  editor del post y en los ajustes SEO).
 - Tráfico del sitio: <https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/home> → Analytics.
 
 ## Cobros y facturas (owner)
@@ -72,7 +124,7 @@ Las colecciones de proyectos y sus páginas se gestionan desde la app **Wix Port
 
 ## Lo que requiere ayuda del desarrollador (no es dashboard)
 
-- Nuevas páginas o secciones, cambios de layout/diseño, textos de páginas fijas (home, chi-sono, investimento…), nav/footer.
+- Nuevas páginas o secciones, cambios de layout/diseño, nav/footer.
 - Cambios en el tema visual (tokens, tipografía, colores).
 - Conectar el dominio propio (`stefanolunardi.it`) — se pide al desarrollador o se hace con la app Domains del dashboard.
 - Cualquier cosa nueva: pedir al desarrollador, que la implementará y publicará (release).

@@ -1,44 +1,17 @@
 ---
 import SiteLayout from "@/app/layout.astro";
+import { getSitePageContent } from "@/features/site-content/site-content";
+import "@/features/site-content/site-content.css";
+
+const content = await getSitePageContent("chi-sono");
 ---
 
-<SiteLayout title="Chi sono — La tua storia, la sua visione | Stefano Lunardi" description="Fotografo con oltre trent'anni di esperienza tra fotogiornalismo, moda e pubblicità; fotografo di matrimoni dal 2012. QEP, oltre 100 riconoscimenti internazionali. Vivo tra Italia e Austria.">
+<SiteLayout title={content.title} description={content.intro}>
   <section class="border-b border-border px-6 pb-12 text-center">
-    <p class="eyebrow">Chi sono</p>
-    <h1 class="font-display mt-3 text-4xl font-medium sm:text-5xl md:text-6xl">La tua storia, la sua visione</h1>
-    <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">L'occhio del fotoreporter e la visione dell'artista fine art, al servizio della vostra storia.</p>
+    <p class="eyebrow">{content.eyebrow}</p>
+    <h1 class="font-display mt-3 text-4xl font-medium sm:text-5xl md:text-6xl">{content.title}</h1>
+    <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">{content.intro}</p>
   </section>
 
-  <section class="mx-auto max-w-3xl px-6 py-14">
-    <h2 class="font-display text-3xl font-medium">Il fotoreporter che ha trovato l'arte nei matrimoni</h2>
-    <p class="mt-4 leading-relaxed text-muted-foreground">Quindici anni di fotogiornalismo per le maggiori testate italiane: reportage da tutto il mondo. Leggere una scena prima che accada, diventare invisibile, aspettare il momento vero invece di costruirne uno finto. Dal 2012 porto questo sguardo nei matrimoni.</p>
-
-    <h2 class="font-display mt-12 text-3xl font-medium">L'artista fine art</h2>
-    <p class="mt-4 leading-relaxed text-muted-foreground">Oltre 100 premi e riconoscimenti internazionali. Qualifica QEP — Qualified European Photographer, settore ritratto — della Federation of European Photographers. Le mie opere sono visibili e acquistabili su <a href="https://www.singulart.com/it/artista/stefano-lunardi-37102" target="_blank" rel="noopener" class="text-accent underline underline-offset-4">Singulart</a>.</p>
-
-    <h2 class="font-display mt-12 text-3xl font-medium">La convergenza</h2>
-    <p class="mt-4 leading-relaxed text-muted-foreground">Pochissimi fotografi uniscono in un unico metodo la sensibilità del fotoreporter, la visione dell'artista fine art, il rigore dell'analogico e la cura della relazione umana. Il risultato: foto che sono documenti di verità e opere d'arte.</p>
-
-    <h2 class="font-display mt-12 text-3xl font-medium">Vivo tra Italia e Austria</h2>
-    <p class="mt-4 leading-relaxed text-muted-foreground">Credo nei valori della famiglia. Vivo tra Italia e Austria — moglie austriaca — e parlo italiano, tedesco e inglese: parlare con tutti gli ospiti nella loro lingua cambia le fotografie.</p>
-
-    <h2 class="font-display mt-12 text-3xl font-medium">Curriculum</h2>
-    <ul class="mt-4 flex flex-col gap-3 text-sm leading-relaxed text-muted-foreground">
-      <li><span class="text-foreground font-medium">1993</span> — Diploma John Kaverdash School of Photography</li>
-      <li><span class="text-foreground font-medium">1999-2008</span> — Fotoreporter per le maggiori testate italiane, reportage da tutto il mondo</li>
-      <li><span class="text-foreground font-medium">2008-2012</span> — Fotografo commerciale e pubblicitario (DeLonghi, Calligaris)</li>
-      <li><span class="text-foreground font-medium">2011</span> — Qualifica QEP, settore ritratto</li>
-      <li><span class="text-foreground font-medium">2012-2023</span> — Oltre 100 premi: IPA, International Color Awards, MIFA, B&W Spider Awards, WPGA, ANFM</li>
-      <li><span class="text-foreground font-medium">2017</span> — Ambasciatore della fotografia italiana in Cina</li>
-      <li><span class="text-foreground font-medium">Mostre personali</span> — TERRA (Cervignano, Torino), Timeless Woman (Venezia), Vibrations (Gradisca)</li>
-      <li><span class="text-foreground font-medium">Mostre collettive</span> — IPA Best Show New York, Parigi, Mosca, Manila; Photovisa Krasnodar; Vivid Foto Gallery Barcellona; LUMINA project Cina; Normal magazine Parigi</li>
-    </ul>
-
-    <h2 class="font-display mt-12 text-3xl font-medium">La mia coppia ideale</h2>
-    <p class="mt-4 leading-relaxed text-muted-foreground">Coppie straniere o italiane che sognano un matrimonio elegante in Italia e cercano un fotografo che catturi le emozioni con stile autentico, senza tempo e senza stress.</p>
-
-    <div class="mt-14 text-center">
-      <a href="/contatti" class="inline-block rounded-control border border-foreground bg-foreground px-8 py-3 text-sm font-medium text-primary-foreground no-underline transition-colors hover:border-accent hover:bg-accent">Raccontami la vostra storia</a>
-    </div>
-  </section>
+  <section class="site-content-body mx-auto max-w-3xl px-6 py-14" set:html={content.bodyHtml} />
 </SiteLayout>

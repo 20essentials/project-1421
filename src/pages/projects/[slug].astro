@@ -24,6 +24,6 @@ if (!project) {
 }
 ---
 
-<SiteLayout title={project.title} description={project.description}>
+<SiteLayout headFallback title={project.title} description={project.description}>
   <ProjectPage client:load slug={slug} initialProject={project} initialItems={items} />
 </SiteLayout>

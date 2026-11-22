@@ -1,28 +1,20 @@
 ---
 import SiteLayout from "@/app/layout.astro";
 import ArtisticParallax from "@/features/home/artistic-parallax.astro";
+import { getSitePageContent } from "@/features/site-content/site-content";
+import "@/features/site-content/site-content.css";
+
+const content = await getSitePageContent("fine-art");
 ---
 
-<SiteLayout title="Fine Art — Modern Elegance | Stefano Lunardi" description="Oltre ai matrimoni, espongo e vendo il mio lavoro personale su Singulart.">
+<SiteLayout title={content.title} description={content.intro}>
   <ArtisticParallax ctaHref="#dove-vederle" ctaLabel="Dove acquistarle" />
 
   <section class="border-b border-border px-6 pb-12 pt-12 text-center">
-    <p class="eyebrow">Fine Art</p>
-    <h1 class="font-display mt-3 text-4xl font-medium sm:text-5xl md:text-6xl">Modern Elegance</h1>
-    <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">Oltre ai matrimoni, espongo e vendo il mio lavoro personale.</p>
+    <p class="eyebrow">{content.eyebrow}</p>
+    <h1 class="font-display mt-3 text-4xl font-medium sm:text-5xl md:text-6xl">{content.title}</h1>
+    <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">{content.intro}</p>
   </section>
 
-  <section class="mx-auto max-w-3xl px-6 py-14">
-    <h2 class="font-display text-3xl font-medium">Continuare a fotografare è come respirare</h2>
-    <p class="mt-4 leading-relaxed text-muted-foreground">Mi permette di vedere, ogni volta, qualcosa di nuovo nella vostra storia. Le mie opere sono ricerca su luce, composizione e rapporto tra soggetto e spazio: portano l'invisibile nel visibile. Non foto decorative, ma opere che esplorano atmosfera e sentimento.</p>
-
-    <h2 class="font-display mt-12 scroll-mt-24 text-3xl font-medium" id="dove-vederle">Dove vederle e acquistarle</h2>
-    <div class="mt-6 flex flex-col items-start gap-3 text-sm">
-      <a href="https://www.singulart.com/it/artista/stefano-lunardi-37102" target="_blank" rel="noopener" class="text-accent underline underline-offset-4">Singulart — le mie opere</a>
-      <a href="https://www.artlunagallery.com/fine-art-portrait" target="_blank" rel="noopener" class="text-accent underline underline-offset-4">LunaGallery — fine art portrait</a>
-    </div>
-
-    <h2 class="font-display mt-12 text-3xl font-medium">Perché conta per il tuo matrimonio</h2>
-    <p class="mt-4 leading-relaxed text-muted-foreground">La visione artistica entra in ogni scatto del giorno del matrimonio: ogni scena diventa una potenziale opera. È lo stesso sguardo riconosciuto da oltre 100 riconoscimenti internazionali — <a href="/awards" class="text-accent underline underline-offset-4">premi e riconoscimenti</a>.</p>
-  </section>
+  <section id="dove-vederle" class="site-content-body mx-auto max-w-3xl scroll-mt-24 px-6 py-14" set:html={content.bodyHtml} />
 </SiteLayout>

@@ -47,6 +47,53 @@ Project collections and their pages are managed from the **Wix Portfolio** app.
 - Open the Portfolio app: <https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/app/d90652a2-f5a1-4c7c-84c4-d4cdcc41f130>
 - Add collections and projects (images, texts, order); /portfolio and /projects update live.
 
+## CMS-managed page text
+
+These pages are **Single Item** collections: one record each, edited like a form. The fields
+are `eyebrow`, `title`, `intro` and `body` (rich text). Every save appears on the site live,
+without a redeploy.
+
+| Page              | Collection     | Where                                                                                                          |
+| ----------------- | -------------- | -------------------------------------------------------------------------------------------------------------- |
+| `/` (hero)        | `Home`         | [Home](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Home)                |
+| `/il-mio-metodo`  | `IlMetodo`     | [Il Metodo](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/IlMetodo)       |
+| `/chi-sono`       | `ChiSono`      | [Chi Sono](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/ChiSono)         |
+| `/contatti`       | `Contatti`     | [Contatti](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Contatti)        |
+| `/video`          | `Video`        | [Video](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Video)              |
+| `/fine-art`       | `FineArt`      | [Fine Art](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/FineArt)         |
+| `/location`       | `Location`     | [Location](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Location)        |
+| `/investimento`   | `Investimento` | [Investimento](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Investimento)|
+| `/awards`         | `Awards`       | [Awards](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Awards)            |
+| `/recensioni`     | `Recensioni`   | [Recensioni](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Recensioni)    |
+| `/legal` (header) | `LegalIndex`   | [Documenti legali](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/LegalIndex) |
+| `/404`            | `NotFound`     | [404](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/NotFound)             |
+
+Scope per page: on `/` only the hero text is editable (the slides, galleries and sections below
+stay fixed); on `/contatti`, `/video` and `/recensioni` you edit the header text (the form,
+the video embeds and the review cards stay fixed); on `/awards` the awards lists and exhibitions
+are editable, the seals grid stays fixed; `/fine-art`, `/location`, `/investimento`,
+`/il-mio-metodo` and `/chi-sono` are fully editable. The page SEO (title and description for
+Google) is NOT in the CMS anymore: it is managed in the SEO settings, see below.
+
+## Legal documents (CMS)
+
+Each legal document is its own **Single Item** collection: header text, version and full body
+are editable. The list of documents on `/legal` updates on its own from these collections.
+
+| Page                            | Collection              | Where                                                                                                              |
+| ------------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `/legal/termini-e-condizioni`   | `TerminiECondizioni`    | [Termini e condizioni](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/TerminiECondizioni) |
+| `/legal/privacy`                | `Privacy`               | [Privacy](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Privacy)              |
+| `/legal/accessibilita`          | `Accessibilita`         | [Accessibilità](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Accessibilita)  |
+| `/legal/carta-accordo-privacy`  | `CartaAccordoPrivacy`   | [Carta di accordo](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/CartaAccordoPrivacy) |
+| `/legal/manifesto-soberania-digitale` | `ManifestoSoberaniaDigitale` | [Manifesto](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/ManifestoSoberaniaDigitale) |
+| `/legal/termini-di-utilizzo`    | `TerminiDiUtilizzo`     | [Termini di utilizzo](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/TerminiDiUtilizzo) |
+| `/legal/accordo-utente`         | `AccordoUtente`         | [Accordo utente](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/AccordoUtente) |
+| `/legal/cookie-policy`          | `CookiePolicy`          | [Cookie policy](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/CookiePolicy)   |
+| `/legal/resi-e-rimborsi`        | `ResiERimborsi`         | [Resi e rimborsi](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/ResiERimborsi) |
+| `/legal/protezione-dati`        | `ProtezioneDati`        | [Protezione dati](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/ProtezioneDati) |
+| `/legal/avviso-legale` and `/impressum` | `AvvisoLegale`  | [Avviso legale](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/AvvisoLegale)   |
+
 ## Contact form — /contatti
 
 - The form is a **Wix Forms** app; to edit the form:
@@ -60,9 +107,13 @@ Project collections and their pages are managed from the **Wix Portfolio** app.
 
 ## SEO and analytics
 
-- Site and per-page SEO: Promote SEO app —
-  <https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/app/1480c568-5cbd-9392-5604-1148f5faffa0>
-- Blog post and category pages also have their SEO editable item by item.
+- **SEO of every static page — title, Google description and social sharing** — is edited in the
+  SEO settings:
+  <https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/seo-home/seo-settings/static-page>
+  Pick the page, edit its title and description; the social image used when the page is shared
+  (og:image) is managed there too. Changes go live on the site.
+- Blog post and category pages also have their SEO editable item by item (in the post editor and
+  the SEO settings).
 - Site traffic: <https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/home> → Analytics.
 
 ## Payments and invoices (owner)
@@ -72,7 +123,7 @@ Project collections and their pages are managed from the **Wix Portfolio** app.
 
 ## What requires developer help (not the dashboard)
 
-- New pages or sections, layout/design changes, text on fixed pages (home, chi-sono, investimento…), nav/footer.
+- New pages or sections, layout/design changes, nav/footer.
 - Changes to the visual theme (tokens, typography, colors).
 - Connecting your own domain (`stefanolunardi.it`) — ask the developer or do it with the Domains app in the dashboard.
 - Anything new: ask the developer, who will implement and publish it (release).
