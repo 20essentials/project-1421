@@ -12,16 +12,17 @@ de layout, secciones nuevas) está al final.
 
 Los posts que cree aparecen solos en el feed; los borrados desaparecen del sitio al instante.
 
-| Qué hacer | Dónde |
-|---|---|
-| Crear/editar/publicar posts (borradores incluidos) | [Posts](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/blog/posts) |
-| Organizar por categorías (pills del feed) | [Categorías](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/blog/categories) |
-| Etiquetas (chips al pie de cada post) | [Tags](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/blog/tags) |
-| Moderar comentarios de los posts | [Comentarios](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/blog/comments) |
-| Autores/escritores (guest writers) | [Writers](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/blog/writers) |
-| Estadísticas del blog | [Analytics del blog](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/blog/analytics) |
+| Qué hacer                                          | Dónde                                                                                                      |
+| -------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Crear/editar/publicar posts (borradores incluidos) | [Posts](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/blog/posts)                  |
+| Organizar por categorías (pills del feed)          | [Categorías](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/blog/categories)        |
+| Etiquetas (chips al pie de cada post)              | [Tags](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/blog/tags)                    |
+| Moderar comentarios de los posts                   | [Comentarios](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/blog/comments)         |
+| Autores/escritores (guest writers)                 | [Writers](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/blog/writers)              |
+| Estadísticas del blog                              | [Analytics del blog](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/blog/analytics) |
 
 Trucos dentro del editor de cada post:
+
 - **Fijar (pin) un post** para que lidere el feed; **destacar (featured)** también es posible.
 - **Portada**: cada post puede cambiar su cover (imagen superior + tarjeta del feed).
 - **SEO del post**: título y descripción para Google se editan en el propio editor (SEO settings).

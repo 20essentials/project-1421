@@ -6,6 +6,10 @@ Our Astro templates are still in development and subject to change.
 
 To use a template, follow the [Wix CLI for Headless Quick Start](https://dev.wix.com/docs/go-headless/get-started/quick-starts/wix-managed-headless/quick-start-with-the-wix-cli), and select the desired template during the setup process.
 
+## Project documentation
+
+See the [documentation index](DOCUMENTATION/README.md) for the English, Italian and Spanish versions of the setup, client dashboard and feature guides.
+
 ## Need help?
 
 For documentation and support, check out:

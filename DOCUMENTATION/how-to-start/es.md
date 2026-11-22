@@ -85,7 +85,7 @@ Un cambio de código termina con `npm run release` (Wix CLI); el servidor de des
 
 ## 8. Dónde está el contenido
 
-El contenido y el commerce los posee el sitio Wix, no este repo: blog, FAQ, portfolio, formularios, SEO, etc. se gestionan desde el dashboard. Consulta `CLIENT-CAN-DO.md` antes de tocar nada ahí o de dar instrucciones al cliente.
+El contenido y el commerce los posee el sitio Wix, no este repo: blog, FAQ, portfolio, formularios, SEO, etc. se gestionan desde el dashboard. Consulta [CLIENT-CAN-DO.md](../client-can-do/es.md) antes de tocar nada ahí o de dar instrucciones al cliente.
 
 Para convenciones de código, reglas de imágenes, screenshots y flujo de release, lee `AGENTS.md`.
 

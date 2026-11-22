@@ -158,6 +158,10 @@ stefanolunardi-photographer
 │   ├── Sistema de diseño → DESIGN.md
 │   ├── Histórico → ROADMAP-DONE.md
 │   ├── Próximos pasos → ROADMAP-NEXT-STEPS.md
+│   ├── Documentación → DOCUMENTATION/
+│   │   ├── Cómo empezar → DOCUMENTATION/how-to-start/es.md
+│   │   ├── Qué puede hacer el cliente → DOCUMENTATION/client-can-do/es.md
+│   │   └── Todas las features → DOCUMENTATION/all-features/es.md
 │   └── Skills instaladas → .agents/skills/wix-headless-kit/, .agents/skills/wix-docs/
 │
 └── Material fuente del cliente
@@ -174,4 +178,4 @@ PENDIENTE (no implementado todavía)
 └── Revisión de titles/descriptions por página con el cliente → ROADMAP-NEXT-STEPS.md
 ```
 
-> Nota: `ALL-FEATURES.md`, `DESIGN.md` y los roadmaps se actualizan cuando el mapa cambia.
+> Nota: `DOCUMENTATION/all-features/es.md`, `DESIGN.md` y los roadmaps se actualizan cuando el mapa cambia.

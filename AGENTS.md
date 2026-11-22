@@ -12,21 +12,32 @@ Use **[20essentials/tools-catalog](https://github.com/20essentials/tools-catalog
 - **How to use it**: inspect the repo structure/categories on GitHub; prefer entries with clear URL, use case, and caveats. Treat it as curated guidance, then validate fit for this project.
 - **Maintenance**: if adding/updating catalog entries, keep them factual and concise, with URL, use case, and caveats. No secrets/tokens, no author promotion.
 
-### CLIENT-CAN-DO.md — the client's dashboard guide (keep it current)
+### User-facing documentation — `DOCUMENTATION/<doc>/<lang>.md`
 
-`CLIENT-CAN-DO.md` at the repo root is the client-facing list of everything they can manage
-themselves from the Wix dashboard (blog posts/categories/tags/comments, FAQ, portfolio, form
-submissions, SEO, invoices…). Rules:
+Docs meant for humans other than the coding agent live under `DOCUMENTATION/`: one folder per
+document, one file per language (`en.md`, `it.md`, `es.md`). Current documents are `how-to-start`,
+`client-can-do` and `all-features`; `DOCUMENTATION/README.md` is the index.
 
-- Any change that touches or reveals a dashboard-managed capability (a new app installed on the
-  site, a new collection/app surfaced by the frontend, a changed authoring flow) must be reflected
-  in `CLIENT-CAN-DO.md` in the same session — one short section with the direct dashboard links.
-- When the client asks how to do something in the dashboard, answer from `CLIENT-CAN-DO.md`; if
-  the answer isn't there, verify the route with the wix-manage `dashboard-navigation` recipe (or
-  the app-ID fallback `…/dashboard/{siteId}/app/{appDefId}`) and add it to the file before
-  finishing. Routes are recipe data — never invent `manage.wix.com` paths from memory.
-- When you hand the client any "you can do this yourself" instruction, add it to the file too.
-- Never put secrets, tokens or member emails in the file; it may be shared as-is with the client.
+- Agent-only docs (`AGENTS.md`, `CLAUDE.md`, `DESIGN.md`, `ROADMAP-*.md`) stay at the repo root and
+  are not translated.
+- Any change to a user-facing doc must be applied to all three language files in the same session.
+  Update `DOCUMENTATION/README.md` when a document is added or removed. Never add a new
+  user-facing markdown file at the repo root.
+- Keep paths, commands, URLs and identifiers identical across translations; translate prose only.
+- The client dashboard guide (`DOCUMENTATION/client-can-do/{en,it,es}.md`) lists everything the
+  client can manage themselves from the Wix dashboard (blog posts/categories/tags/comments, FAQ,
+  portfolio, form submissions, SEO, invoices…). Rules:
+  - Any change that touches or reveals a dashboard-managed capability (a new app installed on the
+    site, a new collection/app surfaced by the frontend, a changed authoring flow) must be reflected
+    in all three language files in the same session — one short section with the direct dashboard
+    links.
+  - When the client asks how to do something in the dashboard, answer from the file matching their
+    language; if the answer isn't there, verify the route with the wix-manage `dashboard-navigation`
+    recipe (or the app-ID fallback `…/dashboard/{siteId}/app/{appDefId}`) and add it to all three
+    files before finishing. Routes are recipe data — never invent `manage.wix.com` paths from memory.
+  - When you hand the client any "you can do this yourself" instruction, add it to all three files
+    too.
+  - Never put secrets, tokens or member emails in the files; they may be shared as-is with the client.
 
 ### Dev server — use `npm run dev:fg`, never `npm run dev`
 
