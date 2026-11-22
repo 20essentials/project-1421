@@ -27,6 +27,7 @@
     "@wix/astro": "^3.0.0",
     "@wix/astro-pages": "^3.0.0",
     "@wix/blog": "^1.0.645",
+    "@wix/business-tools": "1.0.234",
     "@wix/dashboard": "^1.3.43",
     "@wix/essentials": "^1.0.6",
     "@wix/faq": "^1.0.76",

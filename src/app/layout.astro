@@ -7,6 +7,8 @@ import type { FormDto } from "@/features/forms/types";
 import ConsentBootstrap from "@/features/consent/consent-bootstrap.astro";
 import ConsentBanner from "@/features/consent/consent-banner.astro";
 import { allNav, primaryNav } from "@/app/nav";
+import { fetchSiteInfo } from "@/features/site-info/site-info";
+import { SITE_INFO_FALLBACKS, type SiteInfo } from "@/features/site-info/site-info-core";
 
 interface Props {
   title?: string;
@@ -21,6 +23,18 @@ try {
   newsletterForm = await getForm(NEWSLETTER_FORM_ID);
 } catch {
 }
+
+// Business info from the dashboard (Settings > Business Info) with the studio's
+// values as fallback — the page renders the same whether the owner filled the
+// dashboard fields or not. The favicon follows the same idea: Wix serves the
+// dashboard favicon (Settings > Website settings) at /favicon.ico on its own,
+// and the local PNG set below is the fallback for the higher-resolution icons.
+let siteInfo: SiteInfo | null = null;
+try {
+  siteInfo = await fetchSiteInfo();
+} catch {
+}
+const info = siteInfo ?? SITE_INFO_FALLBACKS;
 
 const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
 
@@ -79,10 +93,9 @@ const structuredData = JSON.stringify({
         })();
       </script>
     )}
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png" />
     <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png" />
-    <link rel="mask-icon" href="/mask-icon.svg" color="#1a1d23" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#1a1d23" />
@@ -93,7 +106,7 @@ const structuredData = JSON.stringify({
         <link rel="canonical" href={canonical} />
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="it_IT" />
-        <meta property="og:site_name" content="Stefano Lunardi" />
+        <meta property="og:site_name" content={info.displayName} />
         <meta property="og:title" content={resolvedTitle} />
         <meta property="og:description" content={resolvedDescription} />
         <meta property="og:url" content={canonical} />
@@ -167,10 +180,10 @@ const structuredData = JSON.stringify({
           <div>
             <p class="eyebrow">Contatti</p>
             <div class="mt-4 flex flex-col gap-2">
-              <a href="mailto:studio@stefanolunardi.com" class="text-foreground no-underline hover:text-accent">studio@stefanolunardi.com</a>
-              <a href="tel:+393387513113" class="text-foreground no-underline hover:text-accent">+39 338 751 3113 (Italia)</a>
+              <a href={`mailto:${info.email}`} class="text-foreground no-underline hover:text-accent">{info.email}</a>
+              <a href={`tel:${info.phone.replace(/[^\d+]/g, "")}`} class="text-foreground no-underline hover:text-accent">{info.phone}</a>
               <a href="tel:+436767517274" class="text-foreground no-underline hover:text-accent">+43 676 751 7274 (Austria)</a>
-              <p class="text-muted-foreground">Villach · Udine · Treviso</p>
+              <p class="text-muted-foreground">{info.address}</p>
             </div>
           </div>
           <div>
