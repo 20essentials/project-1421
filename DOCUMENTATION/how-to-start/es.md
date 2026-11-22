@@ -1,6 +1,6 @@
 # Cómo empezar en tu propio ordenador
 
-Guía para clonar este proyecto, conectarlo a **tu** cuenta Wix y arrancarlo. Los secretos y datos locales van en archivos ignorados por Git; los identificadores del sitio viven en `wix.config.json` y solo se cambian si vas a apuntar el proyecto a otro sitio.
+Guía para clonar este proyecto, conectarlo a **tu** cuenta Wix y arrancarlo. Los secretos y datos locales van en archivos ignorados por Git; **debes crear `.opencode/opencode.json`** desde la plantilla antes de usar OpenCode. Los identificadores del sitio viven en `wix.config.json` y solo se cambian si vas a apuntar el proyecto a otro sitio.
 
 ## 1. Requisitos
 
@@ -45,24 +45,49 @@ npx wix env pull
 
 Si hace falta cambiar de cuenta: `npx wix logout` y vuelve a ejecutar `npx wix login`.
 
-## 5. Configurar los MCP de OpenCode
+## 5. Crear la configuración de OpenCode
 
-El repo trae `.opencode/opencode.json` con dos servidores: `wix-mcp` (OAuth, sin tokens en el repo) y `chrome-devtools`. El único dato local es el account ID de Wix:
+**Debes crear `.opencode/opencode.json`.** El repo solo trae la plantilla `.opencode/opencode.example.json`; OpenCode no usará la plantilla. Cópiala y pega tu token de Wix:
 
 ```bash
-cp .opencode/wix-account-id.example .opencode/wix-account-id
-# edita .opencode/wix-account-id y pon ahí tu Wix account ID (un UUID)
+cp .opencode/opencode.example.json .opencode/opencode.json
+# edita .opencode/opencode.json y pega tu token de Wix MCP en "Authorization"
 ```
 
-Ese archivo está en `.gitignore`; la config lo lee con `{file:wix-account-id}`. OpenCode **no** carga `.env.local`, así que no sirve poner el ID ahí. Si el archivo falta, el header queda vacío y `wix-mcp` no conecta.
+La estructura resultante es:
 
-Después:
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "wix-mcp": {
+      "type": "remote",
+      "url": "https://mcp.wix.com/mcp",
+      "headers": {
+        "Authorization": "<tu-token-de-wix-mcp>",
+        "wix-account-id": "60058239-f2bd-408b-89a2-6d464dff6e8a"
+      }
+    },
+    "chrome-devtools": {
+      "type": "local",
+      "command": ["npx", "-y", "chrome-devtools-mcp@1.10.1"],
+      "timeout": {
+        "startup": 60000
+      }
+    }
+  }
+}
+```
+
+- Deja `Authorization` vacío solo en la plantilla; un `opencode.json` real debe contener tu token. No subas ni compartas ese token.
+- El token debe pertenecer a la cuenta Wix a la que pertenece el sitio y tener permisos de SEO Settings; si no, las llamadas SEO de Wix devuelven `403 PERMISSION_DENIED`.
+- Cambia `wix-account-id` solo si vas a apuntar el MCP a otra cuenta Wix.
+- Esta estructura no usa OAuth y no lee `.opencode/wix-account-id`; OpenCode no carga `.env.local`, así que poner el ID allí no sirve.
+
+Después de crear el archivo:
 
 1. Reinicia OpenCode (la configuración no se recarga en caliente).
-2. Ejecuta `/mcps` → `wix-mcp` → inicia sesión con OAuth en el navegador.
-3. Comprueba con `opencode mcp list`: deben aparecer `cloudflare`, `wix-mcp` y `chrome-devtools`.
-
-El account ID es el UUID de la cuenta Wix a la que pertenece el sitio. Si no lo tienes, pídelo al dueño de la cuenta o cópialo de un ordenador donde el MCP ya esté configurado.
+2. Comprueba con `opencode mcp list`: deben aparecer `cloudflare`, `wix-mcp` y `chrome-devtools`.
 
 ## 6. Arrancar la web
 
@@ -91,10 +116,11 @@ Para convenciones de código, reglas de imágenes, screenshots y flujo de releas
 
 ## Problemas habituales
 
-| Síntoma                                       | Solución                                                                     |
-| --------------------------------------------- | ---------------------------------------------------------------------------- |
-| `wix-mcp` no conecta                          | Revisa `.opencode/wix-account-id`, reinicia OpenCode y haz OAuth en `/mcps`. |
-| `needs authentication` en `opencode mcp list` | Es el paso OAuth pendiente; no es un error de la config.                     |
-| `Dev server failed to start within 30s`       | Usa `npm run dev:fg` y espera el banner.                                     |
-| `astro check` muestra hints                   | Elimina el código muerto (imports/declaraciones sin usar) antes de terminar. |
-| El CLI trabaja con el sitio equivocado        | Revisa `appId` y `siteId` en `wix.config.json` antes de iniciar sesión.      |
+| Síntoma                                       | Solución                                                                                                                     |
+| --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `wix-mcp` no conecta                          | Comprueba que `.opencode/opencode.json` exista y tenga un `Authorization` válido y el `wix-account-id`, y reinicia OpenCode. |
+| `needs authentication` en `opencode mcp list` | `Authorization` está vacío o no es válido; complétalo y reinicia OpenCode.                                                   |
+| `403 PERMISSION_DENIED` en herramientas SEO   | El token no tiene permisos de SEO Settings; genéralo de nuevo con la cuenta Wix correcta.                                    |
+| `Dev server failed to start within 30s`       | Usa `npm run dev:fg` y espera el banner.                                                                                     |
+| `astro check` muestra hints                   | Elimina el código muerto (imports/declaraciones sin usar) antes de terminar.                                                 |
+| El CLI trabaja con el sitio equivocado        | Revisa `appId` y `siteId` en `wix.config.json` antes de iniciar sesión.                                                      |
