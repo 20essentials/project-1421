@@ -123,7 +123,7 @@ const isActive = (link: string) => {
               LOCALES.map((l, i) => (
                 <li style={`--i:${i}`}>
                   <a
-                    href={localizedHref(l, current || '/')}
+                    href={localizedHref(l, current || '/')} data-locale-switch={l}
                     aria-current={l === locale ? 'true' : undefined}
                     class='lang-item flex h-10 items-center justify-between rounded-xl px-3.5 text-sm text-muted-foreground no-underline aria-current:font-medium aria-current:text-foreground hover:bg-foreground/5 hover:text-foreground'
                   >
@@ -219,7 +219,7 @@ const isActive = (link: string) => {
           {
             LOCALES.map(l => (
               <a
-                href={localizedHref(l, current || '/')}
+                href={localizedHref(l, current || '/')} data-locale-switch={l}
                 aria-current={l === locale ? 'true' : undefined}
                 class='flex h-8 items-center rounded-full border border-border px-3 text-xs text-muted-foreground no-underline transition-colors hover:border-foreground hover:text-foreground aria-current:border-foreground aria-current:text-foreground'
               >
@@ -459,6 +459,22 @@ const isActive = (link: string) => {
 
 <script>
   import { scrollToTarget } from "@/shared/smooth-scroll";
+
+  // Language switch: the edge serves bare paths (the primary locale's canonical
+  // home) in the language of the `wixLanguage` cookie — an old cookie hijacks
+  // the switch back to the previous locale. Write the chosen locale into the
+  // cookie before the navigation so the request arrives in the right language.
+  // Locale-prefixed pages ignore the cookie, so this is also safe for es/en/de.
+  document.addEventListener(
+    "click",
+    (event) => {
+      const link = event.target instanceof Element ? event.target.closest("[data-locale-switch]") : null;
+      if (link instanceof HTMLAnchorElement && link.dataset.localeSwitch) {
+        document.cookie = `wixLanguage=${link.dataset.localeSwitch}; path=/; max-age=31536000; samesite=lax`;
+      }
+    },
+    true,
+  );
 
   let toggle: HTMLButtonElement | null = null;
   let menu: HTMLElement | null = null;
