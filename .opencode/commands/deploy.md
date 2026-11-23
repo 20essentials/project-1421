@@ -10,7 +10,7 @@ se hace con `wix release` (requiere sesión de `npx wix login` en esta máquina)
 3. Ejecuta los tests en orden; si cualquiera falla, DETENTE, muestra el error y no despliegues ni pushees:
    - `npm run check` (astro check)
    - `npm test` (vitest)
-4. Solo si ambos pasan, despliega a Wix: `npm run release` (= `wix release`).
+4. Solo si ambos pasan, despliega a Wix: `npm run build` y luego `npm run release` (= `wix release`). `wix release` publica el `dist/` existente, no reconstruye: sin el build previo se publica una versión obsoleta.
    Si falla la autenticación, pide al usuario ejecutar `npx wix login` y reintenta una vez.
 5. Después de un release exitoso, sube los commits: si `main` está adelantada respecto a `origin/main`, haz `git push origin main`.
 6. Si el push es rechazado (remoto adelantado), NO hagas force-push: avisa y pregunta cómo proceder (pull/rebase).
