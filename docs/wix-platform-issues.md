@@ -168,22 +168,48 @@ per page.
 
 ## 6. `wixLanguage` cookie forces the visitor's locale on every navigation
 
-**Status:** open — Wix Multilingual `autoSwitch` behavior, not our code.
+**Status:** closed 2026-11-23. Two changes:
 
-**Symptom.** A visitor whose browser language is Italian gets redirected to
-`/es` on every visit to `/` or `/it`, because a `wixLanguage=es` cookie from an
-earlier visit wins over `Accept-Language`. Bots (no Accept-Language) fall back
-to `/en` — including crawlers hitting `/` and `/sitemap.xml` (302 → 404: the
-site has no sitemap today).
+1. **`autoSwitch: false`** via the Locale Settings API
+   (`PATCH /locale-settings/v2/settings`, revision 5 → 6). Before: the edge
+   redirected `/`, `/it/…` (and bare assets) by the visitor's
+   `Accept-Language`/cookie, so bots fell back to `/en` and stale cookies
+   hijacked navigation. After: `/`, `/es`, `/en`, `/de` all answer 200 with
+   their own locale regardless of cookies; `/it/…` canonically 301s to the
+   bare path (serves Italian). Note the docs' own caution agrees: auto-switch
+   harms SEO (duplicate content, indexing limits).
 
-**What we verified:** locale settings are correct (primary `it`, visitor
-primary `it`, SUBDIRECTORY). The redirect comes from `autoSwitch: true` +
-cookie precedence at the edge.
+2. **The language menu writes the cookie before navigating**
+   (`fix(i18n): write the locale cookie when switching languages`). Even with
+   autoSwitch off, the `wixLanguage` cookie still decides the language of
+   bare paths (the primary locale's canonical home): `/` + cookie `de` served
+   the German site, so choosing Italiano from `/de` bounced back to German.
+   The header menu (desktop + mobile) now carries `data-locale-switch={l}`
+   and a delegated capture-phase click listener sets
+   `wixLanguage=<locale>; path=/; max-age=1y` before the navigation, so the
+   request arrives in the chosen language. Locale-prefixed pages ignore the
+   cookie, so this is safe for es/en/de too. Verified in a real browser:
+   `/de` with cookie `de` → click Italiano → lands on the Italian site.
 
-**Options if it bites again:** disable autoSwitch via the Locale Settings API
-(`POST /locale-settings/v2/settings` → `autoSwitch: false`), or leave as-is
-(Wix's intended UX). The missing sitemap is a separate SEO gap worth building
-(`sitemap-index.xml` currently 404s).
+**Original symptom (for the record).** A visitor whose browser language was
+Italian got redirected to `/es` on every visit, because a `wixLanguage=es`
+cookie from an earlier visit won over `Accept-Language`; bots (no
+Accept-Language) fell back to `/en`.
+
+**Residual risk / what to watch:**
+
+- If Wix re-enables autoSwitch (dashboard toggle "open the site in the
+  visitor's language"), the hijack returns — re-check
+  `GET /locale-settings/v2/settings` → `autoSwitch`.
+- The menu's cookie write relies on `wixLanguage` being non-HttpOnly (it is
+  today). If Wix ever makes it HttpOnly, the write fails silently and the
+  primary-locale switch breaks again — symptom: switching to Italian from a
+  secondary-locale page lands on the previous language.
+- Bare assets under a foreign `wixLanguage` cookie no longer redirect since
+  autoSwitch is off (bare asset + cookie = 200), but keep an eye on the
+  hydration/caching entries (§1, §2) if the edge behavior changes.
+- Bots hitting `/` now always get Italian; `sitemap-index.xml` still 404s
+  (no sitemap exists) — a separate SEO gap worth building.
 
 ## Historical note
 
