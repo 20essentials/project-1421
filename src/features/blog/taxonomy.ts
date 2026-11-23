@@ -61,14 +61,18 @@ export async function fetchTagsByIds(ids: readonly string[]): Promise<BlogTag[]>
   }
 }
 
-// The two by-slug getters return DIFFERENT envelopes upstream ({ category } vs { tag } here;
-// getTag(id) even returns the tag bare) — the mapping below absorbs that asymmetry once.
+// The by-slug reads go through the QUERY endpoint: Wix's own get-category-by-slug /
+// get-tag-by-slug answers 404 "No entity was found" for the slugs queryCategories returns on
+// this site, so the query's slug filter is the reliable path. (The two return DIFFERENT
+// envelopes upstream — getTag(id) even returns the tag bare; the mapping below absorbs that
+// asymmetry once.)
 
 /** One category by its URL slug. Null when not found. */
 export async function fetchCategoryBySlug(slug: string): Promise<BlogCategory | null> {
   try {
-    const res = await categories.getCategoryBySlug(slug);
-    return res.category ? toCategory(res.category as Raw, imgSrc) : null;
+    const res = await categories.queryCategories().eq("slug", slug).limit(1).find();
+    const raw = (res.items ?? [])[0];
+    return raw ? toCategory(raw as Raw, imgSrc) : null;
   } catch {
     return null;
   }
@@ -77,8 +81,9 @@ export async function fetchCategoryBySlug(slug: string): Promise<BlogCategory | 
 /** One tag by its URL slug. Null when not found. */
 export async function fetchTagBySlug(slug: string): Promise<BlogTag | null> {
   try {
-    const res = await tags.getTagBySlug(slug);
-    return res.tag ? toTag(res.tag as Raw) : null;
+    const res = await tags.queryTags().eq("slug", slug).limit(1).find();
+    const raw = (res.items ?? [])[0];
+    return raw ? toTag(raw as Raw) : null;
   } catch {
     return null;
   }
