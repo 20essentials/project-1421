@@ -135,6 +135,23 @@ const structuredData = JSON.stringify({
           XMLHttpRequest.prototype.open = function (method, url, ...rest) {
             return open.call(this, method, upgrade(url), ...rest);
           };
+          const hideFromWixEmbeds = (key) => {
+            let value = window[key];
+            Object.defineProperty(window, key, {
+              configurable: true,
+              enumerable: true,
+              get() {
+                return (new Error().stack || "").includes("setupContext-DcZmzUDt.js")
+                  ? undefined
+                  : value;
+              },
+              set(next) {
+                value = next;
+              },
+            });
+          };
+          hideFromWixEmbeds("__wix_context__");
+          hideFromWixEmbeds("$wixContext");
         })();
       </script>
     )}
