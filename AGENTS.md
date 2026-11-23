@@ -6,6 +6,14 @@ node_modules/@wix/cli/agents/instructions.md
 # Notes
 - NO python, just nodejs
 
+## Wix platform issues — read before debugging oddities
+
+`docs/wix-platform-issues.md` logs every Wix platform behavior that broke the
+site (edge redirects caching, CDN variant poisoning, hydration failures,
+by-slug API 404s, injected titles) with evidence, the fix applied and the
+residual risk. Consult it before debugging a symptom that "should not happen",
+and append new findings there instead of rediscovering them.
+
 ## Tools catalog — source of truth for ideas & libraries
 
 Use **[20essentials/tools-catalog](https://github.com/20essentials/tools-catalog)** as the curated, project-focused source of truth for reusable tools, libraries, patterns, components, services, and implementation ideas. It is a specific, maintained catalog for this workflow — not a generic “awesome list” to browse at random.
