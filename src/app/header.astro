@@ -49,7 +49,7 @@ const isActive = (link: string) => {
 
 <header class='pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-5'>
   <div
-    class='nav-pill pointer-events-auto flex w-max max-w-full items-center gap-5 rounded-full border border-border bg-background/70 p-2 pl-6 shadow-sm backdrop-blur-xl'
+    class='nav-pill pointer-events-auto relative flex w-max max-w-full items-center gap-5 rounded-full border border-border bg-background/70 p-2 pl-6 shadow-sm backdrop-blur-xl'
   >
     <a href={href("/")} class='flex shrink-0 items-center invert' aria-label={label("homeAriaLabel", "Stefano Lunardi — Home")}>
       <img
@@ -87,7 +87,7 @@ const isActive = (link: string) => {
       <div class='lang-switch relative' data-lang-switch>
         <button
           type='button'
-          class='lang-trigger flex h-9 cursor-pointer items-center gap-1.5 rounded-full px-2.5 text-sm text-muted-foreground transition-colors select-none hover:bg-foreground/5 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:px-3'
+          class='lang-trigger flex size-9 cursor-pointer items-center justify-center rounded-full border border-border text-muted-foreground transition-colors select-none hover:border-foreground/40 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:h-9 sm:w-auto sm:gap-1.5 sm:border-0 sm:px-3 sm:hover:border-transparent sm:hover:bg-foreground/5'
           aria-expanded='false'
           aria-haspopup='true'
           aria-label={`${label('localeLabel', 'Lingua')}: ${locale.toUpperCase()}`}
@@ -96,8 +96,9 @@ const isActive = (link: string) => {
             viewBox='0 0 16 16'
             fill='none'
             stroke='currentColor'
-            stroke-width='1.25'
-            class='size-4'
+            stroke-width='1.35'
+            stroke-linecap='round'
+            class='size-4.5 sm:size-4'
             aria-hidden='true'
           >
             <circle cx='8' cy='8' r='6.25'></circle>
@@ -109,14 +110,14 @@ const isActive = (link: string) => {
             fill='none'
             stroke='currentColor'
             stroke-width='1.5'
-            class='lang-chevron size-3'
+            class='lang-chevron hidden size-3 sm:block'
             aria-hidden='true'
           >
             <path d='M2.5 4.5 6 8l3.5-3.5'></path>
           </svg>
         </button>
         <div
-          class='lang-panel absolute top-11 right-0 z-20 w-48 rounded-2xl border border-border bg-background/90 p-1.5 shadow-lg backdrop-blur-xl'
+          class='lang-panel absolute top-11 left-1/2 -ml-24 z-20 w-48 rounded-2xl border border-border bg-background/90 p-1.5 shadow-lg backdrop-blur-xl'
         >
           <ul class='flex flex-col'>
             {
