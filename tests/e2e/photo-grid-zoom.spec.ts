@@ -81,9 +81,7 @@ test("la sección del portfolio no ensucia la consola", async ({ page }) => {
   page.on("pageerror", (error) => problems.push(`pageerror: ${error.message}`));
   page.on("console", (message) => {
     if (message.type() === "error" || message.type() === "warning") {
-      const text = message.text();
-      if (text.includes("AppId 196175ca-0c1e-41ec-9f9a-ceafda45b2bd")) return;
-      problems.push(`${message.type()}: ${text}`);
+      problems.push(`${message.type()}: ${message.text()}`);
     }
   });
 
