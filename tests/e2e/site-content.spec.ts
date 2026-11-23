@@ -78,4 +78,20 @@ test.describe("CMS Single Item pages", () => {
       /singulart\.com/,
     );
   });
+
+  test("home shows the awards wall with twelve seals and its CTA", async ({ page }) => {
+    const response = await page.goto("/", { waitUntil: "domcontentloaded" });
+    expect(response?.status()).toBeLessThan(500);
+
+    const wall = page.locator("[data-awards-wall]");
+    await expect(wall).toBeVisible();
+    await expect(
+      wall.getByRole("heading", { level: 2, name: "Oltre 100 premi internazionali" }),
+    ).toBeVisible();
+    await expect(wall.locator("img")).toHaveCount(12);
+    await expect(wall.getByRole("link", { name: "Tutti i premi e le mostre" })).toHaveAttribute(
+      "href",
+      "/it/awards",
+    );
+  });
 });

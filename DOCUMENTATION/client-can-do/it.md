@@ -71,8 +71,9 @@ sito in tempo reale, senza redeploy.
 
 Perimetro per pagina: in `/` sono modificabili testo, immagini e video di ogni sezione (slide
 hero, presentazione, intro delle gallerie, video di presentazione, i tre tipi di foto, sezione
-foto/video, testata del blog, riconoscimenti, citazioni, testata FAQ e invito finale — le
-griglie delle gallerie mantengono il loro layout); in `/contatti`, `/video` e `/recensioni`
+foto/video, testata del blog, muro dei riconoscimenti (testo e prime sei immagini modificabili;
+gli altri sei sigilli restano fissi), citazioni, testata FAQ e invito finale — le griglie delle
+gallerie mantengono il loro layout); in `/contatti`, `/video` e `/recensioni`
 modifichi il testo dell'intestazione (il modulo, i video e le card delle recensioni restano
 fissi); in `/awards` sono modificabili gli elenchi di premi e mostre, la griglia dei sigilli
 resta fissa; `/fine-art`, `/location`, `/investimento`, `/il-mio-metodo` e `/chi-sono` sono

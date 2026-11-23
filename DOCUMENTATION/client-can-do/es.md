@@ -71,8 +71,9 @@ aparece en el sitio en vivo, sin redeploy.
 
 Alcance por página: en `/` son editables el texto, las imágenes y los vídeos de cada sección
 (slides del hero, presentación, intro de las galerías, vídeo de presentación, los tres tipos de
-foto, sección foto/vídeo, cabecera del blog, reconocimientos, citas, cabecera FAQ y el llamado
-final — las cuadrículas de las galerías mantienen su layout); en `/contatti`, `/video` y
+foto, sección foto/vídeo, cabecera del blog, muro de reconocimientos (texto y seis primeras
+imágenes editables; los otros seis sellos quedan fijos), citas, cabecera FAQ y el llamado final —
+las cuadrículas de las galerías mantienen su layout); en `/contatti`, `/video` y
 `/recensioni` editas el texto de la cabecera (el formulario, los vídeos y las tarjetas de
 reseñas quedan fijos); en `/awards` son editables las listas de premios y exposiciones, la
 cuadrícula de sellos queda fija; `/fine-art`, `/location`, `/investimento`, `/il-mio-metodo` y

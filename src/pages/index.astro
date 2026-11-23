@@ -8,6 +8,7 @@ import { getHomeContent } from "@/features/site-content/site-content";
 import { currentLocale } from "@/features/i18n/current-locale";
 import { localizedHref } from "@/features/i18n/localized-path";
 import { imgAttrs, imgSrc, imgSrcSet, mediaKey } from "@/shared/media";
+import { homeExtraSeals } from "@/shared/award-seals";
 import type { PostPage } from "@/features/blog/types";
 import type { FaqData } from "@/features/faq/types";
 
@@ -32,6 +33,15 @@ const VEIL_RATIO = 3425 / 4961;
 
 const faqPreview = faq.questions.slice(0, 3);
 const latestPosts = posts?.posts.slice(0, 3) ?? [];
+
+const homeAwardLogos = [
+  { src: heroContent.awardLogo1, alt: "Vogue Sposa", label: "Vogue Sposa", width: 600, height: 600 },
+  { src: heroContent.awardLogo2, alt: "Wezoree", label: "Wezoree", width: 5552, height: 1700 },
+  { src: heroContent.awardLogo3, alt: "IPA International Photo Awards — 1° place Fine Art 2016", label: "IPA International Photo Awards", width: 800, height: 790 },
+  { src: heroContent.awardLogo4, alt: "MIFA Moscow International Foto Awards", label: "MIFA Moscow", width: 702, height: 702 },
+  { src: heroContent.awardLogo5, alt: "International Color Awards", label: "International Color Awards", width: 250, height: 251 },
+  { src: heroContent.awardLogo6, alt: "IPA International Photo Awards — 2° place Wedding 2016", label: "IPA International Photo Awards", width: 800, height: 790 },
+];
 
 interface ScrollScene {
   key: string;
@@ -393,33 +403,59 @@ const alignFor = (i: number): "center" | "right" | "left" =>
     )
   }
 
-  <section class="border-y border-border px-6 py-20">
-    <div class="mx-auto max-w-4xl text-center">
-      <p class="eyebrow">{heroContent.awardsEyebrow}</p>
-      <p class="font-display mt-3 text-3xl font-medium sm:text-4xl">{heroContent.awardsTitle}</p>
-      <p class="mt-4 text-sm leading-relaxed text-muted-foreground">{heroContent.awardsText}</p>
-      <div class="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
-        {[
-          { src: heroContent.awardLogo1, alt: "Vogue Sposa", class: "h-12 w-auto", width: 600, height: 600 },
-          { src: heroContent.awardLogo2, alt: "Wezoree", class: "h-10 w-auto", width: 5552, height: 1700 },
-          { src: heroContent.awardLogo3, alt: "IPA International Photo Awards — 1° place Fine Art 2016", class: "h-14 w-auto", width: 800, height: 790 },
-          { src: heroContent.awardLogo4, alt: "MIFA Moscow International Foto Awards", class: "h-14 w-auto", width: 702, height: 702 },
-          { src: heroContent.awardLogo5, alt: "International Color Awards", class: "h-14 w-auto", width: 250, height: 251 },
-          { src: heroContent.awardLogo6, alt: "IPA International Photo Awards — 2° place Wedding 2016", class: "h-14 w-auto", width: 800, height: 790 },
-        ].map((logo) => (
-          <img
-            src={`https://static.wixstatic.com/media/${mediaKey(logo.src)}`}
-            alt={logo.alt}
-            loading="lazy"
-            decoding="async"
-            class={`object-contain opacity-80 ${logo.class}`}
-            style={`aspect-ratio: ${logo.width} / ${logo.height}`}
-            width={logo.width}
-            height={logo.height}
-          />
-        ))}
+  <section
+    data-awards-wall
+    aria-labelledby="awards-title"
+    class="awards-wall dot-grid dot-grid-light border-y border-white/10 px-6 py-24 sm:py-32"
+  >
+    <div class="mx-auto max-w-7xl">
+      <div class="awards-wall__head">
+        <div>
+          <p class="eyebrow awards-wall__eyebrow">{heroContent.awardsEyebrow}</p>
+          <h2 id="awards-title" class="font-display awards-wall__title">{heroContent.awardsTitle}</h2>
+          <p class="awards-wall__copy">{heroContent.awardsText}</p>
+        </div>
+        <p class="awards-wall__count" aria-hidden="true">100<span>+</span></p>
       </div>
-      <a href={href("/awards")} class="mt-8 rounded-control btn-ghost no-underline">{heroContent.awardsCta}</a>
+
+      <ul class="awards-wall__grid">
+        {
+          homeAwardLogos.map((logo) => (
+            <li class="awards-wall__card">
+              <img
+                src={`https://static.wixstatic.com/media/${mediaKey(logo.src)}`}
+                alt={logo.alt}
+                loading="lazy"
+                decoding="async"
+                class="awards-wall__img"
+                width={logo.width}
+                height={logo.height}
+              />
+              <span class="awards-wall__label" aria-hidden="true">{logo.label}</span>
+            </li>
+          ))
+        }
+        {
+          homeExtraSeals.map((seal) => (
+            <li class="awards-wall__card">
+              <img
+                src={seal.src}
+                alt={seal.alt}
+                loading="lazy"
+                decoding="async"
+                class="awards-wall__img"
+                width={seal.width}
+                height={seal.height}
+              />
+              <span class="awards-wall__label" aria-hidden="true">{seal.label}</span>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="awards-wall__footer">
+        <a href={href("/awards")} class="rounded-control awards-wall__cta">{heroContent.awardsCta}</a>
+      </div>
     </div>
   </section>
 
@@ -799,6 +835,151 @@ const alignFor = (i: number): "center" | "right" | "left" =>
       width: 100%;
       aspect-ratio: 16 / 9;
       background: url("https://static.wixstatic.com/media/600582_7aee14ecf9714020be28dcff3d7a17a2~mv2.avif") center / cover no-repeat;
+    }
+  }
+
+  .awards-wall {
+    background: var(--color-primary);
+    color: rgb(255 255 255 / 0.92);
+  }
+  .awards-wall__head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+    align-items: end;
+  }
+  @media (min-width: 1024px) {
+    .awards-wall__head {
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 4rem;
+    }
+  }
+  .awards-wall__eyebrow {
+    color: rgb(255 255 255 / 0.55);
+  }
+  .awards-wall__title {
+    margin-top: 0.75rem;
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: #ffffff;
+  }
+  .awards-wall__copy {
+    max-width: 62ch;
+    margin-top: 1.25rem;
+    font-size: 0.875rem;
+    line-height: 1.75;
+    color: rgb(255 255 255 / 0.62);
+  }
+  .awards-wall__count {
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 12vw, 6rem);
+    font-weight: 500;
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+    color: #ffffff;
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+  .awards-wall__count span {
+    color: rgb(255 255 255 / 0.35);
+  }
+  .awards-wall__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin-top: 3.5rem;
+  }
+  @media (min-width: 640px) {
+    .awards-wall__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 1024px) {
+    .awards-wall__grid {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 4.5rem;
+    }
+  }
+  .awards-wall__card {
+    position: relative;
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1;
+    min-inline-size: 0;
+    min-block-size: 0;
+    overflow: hidden;
+    padding: 1rem 1rem 2.25rem;
+    border: 1px solid rgb(255 255 255 / 0.18);
+    background: var(--color-secondary);
+    transition:
+      transform 350ms var(--ease-fluid),
+      background-color 350ms var(--ease-fluid),
+      border-color 350ms var(--ease-fluid),
+      box-shadow 350ms var(--ease-fluid);
+  }
+  .awards-wall__card:hover {
+    transform: translateY(-4px);
+    background: #ffffff;
+    border-color: #ffffff;
+    box-shadow: 0 18px 44px -26px rgb(0 0 0 / 0.9);
+  }
+  .awards-wall__img {
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+    min-inline-size: 0;
+    min-block-size: 0;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+    opacity: 0.9;
+    transition:
+      opacity 350ms var(--ease-fluid),
+      transform 350ms var(--ease-fluid);
+  }
+  .awards-wall__card:hover .awards-wall__img {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+  .awards-wall__label {
+    position: absolute;
+    inset-inline: 0.5rem;
+    bottom: 0.7rem;
+    text-align: center;
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    line-height: 1.2;
+    text-transform: uppercase;
+    color: var(--color-muted-foreground);
+  }
+  .awards-wall__footer {
+    margin-top: 3.5rem;
+    text-align: center;
+  }
+  .awards-wall__cta {
+    border: 1px solid rgb(255 255 255 / 0.4);
+    padding: 0.75rem 2rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: rgb(255 255 255 / 0.9);
+    background: transparent;
+    text-decoration: none;
+  }
+  .awards-wall__cta:hover {
+    border-color: #ffffff;
+    color: #ffffff;
+    background: rgb(255 255 255 / 0.06);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .awards-wall__card,
+    .awards-wall__img {
+      transition: none;
+    }
+    .awards-wall__card:hover,
+    .awards-wall__card:hover .awards-wall__img {
+      transform: none;
     }
   }
 

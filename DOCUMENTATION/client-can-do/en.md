@@ -71,8 +71,9 @@ redeploy.
 
 Scope per page: on `/` every section's text, images and videos are editable (hero slides,
 about, art galleries intro, intro video, the three shot types, photo/video section, blog
-preview header, awards strip, quotes, FAQ header and the final call to action — the gallery
-grids themselves keep their layout); on `/contatti`, `/video` and `/recensioni` you edit the
+preview header, awards wall (its text and first six logos are editable; the six additional seals
+stay fixed), quotes, FAQ header and the final call to action — the gallery grids themselves keep
+their layout); on `/contatti`, `/video` and `/recensioni` you edit the
 header text (the form, the video embeds and the review cards stay fixed); on `/awards` the
 awards lists and exhibitions are editable, the seals grid stays fixed; `/fine-art`,
 `/location`, `/investimento`, `/il-mio-metodo` and `/chi-sono` are fully editable. The page

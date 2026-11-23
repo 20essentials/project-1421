@@ -78,6 +78,7 @@ Reglas de color: no introducir colores nuevos; usar grises con un toque frío
 - **Skeletons**: `animate-pulse bg-secondary`.
 - **Iconos**: inline SVG, `stroke-width 1.5`, `size-4`.
 - **Consentimiento**: `src/features/consent/consent-banner.astro` — `<aside data-sl-consent>` fijo abajo con `role="region"`; botones `Accetta` / `Rifiuta` / `Preferenze` y panel granular `data-consent-panel`. Usa solo tokens monocromos; se reabre desde el footer (`Preferenze cookie`).
+- **Muro de Riconoscimientos (home)**: sección en `--color-primary` con `.dot-grid-light`, titular Jost amplio, cifra `100+` decorativa (`aria-hidden`) y una rejilla de 12 placas claras (`--color-secondary`): 6 logotipos editables del CMS `Home` y 6 sigillos fijos compartidos con `/awards` (`src/shared/award-seals.ts`). Las imágenes usan `mix-blend-mode: multiply` para integrar los fondos blancos; hover eleva la placa, sin movimiento bajo `prefers-reduced-motion`.
 
 ## Motion
 
@@ -96,3 +97,4 @@ Reglas de color: no introducir colores nuevos; usar grises con un toque frío
 Capturas por feature en `.screenshots/` (nunca borrar ni sobrescribir).
 
 - Cookie consent: `.screenshots/cookie-consent-banner-20261118-155621.png` y `.screenshots/cookie-consent-panel-20261118-155621.png`.
+- Muro de Riconoscimientos: `.screenshots/awards-wall-20261123-234454.png` (desktop) y `.screenshots/awards-wall-mobile-20261123-234602.png` (mobile 390px).
