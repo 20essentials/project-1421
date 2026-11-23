@@ -107,3 +107,49 @@ dónde viven. Los pasos siguientes viven en `ROADMAP-NEXT-STEPS.md`.
 
 ### Cierre de "5. Contenido que depende del cliente"
 - Los 3 ítems de la sección 5 de `ROADMAP-NEXT-STEPS.md` quedan cerrados aquí; la sección queda solo con el seguimiento con Stefano (textos de las respuestas + 3 fotos marcadas).
+
+## 2026-11-19 → 2026-11-21
+
+### Rediseño visual y nuevas páginas
+- Home: bio de Stefano con retrato (`9ba4464`), hero de cinco escenas color/B&N (`d1aaf69`), parallax fine-art con 10 slides y enlaces a Singulart/Luna Gallery (`c601b3d`, `99b82b0`, `42b900d`), sección "mi presento" con vídeo (`2554bff`), galería de arte (`6f485ea`), loop de pintura en la sección foto-e-video (`14a4c43`) y lightbox flip-zoom en la grid (`8ae8043`).
+- Portfolio: showcase coil con three.js (`ea6c6c2`, `71afc2b`) movido de home a portfolio y retitulado "Ogni scatto un'opera" (`807d868`, `287a0ce`).
+- Vídeo: página `/video` con films y grid de canales (`e790e45`), enlace YouTube en header/footer (`39542ac`), autoplay muted del vídeo destacado (`8d07693`).
+- 404 interactiva con lente de marea (`40ffe4c`) + nav flotante y panel legible (`679e559`); se retiró la tarjeta 404 hardcoded del overlay (`38036fb`); redirect `/projects` → `/portfolio` (`244c2cc`).
+- FAQ rediseñada con componentes editoriales y tests (`f65f291`); nav: indicador sigue hover/focus (`979fc96`), CTA preventivo en el pill mobile (`4b3b258`), offset del header movido a `main` (`6cffa61`).
+- Consent: banner rediseñado con panel granular animado (`45eb496`).
+- Estilos: smooth scroll con Lenis (`db73184`), textura dot-grid (`5d7d018`), clases canónicas Tailwind v4 (`1d2cda8`), padding horizontal en heroes full-width (`0a22863`), ripple de feedback en controles (`ade2ea8`).
+
+### Media, formularios y calidad
+- Todas las imágenes del sitio servidas desde Wix Media Manager (`0835be8`) y re-subidas en AVIF (`f679f83`); dimensiones intrínsecas en imágenes lazy (`d9cf6cb`) y logos (`7eb23fa`); fallback si falla el avatar del autor (`daa69e5`); logos de marca servidos desde wixstatic (`62615af`).
+- Formularios: country picker buscable en "Location" (`ed5cc1f`), spam gate (`spam-core.ts` + tests) y ring focus-visible (`9ec9b7a`), limpieza de imports (`b57144b`).
+- Reglas de agentes añadidas: tests Vitest/Playwright obligatorios para lógica TS (`1330570`), cero hints en `astro check` (`5860276`), consola sin warnings/errors (`7fc5f77`), Tailwind v4 canónico (`530bfd8`), catálogo de herramientas (`528fc2e`), skill `no-invented-code` (`cb94fca`), script `dev:fg` para foreground (`687c4d5`).
+- CI/CD: deploy automático de `main` tras CI verde (`d7f7889`), comando local de deploy con tests antes de release (`fae049b`), `npm run release` = `build && wix release` (evita releases de `dist/` stale; historical note en `docs/wix-platform-issues.md`).
+- Guía del dashboard del cliente (`bd8ba0f`) y guías de usuario en `DOCUMENTATION/` traducidas a en/it/es (`b23d092`, `0fae273`).
+
+## 2026-11-22
+
+### Contenido editable por el cliente desde Wix
+- Capa de datos `site-content` + planes de seed (`a353f16`, `ca2f7b9`, `ea5b7b6`); home con todo texto/media por sección editable desde colecciones single-item (`61f4e8c`, plan `seed/single-item-pages-plan.json`), imágenes como URLs de media planas para arreglar srcset (`194f0e2`), campos de las colecciones ordenados según el flujo de página (`1e4d352`, `1d47949`).
+- Labels del chrome (header/footer) desde colección single-item (`51fc46d`); info del negocio desde Wix site properties (`c28e337`).
+- Scripts para OG image global (`6ccf178`), post-migration de posts del sitio antiguo (`f9334a5`), reviews reales en lugar de placeholders (`57b690a`), enlace a reseñas de matrimonio.com en el footer (`cc972c9`), ghost buttons en la home (`15f016c`), alineación legal y viñetas CMS restauradas (`967e36e`).
+- E2E: sweep en vivo de titles/headings/redirects (`b42b52f`).
+
+## 2026-11-23
+
+### Multi-idioma (paso 2 del roadmap) — cerrado
+- Núcleo de locales (`5f40e45`): `LOCALES = ["it", "es", "en", "de"]`, `DEFAULT_LOCALE = "it"`, resolución desde request/cookie `wixLanguage` (`src/features/i18n/`).
+- Chrome, páginas y capas de datos en el idioma del visitante (`f120c9d`), CTAs internos hardcoded localizados (`07a314f`), menú de idiomas escribe la cookie antes de navegar (`9f8db7e`), SEO pide a Google no traducir (`40a5a84`).
+- `hreflang` por locale + `x-default` en `src/app/layout.astro:173-176`; titles por página en páginas estáticas (§5 del log de plataforma).
+- Estabilidad multilingual: assets de cada página servidos desde una sola base locale y con `?v=BUILD_ID` (`a7d86d6`), proxy de assets localizados para sortear el edge (`24a4d7f`), `autoSwitch: false` vía Locale Settings (cambio de configuración, registrado en §6; `3400c3c` cierra el hallazgo en el log). Detalle y evidencia en `docs/wix-platform-issues.md` §1, §2 y §6.
+
+### SEO real y consistencia
+- `src/pages/sitemap-full.xml.ts` con URLs reales de estáticas, posts, categorías/tags y portfolio; `/robots.txt` apunta a él; `llms.txt` curado subido por la API de Wix (`manuallyEdited: true`) — §5 del log de plataforma (`9ec9b7a`).
+- Blog: categorías/tags resueltos por endpoint de query en vez de by-slug (`2254e98`), párrafos vacíos eliminados antes del viewer de Ricos (`cfe99be`).
+- `docs/wix-platform-issues.md` creado y enlazado desde `AGENTS.md` (`4c7dfc7`, `c8df7af`): 6 hallazgos con evidencia, fix y riesgo residual (redirecciones de edge, caché variante, ruido de scripts Wix, 404s by-slug, título inyectado, cookie de locale).
+- Ajustes en E2E para el error `AppId … Client 404` inyectado por Wix (`7c8eaa7` lo filtra en dev, `4c20982` lo retira del filtro); globals de contexto Wix ocultos al script MCP (`cb7db3a`).
+
+### Cierre de warnings de consola (trabajo de hoy, releaseado)
+- `[ConsentPolicy] setConsentPolicy is not available`: `src/shared/consent.ts` resuelve los mismos targets que el SDK (`globals.$ns["wix-window"].consentPolicy`, `window.consentPolicyManager`) y omite la llamada si no existe — en headless el wrapper solo avisaba y no hacía nada. Tests unitarios actualizados + 3 casos nuevos del guard.
+- Icono 192×192 del manifest: el media item `600582_61952383…` quedó truncado en el Media Manager (IDAT declarado 4746 B, archivo 4530 B sin IEND; `createImageBitmap` fallaba). Regenerado desde `public/favicon.svg`, subido en dos pasos y marcado `READY`: `600582_0246be52d6fe4016bddd36f014a0979a~mv2.png`. `public/site.webmanifest` y `docs/images-sitemap.txt` actualizados; `docs/wix-platform-issues.md` §3 corregido (antes decía que el PNG era válido) y ampliado con el hallazgo de que el edge sirve bytes ICO en `/favicon.svg`.
+- Enviados dos reportes a Wix (subida truncada servida como READY; reserva undocumented de `/favicon.svg`), previo OK explícito del cliente.
+- Keys: `npm run check` 0/0/0, 112 tests unitarios en verde, release hecha y consola del live sin los dos warnings (queda solo el `AppId` inyectado por Wix, documentado como ruido).
