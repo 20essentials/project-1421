@@ -31,11 +31,30 @@ export interface RichContentProps {
   fallbackParagraphs?: string[];
 }
 
+/** A node has renderable text when it or any descendant carries a non-empty text run. */
+function hasText(node: any): boolean {
+  const t = node?.textData?.text ?? node?.text_data?.text;
+  if (typeof t === "string" && t.trim()) return true;
+  return (node?.nodes ?? []).some(hasText);
+}
+
+/**
+ * The dashboard's rich text editor leaves stray empty paragraphs between sections; the viewer
+ * renders each as a full blank line, which reads as brutal gaps. Drop PARAGRAPH nodes that carry
+ * no text (images/embeds and headings stay), on a copy — the source document is untouched.
+ */
+function withoutEmptyParagraphs(content: Record<string, unknown>): Record<string, unknown> {
+  const nodes = (Array.isArray(content.nodes) ? content.nodes : []).filter(
+    (n: any) => !(n?.type === "PARAGRAPH" && !hasText(n)),
+  );
+  return { ...content, nodes };
+}
+
 export default function RichContent({ content, fallbackParagraphs = [] }: RichContentProps) {
   if (content) {
     return (
       <div className="ricos-content">
-        <RicosViewer content={content as any} plugins={plugins} wixClient={ricosWixClient} />
+        <RicosViewer content={withoutEmptyParagraphs(content) as any} plugins={plugins} wixClient={ricosWixClient} />
       </div>
     );
   }
