@@ -73,3 +73,13 @@ https://static.wixstatic.com/media/600582_3f61e6bd350a4347962d8e33b2ae813c~mv2.j
 # og:image NO puede ser AVIF (los crawlers sociales no lo renderizan): siempre JPEG.
 # Se usa como tag og:image en los Item SEO Tags de todas las STATIC_PAGE (dashboard SEO).
 tmp-og/og-image.jpg -> https://static.wixstatic.com/media/600582_f5d32dbab14745eabc17b44e1efc6d3e~mv2.jpg
+
+# Brand assets subidos al Media Manager (dos pasos: generate-upload-url + PUT).
+# Los PNG de public/ NO se servían en producción (302 → 404 en consola): reemplazados
+# por wixstatic. Excepción AVIF: los favicons/logo deben quedarse en PNG/SVG por
+# compatibilidad de formato, no se convierten a AVIF.
+public/logo.png -> https://static.wixstatic.com/media/600582_7b25241827f7487b9c5971d556a24036~mv2.png
+public/favicon-32x32.png -> https://static.wixstatic.com/media/600582_e505c94daf344b3abd0ff02c1596f705~mv2.png
+public/favicon-16x16.png -> https://static.wixstatic.com/media/600582_5ca3a73136b5424cb75c3f945d5da796~mv2.png
+public/apple-touch-icon.png -> https://static.wixstatic.com/media/600582_c34d60f8b90240a1a671dc9b83c6c3b0~mv2.png
+public/android-chrome-192x192.png -> https://static.wixstatic.com/media/600582_61952383a35b4f3da0c0c5f3cba0f262~mv2.png

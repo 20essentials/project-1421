@@ -2,8 +2,8 @@
   "name": "Stefano Lunardi — Fotografo di matrimoni | Fine Art | Fotoreporter",
   "short_name": "Stefano Lunardi",
   "icons": [
-    { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
+    { "src": "https://static.wixstatic.com/media/600582_61952383a35b4f3da0c0c5f3cba0f262~mv2.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
   ],
   "theme_color": "#08090a",
   "background_color": "#08090a",
