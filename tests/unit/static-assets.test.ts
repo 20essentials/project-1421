@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { toAssetPath, toMutableResponse, toPublicOrigin } from "@/app/static-assets";
+import {
+  localeAssetRewriter,
+  toAssetPath,
+  toMutableResponse,
+  toPublicOrigin,
+} from "@/app/static-assets";
 
 describe("toAssetPath", () => {
   it("keeps root asset paths", () => {
@@ -70,5 +75,70 @@ describe("toMutableResponse", () => {
 
     expect(copy.status).toBe(304);
     expect(copy.body).toBeNull();
+  });
+});
+
+describe("localeAssetRewriter", () => {
+  const V = "202611231200";
+
+  async function rewrite(html: string, locale: Parameters<typeof localeAssetRewriter>[0], version?: string) {
+    const stream = new ReadableStream<Uint8Array>({
+      start(controller) {
+        controller.enqueue(new TextEncoder().encode(html));
+        controller.close();
+      },
+    }).pipeThrough(localeAssetRewriter(locale, version));
+    return await new Response(stream).text();
+  }
+
+  it("prefixes bare asset urls with the page locale and the release version", async () => {
+    const html =
+      '<script src="/_astro/app.js"></script>' +
+      '<astro-island component-url="/_astro/a.js" before-hydration-url="/_astro/b.js">';
+    expect(await rewrite(html, "es", V)).toBe(
+      '<script src="/es/_astro/app.js?v=' + V + '"></script>' +
+        '<astro-island component-url="/es/_astro/a.js?v=' + V + '" before-hydration-url="/es/_astro/b.js?v=' + V + '">',
+    );
+  });
+
+  it("appends the version to already-prefixed urls without re-prefixing them", async () => {
+    const html = '<script src="/es/_astro/app.js"></script><img srcset="/en/_astro/a.webp 1x">';
+    expect(await rewrite(html, "es", V)).toBe(
+      '<script src="/es/_astro/app.js?v=' + V + '"></script><img srcset="/en/_astro/a.webp?v=' + V + ' 1x">',
+    );
+  });
+
+  it("prefixes url-like text even when not inside a quoted attribute", async () => {
+    expect(await rewrite("href=/_astro/x.js", "de", V)).toBe("href=/de/_astro/x.js?v=" + V);
+  });
+
+  it("matches occurrences split across chunk boundaries", async () => {
+    const html = '<p x="/_astro/one.js">/_astro/two.js</p>';
+    const expected = '<p x="/de/_astro/one.js?v=' + V + '">/de/_astro/two.js?v=' + V + '</p>';
+    const bytes = new TextEncoder().encode(html);
+    for (const size of [1, 2, 3, 7, 8, 9, 23, 24, 25]) {
+      const chunks: Uint8Array[] = [];
+      for (let i = 0; i < bytes.length; i += size) chunks.push(bytes.slice(i, i + size));
+      const stream = new ReadableStream<Uint8Array>({
+        start(controller) {
+          for (const c of chunks) controller.enqueue(c);
+          controller.close();
+        },
+      }).pipeThrough(localeAssetRewriter("de", V));
+      expect(await new Response(stream).text()).toBe(expected);
+    }
+  });
+
+  it("handles multibyte characters across chunks without corrupting them", async () => {
+    const html = '<p>ñoki—✓</p><script src="/_astro/app.js"></script>';
+    expect(await rewrite(html, "en", V)).toBe(
+      '<p>ñoki—✓</p><script src="/en/_astro/app.js?v=' + V + '"></script>',
+    );
+  });
+
+  it("omits the query when no version is given", async () => {
+    expect(await rewrite('<script src="/_astro/a.js">', "es", undefined)).toBe(
+      '<script src="/es/_astro/a.js">',
+    );
   });
 });

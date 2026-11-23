@@ -36,7 +36,6 @@ interface Props {
   headFallback?: boolean;
 }
 const { title, description, headFallback = false } = Astro.props;
-
 const NEWSLETTER_FORM_ID = "99167414-c329-4e8f-8f02-db033652f376";
 
 let newsletterForm: FormDto | null = null;
@@ -180,6 +179,16 @@ const structuredData = JSON.stringify({
         <meta name="twitter:title" content={resolvedTitle} />
         <meta name="twitter:description" content={resolvedDescription} />
         <script type="application/ld+json" is:inline set:html={structuredData} />
+      </>
+    )}
+    {/* Wix's viewer injects one locale-level title ("Es | …") for every page of a secondary
+        locale and reuses it across client-side (soft) navigations. Static pages own their real
+        title in the page data, so emit it — like the shipped templates do — and give the viewer
+        a per-page tag to resolve on soft navigation. Item pages pass no title (SEO.Tags owns). */}
+    {!emitFallbackHead && !hasSeoTags && title && (
+      <>
+        <title>{resolvedTitle}</title>
+        {description && <meta name="description" content={resolvedDescription} />}
       </>
     )}
     <slot name="seo-tags" />
