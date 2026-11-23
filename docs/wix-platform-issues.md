@@ -1,0 +1,193 @@
+# Wix platform issues — observed on this site
+
+Log of Wix platform behaviors that broke the site, with evidence, the fix
+applied, and what to watch for if they come back. Each entry is grounded in
+reproduction against the live edge / browser — not theory. Keep entries
+append-only: update the status when behavior changes, never delete history.
+
+Site: `https://stefano-lunardi-d960960gm-0f09.wix-site-host.com`
+(siteId `b24dc2d0-f24b-4d97-b733-550f7c321876`).
+
+---
+
+## 1. Multilingual edge redirects bare asset requests → duplicated React → broken hydration
+
+**Status:** fixed 2026-11-23 (`fix(i18n): keep the asset graph on one locale base per release`).
+
+**Symptom.** On any page of a secondary locale (es/en/de), React islands died
+during hydration with:
+
+- `TypeError: Cannot read properties of null (reading 'useRef')` (×2)
+- `Uncaught Error: Minified React error #423` (×2)
+
+Islands (Wix Forms contact form, newsletter form) rendered but without
+interactivity. Intermittent: some page loads were clean.
+
+**Root cause chain (all steps reproduced):**
+
+1. The `wixLanguage` cookie (set by Wix Multilingual on the first visit to any
+   locale page) changes how the edge serves bare asset URLs:
+   `GET /_astro/app.js` + cookie → **302** to `/es/_astro/app.js`; without the
+   cookie → 200. Verified by curl with/without the cookie.
+2. The edge CDN **caches some of those 302s**, while other requests for the
+   same URL reach the SSR worker, whose middleware proxies them and answers
+   **200 at the bare URL**. Browser network log showed the mix for one page
+   load with one cookie state.
+3. Astro resolves a module's relative imports against the module's own final
+   URL. With some chunks living at `/_astro/…` and others at `/es/_astro/…`,
+   the page's module graph spanned **two bases → React existed twice** → the
+   second copy has no hooks dispatcher → `useRef` of null.
+
+**Why cookies were involved:** the cookie flips the edge into redirect mode for
+bare asset URLs. Clearing cookies "fixed" it for the user because Chrome
+clears the (poisoned) HTTP cache along with the cookies — and without the
+cookie the bare URLs stopped redirecting.
+
+**Fix.** The SSR middleware (`src/middleware.ts` + `localeAssetRewriter` in
+`src/app/static-assets.ts`) rewrites every `/_astro/…` URL in HTML responses to
+the page's locale base (`/es/_astro/…`) for es/en/de pages — those URLs never
+redirect (verified against the edge). Primary-locale (`it`) pages keep bare
+URLs: the edge canonicalizes `/it/…` back to `/…`, so prefixing `it` would
+redirect every asset again.
+
+**Residual risk / what to watch:**
+
+- Secondary-locale pages must show script/asset URLs prefixed with their locale
+  in `view-source` (`/es/_astro/...`). If they ever show bare `/_astro/` again,
+  the rewriter was bypassed (or Wix changed its injection behavior) and the
+  hydration breakage will return.
+- A visitor on an `it` page with a **stale `es` cookie** still gets bare asset
+  redirects (all consistent, single base — safe) unless the edge mixes proxied
+  and redirected answers again. Intermittent hydration errors on `it` pages →
+  suspect this first.
+
+## 2. CDN caches corrupt/stale compressed variants of same-hash assets → unstyled page
+
+**Status:** mitigated 2026-11-23 (same commit: per-release `?v=` cache bust).
+
+**Symptom.** A visitor saw the home page completely unstyled ("el home está
+roto"); deleting browser cookies+cache fixed it. Browser console:
+`Failed to load resource: net::ERR_CONTENT_DECODING_FAILED` against
+`/es/_astro/index.CAOXZTkl.css` (transfer 3345 B, decoded 0 B).
+
+**Root cause.** The edge's compressed variant caches (gzip/brotli) held entries
+from earlier releases / poisoned redirect responses under the same hashed
+filename: curl showed the gzip variant decoding to 2095 B (an old, partial CSS)
+while the raw variant served the correct 9157 B. Browsers request brotli first
+and store the response under `cache-control: public,max-age=3600,immutable`
+(injected by the Wix hosting adapter into `_headers` for `/_astro/*`), so a
+poisoned entry survives in the visitor's disk cache indefinitely.
+
+**Fix.** The rewriter appends `?v=<BUILD_ID>` (build timestamp, defined in
+`astro.config.mjs`) to every rewritten asset URL. Each release produces fresh
+cache keys, so a poisoned browser cache entry is abandoned on the next deploy.
+
+**Residual risk / what to watch:**
+
+- Unstyled pages with `ERR_CONTENT_DECODING_FAILED` on `/_astro/*` resources →
+  a stale variant cache again. Check whether the failing URL carries the
+  current `?v=`; if the HTML still emits the old version, the release didn't
+  rebuild (`wix release` does NOT rebuild — always run `npm run build` first).
+- Per-release re-download of all assets: expected cost of the cache bust.
+
+## 3. Wix platform script noise in the console (not ours, harmless today)
+
+**Status:** open / noise. Do not "fix" in our code; ignore or filter in e2e.
+
+- `AppId 196175ca-0c1e-41ec-9f9a-ceafda45b2bd does not expose function
+  correctly, error code: Client 404` — a script Wix injects on every page
+  (webmcp/embedded-scripts layer; also loads from
+  `*.wix-host.com/_wix_*-embedded-scripts/`). Present on every page, every
+  load, including clean loads. Already filtered in the Playwright e2e config
+  (see commits `test(e2e): stop filtering the webmcp appid console error`,
+  `fix(dev): hide wix context globals from the mcp embed script`).
+- `[ConsentPolicy] setConsentPolicy is not available` — Wix consent bootstrap
+  warning in the browser; our `ConsentBootstrap` island works around its own
+  part. Noise.
+- Manifest icon warning for `static.wixstatic.com/...61952383…png` — the PNG is
+  a valid 192×192 image (verified); Chrome rejects it from the manifest
+  cross-origin. Cosmetic; the dashboard favicon at `/favicon.ico` works.
+
+**Residual risk / what to watch:** if the AppId error ever becomes an
+"expose function" error naming one of OUR app IDs, an embedded-script or
+app-extension of ours is failing — then it's ours and goes to the Wix app
+skills for diagnosis.
+
+## 4. `getCategoryBySlug` / `getTagBySlug` return 404 for slugs the query endpoint returns
+
+**Status:** fixed 2026-11-23 (`fix(blog): resolve category and tag slugs via
+the query endpoint`).
+
+**Symptom.** Every blog category and tag page 404'd on the live site
+(`/es/blog/category/consigli`, `/es/blog/tag/wedding-film`), while the slugs
+came straight from the blog feed links.
+
+**Root cause.** `GET /blog/v3/categories/slugs/{slug}` answered
+404 "No entity was found" for every slug — with and without the `language`
+query parameter, across it/en/es/de — while `POST /blog/v3/categories/query`
+with a `slug` filter returned the categories fine. The by-slug endpoints are
+unreliable on this site (categories exist only under `language: "en"` in the
+blog app; the site's primary language is `it`).
+
+**Fix.** `src/features/blog/taxonomy.ts` resolves categories and tags through
+`queryCategories().eq("slug", slug)` / `queryTags().eq("slug", slug)`.
+
+**Residual risk / what to watch:** new 404s on blog category/tag pages → check
+whether the query-filter path still resolves, and whether Wix fixed (or broke)
+the by-slug endpoints.
+
+## 5. Wix viewer injects one locale-level title for every page of a secondary locale
+
+**Status:** mitigated 2026-11-23 (`fix(head): emit per-page titles for static
+pages`).
+
+**Symptom.** Every page under `/es` carried `<title>Es | Stefano Lunardi`
+(same for `/en`, `/de`), injected by the viewer as `wix-seo-tag` after our SSR
+head, and the title did not update across the viewer's client-side (soft)
+navigations. Primary-locale pages got no `<title>` from the viewer at all.
+
+**Root cause.** Our layout emitted `<title>` only in dev (`emitFallbackHead =
+DEV || headFallback`), delegating to Wix's server-side head injection — but the
+injection only knows per-locale defaults ("Es" = locale page name), never our
+per-page content. The viewer reuses that tag on soft navigation.
+
+**Fix.** Static pages emit their own `<title>` + description from the page data
+(shipped-templates model); blog item pages keep `<SEO.Tags>`. Verified live:
+browsers use our first `<title>`, and soft navigation now updates the title
+per page.
+
+**Residual risk / what to watch:**
+
+- `view-source` still shows a **second** `<title wix-seo-tag="true">Es | …`
+  after ours. Browsers and Google use the first; the duplicate is invalid HTML
+  and could confuse other consumers. If it ever matters, options: ask Wix to
+  suppress the default when the page provides its own title, or move page SEO
+  into the dashboard's per-page settings.
+- SEO titles/descriptions for search are OUR emitted tags — keep them
+  meaningful per page (they come from each page's content/CMS).
+
+## 6. `wixLanguage` cookie forces the visitor's locale on every navigation
+
+**Status:** open — Wix Multilingual `autoSwitch` behavior, not our code.
+
+**Symptom.** A visitor whose browser language is Italian gets redirected to
+`/es` on every visit to `/` or `/it`, because a `wixLanguage=es` cookie from an
+earlier visit wins over `Accept-Language`. Bots (no Accept-Language) fall back
+to `/en` — including crawlers hitting `/` and `/sitemap.xml` (302 → 404: the
+site has no sitemap today).
+
+**What we verified:** locale settings are correct (primary `it`, visitor
+primary `it`, SUBDIRECTORY). The redirect comes from `autoSwitch: true` +
+cookie precedence at the edge.
+
+**Options if it bites again:** disable autoSwitch via the Locale Settings API
+(`POST /locale-settings/v2/settings` → `autoSwitch: false`), or leave as-is
+(Wix's intended UX). The missing sitemap is a separate SEO gap worth building
+(`sitemap-index.xml` currently 404s).
+
+## Historical note
+
+`wix release` publishes the existing `dist/` and does **not** rebuild. Three
+consecutive "✔ Uploaded successfully" releases shipped a stale build before we
+noticed. Always: `npm run build` → `npm run release` (see also the
+commit-and-deploy command in `.opencode/commands/`).
