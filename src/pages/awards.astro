@@ -1,6 +1,8 @@
 ---
 import SiteLayout from "@/app/layout.astro";
 import { getSitePageContent } from "@/features/site-content/site-content";
+import { currentLocale } from "@/features/i18n/current-locale";
+import { localizedHref } from "@/features/i18n/localized-path";
 import "@/features/site-content/site-content.css";
 
 const seals = [
@@ -17,6 +19,8 @@ const seals = [
 ];
 
 const content = await getSitePageContent("awards", Astro.request.headers);
+const locale = currentLocale(Astro.url, Astro.request.headers);
+const fineArtHref = localizedHref(locale, "/fine-art");
 ---
 
 <SiteLayout title={content.title} description={content.intro}>
@@ -42,6 +46,6 @@ const content = await getSitePageContent("awards", Astro.request.headers);
   <section class="site-content-body mx-auto max-w-3xl px-6 pb-14" set:html={content.bodyHtml} />
 
   <div class="mx-auto max-w-3xl px-6 pb-24 text-center">
-    <a href="/fine-art" class="inline-block rounded-control border border-foreground px-8 py-3 text-sm font-medium text-foreground no-underline transition-colors hover:border-accent hover:text-accent">Le opere fine art</a>
+    <a href={fineArtHref} class="inline-block rounded-control border border-foreground px-8 py-3 text-sm font-medium text-foreground no-underline transition-colors hover:border-accent hover:text-accent">Le opere fine art</a>
   </div>
 </SiteLayout>

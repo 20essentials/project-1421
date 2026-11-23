@@ -25,9 +25,10 @@ interface Props {
   eyebrow?: string;
   title?: string;
   ctaLabel?: string;
+  ctaHref?: string;
 }
 
-const { eyebrow = "Portfolio", title = "Autentiche e naturali. Eleganti e iconiche.", ctaLabel = "Guarda tutto il portfolio" } = Astro.props;
+const { eyebrow = "Portfolio", title = "Autentiche e naturali. Eleganti e iconiche.", ctaLabel = "Guarda tutto il portfolio", ctaHref = "/portfolio" } = Astro.props;
 
 type BentoTile = {
   src: ImageMetadata;
@@ -66,7 +67,7 @@ const photos: BentoTile[] = [
           {title}
         </h2>
       </div>
-      <a href="/portfolio" class="text-sm text-primary-foreground/80 underline-offset-4 no-underline transition-colors hover:text-primary-foreground hover:underline">
+      <a href={ctaHref} class="text-sm text-primary-foreground/80 underline-offset-4 no-underline transition-colors hover:text-primary-foreground hover:underline">
         {ctaLabel}
       </a>
     </div>

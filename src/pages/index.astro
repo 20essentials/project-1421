@@ -6,6 +6,7 @@ import { fetchPosts, postMetaLine, postPath } from "@/features/blog/posts";
 import { fetchFaq } from "@/features/faq/faq";
 import { getHomeContent } from "@/features/site-content/site-content";
 import { currentLocale } from "@/features/i18n/current-locale";
+import { localizedHref } from "@/features/i18n/localized-path";
 import { imgAttrs, imgSrc, imgSrcSet, mediaKey } from "@/shared/media";
 import type { PostPage } from "@/features/blog/types";
 import type { FaqData } from "@/features/faq/types";
@@ -13,6 +14,7 @@ import type { FaqData } from "@/features/faq/types";
 let posts: PostPage | undefined;
 let faq: FaqData = { categories: [], questions: [], truncated: false };
 const locale = currentLocale(Astro.url, Astro.request.headers);
+const href = (path: string) => localizedHref(locale, path);
 try {
   [posts, faq] = await Promise.all([
     fetchPosts({ headers: Astro.request.headers, locale }),
@@ -61,9 +63,9 @@ const heroScene: ScrollScene = {
   eyebrow: heroContent.eyebrow,
   title: heroContent.title,
   description: heroContent.intro,
-  href: "/contatti",
+  href: href("/contatti"),
   cta: heroContent.heroCta,
-  secondaryHref: "/portfolio",
+  secondaryHref: href("/portfolio"),
   secondaryCta: heroContent.heroCta2,
   solid: true,
   heading: "h1",
@@ -77,7 +79,7 @@ const artScene: ScrollScene = {
   eyebrow: heroContent.slide2Eyebrow,
   title: heroContent.slide2Title,
   description: heroContent.slide2Intro,
-  href: "/fine-art",
+  href: href("/fine-art"),
   cta: heroContent.slide2Cta,
   heading: "h2",
 };
@@ -90,7 +92,7 @@ const veilScene: ScrollScene = {
   eyebrow: heroContent.slide3Eyebrow,
   title: heroContent.slide3Title,
   description: heroContent.slide3Intro,
-  href: "/portfolio",
+  href: href("/portfolio"),
   cta: heroContent.slide3Cta,
   heading: "h2",
 };
@@ -190,8 +192,8 @@ const alignFor = (i: number): "center" | "right" | "left" =>
           <p>{heroContent.aboutText2}</p>
         </div>
         <div class="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-          <a href="/chi-sono" class="rounded-control border border-foreground bg-foreground px-8 py-3 text-sm font-medium text-primary-foreground no-underline transition-colors hover:border-accent hover:bg-accent">{heroContent.aboutCta}</a>
-          <a href="/awards" class="rounded-control btn-ghost no-underline">{heroContent.aboutCta2}</a>
+          <a href={href("/chi-sono")} class="rounded-control border border-foreground bg-foreground px-8 py-3 text-sm font-medium text-primary-foreground no-underline transition-colors hover:border-accent hover:bg-accent">{heroContent.aboutCta}</a>
+          <a href={href("/awards")} class="rounded-control btn-ghost no-underline">{heroContent.aboutCta2}</a>
         </div>
       </div>
     </div>
@@ -277,7 +279,7 @@ const alignFor = (i: number): "center" | "right" | "left" =>
         </p>
       </div>
       <div class="mt-10 text-center">
-        <a href="/video" class="mp-link text-sm underline-offset-4 hover:underline no-underline">{heroContent.presentoLink}</a>
+        <a href={href("/video")} class="mp-link text-sm underline-offset-4 hover:underline no-underline">{heroContent.presentoLink}</a>
       </div>
     </div>
   </section>
@@ -298,12 +300,14 @@ const alignFor = (i: number): "center" | "right" | "left" =>
     eyebrow={heroContent.gridEyebrow}
     title={heroContent.gridTitle}
     ctaLabel={heroContent.gridCta}
+    ctaHref={href("/portfolio")}
   />
 
   <ArtisticParallax
     eyebrow={heroContent.parallaxEyebrow}
     title={heroContent.parallaxTitle}
     line={heroContent.parallaxLine}
+    ctaHref={href("/fine-art")}
   />
 
   <section class="border-y border-border bg-secondary px-6 py-20">
@@ -320,7 +324,7 @@ const alignFor = (i: number): "center" | "right" | "left" =>
         <p class="eyebrow">{heroContent.shot3Eyebrow}</p>
         <p class="mt-3 text-sm leading-relaxed text-muted-foreground">{heroContent.shot3Text}</p>
       </div>
-      <a href="/il-mio-metodo" class="md:col-span-3 justify-self-center rounded-control btn-ghost no-underline">{heroContent.shotsCta}</a>
+      <a href={href("/il-mio-metodo")} class="md:col-span-3 justify-self-center rounded-control btn-ghost no-underline">{heroContent.shotsCta}</a>
     </div>
   </section>
 
@@ -334,7 +338,7 @@ const alignFor = (i: number): "center" | "right" | "left" =>
         <p class="fv-copy mt-5 leading-relaxed">
           {heroContent.fvText}
         </p>
-        <a href="/video" class="fv-cta mt-8 inline-block no-underline">{heroContent.fvCta}</a>
+        <a href={href("/video")} class="fv-cta mt-8 inline-block no-underline">{heroContent.fvCta}</a>
       </div>
       <figure class="fv-frame">
         <video
@@ -365,11 +369,11 @@ const alignFor = (i: number): "center" | "right" | "left" =>
               <p class="eyebrow text-muted-foreground">{heroContent.storiesEyebrow}</p>
               <h2 class="font-display mt-3 text-3xl font-medium sm:text-4xl">{heroContent.storiesTitle}</h2>
             </div>
-            <a href="/blog" class="rounded-control btn-ghost no-underline">{heroContent.storiesCta}</a>
+            <a href={href("/blog")} class="rounded-control btn-ghost no-underline">{heroContent.storiesCta}</a>
           </div>
           <div class="grid grid-cols-1 gap-8 sm:grid-cols-3">
             {latestPosts.map((p) => (
-              <a href={postPath(p.slug)} class="group block min-w-0 no-underline">
+              <a href={localizedHref(locale, postPath(p.slug))} class="group block min-w-0 no-underline">
                 <div class="aspect-4/3 w-full overflow-hidden bg-secondary">
                   {p.coverUrl && (
                     <img {...imgAttrs(p.coverUrl, "(min-width: 640px) 33vw, 100vw", 4 / 3)} alt={p.coverAlt} class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-103" />
@@ -415,7 +419,7 @@ const alignFor = (i: number): "center" | "right" | "left" =>
           />
         ))}
       </div>
-      <a href="/awards" class="mt-8 rounded-control btn-ghost no-underline">{heroContent.awardsCta}</a>
+      <a href={href("/awards")} class="mt-8 rounded-control btn-ghost no-underline">{heroContent.awardsCta}</a>
     </div>
   </section>
 
@@ -425,7 +429,7 @@ const alignFor = (i: number): "center" | "right" | "left" =>
         <p class="font-display text-2xl italic leading-snug">{heroContent.quoteText}</p>
         <p class="mt-3 text-xs uppercase tracking-widest text-muted-foreground">{heroContent.quoteSource}</p>
       </blockquote>
-      <a href="/recensioni" class="mt-6 rounded-control btn-ghost no-underline">{heroContent.quoteCta}</a>
+      <a href={href("/recensioni")} class="mt-6 rounded-control btn-ghost no-underline">{heroContent.quoteCta}</a>
     </div>
   </section>
 
@@ -446,7 +450,7 @@ const alignFor = (i: number): "center" | "right" | "left" =>
             ))}
           </dl>
           <div class="mt-12 text-center">
-              <a href="/faq" class="rounded-control border border-foreground px-8 py-3 text-sm font-medium no-underline transition-colors hover:bg-foreground hover:text-primary-foreground">{heroContent.faqCta}</a>
+              <a href={href("/faq")} class="rounded-control border border-foreground px-8 py-3 text-sm font-medium no-underline transition-colors hover:bg-foreground hover:text-primary-foreground">{heroContent.faqCta}</a>
           </div>
         </div>
       </section>
@@ -457,7 +461,7 @@ const alignFor = (i: number): "center" | "right" | "left" =>
     <p class="eyebrow">{heroContent.ctaEyebrow}</p>
     <h2 class="font-display mx-auto mt-4 max-w-3xl text-4xl font-medium leading-tight sm:text-5xl">{heroContent.ctaTitle}</h2>
     <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">{heroContent.ctaText}</p>
-    <a href="/contatti" class="mt-8 inline-block rounded-control border border-foreground bg-foreground px-8 py-3 text-sm font-medium text-primary-foreground no-underline transition-colors hover:border-accent hover:bg-accent">{heroContent.ctaButton}</a>
+    <a href={href("/contatti")} class="mt-8 inline-block rounded-control border border-foreground bg-foreground px-8 py-3 text-sm font-medium text-primary-foreground no-underline transition-colors hover:border-accent hover:bg-accent">{heroContent.ctaButton}</a>
   </section>
 </SiteLayout>
 

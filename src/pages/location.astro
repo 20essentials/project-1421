@@ -1,9 +1,13 @@
 ---
 import SiteLayout from "@/app/layout.astro";
 import { getSitePageContent } from "@/features/site-content/site-content";
+import { currentLocale } from "@/features/i18n/current-locale";
+import { localizedHref } from "@/features/i18n/localized-path";
 import "@/features/site-content/site-content.css";
 
 const content = await getSitePageContent("location", Astro.request.headers);
+const locale = currentLocale(Astro.url, Astro.request.headers);
+const contattiHref = localizedHref(locale, "/contatti");
 ---
 
 <SiteLayout title={content.title} description={content.intro}>
@@ -17,6 +21,6 @@ const content = await getSitePageContent("location", Astro.request.headers);
 
   <div class="mx-auto max-w-3xl px-6 pb-24 text-center">
     <p class="font-display text-2xl italic">La vostra location non è in lista? Scrivetemi</p>
-    <a href="/contatti" class="mt-6 inline-block rounded-control border border-foreground bg-foreground px-8 py-3 text-sm font-medium text-primary-foreground no-underline transition-colors hover:border-accent hover:bg-accent">Scrivetemi</a>
+    <a href={contattiHref} class="mt-6 inline-block rounded-control border border-foreground bg-foreground px-8 py-3 text-sm font-medium text-primary-foreground no-underline transition-colors hover:border-accent hover:bg-accent">Scrivetemi</a>
   </div>
 </SiteLayout>
