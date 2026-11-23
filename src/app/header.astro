@@ -90,7 +90,7 @@ const isActive = (link: string) => {
           class='lang-trigger flex h-9 cursor-pointer items-center gap-1.5 rounded-full px-2.5 text-sm text-muted-foreground transition-colors select-none hover:bg-foreground/5 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:px-3'
           aria-expanded='false'
           aria-haspopup='true'
-          aria-label={label('localeLabel', 'Lingua')}
+          aria-label={`${label('localeLabel', 'Lingua')}: ${locale.toUpperCase()}`}
         >
           <svg
             viewBox='0 0 16 16'

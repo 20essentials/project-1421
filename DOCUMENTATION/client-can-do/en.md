@@ -118,6 +118,10 @@ are editable. The list of documents on `/legal` updates on its own from these co
   (og:image) is managed there too. Changes go live on the site.
 - Blog post and category pages also have their SEO editable item by item (in the post editor and
   the SEO settings).
+- **robots.txt and llms.txt** (the files search engines and AI assistants read) are editable in the
+  dashboard under SEO Tools ("Robots.txt Editor" and the llms.txt editor). Note: the site's full
+  sitemap with real URLs is served at `/sitemap-full.xml` (already referenced from robots.txt), and
+  the llms.txt summary is regenerated and synced by the developer after content changes.
 - Site traffic: <https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/home> → Analytics.
 
 ## Payments and invoices (owner)

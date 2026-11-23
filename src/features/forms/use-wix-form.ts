@@ -58,6 +58,8 @@ export interface UseWixForm {
   reset: () => void;
   /** Hand a captcha widget's token to the next submit. */
   setCaptchaToken: (token: string | null) => void;
+  /** Record the honeypot input's value. Not state on purpose: no visitor ever types there, so no re-render. */
+  setHoneypot: (value: string) => void;
 }
 
 export function useWixForm(formId: string, options: UseWixFormOptions = {}): UseWixForm {
@@ -104,5 +106,6 @@ export function useWixForm(formId: string, options: UseWixFormOptions = {}): Use
     outcome: state.outcome,
     reset: store.reset,
     setCaptchaToken: store.setCaptchaToken,
+    setHoneypot: store.setHoneypot,
   };
 }

@@ -158,3 +158,19 @@
 #wixheadless-banner-container {
   display: none !important;
 }
+
+/* Focus visible for every text control: the form inputs ship `outline-none`
+   (a Tailwind utility, so a base-layer rule would lose to it) which suppresses
+   the browser's native ring — WCAG 2.4.7/1.4.11 demand an equivalent
+   replacement at 3:1+ contrast. Unlayered, so it outranks the utility; accent
+   (near-black ink) on white is far above that. Keyboard-only (`:focus-visible`),
+   outline + offset per guidance, and outline survives Windows High Contrast
+   Mode where box-shadow does not. */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[role="combobox"]:focus-visible,
+[role="listbox"]:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}

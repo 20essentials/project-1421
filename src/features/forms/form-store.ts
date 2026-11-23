@@ -14,6 +14,7 @@
 // createFormStore(), not a singleton — a page can hold two forms.
 import { applyRules, getForm, isClosed, otherText, otherValue } from "@/features/forms/forms";
 import { addressPartsForCountry } from "@/features/forms/forms-core";
+import { isSpamSubmission } from "@/features/forms/spam-core";
 import {
   EMAIL_PATTERN,
   PHONE_PATTERN,
@@ -252,6 +253,8 @@ export interface FormStore {
   goToStep(index: number): void;
   /** A captcha widget's token, sent with the next submit. The server asks for one with INVALID_CAPTCHA. */
   setCaptchaToken(token: string | null): void;
+  /** Record the honeypot input's value as it is typed. Non-reactive by design. */
+  setHoneypot(value: string): void;
   /** Clear `outcome` (dismiss the thank-you and show the empty form again). */
   reset(): void;
   /**
@@ -275,6 +278,8 @@ export function createFormStore({ formId, initialForm }: FormStoreOptions): Form
   let step = 0;
   let outcome: SubmitOutcome | null = null;
   let captchaToken: string | null = null;
+  let honeypot = "";
+  let openedAt: number | null = null;
   let started = false;
   let generation = 0;
   let hideTimer: ReturnType<typeof setTimeout> | null = null;
@@ -391,6 +396,9 @@ export function createFormStore({ formId, initialForm }: FormStoreOptions): Form
     start() {
       if (started) return;
       started = true;
+      // The spam clock starts when the form mounts on the client — never on the server
+      // render, so only a visitor (or a bot) holding the live form is timed.
+      openedAt = Date.now();
       if (base) return; // the SSR pass already answered this
       if (!formId) {
         loading = false;
@@ -460,6 +468,7 @@ export function createFormStore({ formId, initialForm }: FormStoreOptions): Form
       if (base && index >= 0 && index < base.steps.length && index !== step) { step = index; emit(); }
     },
     setCaptchaToken(token) { captchaToken = token; },
+    setHoneypot(value) { honeypot = value; },
     reset() {
       if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
       outcome = null;
@@ -472,6 +481,9 @@ export function createFormStore({ formId, initialForm }: FormStoreOptions): Form
       // it after the await below (to focus a server-rejected control) comes back null.
       const formEl = (event?.currentTarget ?? null) as HTMLFormElement | null;
       if (!base) return false;
+      // Spam gate, before anything observable: a hit resolves false with no error and no
+      // thank-you, so a bot learns nothing about which signal tripped. See spam-core.
+      if (isSpamSubmission({ honeypot, openedAt, now: Date.now() })) return false;
       const current = base;
       if (isClosed(current)) {
         setErrors({ [FORM_ERROR]: current.disabledMessage || "This form is no longer accepting submissions." });

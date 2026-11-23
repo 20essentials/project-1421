@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { useWixForm, otherValue, FORM_ERROR } from "@/features/forms/use-wix-form";
 import type { FormChoice, FormDto, FormFieldDto } from "@/features/forms/types";
 import { COMBOBOX_MIN_CHOICES, filterChoices, flagFor } from "@/features/forms/choice-combobox-core";
+import { HONEYPOT_NAME } from "@/features/forms/spam-core";
 import { trackEvent } from "@/shared/analytics";
 
 const OTHER_SELECT_VALUE = "__other__";
@@ -375,6 +376,22 @@ export default function SchemaForm({ formId, initialForm }: { formId: string; in
       }}
     >
       {f.form.steps.length > 1 && <p className="eyebrow mb-6">{step.name}</p>}
+
+      {/* Honeypot: invisible to a visitor (off-screen, not focusable, not announced, not
+          autofilled) — a bot that fills every input fills it too, and the store drops the
+          submit silently. Uncontrolled: the value is never rendered, so no re-render. */}
+      <input
+        type="text"
+        name={HONEYPOT_NAME}
+        id={HONEYPOT_NAME}
+        defaultValue=""
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        onChange={(e) => f.setHoneypot(e.currentTarget.value)}
+        className="absolute -left-[9999px] h-0 w-0 opacity-0"
+      />
+
 
       <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
         {fields.map((field) => (
