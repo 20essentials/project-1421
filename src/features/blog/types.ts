@@ -8,6 +8,10 @@ export interface PostSummary {
   id: string;
   slug: string;
   title: string;
+  /** The post's language in its translation group ("it" for the originals, per-translation for copies). */
+  language?: string;
+  /** Shared by every version of the same post across languages ("" on legacy singles). */
+  translationId?: string;
   /** Short summary (≤500 chars) — the card body. May be "". */
   excerpt: string;
   /** Display-ready publish date, e.g. "Aug 26, 2026" ("" when missing). */

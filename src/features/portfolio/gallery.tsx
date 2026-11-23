@@ -1,12 +1,16 @@
 import { useCollections } from "@/features/portfolio/use-collections";
+import { DEFAULT_LOCALE, type Locale } from "@/features/i18n/locale";
+import { localizedHref } from "@/features/i18n/localized-path";
 import { imgFitAttrs } from "@/shared/media";
 import type { CollectionSummary } from "@/features/portfolio/types";
 
-export default function Gallery(props: { initialCollections?: CollectionSummary[] }) {
+export default function Gallery(props: { initialCollections?: CollectionSummary[]; locale?: Locale; labels?: Record<string, string> }) {
   const { collections, error } = useCollections(props);
+  const locale = props.locale ?? DEFAULT_LOCALE;
+  const label = (key: string, fallback: string) => props.labels?.[key] || fallback;
 
   if (error) {
-    return <p className="mt-10 text-center text-sm text-muted-foreground">Non è stato possibile caricare il portfolio. Riprova tra poco.</p>;
+    return <p className="mt-10 text-center text-sm text-muted-foreground">{label("portfolioLoadError", "Non è stato possibile caricare il portfolio. Riprova tra poco.")}</p>;
   }
   if (collections === null) {
     return (
@@ -17,13 +21,13 @@ export default function Gallery(props: { initialCollections?: CollectionSummary[
     );
   }
   if (collections.length === 0) {
-    return <p className="mt-10 text-center text-sm text-muted-foreground">Nessuna collezione ancora pubblicata.</p>;
+    return <p className="mt-10 text-center text-sm text-muted-foreground">{label("noCollections", "Nessuna collezione ancora pubblicata.")}</p>;
   }
 
   return (
     <div className="mt-10 columns-1 gap-6 sm:columns-2 sm:gap-8">
       {collections.map((c) => (
-        <a key={c.id} href={`/portfolio/${c.slug}`} className="group mb-8 block min-w-0 break-inside-avoid no-underline">
+        <a key={c.id} href={localizedHref(locale, `/portfolio/${c.slug}`)} className="group mb-8 block min-w-0 break-inside-avoid no-underline">
           {c.imageUrl ? (
             <div className="overflow-hidden bg-secondary">
               <img

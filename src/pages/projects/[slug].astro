@@ -6,6 +6,7 @@
 import SiteLayout from "@/app/layout.astro";
 import ProjectPage from "@/features/portfolio/project-page";
 import { fetchProjectBySlug, fetchProjectGallery } from "@/features/portfolio/portfolio";
+import { getSiteChrome } from "@/features/site-chrome/site-chrome";
 import type { GalleryItem, ProjectDetail } from "@/features/portfolio/types";
 
 const slug = Astro.params.slug!;
@@ -13,7 +14,7 @@ const slug = Astro.params.slug!;
 let project: ProjectDetail | null = null;
 let items: GalleryItem[] = [];
 try {
-  project = await fetchProjectBySlug(slug);
+  project = await fetchProjectBySlug(slug, Astro.request.headers);
   if (project) items = await fetchProjectGallery(project.id);
 } catch {
   // Guarded: an unhandled SSR throw truncates the response mid-stream.
@@ -22,8 +23,9 @@ try {
 if (!project) {
   return new Response(null, { status: 404 });
 }
+const labels = await getSiteChrome(Astro.request.headers);
 ---
 
 <SiteLayout headFallback title={project.title} description={project.description}>
-  <ProjectPage client:load slug={slug} initialProject={project} initialItems={items} />
+  <ProjectPage client:load slug={slug} initialProject={project} initialItems={items} labels={labels} />
 </SiteLayout>

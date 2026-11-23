@@ -210,6 +210,8 @@ export function toSummary(raw: Raw, imgSrc: ImgSrc): PostSummary {
     id: rawId(raw),
     slug: raw.slug ?? "",
     title: raw.title ?? "",
+    language: typeof raw.language === "string" ? raw.language : undefined,
+    translationId: typeof raw.translationId === "string" ? raw.translationId : undefined,
     excerpt: raw.excerpt ?? "",
     ...dateParts(raw.firstPublishedDate),
     minutesToRead: raw.minutesToRead ?? 0,

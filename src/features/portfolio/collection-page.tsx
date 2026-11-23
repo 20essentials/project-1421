@@ -1,4 +1,6 @@
 import { useCollectionProjects } from "@/features/portfolio/use-collection-projects";
+import { DEFAULT_LOCALE, type Locale } from "@/features/i18n/locale";
+import { localizedHref } from "@/features/i18n/localized-path";
 import { imgFitAttrs } from "@/shared/media";
 import type { CollectionSummary, ProjectSummary } from "@/features/portfolio/types";
 
@@ -6,11 +8,15 @@ export default function CollectionPage(props: {
   slug: string;
   initialCollection?: CollectionSummary;
   initialProjects?: ProjectSummary[];
+  locale?: Locale;
+  labels?: Record<string, string>;
 }) {
   const { collection, notFound, projects, error } = useCollectionProjects(props.slug, props);
+  const locale = props.locale ?? DEFAULT_LOCALE;
+  const label = (key: string, fallback: string) => props.labels?.[key] || fallback;
 
   if (notFound) {
-    return <p className="text-center text-sm text-muted-foreground">Questa collezione non esiste (più).</p>;
+    return <p className="text-center text-sm text-muted-foreground">{label("collectionNotFound", "Questa collezione non esiste (più).")}</p>;
   }
 
   return (
@@ -28,7 +34,7 @@ export default function CollectionPage(props: {
         )}
       </header>
 
-      {error && <p className="mt-10 text-center text-sm text-muted-foreground">Non è stato possibile caricare i progetti. Riprova tra poco.</p>}
+      {error && <p className="mt-10 text-center text-sm text-muted-foreground">{label("projectsLoadError", "Non è stato possibile caricare i progetti. Riprova tra poco.")}</p>}
 
       {projects === null && (
         <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">
@@ -38,13 +44,13 @@ export default function CollectionPage(props: {
       )}
 
       {projects !== null && projects.length === 0 && (
-        <p className="mt-10 text-center text-sm text-muted-foreground">Nessun progetto ancora pubblicato in questa collezione.</p>
+        <p className="mt-10 text-center text-sm text-muted-foreground">{label("noProjects", "Nessun progetto ancora pubblicato in questa collezione.")}</p>
       )}
 
       {projects !== null && projects.length > 0 && (
         <div className="mt-10 columns-1 gap-6 sm:columns-2 sm:gap-8">
           {projects.map((p) => (
-            <a key={p.id} href={`/projects/${p.slug}`} className="group mb-8 block min-w-0 break-inside-avoid no-underline">
+            <a key={p.id} href={localizedHref(locale, `/projects/${p.slug}`)} className="group mb-8 block min-w-0 break-inside-avoid no-underline">
               {p.imageUrl ? (
                 <div className="overflow-hidden bg-secondary">
                   <img

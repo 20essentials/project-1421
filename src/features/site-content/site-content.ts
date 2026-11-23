@@ -1,3 +1,5 @@
+import { withPublishedTranslation } from "@/features/i18n/published-content";
+import type { HeaderLike } from "@/features/i18n/locale-from-request";
 import { queryItems } from "@/wix/cms/items";
 import {
   toHomeContent,
@@ -34,17 +36,28 @@ const SITE_PAGE_COLLECTIONS = {
 
 export type SitePageId = keyof typeof SITE_PAGE_COLLECTIONS;
 
-export async function getSitePageContent(page: SitePageId): Promise<SitePageContent> {
-  const result = await queryItems(SITE_PAGE_COLLECTIONS[page], { limit: 1 });
-  const content = toSitePageContent(result.items[0] ?? null);
-  if (!content)
-    throw new Error(`SiteContent: no item in collection "${SITE_PAGE_COLLECTIONS[page]}".`);
+export async function getSitePageContent(
+  page: SitePageId,
+  headers?: HeaderLike,
+): Promise<SitePageContent> {
+  const collection = SITE_PAGE_COLLECTIONS[page];
+  const result = await queryItems(collection, { limit: 1 });
+  const raw = result.items[0];
+  const translated = raw
+    ? await withPublishedTranslation(raw, { entityType: collection, headers })
+    : {};
+  const content = toSitePageContent(translated);
+  if (!content) throw new Error(`SiteContent: no item in collection "${collection}".`);
   return content;
 }
 
-export async function getHomeContent(): Promise<HomeContent> {
+export async function getHomeContent(headers?: HeaderLike): Promise<HomeContent> {
   const result = await queryItems("Home", { limit: 1 });
-  const content = toHomeContent(result.items[0] ?? null);
+  const raw = result.items[0];
+  const translated = raw
+    ? await withPublishedTranslation(raw, { entityType: "Home", headers })
+    : {};
+  const content = toHomeContent(translated);
   if (!content) throw new Error('SiteContent: no item in collection "Home".');
   return content;
 }

@@ -16,7 +16,7 @@ const seals = [
   { src: "https://static.wixstatic.com/media/600582_e670259e22cb4eec80d2b88f434b4584~mv2.jpeg", alt: "La Grande Plaque", width: 360, height: 360 },
 ];
 
-const content = await getSitePageContent("awards");
+const content = await getSitePageContent("awards", Astro.request.headers);
 ---
 
 <SiteLayout title={content.title} description={content.intro}>

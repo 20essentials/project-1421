@@ -10,6 +10,7 @@ export interface FaqCategoryNavProps extends UseFaqOptions {
   base?: string;
   asLinks?: boolean;
   allLabel?: string;
+  ariaLabel?: string;
 }
 
 const tab = (active: boolean) =>
@@ -19,7 +20,7 @@ const tab = (active: boolean) =>
 const underline = (active: boolean) =>
   `absolute inset-x-0 bottom-0 h-px origin-left bg-foreground transition-transform duration-500 ease-fluid ${active ? "scale-x-100" : "scale-x-0"}`;
 
-export default function FaqCategoryNav({ base = "/faq", asLinks = false, allLabel = "Tutte", ...options }: FaqCategoryNavProps) {
+export default function FaqCategoryNav({ base = "/faq", asLinks = false, allLabel = "Tutte", ariaLabel = "Categorie", ...options }: FaqCategoryNavProps) {
   const { data, activeCategoryId, selectCategory } = useFaq(options);
   const categories = (data?.categories ?? []).filter((c) => c.questionCount > 0);
   if (categories.length < 2) return null;
@@ -27,7 +28,7 @@ export default function FaqCategoryNav({ base = "/faq", asLinks = false, allLabe
   const items = [{ id: null as string | null, title: allLabel }, ...categories.map((c) => ({ id: c.id as string | null, title: c.title }))];
 
   return (
-    <nav aria-label="Categorie" className="mb-10 flex flex-wrap gap-x-8 gap-y-2">
+    <nav aria-label={ariaLabel} className="mb-10 flex flex-wrap gap-x-8 gap-y-2">
       {items.map((item) =>
         asLinks ? (
           <a

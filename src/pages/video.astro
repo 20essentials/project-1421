@@ -10,7 +10,7 @@ const curatedIds = new Set(curatedVideos.map((video) => video.id));
 const channelVideos = feed.filter((video) => !curatedIds.has(video.id));
 
 const [featured, ...rest] = curatedVideos;
-const content = await getSitePageContent("video");
+const content = await getSitePageContent("video", Astro.request.headers);
 
 const videoSchema = {
   "@context": "https://schema.org",

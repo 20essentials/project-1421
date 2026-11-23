@@ -15,8 +15,11 @@ import PostLikeButton from "@/features/blog/post-like-button";
 import CommentsView from "@/features/blog/comments-view";
 import { fetchCurrentMemberId } from "@/features/blog/authors";
 import { PostCard } from "@/features/blog/blog-feed-view";
-import { categoryPath, fetchPostBySlug, fetchRelatedPosts, postMetaLine, tagPath } from "@/features/blog/posts";
+import { categoryPath, fetchPostBySlug, fetchRelatedPosts, postMetaLine, postPath, tagPath } from "@/features/blog/posts";
+import { currentLocale } from "@/features/i18n/current-locale";
+import { localizedHref } from "@/features/i18n/localized-path";
 import { fetchBlogCategories, fetchTagsByIds, inIdOrder } from "@/features/blog/taxonomy";
+import { getSiteChrome } from "@/features/site-chrome/site-chrome";
 import type { BlogCategory, BlogTag, PostDetail, PostSummary } from "@/features/blog/types";
 import { WIX_APPS } from "@wix/essentials";
 import { SEO } from "@wix/seo/components";
@@ -36,6 +39,7 @@ const slug = Astro.params.slug;
 if (!slug) {
   return new Response(null, { status: 404 });
 }
+const locale = currentLocale(Astro.url, Astro.request.headers);
 
 // Behind Wix's proxy the request URL is internal — the real public page URL arrives on
 // x-wix-forwarded-url; the SEO service needs the public one.
@@ -53,7 +57,7 @@ let seoTagsServiceConfig = null;
 let currentMemberId: string | null = null;
 try {
   [post, allCategories, seoTagsServiceConfig, currentMemberId] = await Promise.all([
-    fetchPostBySlug(slug),
+    fetchPostBySlug(slug, Astro.request.headers, locale),
     fetchBlogCategories(),
     loadSEOTagsServiceConfig({
       pageUrl,
@@ -67,7 +71,7 @@ try {
   ]);
   if (post) {
     // Tags are read BY ID (a blog's tags run to hundreds); the related strip needs the post's ids.
-    [postTags, related] = await Promise.all([fetchTagsByIds(post.tagIds), fetchRelatedPosts(post)]);
+    [postTags, related] = await Promise.all([fetchTagsByIds(post.tagIds), fetchRelatedPosts(post, undefined, Astro.request.headers, locale)]);
   }
 } catch {
   // Guarded: an unhandled SSR throw truncates the response mid-stream.
@@ -82,6 +86,8 @@ const postCategories = inIdOrder(post.categoryIds, allCategories);
 // One source of head tags: the SEO service when it resolved (it carries the owner's overrides);
 // otherwise the DTO's own seoTitle/seoDescription (override → title; override → excerpt → body).
 const head = seoTagsServiceConfig ? {} : { title: post.seoTitle, description: post.seoDescription };
+const labels = await getSiteChrome(Astro.request.headers);
+const label = (key: string, fallback: string) => labels[key] || fallback;
 ---
 
 <SiteLayout {...head}>
@@ -95,7 +101,7 @@ const head = seoTagsServiceConfig ? {} : { title: post.seoTitle, description: po
           {postCategories.map((c, i) => (
             <>
               {i > 0 && " · "}
-              <a href={categoryPath(c.slug)} class="no-underline">
+              <a href={localizedHref(locale, categoryPath(c.slug))} class="no-underline">
                 {c.label}
               </a>
             </>
@@ -117,7 +123,7 @@ const head = seoTagsServiceConfig ? {} : { title: post.seoTitle, description: po
         </div>
       )
     }
-    <div class="mt-10">
+    <div class="mt-10 post-body">
       <RichContent client:only="react" content={post.richContent} fallbackParagraphs={post.paragraphs} />
     </div>
     <div class="mt-10 border-t border-border pt-4 text-center">
@@ -127,7 +133,7 @@ const head = seoTagsServiceConfig ? {} : { title: post.seoTitle, description: po
       postTags.length > 0 && (
         <div class="mt-6 flex flex-wrap justify-center gap-2">
           {postTags.map((t) => (
-            <a href={tagPath(t.slug)} class="rounded-control border border-border px-3 py-1 text-xs font-medium text-muted-foreground no-underline">
+            <a href={localizedHref(locale, tagPath(t.slug))} class="rounded-control border border-border px-3 py-1 text-xs font-medium text-muted-foreground no-underline">
               {t.label}
             </a>
           ))}
@@ -137,10 +143,10 @@ const head = seoTagsServiceConfig ? {} : { title: post.seoTitle, description: po
     {
       related.length > 0 && (
         <aside class="mt-14">
-          <h2 class="font-display mb-6 text-center text-2xl font-medium">Altri racconti</h2>
+          <h2 class="font-display mb-6 text-center text-2xl font-medium">{label("relatedPosts", "Altri racconti")}</h2>
           <div class="grid grid-cols-1 gap-8 sm:grid-cols-3">
             {related.map((p) => (
-              <PostCard post={p} />
+              <PostCard post={p} postHref={(slug) => localizedHref(locale, postPath(slug))} />
             ))}
           </div>
         </aside>
@@ -155,3 +161,40 @@ const head = seoTagsServiceConfig ? {} : { title: post.seoTitle, description: po
     }
   </article>
 </SiteLayout>
+
+<style is:global>
+  /* The ricos viewer ships a 15px block margin on every paragraph and 28px/36px headings, which
+     reads as brutal gaps on this layout. Retune the post body to the site's editorial rhythm:
+     tighter, heading-led spacing with comfortable line-height. */
+  .post-body .ricos-content {
+    --ricos-custom-p-line-height: 1.8;
+  }
+  .post-body .ricos-content p {
+    margin-block: 0.85em;
+  }
+  .post-body .ricos-content h2,
+  .post-body .ricos-content h3 {
+    margin-block: 1.9em 0.55em;
+    font-size: 1.25em;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+  .post-body .ricos-content h2 {
+    font-size: 1.4em;
+  }
+  .post-body .ricos-content h2 + p,
+  .post-body .ricos-content h3 + p {
+    margin-block-start: 0.35em;
+  }
+  .post-body .ricos-content ul,
+  .post-body .ricos-content ol {
+    margin-block: 0.9em;
+    padding-inline-start: 1.4em;
+  }
+  .post-body .ricos-content li {
+    margin-block: 0.4em;
+  }
+  .post-body .ricos-content blockquote {
+    margin-block: 1.4em;
+  }
+</style>

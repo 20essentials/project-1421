@@ -5,18 +5,23 @@ import ArtisticParallax from "@/features/home/artistic-parallax.astro";
 import { fetchPosts, postMetaLine, postPath } from "@/features/blog/posts";
 import { fetchFaq } from "@/features/faq/faq";
 import { getHomeContent } from "@/features/site-content/site-content";
+import { currentLocale } from "@/features/i18n/current-locale";
 import { imgAttrs, imgSrc, imgSrcSet, mediaKey } from "@/shared/media";
 import type { PostPage } from "@/features/blog/types";
 import type { FaqData } from "@/features/faq/types";
 
 let posts: PostPage | undefined;
 let faq: FaqData = { categories: [], questions: [], truncated: false };
+const locale = currentLocale(Astro.url, Astro.request.headers);
 try {
-  [posts, faq] = await Promise.all([fetchPosts(), fetchFaq()]);
+  [posts, faq] = await Promise.all([
+    fetchPosts({ headers: Astro.request.headers, locale }),
+    fetchFaq(Astro.request.headers),
+  ]);
 } catch {
 }
 
-const heroContent = await getHomeContent();
+const heroContent = await getHomeContent(Astro.request.headers);
 
 // Slide aspect ratios (height/width) — layout facts; the CMS supplies the images themselves.
 const HERO_RATIO = 1536 / 2752;

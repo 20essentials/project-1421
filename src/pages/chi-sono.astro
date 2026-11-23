@@ -3,7 +3,7 @@ import SiteLayout from "@/app/layout.astro";
 import { getSitePageContent } from "@/features/site-content/site-content";
 import "@/features/site-content/site-content.css";
 
-const content = await getSitePageContent("chi-sono");
+const content = await getSitePageContent("chi-sono", Astro.request.headers);
 ---
 
 <SiteLayout title={content.title} description={content.intro}>

@@ -1,4 +1,15 @@
 ---
+import { localizedHref, stripLocalePrefix } from "@/features/i18n/localized-path";
+import { DEFAULT_LOCALE, LOCALES, type Locale } from "@/features/i18n/locale";
+import type { SiteChromeLabels } from "@/features/site-chrome/site-chrome-core";
+
+const LOCALE_NAMES: Record<Locale, string> = {
+  it: "Italiano",
+  es: "Español",
+  en: "English",
+  de: "Deutsch",
+};
+
 interface NavItem {
   href: string;
   label: string;
@@ -7,27 +18,50 @@ interface Props {
   navPrimary?: NavItem[];
   navAll?: NavItem[];
   current?: string;
+  locale?: Locale;
+  labels?: SiteChromeLabels;
+  email?: string;
+  phone?: string;
 }
-const { navPrimary = [], navAll = [], current = "" } = Astro.props;
-const isActive = (href: string) => current === href || current === `${href}/`;
+const {
+  navPrimary = [],
+  navAll = [],
+  current = "",
+  locale = DEFAULT_LOCALE,
+  labels = {},
+  email = "studio@stefanolunardi.com",
+  phone = "+39 338 751 3113",
+} = Astro.props;
+const href = (path: string) => localizedHref(locale, path);
+const label = (key: string, fallback: string) => labels[key] || fallback;
+const isActive = (link: string) => {
+  const target = stripLocalePrefix(link).replace(/\/$/, "") || "/";
+  return current === target || (target !== "/" && current === `${target}/`);
+};
 ---
 
 <a
   href='#contenido'
   class='btn fixed top-4 left-4 z-60 -translate-y-24 rounded-full bg-foreground px-4 py-2 text-primary-foreground no-underline transition-transform focus-visible:translate-y-0'
 >
-  Salta al contenido
+  {label("skipLink", "Salta al contenido")}
 </a>
 
 <header class='pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-5'>
   <div
     class='nav-pill pointer-events-auto flex w-max max-w-full items-center gap-5 rounded-full border border-border bg-background/70 p-2 pl-6 shadow-sm backdrop-blur-xl'
   >
-    <a href='/' class='flex shrink-0 items-center invert' aria-label='Stefano Lunardi — Home'>
-      <img src='/logo.png' width='413' height='222' alt='' class='h-8 w-auto object-contain' />
+    <a href={href("/")} class='flex shrink-0 items-center invert' aria-label={label("homeAriaLabel", "Stefano Lunardi — Home")}>
+      <img
+        src='https://static.wixstatic.com/media/600582_7b25241827f7487b9c5971d556a24036~mv2.png'
+        width='413'
+        height='222'
+        alt=''
+        class='h-8 w-auto object-contain'
+      />
     </a>
 
-    <nav aria-label='Principale' class='relative hidden xl:block'>
+    <nav aria-label={label("mainNavAriaLabel", "Principale")} class='relative hidden xl:block'>
       <span
         aria-hidden='true'
         class='nav-indicator absolute top-0 left-0 h-9 rounded-full bg-foreground/10'></span>
@@ -50,21 +84,73 @@ const isActive = (href: string) => current === href || current === `${href}/`;
     </nav>
 
     <div class='flex items-center gap-2'>
+      <div class='lang-switch relative' data-lang-switch>
+        <button
+          type='button'
+          class='lang-trigger flex h-9 cursor-pointer items-center gap-1.5 rounded-full px-2.5 text-sm text-muted-foreground transition-colors select-none hover:bg-foreground/5 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:px-3'
+          aria-expanded='false'
+          aria-haspopup='true'
+          aria-label={label('localeLabel', 'Lingua')}
+        >
+          <svg
+            viewBox='0 0 16 16'
+            fill='none'
+            stroke='currentColor'
+            stroke-width='1.25'
+            class='size-4'
+            aria-hidden='true'
+          >
+            <circle cx='8' cy='8' r='6.25'></circle>
+            <path d='M1.75 8h12.5M8 1.75c2.4 2.1 2.4 10.4 0 12.5M8 1.75c-2.4 2.1-2.4 10.4 0 12.5'></path>
+          </svg>
+          <span class='hidden uppercase sm:inline'>{locale}</span>
+          <svg
+            viewBox='0 0 12 12'
+            fill='none'
+            stroke='currentColor'
+            stroke-width='1.5'
+            class='lang-chevron size-3'
+            aria-hidden='true'
+          >
+            <path d='M2.5 4.5 6 8l3.5-3.5'></path>
+          </svg>
+        </button>
+        <div
+          class='lang-panel absolute top-11 right-0 z-20 w-48 rounded-2xl border border-border bg-background/90 p-1.5 shadow-lg backdrop-blur-xl'
+        >
+          <ul class='flex flex-col'>
+            {
+              LOCALES.map((l, i) => (
+                <li style={`--i:${i}`}>
+                  <a
+                    href={localizedHref(l, current || '/')}
+                    aria-current={l === locale ? 'true' : undefined}
+                    class='lang-item flex h-10 items-center justify-between rounded-xl px-3.5 text-sm text-muted-foreground no-underline aria-current:font-medium aria-current:text-foreground hover:bg-foreground/5 hover:text-foreground'
+                  >
+                    <span>{LOCALE_NAMES[l]}</span>
+                    {l === locale && <span aria-hidden='true' class='size-1.5 rounded-full bg-accent'></span>}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
       <a
-        href='/contatti'
+        href={href("/contatti")}
         class='inline-flex h-9 items-center justify-center rounded-full bg-accent px-3 text-sm font-medium text-accent-foreground no-underline transition-colors hover:bg-foreground sm:px-4'
       >
-        <span class='hidden sm:inline'>Richiedi un preventivo</span>
-        <span class='sm:hidden'>Preventivo</span>
+        <span class='hidden sm:inline'>{label("quoteCta", "Richiedi un preventivo")}</span>
+        <span class='sm:hidden'>{label("quoteShort", "Preventivo")}</span>
       </a>
       <button
         type='button'
         class='menu-toggle relative inline-block size-9 rounded-full text-foreground transition-colors hover:bg-foreground/10 xl:hidden'
         aria-expanded='false'
         aria-controls='menu'
-        aria-label='Apri menu'
-        data-open-label='Apri menu'
-        data-close-label='Chiudi menu'
+        aria-label={label("openMenu", "Apri menu")}
+        data-open-label={label("openMenu", "Apri menu")}
+        data-close-label={label("closeMenu", "Chiudi menu")}
       >
         <span aria-hidden='true'></span>
         <span aria-hidden='true'></span>
@@ -80,7 +166,7 @@ const isActive = (href: string) => current === href || current === `${href}/`;
 >
   <div class='menu-scroll h-full overflow-y-auto overscroll-contain px-4 pt-24 pb-8 sm:px-8'>
     <div class='mx-auto flex min-h-full w-full max-w-xl flex-col'>
-      <nav aria-label='Menu completo'>
+      <nav aria-label={label("fullMenuAriaLabel", "Menu completo")}>
         <ul class='grid grid-cols-1 gap-x-5 border-t border-border sm:grid-cols-2'>
           {
             navAll.map((item, i) => (
@@ -104,10 +190,10 @@ const isActive = (href: string) => current === href || current === `${href}/`;
 
       <div class='menu-item mt-6' style={`--i:${navAll.length}`}>
         <a
-          href='/contatti'
+          href={href("/contatti")}
           class='group flex h-12 w-full items-center justify-between rounded-full bg-accent pr-2 pl-5 text-sm font-medium text-accent-foreground no-underline transition-transform duration-700 hover:scale-101 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent'
         >
-          <span>Prenota una consulenza</span>
+          <span>{label("bookConsultation", "Prenota una consulenza")}</span>
           <span
             class='grid size-8 place-items-center rounded-full bg-background text-accent transition-transform duration-700 group-hover:translate-x-0.5'
           >
@@ -125,56 +211,75 @@ const isActive = (href: string) => current === href || current === `${href}/`;
         </a>
       </div>
 
-      <div class='menu-item mt-auto pt-10' style={`--i:${navAll.length + 1}`}>
+      <div class='menu-item mt-4' style={`--i:${navAll.length + 1}`}>
+        <div class='flex flex-wrap items-center gap-2 border-t border-border pt-5'>
+          <span class='text-xs tracking-[0.25em] text-muted-foreground uppercase'>
+            {label("localeLabel", "Lingua")}
+          </span>
+          {
+            LOCALES.map(l => (
+              <a
+                href={localizedHref(l, current || '/')}
+                aria-current={l === locale ? 'true' : undefined}
+                class='flex h-8 items-center rounded-full border border-border px-3 text-xs text-muted-foreground no-underline transition-colors hover:border-foreground hover:text-foreground aria-current:border-foreground aria-current:text-foreground'
+              >
+                {LOCALE_NAMES[l]}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class='menu-item mt-auto pt-10' style={`--i:${navAll.length + 2}`}>
         <div class='grid gap-6 border-t border-border pt-5 sm:grid-cols-2'>
           <div class='flex flex-col gap-1 text-sm'>
             <a
-              href='mailto:studio@stefanolunardi.com'
+              href={`mailto:${email}`}
               class='text-muted-foreground no-underline transition-colors hover:text-foreground'
             >
-              studio@stefanolunardi.com
+              {email}
             </a>
             <a
-              href='tel:+393387513113'
+              href={`tel:${phone.replace(/[^\d+]/g, "")}`}
               class='text-muted-foreground no-underline transition-colors hover:text-foreground'
             >
-              +39 338 751 3113
+              {phone}
             </a>
-            <p class='text-xs text-muted-foreground'>Villach · Udine · Treviso</p>
+            <p class='text-xs text-muted-foreground'>{label("headerTagline", "Villach · Udine · Treviso")}</p>
           </div>
-          <nav class='flex items-start justify-end gap-4 text-sm' aria-label='Social'>
+          <nav class='flex items-start justify-end gap-4 text-sm' aria-label={label("socialAriaLabel", "Social")}>
             <a
               href='https://www.instagram.com/stefanolunardiphoto'
               target='_blank'
               rel='noopener'
               class='text-muted-foreground no-underline transition-colors hover:text-accent'
-              >Instagram</a
+              >{label("socialInstagram", "Instagram")}</a
             >
             <a
               href='https://www.facebook.com/StefanoLunardiFotografo'
               target='_blank'
               rel='noopener'
               class='text-muted-foreground no-underline transition-colors hover:text-accent'
-              >Facebook</a
+              >{label("socialFacebook", "Facebook")}</a
             >
             <a
               href='https://www.linkedin.com/in/stefano-lunardi-5b761526'
               target='_blank'
               rel='noopener'
               class='text-muted-foreground no-underline transition-colors hover:text-accent'
-              >LinkedIn</a
+              >{label("socialLinkedIn", "LinkedIn")}</a
             >
             <a
               href='https://www.youtube.com/@stefanolunardiphotographer7802/videos'
               target='_blank'
               rel='noopener'
               class='text-muted-foreground no-underline transition-colors hover:text-accent'
-              >YouTube</a
+              >{label("socialYouTube", "YouTube")}</a
             >
           </nav>
         </div>
         <p class='mt-4 text-xs text-muted-foreground uppercase tracking-[0.25em]'>
-          Autenticità · Contemplazione · Relazione · Arte · Emozione
+          {label("footerTagline", "Autenticità · Contemplazione · Relazione · Arte · Emozione")}
         </p>
       </div>
     </div>
@@ -280,6 +385,65 @@ const isActive = (href: string) => current === href || current === `${href}/`;
     transition: opacity 700ms var(--ease-fluid, cubic-bezier(0.32, 0.72, 0, 1));
   }
 
+  .lang-panel {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px) scale(0.975);
+    transform-origin: top right;
+    transition:
+      opacity 250ms var(--ease-fluid, cubic-bezier(0.32, 0.72, 0, 1)),
+      transform 300ms var(--ease-fluid, cubic-bezier(0.32, 0.72, 0, 1)),
+      visibility 0s linear 300ms;
+  }
+
+  .lang-switch[data-open] .lang-panel {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition-delay: 0s;
+  }
+
+  .lang-panel .lang-item {
+    opacity: 0;
+    transform: translateY(4px);
+    transition:
+      opacity 300ms var(--ease-fluid, cubic-bezier(0.32, 0.72, 0, 1)),
+      transform 300ms var(--ease-fluid, cubic-bezier(0.32, 0.72, 0, 1)),
+      color 150ms ease-out,
+      background-color 150ms ease-out;
+  }
+
+  .lang-switch[data-open] .lang-panel .lang-item {
+    opacity: 1;
+    transform: none;
+    transition-delay: calc(60ms + var(--i, 0) * 40ms);
+  }
+
+  .lang-chevron {
+    transition: transform 300ms var(--ease-fluid, cubic-bezier(0.32, 0.72, 0, 1));
+  }
+
+  .lang-switch[data-open] .lang-chevron {
+    transform: rotate(180deg);
+  }
+
+  .lang-trigger:active {
+    scale: 0.97;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lang-panel,
+    .lang-panel .lang-item,
+    .lang-chevron {
+      transform: none;
+      transition: none;
+    }
+
+    .lang-trigger:active {
+      scale: 1;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .menu-item,
     .nav-indicator {
@@ -328,9 +492,45 @@ const isActive = (href: string) => current === href || current === `${href}/`;
   });
 
   document.addEventListener("click", event => {
-    const link = (event.target as Element | null)?.closest<HTMLAnchorElement>("a[href]");
+    const target = event.target as Element | null;
+    const link = target?.closest<HTMLAnchorElement>("a[href]");
     if (link && menu && link.closest("#menu")) setOpen(false);
+
+    const inside = target?.closest<HTMLElement>(".lang-switch[data-lang-switch]") ?? null;
+    if (!inside) {
+      closeLangSwitches();
+      return;
+    }
+    if (link && inside.contains(link)) {
+      closeLangSwitches();
+      return;
+    }
+    const trigger = inside.querySelector("button");
+    const open = !inside.hasAttribute("data-open");
+    closeLangSwitches(inside);
+    inside.toggleAttribute("data-open", open);
+    trigger?.setAttribute("aria-expanded", String(open));
+    if (open && event.detail === 0) {
+      inside.querySelector<HTMLAnchorElement>(".lang-panel a")?.focus({ preventScroll: true });
+    }
   });
+
+  document.addEventListener("keydown", event => {
+    if (event.key !== "Escape") return;
+    const openSwitch = document.querySelector<HTMLElement>(".lang-switch[data-open]");
+    if (openSwitch) {
+      closeLangSwitches();
+      openSwitch.querySelector("button")?.focus({ preventScroll: true });
+    }
+  });
+
+  const closeLangSwitches = (except?: Element | null) => {
+    document.querySelectorAll<HTMLElement>(".lang-switch[data-lang-switch]").forEach(d => {
+      if (d === except) return;
+      d.removeAttribute("data-open");
+      d.querySelector("button")?.setAttribute("aria-expanded", "false");
+    });
+  };
 
   window.matchMedia("(min-width: 1280px)").addEventListener("change", event => {
     if (event.matches) setOpen(false);

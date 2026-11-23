@@ -3,7 +3,7 @@ import SiteLayout from "@/app/layout.astro";
 import LegalPage from "@/features/legal/legal-page.astro";
 import { getSitePageContent } from "@/features/site-content/site-content";
 
-const content = await getSitePageContent("avviso-legale");
+const content = await getSitePageContent("avviso-legale", Astro.request.headers);
 ---
 
 <SiteLayout title={content.title} description={content.intro}>

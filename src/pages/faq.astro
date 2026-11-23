@@ -9,11 +9,14 @@ import FaqCategoryNav from "@/features/faq/faq-category-nav";
 import FaqAccordion from "@/features/faq/faq-accordion";
 import { fetchFaq } from "@/features/faq/faq";
 import { faqJsonLd, parseDeepLink } from "@/features/faq/faq-core";
+import { currentLocale } from "@/features/i18n/current-locale";
+import { localizedHref } from "@/features/i18n/localized-path";
+import { getSiteChrome } from "@/features/site-chrome/site-chrome";
 import type { FaqData } from "@/features/faq/types";
 
 let data: FaqData = { categories: [], questions: [], truncated: false };
 try {
-  data = await fetchFaq();
+  data = await fetchFaq(Astro.request.headers);
 } catch {
   // An unguarded SSR throw truncates the response mid-stream; the islands render the empty state instead.
 }
@@ -28,28 +31,63 @@ const initialCategoryId = categoryId && data.categories.some((c) => c.id === cat
 // The whole FAQ, not the filtered view: every marked-up answer is on the page (collapsed panels are still in the DOM).
 const jsonLd = JSON.stringify(faqJsonLd(data.questions, pageUrl.split("#")[0].split("?")[0])).replace(/</g, "\\u003c");
 const description = data.questions.slice(0, 3).map((q) => q.question).join(" · ");
+const labels = await getSiteChrome(Astro.request.headers);
+const locale = currentLocale(Astro.url, Astro.request.headers);
+const faqHref = localizedHref(locale, "/faq");
+const label = (key: string, fallback: string) => labels[key] || fallback;
+const truncatedLabel = labels.faqLimit?.includes("{count}")
+  ? labels.faqLimit
+  : `Prime {count} ${label("faqQuestionsUnit", "domande")} mostrate.`;
 ---
 
-<SiteLayout title="FAQ" description={description}>
+<SiteLayout title={label("faqTitle", "FAQ")} description={description}>
   <script type="application/ld+json" is:inline slot="seo-tags" set:html={jsonLd} />
   <header class="border-b border-border px-6 pb-14 pt-6 text-center">
-    <p class="eyebrow text-muted-foreground">Domande &amp; risposte</p>
-    <h1 class="font-display mt-4 text-4xl font-medium tracking-tight sm:text-6xl">Tutto quello che volete sapere</h1>
+    <p class="eyebrow text-muted-foreground">{label("faqQuestionsUnit", "Domande & risposte")}</p>
+    <h1 class="font-display mt-4 text-4xl font-medium tracking-tight sm:text-6xl">{label("faqHeading", "Tutto quello che volete sapere")}</h1>
     <p class="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-      Le risposte più frequenti sulle nostre nozze, prima ancora di parlarne. Tutte le risposte sono visibili anche ai motori di ricerca.
+      {label("faqIntro", "Le risposte più frequenti sulle nostre nozze, prima ancora di parlarne. Tutte le risposte sono visibili anche ai motori di ricerca.")}
     </p>
     {
       data.questions.length > 0 && (
         <p class="mt-6 text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-          {data.questions.length} domande
-          {data.categories.filter((c) => c.questionCount > 0).length > 1 && ` · ${data.categories.filter((c) => c.questionCount > 0).length} temi`}
+          {data.questions.length} {label("faqQuestionsUnit", "domande")}
+          {data.categories.filter((c) => c.questionCount > 0).length > 1 && ` · ${data.categories.filter((c) => c.questionCount > 0).length} ${label("faqTopicsUnit", "temi")}`}
         </p>
       )
     }
   </header>
   <div class="mx-auto max-w-3xl px-6 pt-14 pb-24">
-    <FaqSearch client:load initialData={data} initialCategoryId={initialCategoryId} />
-    <FaqCategoryNav client:load initialData={data} initialCategoryId={initialCategoryId} />
-    <FaqAccordion client:load initialData={data} initialCategoryId={initialCategoryId} />
+    <FaqSearch
+      client:load
+      initialData={data}
+      initialCategoryId={initialCategoryId}
+      label={label("searchButton", "Cerca")}
+      placeholder={label("faqSearchPlaceholder", "Cerca una domanda…")}
+      resultUnit={label("resultUnit", "risultati")}
+      resultUnitSingular={label("resultUnitSingular", "risultato")}
+    />
+    <FaqCategoryNav
+      client:load
+      initialData={data}
+      initialCategoryId={initialCategoryId}
+      base={faqHref}
+      allLabel={label("faqAll", "Tutte")}
+      ariaLabel={label("categoriesLabel", "Categorie")}
+    />
+    <FaqAccordion
+      client:load
+      initialData={data}
+      initialCategoryId={initialCategoryId}
+      base={faqHref}
+      emptyMessage={label("faqNoQuestions", "Nessuna domanda per ora.")}
+      retryLabel={label("retry", "Riprova")}
+      noResultsLabel={label("faqNoResults", "Nessun risultato per")}
+      resetSearchLabel={label("resetSearch", "Azzera la ricerca")}
+      questionLinkLabel={label("copyLinkAria", "Link a questa domanda")}
+      copyLinkLabel={label("copyLink", "Copia link")}
+      copiedLabel={label("copied", "Copiato")}
+      truncatedLabel={truncatedLabel}
+    />
   </div>
 </SiteLayout>

@@ -1,8 +1,87 @@
 ---
 import SiteLayout from "@/app/layout.astro";
 import { getSitePageContent } from "@/features/site-content/site-content";
+import { currentLocale } from "@/features/i18n/current-locale";
+import { languageTag, type Locale } from "@/features/i18n/locale";
+import { localizedHref } from "@/features/i18n/localized-path";
 
-const rating = { value: "5.0", max: 5, count: 10, consigliato: "100%" };
+const locale = currentLocale(Astro.url, Astro.request.headers);
+
+const ratingCount = 10;
+const ratingConsigliato = "100%";
+
+const UI: Record<
+  Locale,
+  {
+    verified: string;
+    sposi: string;
+    reviewsHeading: string;
+    profilesHeading: string;
+    profilesNote: string;
+    profiles: string[];
+    verifyCta: string;
+  }
+> = {
+  it: {
+    verified: "{count} recensioni verificate · consigliato dal {percent} delle coppie",
+    sposi: "Sposi",
+    reviewsHeading: "Le recensioni, una per una",
+    profilesHeading: "I profili pubblici",
+    profilesNote:
+      "Tutte le recensioni verificate sono leggibili anche sui profili: testo originale, voti e risposte.",
+    profiles: ["Opinioni su matrimonio.com", "Recensioni su Wezoree", "Recensioni su 5 Star Wedding Directory"],
+    verifyCta: "Verifica la tua data",
+  },
+  es: {
+    verified: "{count} reseñas verificadas · recomendado por el {percent} de las parejas",
+    sposi: "Novios",
+    reviewsHeading: "Las reseñas, una por una",
+    profilesHeading: "Los perfiles públicos",
+    profilesNote:
+      "Todas las reseñas verificadas también se pueden leer en los perfiles: texto original, votos y respuestas.",
+    profiles: ["Opiniones en matrimonio.com", "Reseñas en Wezoree", "Reseñas en 5 Star Wedding Directory"],
+    verifyCta: "Comprueba vuestra fecha",
+  },
+  en: {
+    verified: "{count} verified reviews · recommended by {percent} of couples",
+    sposi: "Newlyweds",
+    reviewsHeading: "The reviews, one by one",
+    profilesHeading: "Public profiles",
+    profilesNote:
+      "All verified reviews are also readable on the profiles: original text, ratings and replies.",
+    profiles: ["Reviews on matrimonio.com", "Reviews on Wezoree", "Reviews on 5 Star Wedding Directory"],
+    verifyCta: "Check your date",
+  },
+  de: {
+    verified: "{count} verifizierte Rezensionen · von {percent} der Paare empfohlen",
+    sposi: "Brautpaar",
+    reviewsHeading: "Die Rezensionen, eine nach der anderen",
+    profilesHeading: "Öffentliche Profile",
+    profilesNote:
+      "Alle verifizierten Rezensionen sind auch auf den Profilen lesbar: Originaltext, Bewertungen und Antworten.",
+    profiles: ["Bewertungen auf matrimonio.com", "Rezensionen auf Wezoree", "Rezensionen auf 5 Star Wedding Directory"],
+    verifyCta: "Prüfen Sie Ihr Datum",
+  },
+};
+const ui = UI[locale];
+const verifiedLine = ui.verified.replace("{count}", String(ratingCount)).replace("{percent}", ratingConsigliato);
+
+const IT_MONTHS: Record<string, number> = {
+  gennaio: 1, febbraio: 2, marzo: 3, aprile: 4, maggio: 5, giugno: 6,
+  luglio: 7, agosto: 8, settembre: 9, ottobre: 10, novembre: 11, dicembre: 12,
+};
+const parseItDate = (s: string): Date | null => {
+  const m = s.trim().match(/^(\d{1,2})\s+([a-zùàèé]+)\s+(\d{4})$/i);
+  const month = m ? IT_MONTHS[m[2]?.toLowerCase()] : undefined;
+  return m && month ? new Date(Date.UTC(Number(m[3]), month - 1, Number(m[1]))) : null;
+};
+const dateFmt = new Intl.DateTimeFormat(languageTag(locale), { day: "numeric", month: "long", year: "numeric" });
+const dateLabel = (s: string) => {
+  const d = parseItDate(s);
+  return d ? dateFmt.format(d) : s;
+};
+
+const rating = { value: "5.0", max: 5, count: ratingCount, consigliato: ratingConsigliato };
 
 const recensioni = [
   {
@@ -82,7 +161,7 @@ const profili = [
   { href: "https://wezoree.com/it/vendors/profile/20527-photographers-stefano-lunardi/reviews", label: "Recensioni su Wezoree" },
   { href: "https://5starweddingdirectory.com/wedding-photographers/austria/stefano-lunardi/reviews/", label: "Recensioni su 5 Star Wedding Directory" },
 ];
-const content = await getSitePageContent("recensioni");
+const content = await getSitePageContent("recensioni", Astro.request.headers);
 ---
 
 <SiteLayout title={content.title} description={content.intro}>
@@ -93,12 +172,12 @@ const content = await getSitePageContent("recensioni");
     <p class="mt-6 flex items-center justify-center gap-3 text-sm text-muted-foreground">
       <span class="font-display text-2xl text-accent">{rating.value}</span>
       <span aria-hidden="true" class="text-accent">★★★★★</span>
-      <span>{rating.count} recensioni verificate · consigliato dal {rating.consigliato} delle coppie</span>
+      <span>{verifiedLine}</span>
     </p>
   </section>
 
   <section class="mx-auto max-w-3xl px-6 py-14">
-    <h2 class="font-display text-3xl font-medium">Le recensioni, una per una</h2>
+    <h2 class="font-display text-3xl font-medium">{ui.reviewsHeading}</h2>
     <div class="mt-8 flex flex-col gap-4">
       {
         recensioni.map((r) => (
@@ -106,7 +185,7 @@ const content = await getSitePageContent("recensioni");
             <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
               <p class="font-display text-xl">{r.nomi}</p>
               <p class="text-xs uppercase tracking-widest text-muted-foreground">
-                Sposi · {r.data} · {r.luogo}
+                {ui.sposi} · {dateLabel(r.data)} · {r.luogo}
               </p>
             </div>
             <p class="mt-1 text-sm text-accent" aria-hidden="true">
@@ -120,23 +199,26 @@ const content = await getSitePageContent("recensioni");
       }
     </div>
 
-    <h2 class="font-display mt-14 text-3xl font-medium">I profili pubblici</h2>
+    <h2 class="font-display mt-14 text-3xl font-medium">{ui.profilesHeading}</h2>
     <p class="mt-4 leading-relaxed text-muted-foreground">
-      Tutte le recensioni verificate sono leggibili anche sui profili: testo originale, voti e risposte.
+      {ui.profilesNote}
     </p>
     <div class="mt-6 flex flex-col gap-3 text-sm">
       {
-        profili.map((p) => (
+        profili.map((p, i) => (
           <a href={p.href} target="_blank" rel="noopener" class="text-accent underline underline-offset-4">
-            {p.label}
+            {ui.profiles[i] ?? p.label}
           </a>
         ))
       }
     </div>
 
     <div class="mt-14 text-center">
-      <a href="/contatti" class="inline-block rounded-control border border-foreground px-8 py-3 text-sm font-medium text-foreground no-underline transition-colors hover:border-accent hover:text-accent">
-        Verifica la tua data
+      <a
+        href={localizedHref(locale, "/contatti")}
+        class="inline-block rounded-control border border-foreground px-8 py-3 text-sm font-medium text-foreground no-underline transition-colors hover:border-accent hover:text-accent"
+      >
+        {ui.verifyCta}
       </a>
     </div>
   </section>

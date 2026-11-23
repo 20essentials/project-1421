@@ -10,7 +10,7 @@ import wixHostingAdapter from "@wix/astro-wix-hosting-adapter";
 // https://astro.build/config
 export default defineConfig({
   vite: { plugins: [tailwindcss()] },
-  integrations: [wix(), wixPages(), react()],
+  integrations: [wix({ essentials: true }), wixPages(), react()],
   security: { checkOrigin: false },
   adapter: wixHostingAdapter(),
 

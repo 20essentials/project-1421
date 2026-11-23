@@ -19,80 +19,96 @@ const laRisata = "wix:image://v1/600582_b0b1bd8e531b4038a985e740a4957546~mv2.jpg
 const leLacrime = "wix:image://v1/600582_33ae8889307244c3903778a51806562d~mv2.jpg/le-lacrime.jpg#originWidth=2000&originHeight=1333";
 const loSposoEIuoi = "wix:image://v1/600582_5c66f96caf7a41fc85e4525826840989~mv2.jpg/lo-sposo-e-i-suoi.jpg#originWidth=2000&originHeight=1333";
 
-const projects: ReelProject[] = [
+import { currentLocale } from "@/features/i18n/current-locale";
+import type { Locale } from "@/features/i18n/locale";
+
+const locale = currentLocale(Astro.url, Astro.request.headers);
+
+const COPY: Record<
+  Locale,
   {
-    name: 'Villa al tramonto',
-    category: 'Destination wedding',
-    description:
-      'La villa si accende al calar del buio: il ricevimento ripreso dall’alto, tra cipressi e colline venete.',
-    image: imgSrc(villaTramonto, COIL_TEXTURE_W, COIL_TEXTURE_H),
-    link: '#galleria'
-  },
-  {
-    name: 'Ponte di Rialto',
-    category: 'Venezia',
-    description:
-      'Il bacio sotto la pietra del Rialto, riflesso nel Canal Grande mentre la città continua a vivere.',
-    image: imgSrc(ponteRialto, COIL_TEXTURE_W, COIL_TEXTURE_H),
-    link: '#galleria'
-  },
-  {
-    name: 'L’ultima corsa',
-    category: 'Reportage',
-    description:
-      'La macchina degli sposi torna a casa all’imbrunire, i fari accesi tra i filari e un cielo che brucia.',
-    image: imgSrc(ultimaCorsa, COIL_TEXTURE_W, COIL_TEXTURE_H),
-    link: '#galleria'
-  },
-  {
-    name: 'La spider',
-    category: 'Reportage',
-    description:
-      'Gli sposi lungo il lago in una cabriolet d’epoca: movimento, luce naturale e niente posa.',
-    image: imgSrc(laSpider, COIL_TEXTURE_W, COIL_TEXTURE_H),
-    link: '#galleria'
-  },
-  {
-    name: 'Sotto il velo',
-    category: 'Fine Art',
-    description:
-      'Due volti nella penombra del fienile, avvolti dal velo: solo luce naturale e un’emozione vera.',
-    image: imgSrc(sottoIlVelo, COIL_TEXTURE_W, COIL_TEXTURE_H),
-    link: '#galleria'
-  },
-  {
-    name: 'La risata',
-    category: 'Reportage',
-    description:
-      'Il velo al vento e una risata che non si può ripetere: l’attimo reale, non la posa.',
-    image: imgSrc(laRisata, COIL_TEXTURE_W, COIL_TEXTURE_H),
-    link: '#galleria'
-  },
-  {
-    name: 'Le lacrime',
-    category: 'Emozioni',
-    description:
-      'I genitori durante lo scambio degli anelli: la foto che nessuno ordina, ma che tutti ricordano.',
-    image: imgSrc(leLacrime, COIL_TEXTURE_W, COIL_TEXTURE_H),
-    link: '#galleria'
-  },
-  {
-    name: 'Lo sposo e i suoi',
-    category: 'Venezia',
-    description:
-      'Lo sposo in giacca bianca disceso dallo scalinale della villa, gli amici un passo dietro di lui.',
-    image: imgSrc(loSposoEIuoi, COIL_TEXTURE_W, COIL_TEXTURE_H),
-    link: '#galleria'
+    aria: string;
+    headline: [string, string];
+    hint: string;
+    projects: Array<{ name: string; category: string; description: string }>;
   }
-];
+> = {
+  it: {
+    aria: "Reel dei progetti di matrimonio",
+    headline: ["Ogni scatto,", "un'opera."],
+    hint: "Scrolla o trascina per esplorare",
+    projects: [
+      { name: "Villa al tramonto", category: "Destination wedding", description: "La villa si accende al calar del buio: il ricevimento ripreso dall'alto, tra cipressi e colline venete." },
+      { name: "Ponte di Rialto", category: "Venezia", description: "Il bacio sotto la pietra del Rialto, riflesso nel Canal Grande mentre la città continua a vivere." },
+      { name: "L'ultima corsa", category: "Reportage", description: "La macchina degli sposi torna a casa all'imbrunire, i fari accesi tra i filari e un cielo che brucia." },
+      { name: "La spider", category: "Reportage", description: "Gli sposi lungo il lago in una cabriolet d'epoca: movimento, luce naturale e niente posa." },
+      { name: "Sotto il velo", category: "Fine Art", description: "Due volti nella penombra del fienile, avvolti dal velo: solo luce naturale e un'emozione vera." },
+      { name: "La risata", category: "Reportage", description: "Il velo al vento e una risata che non si può ripetere: l'attimo reale, non la posa." },
+      { name: "Le lacrime", category: "Emozioni", description: "I genitori durante lo scambio degli anelli: la foto che nessuno ordina, ma che tutti ricordano." },
+      { name: "Lo sposo e i suoi", category: "Venezia", description: "Lo sposo in giacca bianca disceso dallo scalinale della villa, gli amici un passo dietro di lui." },
+    ],
+  },
+  es: {
+    aria: "Reel de los proyectos de boda",
+    headline: ["Cada foto,", "una obra."],
+    hint: "Desliza o arrastra para explorar",
+    projects: [
+      { name: "Villa al atardecer", category: "Destination wedding", description: "La villa se enciende al caer la oscuridad: la recepción filmada desde arriba, entre cipreses y colinas vénetas." },
+      { name: "Puente de Rialto", category: "Venecia", description: "El beso bajo la piedra del Rialto, reflejado en el Canal Grande mientras la ciudad sigue viva." },
+      { name: "La última carrera", category: "Reportaje", description: "El coche de los novios vuelve a casa al atardecer, faros encendidos entre las viñas y un cielo en llamas." },
+      { name: "La spider", category: "Reportaje", description: "Los novíos junto al lago en un cabriolet de época: movimiento, luz natural y nada de poses." },
+      { name: "Bajo el velo", category: "Fine Art", description: "Dos rostros en la penumbra del granero, envueltos por el velo: solo luz natural y una emoción verdadera." },
+      { name: "La risa", category: "Reportaje", description: "El velo al viento y una risa que no se puede repetir: el instante real, no la pose." },
+      { name: "Las lágrimas", category: "Emociones", description: "Los padres durante el intercambio de los anillos: la foto que nadie encarga, pero que todos recuerdan." },
+      { name: "El novio y los suyos", category: "Venecia", description: "El novio de chaqueta blanca bajando la escalinata de la villa, los amigos un paso detrás de él." },
+    ],
+  },
+  en: {
+    aria: "Reel of wedding projects",
+    headline: ["Every shot,", "a work of art."],
+    hint: "Scroll or drag to explore",
+    projects: [
+      { name: "Villa at sunset", category: "Destination wedding", description: "The villa lights up as darkness falls: the reception filmed from above, among cypresses and Venetian hills." },
+      { name: "Rialto Bridge", category: "Venice", description: "The kiss beneath the Rialto stone, reflected in the Grand Canal while the city carries on living." },
+      { name: "The last drive", category: "Reportage", description: "The couple's car returns home at dusk, headlights on between the vines and a burning sky." },
+      { name: "The spider", category: "Reportage", description: "The couple along the lake in a vintage cabriolet: movement, natural light and no posing." },
+      { name: "Beneath the veil", category: "Fine Art", description: "Two faces in the barn's half-light, wrapped in the veil: natural light only, and a true emotion." },
+      { name: "The laughter", category: "Reportage", description: "The veil in the wind and a laugh that cannot be repeated: the real instant, not the pose." },
+      { name: "The tears", category: "Emotions", description: "The parents during the ring exchange: the photograph nobody orders, yet everyone remembers." },
+      { name: "The groom and his people", category: "Venice", description: "The groom in a white jacket coming down the villa's steps, his friends one step behind." },
+    ],
+  },
+  de: {
+    aria: "Reel der Hochzeitsprojekte",
+    headline: ["Jede Aufnahme,", "ein Kunstwerk."],
+    hint: "Scrollen oder ziehen zum Erkunden",
+    projects: [
+      { name: "Villa in der Abenddämmerung", category: "Destination Wedding", description: "Die Villa erstrahlt, wenn die Dunkelheit fällt: der Empfang von oben gefilmt, zwischen Zypressen und venetianischen Hügeln." },
+      { name: "Rialto-Brücke", category: "Venedig", description: "Der Kuss unter dem Stein der Rialto-Brücke, gespiegelt im Canal Grande, während die Stadt weiterlebt." },
+      { name: "Die letzte Fahrt", category: "Reportage", description: "Das Auto des Brautpaars fährt bei Einbruch der Dunkelheit nach Hause, Scheinwerfer an, zwischen den Reben und ein glühender Himmel." },
+      { name: "Der Spider", category: "Reportage", description: "Das Paar am See in einem Oldtimer-Cabrio: Bewegung, natürliches Licht und kein Posieren." },
+      { name: "Unter dem Schleier", category: "Fine Art", description: "Zwei Gesichter im Halbdunkel der Scheune, gehüllt in den Schleier: nur natürliches Licht und eine echte Emotion." },
+      { name: "Das Lachen", category: "Reportage", description: "Der Schleier im Wind und ein Lachen, das sich nicht wiederholen lässt: der echte Moment, nicht die Pose." },
+      { name: "Die Tränen", category: "Emotionen", description: "Die Eltern beim Ringaustausch: das Foto, das keiner bestellt und das alle in Erinnerung behalten." },
+      { name: "Der Bräutigam und die Seinen", category: "Venedig", description: "Der Bräutigam im weißen Sakko steigt die Villentreppe hinab, die Freunde einen Schritt hinter ihm." },
+    ],
+  },
+};
+const copy = COPY[locale];
+
+const projects: ReelProject[] = copy.projects.map((p, i) => ({
+  ...p,
+  image: [imgSrc(villaTramonto, COIL_TEXTURE_W, COIL_TEXTURE_H), imgSrc(ponteRialto, COIL_TEXTURE_W, COIL_TEXTURE_H), imgSrc(ultimaCorsa, COIL_TEXTURE_W, COIL_TEXTURE_H), imgSrc(laSpider, COIL_TEXTURE_W, COIL_TEXTURE_H), imgSrc(sottoIlVelo, COIL_TEXTURE_W, COIL_TEXTURE_H), imgSrc(laRisata, COIL_TEXTURE_W, COIL_TEXTURE_H), imgSrc(leLacrime, COIL_TEXTURE_W, COIL_TEXTURE_H), imgSrc(loSposoEIuoi, COIL_TEXTURE_W, COIL_TEXTURE_H)][i],
+  link: "#galleria"
+}));
 ---
 
 <div class='coil-wrap' data-coil-wrap>
-<section class='coil' data-coil role='region' aria-label='Reel dei progetti di matrimonio' tabindex='0'>
-  <h2 class='coil-headline'>Ogni scatto,<br />un'opera.</h2>
+<section class='coil' data-coil role='region' aria-label={copy.aria} tabindex='0'>
+  <h2 class='coil-headline'>{copy.headline[0]}<br />{copy.headline[1]}</h2>
   <canvas class='coil-canvas' data-coil-canvas role='img'></canvas>
   <FallbackGrid client:only='react' projects={projects} />
-  <p class='coil-hint' data-coil-hint>Scrolla o trascina per esplorare</p>
+  <p class='coil-hint' data-coil-hint>{copy.hint}</p>
   <p class='coil-live' data-coil-live aria-live='polite'></p>
   <script type='application/json' data-coil-projects set:html={JSON.stringify(projects)} />
 </section>

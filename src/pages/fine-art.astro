@@ -1,14 +1,32 @@
 ---
 import SiteLayout from "@/app/layout.astro";
 import ArtisticParallax from "@/features/home/artistic-parallax.astro";
-import { getSitePageContent } from "@/features/site-content/site-content";
+import { getSitePageContent, getHomeContent } from "@/features/site-content/site-content";
+import { currentLocale } from "@/features/i18n/current-locale";
+import type { Locale } from "@/features/i18n/locale";
 import "@/features/site-content/site-content.css";
 
-const content = await getSitePageContent("fine-art");
+const locale = currentLocale(Astro.url, Astro.request.headers);
+const [content, home] = await Promise.all([
+  getSitePageContent("fine-art", Astro.request.headers),
+  getHomeContent(Astro.request.headers),
+]);
+
+const WHERE_CTA: Record<Locale, string> = {
+  it: "Dove acquistarle",
+  es: "Dónde comprarlas",
+  en: "Where to buy them",
+  de: "Wo erhältlich",
+};
 ---
 
 <SiteLayout title={content.title} description={content.intro}>
-  <ArtisticParallax ctaHref="#dove-vederle" ctaLabel="Dove acquistarle" />
+  <ArtisticParallax
+    ctaHref="#dove-vederle"
+    ctaLabel={WHERE_CTA[locale]}
+    title={home.parallaxTitle}
+    line={home.parallaxLine}
+  />
 
   <section class="border-b border-border px-6 pb-12 pt-12 text-center">
     <p class="eyebrow">{content.eyebrow}</p>

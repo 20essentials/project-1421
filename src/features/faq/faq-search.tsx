@@ -9,11 +9,13 @@ import { useFaq, type UseFaqOptions } from "@/features/faq/use-faq";
 export interface FaqSearchProps extends UseFaqOptions {
   label?: string;
   placeholder?: string;
+  resultUnit?: string;
+  resultUnitSingular?: string;
   /** Debounce in ms (default 250). */
   delay?: number;
 }
 
-export default function FaqSearch({ label = "Cerca", placeholder = "Cerca una domanda…", delay = 250, ...options }: FaqSearchProps) {
+export default function FaqSearch({ label = "Cerca", placeholder = "Cerca una domanda…", resultUnit = "risultati", resultUnitSingular = "risultato", delay = 250, ...options }: FaqSearchProps) {
   const { query, setQuery, resultsCount, data } = useFaq(options);
   const [draft, setDraft] = useState(query);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -58,7 +60,7 @@ export default function FaqSearch({ label = "Cerca", placeholder = "Cerca una do
         )}
       </div>
       <p aria-live="polite" className="mt-2 min-h-5 text-sm text-muted-foreground">
-        {active ? `${resultsCount} ${resultsCount === 1 ? "risultato" : "risultati"}` : ""}
+        {active ? `${resultsCount} ${resultsCount === 1 ? resultUnitSingular : resultUnit}` : ""}
       </p>
     </form>
   );

@@ -36,6 +36,13 @@ export interface FaqAccordionProps extends UseFaqOptions {
   /** The FAQ page's path — the base of every copied deep link (default "/faq"). */
   base?: string;
   emptyMessage?: string;
+  retryLabel?: string;
+  noResultsLabel?: string;
+  resetSearchLabel?: string;
+  questionLinkLabel?: string;
+  copyLinkLabel?: string;
+  copiedLabel?: string;
+  truncatedLabel?: string;
   /** Category headings above each group. Default: only while every category shows (no active filter). */
   showCategoryHeadings?: boolean;
   LinkComponent?: ComponentType<LinkLikeProps>;
@@ -94,6 +101,13 @@ function Skeleton() {
 export default function FaqAccordion({
   base = "/faq",
   emptyMessage = "Nessuna domanda per ora.",
+  retryLabel = "Riprova",
+  noResultsLabel = "Nessun risultato per",
+  resetSearchLabel = "Azzera la ricerca",
+  questionLinkLabel = "Link a questa domanda",
+  copyLinkLabel = "Copia link",
+  copiedLabel = "Copiato",
+  truncatedLabel = "Prime domande mostrate.",
   showCategoryHeadings,
   LinkComponent = PlainLink,
   ...options
@@ -135,7 +149,7 @@ export default function FaqAccordion({
         <p className="mb-4 flex items-center gap-3 text-sm text-destructive">
           <span>{error}</span>
           <button type="button" onClick={retry} disabled={loading} className="rounded-sm border border-border px-3 py-1 text-foreground hover:bg-secondary disabled:opacity-50">
-            Riprova
+            {retryLabel}
           </button>
         </p>
       )}
@@ -145,9 +159,9 @@ export default function FaqAccordion({
         <p className="py-16 text-center text-muted-foreground">
           {query.trim() ? (
             <>
-              Nessun risultato per &ldquo;{query.trim()}&rdquo;.{" "}
+              {noResultsLabel} &ldquo;{query.trim()}&rdquo;.{" "}
               <button type="button" onClick={() => setQuery("")} className="underline underline-offset-4 text-foreground">
-                Azzera la ricerca
+                {resetSearchLabel}
               </button>
             </>
           ) : (
@@ -205,10 +219,10 @@ export default function FaqAccordion({
                         <div className={ANSWER_CLASS} dangerouslySetInnerHTML={{ __html: q.answerHtml }} />
                         <p className="mt-4 flex items-center gap-5 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
                           <LinkComponent href={faqDeepLink(q, base, activeCategoryId)} className="transition-colors hover:text-foreground no-underline underline-offset-4">
-                            Link a questa domanda
+                            {questionLinkLabel}
                           </LinkComponent>
                           <button type="button" onClick={() => copyLink(q)} className="uppercase tracking-[0.18em] transition-colors hover:text-foreground">
-                            {copiedId === q.id ? "Copiato" : "Copia link"}
+                            {copiedId === q.id ? copiedLabel : copyLinkLabel}
                           </button>
                         </p>
                       </div>
@@ -221,7 +235,7 @@ export default function FaqAccordion({
         ))
       )}
       {data.truncated && (
-        <p className="mt-6 text-sm text-muted-foreground">Prime {data.questions.length} domande mostrate.</p>
+        <p className="mt-6 text-sm text-muted-foreground">{truncatedLabel.replace("{count}", String(data.questions.length))}</p>
       )}
     </div>
   );

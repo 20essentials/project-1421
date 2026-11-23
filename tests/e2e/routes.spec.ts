@@ -20,7 +20,7 @@ test.describe("header", () => {
     await page.goto("/");
     const header = page.locator("header").first();
     await expect(header).toBeVisible();
-    await expect(page.locator("nav[aria-label='Principale']")).toBeHidden();
+    await expect(page.locator("header nav")).toBeHidden();
   });
 
   test("menu toggle opens and closes the overlay", async ({ page }) => {
@@ -47,7 +47,7 @@ test.describe("header indicator follower", () => {
 
   test("indicator follows hovered nav link and returns to the active one", async ({ page }) => {
     await page.goto("/blog");
-    const nav = page.locator("nav[aria-label='Principale']");
+    const nav = page.locator("header nav");
     const links = page.locator("[data-nav-link]");
     const count = await links.count();
     test.expect(count).toBeGreaterThan(1);

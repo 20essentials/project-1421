@@ -3,7 +3,7 @@ import SiteLayout from "@/app/layout.astro";
 import LegalPage from "@/features/legal/legal-page.astro";
 import { getSitePageContent } from "@/features/site-content/site-content";
 
-const content = await getSitePageContent("carta-accordo-privacy");
+const content = await getSitePageContent("carta-accordo-privacy", Astro.request.headers);
 ---
 
 <SiteLayout title={content.title} description={content.intro}>

@@ -2,6 +2,7 @@
 import SiteLayout from "@/app/layout.astro";
 import SchemaForm from "@/features/forms/schema-form";
 import { getForm } from "@/features/forms/forms";
+import { getSiteChrome } from "@/features/site-chrome/site-chrome";
 import type { FormDto } from "@/features/forms/types";
 import { getSitePageContent } from "@/features/site-content/site-content";
 
@@ -9,11 +10,13 @@ const FORM_ID = "9ab7aa27-14c9-4278-a9e5-c530df27d1ac";
 
 let form: FormDto | null = null;
 try {
-  form = await getForm(FORM_ID);
+  form = await getForm(FORM_ID, Astro.request.headers);
 } catch {
 }
 
-const content = await getSitePageContent("contatti");
+const content = await getSitePageContent("contatti", Astro.request.headers);
+const labels = await getSiteChrome(Astro.request.headers);
+const label = (key: string, fallback: string) => labels[key] || fallback;
 ---
 
 <SiteLayout title={content.title} description={content.intro}>
@@ -24,8 +27,8 @@ const content = await getSitePageContent("contatti");
   </section>
 
   <section class="mx-auto max-w-3xl px-6 py-14">
-    <h2 class="font-display text-2xl font-medium sm:text-3xl">Il vostro messaggio</h2>
-    <p class="mt-2 text-sm text-muted-foreground">Risposta entro 48 ore, senza fretta e senza pressione commerciale.</p>
+    <h2 class="font-display text-2xl font-medium sm:text-3xl">{label("contactMessageTitle", "Il vostro messaggio")}</h2>
+    <p class="mt-2 text-sm text-muted-foreground">{label("contactResponseNote", "Risposta entro 48 ore, senza fretta e senza pressione commerciale.")}</p>
     <div class="mt-8">
       <SchemaForm client:load formId={FORM_ID} initialForm={form ?? undefined} />
     </div>
@@ -34,17 +37,17 @@ const content = await getSitePageContent("contatti");
   <section class="mx-auto max-w-3xl px-6 border-t border-border py-14">
     <div class="grid grid-cols-1 gap-10 sm:grid-cols-2">
       <div>
-        <p class="eyebrow">Contatti diretti</p>
+        <p class="eyebrow">{label("directContacts", "Contatti diretti")}</p>
         <div class="mt-4 flex flex-col gap-2 text-sm">
           <a href="tel:+393387513113" class="text-foreground no-underline hover:text-accent">+39 338 751 3113 (Italia)</a>
           <a href="tel:+436767517274" class="text-foreground no-underline hover:text-accent">+43 676 751 7274 (Austria)</a>
           <a href="mailto:studio@stefanolunardi.com" class="text-foreground no-underline hover:text-accent">studio@stefanolunardi.com</a>
         </div>
-        <p class="eyebrow mt-8">Zone</p>
+        <p class="eyebrow mt-8">{label("zones", "Zone")}</p>
         <p class="mt-3 text-sm text-muted-foreground">Villach (Austria) · Udine (Italia) · Treviso (Italia)</p>
       </div>
       <div>
-        <p class="eyebrow">Cosa succede nel primo incontro</p>
+        <p class="eyebrow">{label("firstMeetingTitle", "Cosa succede nel primo incontro")}</p>
         <ul class="mt-4 flex flex-col gap-3 text-sm leading-relaxed text-muted-foreground">
           <li>Vedere il portfolio completo e gallery di matrimoni reali</li>
           <li>Capire il metodo dei tre incontri preparatori</li>

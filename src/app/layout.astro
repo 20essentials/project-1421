@@ -6,7 +6,23 @@ import { getForm } from "@/features/forms/forms";
 import type { FormDto } from "@/features/forms/types";
 import ConsentBootstrap from "@/features/consent/consent-bootstrap.astro";
 import ConsentBanner from "@/features/consent/consent-banner.astro";
-import { allNav, primaryNav } from "@/app/nav";
+import { allNav as allNavPaths, primaryNav as primaryNavPaths } from "@/app/nav";
+import { currentLocale } from "@/features/i18n/current-locale";
+import {
+  DEFAULT_LOCALE,
+  LOCALES,
+  languageTag,
+  ogLocale,
+  type Locale,
+} from "@/features/i18n/locale";
+import {
+  currentCleanPath,
+  localizedCanonicalPath,
+  localizedHref,
+  localizedPath,
+} from "@/features/i18n/localized-path";
+import { getSiteChrome } from "@/features/site-chrome/site-chrome";
+import { toNavItems } from "@/features/site-chrome/site-chrome-core";
 import { fetchSiteInfo } from "@/features/site-info/site-info";
 import { SITE_INFO_FALLBACKS, type SiteInfo } from "@/features/site-info/site-info-core";
 
@@ -25,7 +41,7 @@ const NEWSLETTER_FORM_ID = "99167414-c329-4e8f-8f02-db033652f376";
 
 let newsletterForm: FormDto | null = null;
 try {
-  newsletterForm = await getForm(NEWSLETTER_FORM_ID);
+  newsletterForm = await getForm(NEWSLETTER_FORM_ID, Astro.request.headers);
 } catch {
 }
 
@@ -41,7 +57,16 @@ try {
 }
 const info = siteInfo ?? SITE_INFO_FALLBACKS;
 
-const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
+const locale = currentLocale(Astro.url, Astro.request.headers);
+const currentPath = currentCleanPath(Astro.url.pathname);
+const labels = await getSiteChrome(Astro.request.headers);
+const navPrimary = toNavItems(primaryNavPaths, labels, locale);
+const navAll = toNavItems(allNavPaths, labels, locale);
+const label = (key: string, fallback: string) => labels[key] || fallback;
+const copyright = label(
+  "copyright",
+  "© {year} Stefano Lunardi — Fotografo di matrimoni | Fine Art | Fotoreporter",
+).replace("{year}", String(new Date().getFullYear()));
 
 const forwardedUrl = Astro.request.headers.get("x-wix-forwarded-url");
 const publicUrl =
@@ -49,12 +74,20 @@ const publicUrl =
     ? forwardedUrl
     : Astro.url.href;
 const origin = import.meta.env.PUBLIC_SITE_URL?.replace(/\/$/, "") || new URL(publicUrl).origin;
-const canonical = new URL(Astro.url.pathname, origin).href;
+const localizedCanonical = localizedCanonicalPath(Astro.url.pathname, forwardedUrl, locale);
+const canonical = new URL(localizedCanonical, origin).href;
+const alternates = LOCALES.map((alternateLocale: Locale) => ({
+  locale: alternateLocale,
+  href: new URL(localizedPath(alternateLocale, currentPath), origin).href,
+}));
 const resolvedTitle =
-  title ?? "Stefano Lunardi — Fotografo di matrimoni | Fine Art | Fotoreporter";
+  title ?? label("seoTitle", "Stefano Lunardi — Fotografo di matrimoni | Fine Art | Fotoreporter");
 const resolvedDescription =
   description ??
-  "Fotografia di matrimonio fine art in Italia e Austria: storie autentiche, emozioni e ricordi che restano.";
+  label(
+    "seoDescription",
+    "Fotografia di matrimonio fine art in Italia e Austria: storie autentiche, emozioni e ricordi che restano.",
+  );
 const hasSeoTags = Astro.slots.has("seo-tags");
 // Static pages behind Wix hosting get their head tags injected server-side from the
 // dashboard's SEO settings; local dev has no injection, so it emits the fallbacks.
@@ -64,13 +97,17 @@ const structuredData = JSON.stringify({
   "@type": "Person",
   name: "Stefano Lunardi",
   url: origin,
-  jobTitle: "Fotografo di matrimoni",
-  knowsAbout: ["Fotografia di matrimonio", "Fine Art", "Fotoreportage"],
+  jobTitle: label("jobTitle", "Fotografo di matrimoni"),
+  knowsAbout: [
+    label("knowsAboutWedding", "Fotografia di matrimonio"),
+    label("knowsAboutFineArt", "Fine Art"),
+    label("knowsAboutPhotojournalism", "Fotoreportage"),
+  ],
 }).replace(/</g, "\\u003c");
 ---
 
 <!doctype html>
-<html lang="it">
+<html lang={languageTag(locale)}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -102,9 +139,9 @@ const structuredData = JSON.stringify({
       </script>
     )}
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
-    <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png" />
-    <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" href="https://static.wixstatic.com/media/600582_e505c94daf344b3abd0ff02c1596f705~mv2.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="https://static.wixstatic.com/media/600582_5ca3a73136b5424cb75c3f945d5da796~mv2.png" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="https://static.wixstatic.com/media/600582_c34d60f8b90240a1a671dc9b83c6c3b0~mv2.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#1a1d23" />
     {emitFallbackHead && !hasSeoTags && (
@@ -112,8 +149,12 @@ const structuredData = JSON.stringify({
         <title>{resolvedTitle}</title>
         <meta name="description" content={resolvedDescription} />
         <link rel="canonical" href={canonical} />
+        {alternates.map((alternate) => (
+          <link rel="alternate" hreflang={languageTag(alternate.locale)} href={alternate.href} />
+        ))}
+        <link rel="alternate" hreflang="x-default" href={new URL(localizedPath(DEFAULT_LOCALE, currentPath), origin).href} />
         <meta property="og:type" content="website" />
-        <meta property="og:locale" content="it_IT" />
+        <meta property="og:locale" content={ogLocale(locale)} />
         <meta property="og:site_name" content={info.displayName} />
         <meta property="og:title" content={resolvedTitle} />
         <meta property="og:description" content={resolvedDescription} />
@@ -141,52 +182,62 @@ const structuredData = JSON.stringify({
     </script>
   </head>
   <body>
-    <SiteHeader navPrimary={primaryNav} navAll={allNav} current={currentPath} />
+    <SiteHeader
+      navPrimary={navPrimary}
+      navAll={navAll}
+      current={currentPath}
+      locale={locale}
+      labels={labels}
+      email={info.email}
+      phone={info.phone}
+    />
     <main id="contenido">
       <slot />
     </main>
     <footer class="border-t border-border px-6 pb-10 pt-16">
       <div class="mx-auto max-w-7xl">
         <section class="mx-auto max-w-xl border-b border-border pb-14 text-center">
-          <p class="eyebrow">Aggiornamenti esclusivi</p>
-          <h2 class="font-display mt-3 text-2xl font-medium sm:text-3xl">La newsletter di Stefano</h2>
-          <p class="mt-3 text-sm leading-relaxed text-muted-foreground">Nuovi lavori, premi e storie dietro le quinte, una volta al mese. Niente spam.</p>
+          <p class="eyebrow">{label("newsletterSubtitle", "Aggiornamenti esclusivi")}</p>
+          <h2 class="font-display mt-3 text-2xl font-medium sm:text-3xl">{label("newsletterTitle", "La newsletter di Stefano")}</h2>
+          <p class="mt-3 text-sm leading-relaxed text-muted-foreground">{label("newsletterDescription", "Nuovi lavori, premi e storie dietro le quinte, una volta al mese. Niente spam.")}</p>
           <div class="mt-8 text-left">
             {newsletterForm ? (
               <SchemaForm client:load formId={NEWSLETTER_FORM_ID} initialForm={newsletterForm} />
             ) : (
-              <p class="text-sm text-muted-foreground">L'iscrizione alla newsletter è temporaneamente non disponibile. Scrivici a studio@stefanolunardi.com.</p>
+              <p class="text-sm text-muted-foreground">{label("newsletterUnavailable", "L'iscrizione alla newsletter è temporaneamente non disponibile. Scrivici a studio@stefanolunardi.com.")}</p>
             )}
           </div>
         </section>
-        <p class="font-display mx-auto max-w-3xl text-center text-2xl italic leading-snug sm:text-3xl">
-          "Tutto è fugace, ma ciò che rimane è il ricordo."
-        </p>
-        <p class="mt-6 text-center text-xs uppercase tracking-[0.25em] text-muted-foreground">
-          Autenticità · Contemplazione · Relazione · Arte · Emozione
-        </p>
+        <div class="mx-auto mt-14 max-w-3xl text-center">
+          <p class="font-display text-2xl italic leading-snug sm:text-3xl">
+            "{label("footerQuote", "Tutto è fugace, ma ciò che rimane è il ricordo.")}"
+          </p>
+          <p class="mt-6 text-xs uppercase tracking-[0.25em] text-muted-foreground">
+            {label("footerTagline", "Autenticità · Contemplazione · Relazione · Arte · Emozione")}
+          </p>
+        </div>
         <div class="mt-12 grid grid-cols-1 gap-10 text-sm sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <p class="eyebrow">Il sito</p>
-            <nav class="mt-4 flex flex-col gap-2" aria-label="Footer">
-              {allNav.map((l) => (
+            <p class="eyebrow">{label("siteLabel", "Il sito")}</p>
+            <nav class="mt-4 flex flex-col gap-2" aria-label={label("footerAriaLabel", "Footer")}>
+              {navAll.map((l) => (
                 <a href={l.href} class="text-foreground no-underline hover:text-accent">{l.label}</a>
               ))}
             </nav>
           </div>
           <div>
-            <p class="eyebrow">Documenti legali</p>
-            <nav class="mt-4 flex flex-col gap-2" aria-label="Documenti legali">
-              <a href="/legal" class="text-foreground no-underline hover:text-accent">Tutti i documenti</a>
-              <a href="/legal/termini-e-condizioni" class="text-foreground no-underline hover:text-accent">Termini e condizioni</a>
-              <a href="/legal/privacy" class="text-foreground no-underline hover:text-accent">Privacy</a>
-              <a href="/legal/accessibilita" class="text-foreground no-underline hover:text-accent">Accessibilità</a>
-              <a href="/legal/cookie-policy" class="text-foreground no-underline hover:text-accent">Cookie</a>
-              <a href="/impressum" class="text-foreground no-underline hover:text-accent">Avviso legale</a>
+            <p class="eyebrow">{label("legalDocuments", "Documenti legali")}</p>
+            <nav class="mt-4 flex flex-col gap-2" aria-label={label("legalDocuments", "Documenti legali")}>
+              <a href={localizedHref(locale, "/legal")} class="text-foreground no-underline hover:text-accent">{label("allDocuments", "Tutti i documenti")}</a>
+              <a href={localizedHref(locale, "/legal/termini-e-condizioni")} class="text-foreground no-underline hover:text-accent">{label("termsConditions", "Termini e condizioni")}</a>
+              <a href={localizedHref(locale, "/legal/privacy")} class="text-foreground no-underline hover:text-accent">{label("privacy", "Privacy")}</a>
+              <a href={localizedHref(locale, "/legal/accessibilita")} class="text-foreground no-underline hover:text-accent">{label("accessibility", "Accessibilità")}</a>
+              <a href={localizedHref(locale, "/legal/cookie-policy")} class="text-foreground no-underline hover:text-accent">{label("cookie", "Cookie")}</a>
+              <a href={localizedHref(locale, "/impressum")} class="text-foreground no-underline hover:text-accent">{label("legalNotice", "Avviso legale")}</a>
             </nav>
           </div>
           <div>
-            <p class="eyebrow">Contatti</p>
+            <p class="eyebrow">{label("contacts", "Contatti")}</p>
             <div class="mt-4 flex flex-col gap-2">
               <a href={`mailto:${info.email}`} class="text-foreground no-underline hover:text-accent">{info.email}</a>
               <a href={`tel:${info.phone.replace(/[^\d+]/g, "")}`} class="text-foreground no-underline hover:text-accent">{info.phone}</a>
@@ -195,32 +246,51 @@ const structuredData = JSON.stringify({
             </div>
           </div>
           <div>
-            <p class="eyebrow">Segui</p>
+            <p class="eyebrow">{label("followLabel", "Segui")}</p>
             <div class="mt-4 flex flex-col gap-2">
-              <a href="https://www.instagram.com/stefanolunardiphoto" target="_blank" rel="noopener" class="text-foreground no-underline hover:text-accent">Instagram</a>
-              <a href="https://www.facebook.com/StefanoLunardiFotografo" target="_blank" rel="noopener" class="text-foreground no-underline hover:text-accent">Facebook</a>
-              <a href="https://www.linkedin.com/in/stefano-lunardi-5b761526" target="_blank" rel="noopener" class="text-foreground no-underline hover:text-accent">LinkedIn</a>
-              <a href="https://www.youtube.com/@stefanolunardiphotographer7802/videos" target="_blank" rel="noopener" class="text-foreground no-underline hover:text-accent">YouTube</a>
+              <a href="https://www.instagram.com/stefanolunardiphoto" target="_blank" rel="noopener" class="text-foreground no-underline hover:text-accent">{label("socialInstagram", "Instagram")}</a>
+              <a href="https://www.facebook.com/StefanoLunardiFotografo" target="_blank" rel="noopener" class="text-foreground no-underline hover:text-accent">{label("socialFacebook", "Facebook")}</a>
+              <a href="https://www.linkedin.com/in/stefano-lunardi-5b761526" target="_blank" rel="noopener" class="text-foreground no-underline hover:text-accent">{label("socialLinkedIn", "LinkedIn")}</a>
+              <a href="https://www.youtube.com/@stefanolunardiphotographer7802/videos" target="_blank" rel="noopener" class="text-foreground no-underline hover:text-accent">{label("socialYouTube", "YouTube")}</a>
               <a href="https://www.singulart.com/it/artista/stefano-lunardi-37102" target="_blank" rel="noopener" class="text-foreground no-underline hover:text-accent">Singulart — opere fine art</a>
               <a href="https://www.matrimonio.com/fotografo-matrimonio/stefanolunardi-photographer--e33485/opinioni" target="_blank" rel="noopener" class="text-foreground no-underline hover:text-accent">Matrimonio.com — opinioni</a>
             </div>
           </div>
         </div>
         <div class="mt-12 flex flex-col items-center justify-between gap-3 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row">
-          <p>© {new Date().getFullYear()} Stefano Lunardi — Fotografo di matrimoni | Fine Art | Fotoreporter</p>
+          <p>{copyright}</p>
           <div class="flex items-center gap-4">
             <button type="button" data-consent-settings class="no-underline hover:text-accent">
-              Preferenze cookie
+              {label("cookiePreferences", "Preferenze cookie")}
             </button>
-            <a href="/impressum" class="no-underline hover:text-accent">Avviso legale</a>
+            <a href={localizedHref(locale, "/impressum")} class="no-underline hover:text-accent">{label("legalNotice", "Avviso legale")}</a>
           </div>
         </div>
       </div>
     </footer>
-    <ConsentBanner />
+    <ConsentBanner labels={labels} />
     <script>
       import { mountRipple } from "@/shared/ripple";
       import { mountSmoothScroll } from "@/shared/smooth-scroll";
+
+      const locales = ["it", "es", "en", "de"];
+      const locale = document.documentElement.lang.split("-")[0] || "it";
+      if (locales.includes(locale)) {
+        const localizeLinks = () => {
+          document.querySelectorAll<HTMLAnchorElement>('a[href^="/"]').forEach((anchor) => {
+            const currentHref = anchor.getAttribute("href");
+            if (!currentHref || !currentHref.startsWith("/")) return;
+            const firstSegment = currentHref.slice(1).split(/[/?#]/)[0];
+            if (locales.includes(firstSegment)) return;
+            anchor.setAttribute("href", currentHref === "/" ? `/${locale}/` : `/${locale}${currentHref}`);
+          });
+        };
+        localizeLinks();
+        new MutationObserver(localizeLinks).observe(document.body, {
+          childList: true,
+          subtree: true,
+        });
+      }
 
       mountRipple();
       mountSmoothScroll();

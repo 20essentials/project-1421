@@ -6,7 +6,9 @@
 // collection-page component.
 import SiteLayout from "@/app/layout.astro";
 import CollectionPage from "@/features/portfolio/collection-page";
+import { currentLocale } from "@/features/i18n/current-locale";
 import { fetchCollectionBySlug, fetchProjects } from "@/features/portfolio/portfolio";
+import { getSiteChrome } from "@/features/site-chrome/site-chrome";
 import type { CollectionSummary, ProjectSummary } from "@/features/portfolio/types";
 
 const slug = Astro.params.slug!;
@@ -14,8 +16,8 @@ const slug = Astro.params.slug!;
 let collection: CollectionSummary | null = null;
 let projects: ProjectSummary[] = [];
 try {
-  collection = await fetchCollectionBySlug(slug);
-  if (collection) projects = await fetchProjects({ collectionId: collection.id });
+  collection = await fetchCollectionBySlug(slug, Astro.request.headers);
+  if (collection) projects = await fetchProjects({ collectionId: collection.id, headers: Astro.request.headers });
 } catch {
   // Guarded: an unhandled SSR throw truncates the response mid-stream.
 }
@@ -23,8 +25,10 @@ try {
 if (!collection) {
   return new Response(null, { status: 404 });
 }
+const labels = await getSiteChrome(Astro.request.headers);
+const locale = currentLocale(Astro.url, Astro.request.headers);
 ---
 
 <SiteLayout headFallback title={collection.title} description={collection.description}>
-  <CollectionPage client:load slug={slug} initialCollection={collection} initialProjects={projects} />
+  <CollectionPage client:load slug={slug} initialCollection={collection} initialProjects={projects} locale={locale} labels={labels} />
 </SiteLayout>

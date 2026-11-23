@@ -7,8 +7,10 @@
 // a real 404 (Wix's router answers 200 + empty feed; on a headless site that page does not exist).
 import SiteLayout from "@/app/layout.astro";
 import Feed from "@/features/blog/feed";
+import { currentLocale } from "@/features/i18n/current-locale";
 import { fetchPosts } from "@/features/blog/posts";
 import { fetchBlogCategories, fetchBlogTags, fetchTagBySlug } from "@/features/blog/taxonomy";
+import { getSiteChrome } from "@/features/site-chrome/site-chrome";
 import type { BlogCategory, BlogTag, PostPage } from "@/features/blog/types";
 
 const slug = Astro.params.slug;
@@ -22,7 +24,8 @@ let categories: BlogCategory[] = [];
 let tags: BlogTag[] = [];
 try {
   [tag, categories, tags] = await Promise.all([fetchTagBySlug(slug), fetchBlogCategories(), fetchBlogTags()]);
-  if (tag) page = await fetchPosts({ tagId: tag.id });
+  const locale = currentLocale(Astro.url, Astro.request.headers);
+  if (tag) page = await fetchPosts({ tagId: tag.id, headers: Astro.request.headers, locale });
 } catch {
   // Guarded: an unhandled SSR throw truncates the response mid-stream. With no seed the island
   // fetches the filtered page client-side and shows its own error state.
@@ -31,11 +34,14 @@ try {
 if (!tag) {
   return new Response(null, { status: 404 });
 }
+const locale = currentLocale(Astro.url, Astro.request.headers);
+const labels = await getSiteChrome(Astro.request.headers);
+const label = (key: string, fallback: string) => labels[key] || fallback;
 ---
 
 <SiteLayout headFallback title={tag.label}>
   <header class="mb-10 mt-12 px-6 text-center">
-    <p class="eyebrow">Tema</p>
+    <p class="eyebrow">{label("tagLabel", "Tema")}</p>
     <h1 class="font-display mt-3 text-4xl font-medium sm:text-5xl">{tag.label}</h1>
   </header>
 
@@ -46,7 +52,9 @@ if (!tag) {
       initialTagId={tag.id}
       initialCategories={categories}
       initialTags={tags}
-      emptyMessage="Nessun articolo con questo tema ancora."
+      emptyMessage={label("noTagPosts", "Nessun articolo con questo tema ancora.")}
+      locale={locale}
+      labels={labels}
     />
   </div>
 </SiteLayout>

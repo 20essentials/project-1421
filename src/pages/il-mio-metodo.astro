@@ -4,7 +4,7 @@ import CameraHero from "@/components/camera-hero.astro";
 import { getSitePageContent } from "@/features/site-content/site-content";
 import "@/features/site-content/site-content.css";
 
-const content = await getSitePageContent("il-mio-metodo");
+const content = await getSitePageContent("il-mio-metodo", Astro.request.headers);
 ---
 
 <SiteLayout title={content.title} description={content.intro}>

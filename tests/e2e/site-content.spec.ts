@@ -8,7 +8,7 @@ test.describe("CMS Single Item pages", () => {
     await expect(
       page.getByRole("heading", {
         level: 1,
-        name: "Matrimoni come opere d'arte, non come catene di montaggio",
+        name: "Matrimoni come opere d'arte",
       }),
     ).toBeVisible();
     await expect(
@@ -17,7 +17,7 @@ test.describe("CMS Single Item pages", () => {
     await expect(page.getByRole("heading", { name: "Dietro l'obiettivo" })).toBeVisible();
     await expect(page.getByRole("link", { name: "Guarda tutto il portfolio" })).toHaveAttribute(
       "href",
-      "/portfolio",
+      "/it/portfolio",
     );
   });
 
@@ -32,7 +32,7 @@ test.describe("CMS Single Item pages", () => {
     await expect(page.getByText("Totale di dedizione")).toBeVisible();
     await expect(page.getByRole("link", { name: "Guarda l'investimento" })).toHaveAttribute(
       "href",
-      "/investimento",
+      "/it/investimento",
     );
   });
 

@@ -9,8 +9,10 @@
 // answers 200 with an empty feed; on a headless site a page that exists for no category is a 404).
 import SiteLayout from "@/app/layout.astro";
 import Feed from "@/features/blog/feed";
+import { currentLocale } from "@/features/i18n/current-locale";
 import { fetchPosts } from "@/features/blog/posts";
 import { fetchBlogCategories, fetchBlogTags, fetchCategoryBySlug } from "@/features/blog/taxonomy";
+import { getSiteChrome } from "@/features/site-chrome/site-chrome";
 import type { BlogCategory, BlogTag, PostPage } from "@/features/blog/types";
 import { WIX_APPS } from "@wix/essentials";
 import { SEO } from "@wix/seo/components";
@@ -54,7 +56,8 @@ try {
       itemData: { slug },
     }).catch(() => null),
   ]);
-  if (category) page = await fetchPosts({ categoryId: category.id });
+  const locale = currentLocale(Astro.url, Astro.request.headers);
+  if (category) page = await fetchPosts({ categoryId: category.id, headers: Astro.request.headers, locale });
 } catch {
   // Guarded: an unhandled SSR throw truncates the response mid-stream. With no seed the island
   // fetches the filtered page client-side and shows its own error state.
@@ -63,17 +66,20 @@ try {
 if (!category) {
   return new Response(null, { status: 404 });
 }
+const locale = currentLocale(Astro.url, Astro.request.headers);
 
 // One source of head tags: the SEO service when it resolved; else the category's own SEO title
 // (the dashboard's title tag) → its label, and its description.
 const head = seoTagsServiceConfig ? {} : { title: category.title || category.label, description: category.description || undefined };
+const labels = await getSiteChrome(Astro.request.headers);
+const label = (key: string, fallback: string) => labels[key] || fallback;
 ---
 
 <SiteLayout {...head}>
   {seoTagsServiceConfig && <SEO.Tags seoTagsServiceConfig={seoTagsServiceConfig} slot="seo-tags" />}
 
   <header class="mb-10 mt-12 px-6 text-center">
-    <p class="eyebrow">Categoria</p>
+    <p class="eyebrow">{label("categoryLabel", "Categoria")}</p>
     <h1 class="font-display mt-3 text-4xl font-medium sm:text-5xl">{category.label}</h1>
     {category.description && <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">{category.description}</p>}
   </header>
@@ -85,7 +91,9 @@ const head = seoTagsServiceConfig ? {} : { title: category.title || category.lab
       initialCategoryId={category.id}
       initialCategories={categories}
       initialTags={tags}
-      emptyMessage="Nessun articolo in questa categoria ancora."
+      emptyMessage={label("noCategoryPosts", "Nessun articolo in questa categoria ancora.")}
+      locale={locale}
+      labels={labels}
     />
   </div>
 </SiteLayout>

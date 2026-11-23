@@ -11,12 +11,12 @@ const groups = [
   { label: "Acquisti", slugs: ["resi-e-rimborsi"] },
 ] as const;
 
-const content = await getSitePageContent("legal-index");
+const content = await getSitePageContent("legal-index", Astro.request.headers);
 const docs = new Map(
   await Promise.all(
     groups.flatMap((group) => group.slugs).map(async (slug) => {
       try {
-        return [slug, await getSitePageContent(slug)] as const;
+        return [slug, await getSitePageContent(slug, Astro.request.headers)] as const;
       } catch {
         // A collection with no item is skipped from the listing, not a failed page.
         return [slug, null] as const;

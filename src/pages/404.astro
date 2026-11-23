@@ -1,32 +1,55 @@
 ---
 import "@/styles/global.css";
 import SiteHeader from "@/app/header.astro";
-import { allNav, primaryNav } from "@/app/nav";
+import { allNav as allNavPaths, primaryNav as primaryNavPaths } from "@/app/nav";
 import tidalPhoto from "@/assets/photos/01-autentiche.webp";
-import TidalLens from "@/features/tidal-lens/tidal-lens.astro";
+import { currentLocale } from "@/features/i18n/current-locale";
+import { languageTag } from "@/features/i18n/locale";
+import { currentCleanPath, localizedHref } from "@/features/i18n/localized-path";
+import { getSiteChrome } from "@/features/site-chrome/site-chrome";
+import { toNavItems } from "@/features/site-chrome/site-chrome-core";
 import { getSitePageContent } from "@/features/site-content/site-content";
+import TidalLens from "@/features/tidal-lens/tidal-lens.astro";
 
-const content = await getSitePageContent("not-found");
-const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
+const headers = Astro.request.headers;
+const locale = currentLocale(Astro.url, headers);
+const labels = await getSiteChrome(headers);
+const content = await getSitePageContent("not-found", headers);
+const currentPath = currentCleanPath(Astro.url.pathname);
+const navPrimary = toNavItems(primaryNavPaths, labels, locale);
+const navAll = toNavItems(allNavPaths, labels, locale);
+const label = (key: string, fallback: string) => labels[key] || fallback;
 ---
 
 <!doctype html>
-<html lang="it">
+<html lang={languageTag(locale)}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex, follow" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png" />
-    <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="https://static.wixstatic.com/media/600582_e505c94daf344b3abd0ff02c1596f705~mv2.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="https://static.wixstatic.com/media/600582_5ca3a73136b5424cb75c3f945d5da796~mv2.png" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="https://static.wixstatic.com/media/600582_c34d60f8b90240a1a671dc9b83c6c3b0~mv2.png" />
   </head>
   <body class="bg-foreground">
-    <SiteHeader navPrimary={primaryNav} navAll={allNav} current={currentPath} />
+    <SiteHeader
+      navPrimary={navPrimary}
+      navAll={navAll}
+      current={currentPath}
+      locale={locale}
+      labels={labels}
+    />
     <header class="px-6 pt-14 text-center text-primary-foreground">
       <p class="eyebrow text-primary-foreground/80">{content.eyebrow}</p>
       <h1 class="font-display mt-3 text-4xl font-medium sm:text-5xl">{content.title}</h1>
       <p class="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-primary-foreground/85 sm:text-base">{content.intro}</p>
+      <a
+        href={localizedHref(locale, "/")}
+        class="mt-8 inline-block rounded-control border border-primary-foreground/60 px-8 py-3 text-sm font-medium no-underline hover:bg-primary-foreground hover:text-foreground"
+      >
+        {label("backHome", "Torna alla home")}
+      </a>
     </header>
     <TidalLens src={tidalPhoto} />
   </body>

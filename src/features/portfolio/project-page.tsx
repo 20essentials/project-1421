@@ -7,11 +7,13 @@ export default function ProjectPage(props: {
   slug: string;
   initialProject?: ProjectDetail;
   initialItems?: GalleryItem[];
+  labels?: Record<string, string>;
 }) {
   const { project, notFound, items, error } = useProjectDetail(props.slug, props);
+  const label = (key: string, fallback: string) => props.labels?.[key] || fallback;
 
   if (notFound) {
-    return <p className="text-center text-sm text-muted-foreground">Questo progetto non esiste (più).</p>;
+    return <p className="text-center text-sm text-muted-foreground">{label("projectNotFound", "Questo progetto non esiste (più).")}</p>;
   }
   if (!project) {
     return <div className="h-10 w-72 animate-pulse bg-secondary" />;
@@ -42,7 +44,7 @@ export default function ProjectPage(props: {
         )}
       </header>
 
-      {error && <p className="mt-10 text-center text-sm text-muted-foreground">Non è stato possibile caricare la galleria. Riprova tra poco.</p>}
+      {error && <p className="mt-10 text-center text-sm text-muted-foreground">{label("galleryLoadError", "Non è stato possibile caricare la galleria. Riprova tra poco.")}</p>}
 
       {items === null && <div className="mt-10 aspect-3/2 w-full animate-pulse bg-secondary" />}
 
@@ -53,7 +55,7 @@ export default function ProjectPage(props: {
       )}
 
       {items !== null && items.length === 0 && !project.imageUrl && (
-        <p className="mt-10 text-center text-sm text-muted-foreground">Nessuna immagine pubblicata ancora in questo progetto.</p>
+        <p className="mt-10 text-center text-sm text-muted-foreground">{label("noImages", "Nessuna immagine pubblicata ancora in questo progetto.")}</p>
       )}
 
       {items !== null && items.length > 0 && (

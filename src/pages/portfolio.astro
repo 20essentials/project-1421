@@ -1,29 +1,30 @@
 ---
-// Collections gallery — data fetched SERVER-SIDE (SEO) and handed to the island as DTO props.
-// Keep this frontmatter; swap the island import to YOUR gallery component.
 import SiteLayout from "@/app/layout.astro";
 import Gallery from "@/features/portfolio/gallery";
 import PortfolioCoil from "@/features/portfolio/coil/portfolio-coil.astro";
+import { currentLocale } from "@/features/i18n/current-locale";
 import { fetchCollections } from "@/features/portfolio/portfolio";
+import { getSiteChrome } from "@/features/site-chrome/site-chrome";
 import type { CollectionSummary } from "@/features/portfolio/types";
 
 let collections: CollectionSummary[] = [];
 try {
-  collections = await fetchCollections();
+  collections = await fetchCollections({ headers: Astro.request.headers });
 } catch {
-  // An unguarded SSR throw truncates the response mid-stream; the island renders the
-  // empty state instead.
 }
+const labels = await getSiteChrome(Astro.request.headers);
+const locale = currentLocale(Astro.url, Astro.request.headers);
+const label = (key: string, fallback: string) => labels[key] || fallback;
 ---
 
-<SiteLayout title="Portfolio — Stefano Lunardi" description="Wedding reportage e ritratti d'autore: ogni scatto è un quadro d'arte.">
+<SiteLayout title={label("portfolioTitle", "Portfolio — Stefano Lunardi")} description={label("portfolioDescription", "Wedding reportage e ritratti d'autore: ogni scatto è un quadro d'arte.")}>
   <header class="dot-grid border-b border-border px-6 pb-10 text-center">
-    <p class="eyebrow">Fotografo di matrimoni | Fine Art | Fotoreporter</p>
-    <h1 class="font-display mt-3 text-4xl font-medium sm:text-5xl">Every frame is a painting</h1>
-    <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">Ogni scatto è un quadro d'arte: candid autentici, ritratti editoriali e aeree che raccontano la vostra storia.</p>
+    <p class="eyebrow">{label("portfolioRole", "Fotografo di matrimoni | Fine Art | Fotoreporter")}</p>
+    <h1 class="font-display mt-3 text-4xl font-medium sm:text-5xl">{label("portfolioHeading", "Every frame is a painting")}</h1>
+    <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">{label("portfolioIntro", "Ogni scatto è un quadro d'arte: candid autentici, ritratti editoriali e aeree che raccontano la vostra storia.")}</p>
   </header>
   <div id="galleria" class="mx-auto max-w-7xl px-6 pt-12 pb-12">
-    <Gallery client:load initialCollections={collections} />
+    <Gallery client:load initialCollections={collections} locale={locale} labels={labels} />
   </div>
   <PortfolioCoil />
 </SiteLayout>
