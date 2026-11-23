@@ -110,6 +110,11 @@ const structuredData = JSON.stringify({
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {/* Don't offer to translate / switch language: every page is already
+        authored per locale (it/es/en/de) and the site redirects visitors by
+        language itself. */}
+    <meta name="google" content="notranslate" />
+    <meta http-equiv="content-language" content={languageTag(locale)} />
     {import.meta.env.DEV && (
       <script is:inline>
         (() => {
