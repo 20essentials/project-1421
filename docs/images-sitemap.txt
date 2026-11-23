@@ -83,3 +83,8 @@ public/favicon-32x32.png -> https://static.wixstatic.com/media/600582_e505c94daf
 public/favicon-16x16.png -> https://static.wixstatic.com/media/600582_5ca3a73136b5424cb75c3f945d5da796~mv2.png
 public/apple-touch-icon.png -> https://static.wixstatic.com/media/600582_c34d60f8b90240a1a671dc9b83c6c3b0~mv2.png
 public/android-chrome-192x192.png -> https://static.wixstatic.com/media/600582_61952383a35b4f3da0c0c5f3cba0f262~mv2.png
+# 2026-11-23: la subida anterior (61952383) quedó truncada en el Media Manager
+# (IDAT declarado 4746 B, archivo de 4530 B sin IEND) y Chrome la rechazaba como
+# icono del manifest ("resource isn't a valid image"). Regenerado desde
+# public/favicon.svg a 192x192 (canvas de Chromium) y re-subido:
+site.webmanifest icon 192x192 (regenerado desde public/favicon.svg) -> https://static.wixstatic.com/media/600582_0246be52d6fe4016bddd36f014a0979a~mv2.png

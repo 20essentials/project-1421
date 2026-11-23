@@ -14,6 +14,7 @@ import {
   CONSENT_GRANULAR_STORAGE_KEY,
   CONSENT_STORAGE_KEY,
   DENIED_PREFERENCES,
+  applyConsentPolicy,
   getConsentState,
   getGranularPreferences,
   hasAnalyticsConsent,
@@ -53,7 +54,9 @@ class MemoryStorage implements Storage {
 describe("consent", () => {
   beforeEach(() => {
     setConsentPolicy.mockClear();
-    vi.stubGlobal("window", {});
+    vi.stubGlobal("window", {
+      consentPolicyManager: { setConsentPolicy },
+    });
     vi.stubGlobal("localStorage", new MemoryStorage());
   });
 
@@ -124,5 +127,36 @@ describe("consent", () => {
 
     expect(getGranularPreferences()).toEqual(DENIED_PREFERENCES);
     expect(hasAnalyticsConsent()).toBe(false);
+  });
+
+  it("applies the policy when the viewer consent manager is present", () => {
+    vi.stubGlobal("window", {
+      consentPolicyManager: { setConsentPolicy },
+    });
+
+    applyConsentPolicy(DENIED_PREFERENCES);
+
+    expect(setConsentPolicy).toHaveBeenCalledTimes(1);
+  });
+
+  it("applies the policy when only the viewer globals expose consentPolicy", () => {
+    vi.stubGlobal("window", {
+      globals: {
+        $ns: { "wix-window": { consentPolicy: { setConsentPolicy } } },
+      },
+    });
+
+    applyConsentPolicy(DENIED_PREFERENCES);
+
+    expect(setConsentPolicy).toHaveBeenCalledTimes(1);
+  });
+
+  it("skips the Wix policy call when no consent manager is available", () => {
+    vi.stubGlobal("window", {});
+
+    setConsentState("accepted");
+
+    expect(getConsentState()).toBe("accepted");
+    expect(setConsentPolicy).not.toHaveBeenCalled();
   });
 });

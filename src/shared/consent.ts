@@ -118,8 +118,28 @@ export function policyFromPreferences(
   };
 }
 
+interface WixConsentPolicyTarget {
+  setConsentPolicy?: unknown;
+}
+
+interface WixConsentGlobals {
+  globals?: { $ns?: { "wix-window"?: { consentPolicy?: WixConsentPolicyTarget } } };
+  consentPolicyManager?: WixConsentPolicyTarget;
+}
+
+function findWixConsentPolicyTarget(): WixConsentPolicyTarget | null {
+  if (typeof window === "undefined") return null;
+  const scope = window as unknown as WixConsentGlobals;
+  const viewer = scope.globals?.$ns?.["wix-window"]?.consentPolicy;
+  if (typeof viewer?.setConsentPolicy === "function") return viewer;
+  return typeof scope.consentPolicyManager?.setConsentPolicy === "function"
+    ? scope.consentPolicyManager
+    : null;
+}
+
 export function applyConsentPolicy(preferences: GranularConsentPreferences): void {
   if (typeof window === "undefined") return;
+  if (!findWixConsentPolicyTarget()) return;
   try {
     void consentPolicyManager.setConsentPolicy(
       policyFromPreferences(preferences),

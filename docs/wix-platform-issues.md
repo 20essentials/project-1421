@@ -102,11 +102,30 @@ cache keys, so a poisoned browser cache entry is abandoned on the next deploy.
   (see commits `test(e2e): stop filtering the webmcp appid console error`,
   `fix(dev): hide wix context globals from the mcp embed script`).
 - `[ConsentPolicy] setConsentPolicy is not available` — Wix consent bootstrap
-  warning in the browser; our `ConsentBootstrap` island works around its own
-  part. Noise.
-- Manifest icon warning for `static.wixstatic.com/...61952383…png` — the PNG is
-  a valid 192×192 image (verified); Chrome rejects it from the manifest
-  cross-origin. Cosmetic; the dashboard favicon at `/favicon.ico` works.
+  warning in the browser. **Fixed 2026-11-23:** the headless site never injects
+  the viewer consent manager (`globals.$ns["wix-window"].consentPolicy` /
+  `window.consentPolicyManager` are both absent), so the SDK wrapper always
+  warned and no-oped. `src/shared/consent.ts` now resolves the same targets the
+  SDK does and skips the call when none exists — the local-storage policy was
+  and remains the effective gate (`applyConsentPolicy` is best-effort). Unit
+  tests cover all three branches (manager present / viewer globals only /
+  neither).
+- Manifest icon warning for `static.wixstatic.com/...61952383…png` — **fixed
+  2026-11-23.** The docs previously recorded the PNG as "valid, verified": that
+  is no longer true. The media item at that URL was re-uploaded/corrupted
+  (Last-Modified 2026-11-23 13:26): its IDAT chunk declares 4746 B but the file
+  is 4530 B with no IEND — a truncated upload, so Chrome's manifest icon decode
+  failed ("Download error or resource isn't a valid image"; confirmed with
+  `createImageBitmap` in the page: "source image could not be decoded").
+  `public/site.webmanifest` now points at a freshly rendered 192×192 PNG
+  (rasterized from `public/favicon.svg` via Chromium canvas, two-step Media
+  Manager upload, `READY`): `600582_0246be52d6fe4016bddd36f014a0979a~mv2.png`.
+  The corrupt media item `600582_61952383…` is no longer referenced anywhere
+  (see `docs/images-sitemap.txt`); it can be deleted from the dashboard.
+  Related discovery while verifying: the Wix edge hijacks `/favicon.svg` on the
+  live site and serves the dashboard favicon's **ICO bytes** there (our
+  `public/favicon.svg` is real SVG and works in dev/preview builds) — when
+  testing SVG favicon behavior, verify against the actual served bytes.
 
 **Residual risk / what to watch:** if the AppId error ever becomes an
 "expose function" error naming one of OUR app IDs, an embedded-script or
