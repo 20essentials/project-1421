@@ -115,6 +115,8 @@ const alignFor = (i: number): "center" | "right" | "left" =>
               fetchpriority={i === 0 ? "high" : undefined}
               decoding="async"
               alt={s.alt}
+              width={1600}
+              height={Math.round(1600 * s.ratio)}
               class="sw-still__img"
             />
             {s.secondaryImageUrl && (
@@ -124,6 +126,8 @@ const alignFor = (i: number): "center" | "right" | "left" =>
                 fetchpriority={i === 0 ? "high" : undefined}
                 decoding="async"
                 alt={s.secondaryAlt ?? s.alt}
+                width={1600}
+                height={Math.round(1600 * s.ratio)}
                 class="sw-still__img"
               />
             )}
@@ -172,6 +176,8 @@ const alignFor = (i: number): "center" | "right" | "left" =>
           loading="lazy"
           decoding="async"
           class="aspect-4/5 w-full bg-background object-cover object-top"
+          width="640"
+          height="800"
         />
       </figure>
       <div>

@@ -75,10 +75,10 @@ export function imgSrcSet(value: MediaLike, widths: number[] = [320, 480, 640, 9
  * `sizes` is the width the image renders at (a CSS length or media-query list); `ratio` is
  * height/width. Returns an empty object when there is no image — render your placeholder then.
  */
-export function imgAttrs(value: MediaLike, sizes: string, ratio = 1): { src: string; srcSet: string; sizes: string; loading: "lazy"; decoding: "async" } | Record<string, never> {
+export function imgAttrs(value: MediaLike, sizes: string, ratio = 1): { src: string; srcSet: string; sizes: string; width: number; height: number; loading: "lazy"; decoding: "async" } | Record<string, never> {
   const src = imgSrc(value, 640, Math.round(640 * ratio));
   if (!src) return {};
-  return { src, srcSet: imgSrcSet(value, undefined, ratio), sizes, loading: "lazy", decoding: "async" };
+  return { src, srcSet: imgSrcSet(value, undefined, ratio), sizes, width: 640, height: Math.round(640 * ratio), loading: "lazy", decoding: "async" };
 }
 
 export function imgFitSrc(value: MediaLike, width = 1600, height = 1600): string {

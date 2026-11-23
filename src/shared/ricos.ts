@@ -101,7 +101,7 @@ interface Ctx {
 function imgTag(image: Raw | undefined, alt: unknown, ctx: Ctx): string {
   const src = ctx.imgSrc(imageValue(image), ctx.width, ctx.height);
   if (!src) return "";
-  return `<img src="${escapeHtml(src)}" alt="${escapeHtml(String(alt ?? ""))}" loading="lazy" decoding="async">`;
+  return `<img src="${escapeHtml(src)}" alt="${escapeHtml(String(alt ?? ""))}" width="${ctx.width}" height="${ctx.height}" loading="lazy" decoding="async">`;
 }
 
 function childrenToHtml(node: Raw, ctx: Ctx): string {
