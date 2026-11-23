@@ -3,6 +3,9 @@
 All CLI instructions can be found at:
 node_modules/@wix/cli/agents/instructions.md
 
+# Notes
+- NO python, just nodejs
+
 ## Tools catalog — source of truth for ideas & libraries
 
 Use **[20essentials/tools-catalog](https://github.com/20essentials/tools-catalog)** as the curated, project-focused source of truth for reusable tools, libraries, patterns, components, services, and implementation ideas. It is a specific, maintained catalog for this workflow — not a generic “awesome list” to browse at random.
