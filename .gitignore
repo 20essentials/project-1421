@@ -12,6 +12,7 @@ dist/
 node_modules/
 .opencode/opencode.json
 opencode.json
+stefanolunardi-cumplimiento-linee-guida/
 
 # logs
 npm-debug.log*
