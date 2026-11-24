@@ -1,13 +1,15 @@
 /**
- * Lightbox FLIP zoom para la grid bento del portfolio en la homepage.
+ * Lightbox FLIP zoom compartido por la grid de fotos de la homepage y por las
+ * galerías de las colecciones de portfolio.
  *
- * Click en un tile: la imagen despega EXACTAMENTE de su recorte en el tile
- * (`object-fit: cover` coincide píxel a píxel con el primer frame), crece hasta
- * un marco centrado respetando su aspecto natural y, mientras crece, el recorte
- * se "cura": un `clip-path: inset()` animado abre la foto completa que el tile
- * escondía. Detrás, la grid se atenúa en cascada desde el tile pulsado y el
- * resto de la página cae bajo un velo. Click en cualquier parte, Escape o el
- * botón de cierre la devuelven a su tile por el mismo camino.
+ * Click en un tile: la imagen despega EXACTAMENTE de su encuadre en el tile,
+ * crece hasta un marco centrado respetando su aspecto natural y, mientras crece,
+ * un `clip-path: inset()` animado abre la foto completa. En el masonry el tile
+ * ya muestra la foto completa, así que el clip arranca abierto; en una grid con
+ * `object-fit: cover` cura el recorte original. Detrás, la grid se atenúa en
+ * cascada desde el tile pulsado y el resto de la página cae bajo un velo.
+ * Click en cualquier parte, Escape o el botón de cierre devuelven la imagen a
+ * su tile por el mismo camino.
  *
  * Idea tomada de 20essentials/project-1108 (GSAP Flip sobre una capa fija);
  * reescrita: la geometría cover→contain es matemática propia y pura
@@ -33,6 +35,14 @@ const OPEN = { zoom: 0.8, clip: 0.85, backdrop: 0.45, dim: 0.55, stagger: 0.4 };
 const CLOSE = { zoom: 0.55, clip: 0.45, backdrop: 0.3, dim: 0.4, stagger: 0.25 };
 const BACKDROP = "rgba(6,6,8,0.94)";
 const DIMMED = 0.16;
+const NO_CLIP = "inset(0px 0px 0px 0px)";
+
+/** Selectores de la grid y sus tiles; el lightbox es el mismo en toda la página. */
+export interface PhotoZoomTargets {
+  grid: string;
+  tile: string;
+  lightbox?: string;
+}
 
 interface Lightbox {
   root: HTMLElement;
@@ -53,6 +63,10 @@ const rectOf = (el: Element): Rect => {
   return { left: r.left, top: r.top, width: r.width, height: r.height };
 };
 
+/** Sin recorte devolvemos un inset explícito: GSAP interpola mejor de valor a valor. */
+const clipFor = (flipState: FlipState, tileImg: HTMLImageElement): string =>
+  clipInsetFor(flipState.target, flipState.flip, rectOf(tileImg)) || NO_CLIP;
+
 /** Natural size of the tile's image, decoding it first so the lightbox never opens half-drawn. */
 async function naturalSize(img: HTMLImageElement): Promise<{ width: number; height: number }> {
   if (img.decode) {
@@ -71,13 +85,13 @@ async function naturalSize(img: HTMLImageElement): Promise<{ width: number; heig
   return { width: img.naturalWidth, height: img.naturalHeight };
 }
 
-export function mountPhotoGridZoom(): void {
-  const grid = document.querySelector<HTMLElement>(".bento-grid");
+export function mountPhotoZoom(targets: PhotoZoomTargets): void {
+  const grid = document.querySelector<HTMLElement>(targets.grid);
   if (!grid || grid.dataset.zoomReady) return;
   grid.dataset.zoomReady = "";
 
-  const tiles = Array.from(grid.querySelectorAll<HTMLButtonElement>(".bento-tile"));
-  const lightbox = readLightbox();
+  const tiles = Array.from(grid.querySelectorAll<HTMLButtonElement>(targets.tile));
+  const lightbox = readLightbox(targets.lightbox ?? ".pg-lightbox");
   if (tiles.length === 0 || !lightbox) return;
   const { root, img, close: closeBtn } = lightbox;
 
@@ -104,7 +118,7 @@ export function mountPhotoGridZoom(): void {
       scaleX: flipState.flip.scaleX,
       scaleY: flipState.flip.scaleY,
       transformOrigin: "0 0",
-      clipPath: clipInsetFor(flipState.target, flipState.flip, rectOf(tileImg)),
+      clipPath: clipFor(flipState, tileImg),
     });
   }
 
@@ -229,7 +243,7 @@ export function mountPhotoGridZoom(): void {
       )
       .to(
         img,
-        { clipPath: clipInsetFor(flipState.target, flipState.flip, rectOf(tileImg)), duration: CLOSE.clip, ease: "power2.inOut" },
+        { clipPath: clipFor(flipState, tileImg), duration: CLOSE.clip, ease: "power2.inOut" },
         0,
       )
       .to(tiles, { opacity: 1, duration: CLOSE.dim, ease: "power2.out", stagger: { amount: CLOSE.stagger, from: tiles.indexOf(trigger) } }, 0.05)
@@ -256,7 +270,7 @@ export function mountPhotoGridZoom(): void {
       y: next.flip.y,
       scaleX: next.flip.scaleX,
       scaleY: next.flip.scaleY,
-      clipPath: clipInsetFor(next.target, next.flip, rectOf(triggerImg)),
+      clipPath: clipFor(next, triggerImg),
       duration: 0.3,
       ease: "power2.out",
     });
@@ -296,8 +310,13 @@ export function mountPhotoGridZoom(): void {
   closeBtn.addEventListener("click", close);
 }
 
-function readLightbox(): Lightbox | null {
-  const root = document.querySelector<HTMLElement>(".pg-lightbox");
+/** Entrada que usa la homepage; las galerías llaman a `mountPhotoZoom` con sus selectores. */
+export function mountPhotoGridZoom(): void {
+  mountPhotoZoom({ grid: ".bento-grid", tile: ".bento-tile" });
+}
+
+function readLightbox(selector: string): Lightbox | null {
+  const root = document.querySelector<HTMLElement>(selector);
   const img = root?.querySelector<HTMLImageElement>(".pg-lightbox__img");
   const close = root?.querySelector<HTMLButtonElement>(".pg-lightbox__close");
   return root && img && close ? { root, img, close } : null;

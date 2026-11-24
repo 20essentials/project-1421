@@ -154,6 +154,62 @@
   }
 }
 
+/* Lightbox FLIP compartido: la homepage y las galerías de portfolio montan el
+   mismo chasis; posición, tamaño, transform y clip del img los escribe el JS
+   (photo-grid-zoom.ts) en px. Sin JS el lightbox queda oculto. */
+.pg-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  background-color: rgba(6, 6, 8, 0);
+  cursor: zoom-out;
+}
+
+.pg-lightbox[hidden] {
+  display: none;
+}
+
+.pg-lightbox__img {
+  position: absolute;
+  object-fit: fill;
+  will-change: transform, clip-path;
+}
+
+.pg-lightbox__close {
+  position: absolute;
+  top: clamp(0.75rem, 2.5vw, 1.5rem);
+  right: clamp(0.75rem, 2.5vw, 1.5rem);
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border-radius: 999px;
+  border: 1px solid rgb(255 255 255 / 0.25);
+  background: rgb(6 6 8 / 0.55);
+  color: rgb(255 255 255 / 0.85);
+  cursor: pointer;
+  transition:
+    border-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.pg-lightbox__close:hover {
+  border-color: rgb(255 255 255 / 0.7);
+  color: #ffffff;
+}
+
+.pg-lightbox__close:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pg-lightbox__close {
+    transition: none;
+  }
+}
+
 /* Oculta el banner "Built on Wix Headless" inyectado por el hosting de Wix */
 #wixheadless-banner-container {
   display: none !important;

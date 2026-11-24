@@ -12,6 +12,35 @@ async function openFirstTile(page: import("@playwright/test").Page) {
   return { tile, lightbox };
 }
 
+test("la grid es masonry y cada foto conserva su proporción natural", async ({ page }) => {
+  await page.goto("/");
+  expect(await page.locator(".bento-grid").evaluate((el) => getComputedStyle(el).columnCount)).toBe("4");
+
+  await page.waitForFunction(() =>
+    Array.from(document.querySelectorAll<HTMLImageElement>(".bento-tile img"))
+      .slice(0, 3)
+      .every((img) => img.naturalWidth > 0 && img.naturalHeight > 0),
+  );
+
+  const ratios = await page.locator(".bento-tile img").evaluateAll((nodes) =>
+    nodes.slice(0, 3).map((node) => {
+      const img = node as HTMLImageElement;
+      const box = img.getBoundingClientRect();
+      return {
+        rendered: box.width / box.height,
+        natural: img.naturalWidth / img.naturalHeight,
+        objectFit: getComputedStyle(img).objectFit,
+      };
+    }),
+  );
+
+  for (const ratio of ratios) {
+    expect(ratio.natural).toBeGreaterThan(0);
+    expect(Math.abs(ratio.rendered - ratio.natural)).toBeLessThan(0.02);
+    expect(ratio.objectFit).not.toBe("cover");
+  }
+});
+
 test("el click en un tile abre el lightbox con la imagen centrada y sin recorte", async ({ page }) => {
   await page.goto("/");
   const { lightbox } = await openFirstTile(page);
