@@ -19,6 +19,7 @@ import { fetchPublishedContentBatch } from "@/features/i18n/published-content";
 import type { HeaderLike } from "@/features/i18n/locale-from-request";
 import {
   galleryItems,
+  mergeGalleries,
   visibleCollection,
   visibleCollections,
   visibleProject,
@@ -146,4 +147,13 @@ export async function fetchProjectBySlug(slug: string, headers?: HeaderLike): Pr
 export async function fetchProjectGallery(projectId: string): Promise<GalleryItem[]> {
   const res = await projectItems.listProjectItems(projectId, { paging: { limit: 100 } });
   return galleryItems((res.items ?? []) as Raw[], imgFitSrc, videoSrc);
+}
+
+/** All media from a collection's projects as one flat gallery. Failed projects are skipped. */
+export async function fetchCollectionGallery(projectIds: string[]): Promise<{ items: GalleryItem[]; failed: number }> {
+  const results = await Promise.allSettled(projectIds.map((id) => fetchProjectGallery(id)));
+  return {
+    items: mergeGalleries(results.flatMap((r) => (r.status === "fulfilled" ? [r.value] : []))),
+    failed: results.filter((r) => r.status === "rejected").length,
+  };
 }

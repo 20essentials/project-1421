@@ -156,6 +156,16 @@ export function galleryItems(raws: Raw[], imgSrc: ImgSrc, videoSrc: VideoSrc): G
     .filter((g): g is GalleryItem => g !== null);
 }
 
+/** Several projects' galleries in project order, dropping duplicate media ids. */
+export function mergeGalleries(galleries: GalleryItem[][]): GalleryItem[] {
+  const seen = new Set<string>();
+  return galleries.flat().filter((item) => {
+    if (seen.has(item.id)) return false;
+    seen.add(item.id);
+    return true;
+  });
+}
+
 // ---- render rule ----------------------------------------------------------------------------------
 
 /** The one element a gallery item renders as, attribute names as HTML spells them. */

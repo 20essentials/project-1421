@@ -97,16 +97,17 @@ test.describe("whole-site sweep (live)", () => {
     await sweep(page, postHref!, {});
   });
 
-  test("sweep one live portfolio project", async ({ page }) => {
+  test("sweep one live portfolio gallery", async ({ page }) => {
     await page.goto(`${BASE}/portfolio`, { waitUntil: "domcontentloaded" });
-    const collectionHref = (await page.locator('a[href^="/portfolio/"]').first().getAttribute("href")) ?? "";
+    const collectionHref = (await page.locator('a[href*="/portfolio/"]').first().getAttribute("href")) ?? "";
     expect(collectionHref, "the portfolio must link at least one collection").toBeTruthy();
-    await page.goto(`${BASE}${collectionHref}`, { waitUntil: "domcontentloaded" });
-    const projectHref = (await page.locator('a[href^="/projects/"]').first().getAttribute("href")) ?? "";
-    expect(projectHref, "the collection must link at least one project").toBeTruthy();
-    const response = await page.goto(`${BASE}${projectHref}`, { waitUntil: "domcontentloaded" });
-    expect(response?.status(), projectHref).toBe(200);
+    const response = await page.goto(`${BASE}${collectionHref}`, { waitUntil: "domcontentloaded" });
+    expect(response?.status(), collectionHref).toBe(200);
+    const images = page.locator("main img");
+    await expect(images.first()).toBeVisible();
+    expect(await images.count(), collectionHref).toBeGreaterThan(0);
+    expect(await page.locator('a[href*="/projects/"]').count(), collectionHref).toBe(0);
     const titleText = (await page.locator("head title").first().textContent()) ?? "";
-    expect(titleText.trim(), projectHref).toBeTruthy();
+    expect(titleText.trim(), collectionHref).toBeTruthy();
   });
 });
