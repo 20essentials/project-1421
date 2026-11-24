@@ -656,11 +656,12 @@ const alignFor = (i: number): "center" | "right" | "left" =>
     will-change: transform;
   }
 
-  /* "Mi presento": pellicola a piena pagina. Il video copre l'intero viewport
-     (crop 16:9, stile reference); il copy è una didascalia cinematografica in
-     basso a sinistra così il play di YouTube resta libero al centro. Alla
-     riproduzione il testo sfuma e resta solo il film. */
+  /* "Mi presento": pellicola a piena pagina. Il poster copre l'intero viewport
+     (crop 16:9, stile reference); alla riproduzione l'iframe passa a un box 16:9
+     "contain" dentro la sezione: nessun ritaglio e la barra di YouTube resta
+     sempre visibile (il cover nascondeva i controlli sotto l'overflow). */
   .mp-root {
+    --mp-h: max(100svh, 38rem); /* altezza effettiva della sezione: h-svh min-h-[38rem] */
     background: #0b0b0d;
     color: rgb(255 255 255 / 0.92);
   }
@@ -674,6 +675,18 @@ const alignFor = (i: number): "center" | "right" | "left" =>
     min-height: 100vh;
     min-width: 177.78vh; /* 16:9 di 100vh */
     border: none;
+    transition:
+      width 0.6s ease,
+      min-width 0.6s ease,
+      min-height 0.6s ease;
+  }
+  .mp-root[data-playing] .mp-media {
+    min-width: 0;
+    min-height: 0;
+    /* contain: il box rientra del tutto nella sezione, larghezza o altezza guida */
+    width: min(100%, calc(var(--mp-h) * (16 / 9)));
+    height: auto;
+    aspect-ratio: 16 / 9;
   }
   .mp-scrim {
     background: linear-gradient(to top, rgb(0 0 0 / 0.78), rgb(0 0 0 / 0.3) 48%, transparent 78%);
