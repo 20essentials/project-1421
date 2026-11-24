@@ -559,11 +559,13 @@ const alignFor = (i: number): "center" | "right" | "left" =>
 </script>
 
 <style>
-  /* Sin JS o con reduced-motion: escenas apiladas en flujo, una por viewport. */
+  /* Sin JS o con reduced-motion: escenas apiladas en flujo, una por viewport.
+     svh (no dvh): altura estable, no se repinta a mitad del gesto cuando la
+     barra de URL se esconde y la escena no "aparece recortada". */
   .sw-scene {
     position: relative;
     height: 100vh;
-    height: 100dvh;
+    height: 100svh;
     overflow: hidden;
     background: var(--color-secondary, #f5f1ea);
   }
@@ -628,7 +630,11 @@ const alignFor = (i: number): "center" | "right" | "left" =>
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
-    padding: 0 1.5rem 4.5rem;
+    /* El copy queda anclado al fondo VISIBLE, no al del stage: cuando la
+       barra de URL está visible el stage (100lvh) tiene (lvh - svh) px por
+       debajo del pliegue, y la diferencia se suma al padding. Unidades
+       estables: el valor no cambia a mitad del gesto. En desktop vale 0. */
+    padding: 0 1.5rem calc(4.5rem + (100lvh - 100svh));
     text-align: center;
     pointer-events: none;
   }
@@ -674,14 +680,17 @@ const alignFor = (i: number): "center" | "right" | "left" =>
     pointer-events: auto;
   }
 
-  /* Con JS: escenas absolutas en un viewport sticky; el alto del track y del
-     viewport los fija el JS en px (el dvh dentro de un sticky no se repinta
-     fiable en mobile). */
+  /* Con JS: escenas absolutas en un viewport sticky. El alto del sticky es
+     100lvh (unidad estable, la más grande): nunca cambia a mitad del gesto,
+     así que la escena está completa desde el primer frame — dvh (y el px que
+     fijaba el JS con window.innerHeight) se repinta tarde en Chrome/WebKit
+     cuando la barra de URL colapsa y la escena quedaba un instante más
+     corta que la pantalla (banda en blanco abajo). */
   .sw-root[data-ready] .sw-viewport {
     position: sticky;
     top: 0;
     height: 100vh;
-    height: 100dvh;
+    height: 100lvh;
     overflow: hidden;
   }
   .sw-root[data-ready] .sw-scene {

@@ -6,7 +6,7 @@
  * a mitad de segmento, out antes del siguiente wipe).
  *
  * Sin JS o con `prefers-reduced-motion: reduce`, el root queda como viene del
- * SSR (escenas apiladas en flujo, una debajo de la otra, cada una 100dvh).
+ * SSR (escenas apiladas en flujo, una debajo de la otra, cada una 100svh).
  * Con JS activo marca data-ready y el CSS las vuelve sticky/absolutas.
  */
 
@@ -50,13 +50,14 @@ export function mountScrollWorld() {
   let laidOutW = window.innerWidth;
 
   const layout = () => {
-    vh = window.innerHeight;
+    // Alto de referencia: el del propio viewport sticky, que en CSS es
+    // 100lvh — unidad estable que NO cambia a mitad del gesto cuando la
+    // barra de URL se esconde. Antes se fijaba en px con window.innerHeight
+    // (y antes 100dvh): en Chrome/WebKit se repinta tarde y la escena quedaba
+    // un instante más corta que la pantalla (banda en blanco abajo). Con lvh
+    // no hay carrera que sincronizar.
+    vh = viewport ? viewport.offsetHeight : window.innerHeight;
     laidOutW = window.innerWidth;
-    // El viewport sticky en px, no 100dvh: el `dvh` dentro de un sticky no
-    // se repinta a tiempo en WebKit/Chrome cuando la barra de URL colapsa
-    // al scrollear, y la escena queda más corta que la pantalla (banda en
-    // blanco abajo). Sincronizado con el mismo innerHeight que mide el track.
-    if (viewport) viewport.style.height = `${vh}px`;
     // La altura del track en px (no vh): los segmentos quedan anclados aunque
     // la barra de URL mobile cambie el 100vh del CSS.
     root.style.height = `${Math.round(n * SCROLL_PER_SCENE * vh)}px`;
@@ -117,17 +118,12 @@ export function mountScrollWorld() {
     }
   };
 
-  // Los browsers mobile disparan `resize` al deslizar la barra de URL; rehacer
-  // el layout ahi moveria el scroll. Solo re-layout cuando cambia el ancho
-  // (rotacion incluida); para cambios de altura alcanza re-leer. El alto del
-  // viewport sticky sí se actualiza siempre (los segmentos quedan anclados en
-  // scrollY, el alto no los mueve).
+  // Los browsers mobile disparan `resize` al deslizar la barra de URL; el
+  // viewport sticky ya es estable en CSS (100lvh), así que no hay nada que
+  // repintar por cambios de altura: los segmentos y el track quedan anclados.
+  // Solo re-layout cuando cambia el ancho (rotación incluida).
   window.addEventListener("resize", () => {
-    if (window.innerWidth !== laidOutW) {
-      layout();
-    } else if (viewport && window.innerHeight !== vh) {
-      viewport.style.height = `${window.innerHeight}px`;
-    }
+    if (window.innerWidth !== laidOutW) layout();
     onScroll();
   });
   window.addEventListener("orientationchange", () => layout());
