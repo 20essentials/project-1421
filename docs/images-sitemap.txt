@@ -4,6 +4,7 @@
 
 public/stefan.jpg        -> https://static.wixstatic.com/media/600582_d2dab189c53b42f1939a8f12810090f0~mv2.jpg
 public/stefano/u1.jpg    -> https://static.wixstatic.com/media/600582_4f4ec030097f4d19b03ee08e8c2b7c1c~mv2.jpg
+public/image.png_e79d7bc3_2K.jpg -> https://static.wixstatic.com/media/600582_b1a4d84c62524141a51bf254110f9ec4~mv2.avif
 public/stefano/u2.jpg    -> https://static.wixstatic.com/media/600582_d6d182ce960c4174b0bd7eda7d5bcf19~mv2.jpg
 public/stefano/u3.avif   -> https://static.wixstatic.com/media/600582_32f00d31636f48a7a5db83199735b97a~mv2.avif
 public/stefano/u4.avif   -> https://static.wixstatic.com/media/600582_cfdcd656e5ee474fb0e29390fea7c9e5~mv2.avif
@@ -12,6 +13,8 @@ public/stefano/logo.png  -> https://static.wixstatic.com/media/600582_1422b13022
 # AVIF conversion pass (2026-11-19): every image >1MB re-uploaded as AVIF (sharp, quality 60).
 # Old heavy JPEGs remain in the Media Manager (blog/legacy may reference them).
 # <old> -> <new AVIF>
+# 2026-11-24: about image replaced with the original 1322x1536 ratio (was cropped to 4:5).
+600582_4f4ec030097f4d19b03ee08e8c2b7c1c~mv2.jpg -> 600582_b1a4d84c62524141a51bf254110f9ec4~mv2.avif (83KB)  # index aboutImage
 600582_82bacbc4d7cd4b15b58a35079eca7781~mv2.jpg (2.2MB) -> 600582_d3da93d4d8584fd282a085b093fc7b9d~mv2.avif (97KB)  # index hero
 600582_24a8227eaf6749d6bd0c8214523c187e~mv2.jpg (3.2MB) -> 600582_06d510b40a6d4533849ae100ad4de289~mv2.avif (365KB)  # index color-2
 600582_3d43c4c4c38544449dfc0e442eb6789f~mv2.jpg (3.0MB) -> 600582_b922254fd6344b0680202d935d66d8db~mv2.avif (254KB)  # index color-3

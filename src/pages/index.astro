@@ -7,7 +7,7 @@ import { fetchFaq } from "@/features/faq/faq";
 import { getHomeContent } from "@/features/site-content/site-content";
 import { currentLocale } from "@/features/i18n/current-locale";
 import { localizedHref } from "@/features/i18n/localized-path";
-import { imgAttrs, imgSrc, imgSrcSet, mediaKey } from "@/shared/media";
+import { imgAttrs, imgFitSrc, imgSrc, imgSrcSet, mediaKey } from "@/shared/media";
 import { homeExtraSeals } from "@/shared/award-seals";
 import type { PostPage } from "@/features/blog/types";
 import type { FaqData } from "@/features/faq/types";
@@ -183,13 +183,13 @@ const alignFor = (i: number): "center" | "right" | "left" =>
     <div class="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 md:grid-cols-[2fr_3fr] md:gap-16">
       <figure class="relative">
         <img
-          src={imgSrc(heroContent.aboutImage, 640, 800)}
+          src={imgFitSrc(heroContent.aboutImage, 1322, 1536)}
           alt="Stefano Lunardi, fotografo di matrimoni fine art, con la sua macchina fotografica"
           loading="lazy"
           decoding="async"
-          class="aspect-4/5 w-full bg-background object-cover object-top"
-          width="640"
-          height="800"
+          class="aspect-1322/1536 h-auto w-full bg-background"
+          width="1322"
+          height="1536"
         />
       </figure>
       <div>
