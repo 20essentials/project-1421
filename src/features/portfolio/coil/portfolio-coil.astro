@@ -170,8 +170,11 @@ const projects: ReelProject[] = copy.projects.map((p, i) => ({
   @media (max-width: 767px) {
     .coil {
       top: 0;
-      height: 100dvh;
-      min-height: 100dvh;
+      /* lvh (no dvh): altura estable dentro del sticky — el dvh se repinta
+         tarde en Chrome/WebKit cuando la barra de URL colapsa a mitad del
+         gesto y el stage quedaba un instante más corto que la pantalla. */
+      height: 100lvh;
+      min-height: 100lvh;
     }
 
     .coil-headline {
