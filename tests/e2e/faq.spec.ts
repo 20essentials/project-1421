@@ -15,27 +15,38 @@ async function clickToggling(button: Locator, attr: string, expected: string) {
   }
 }
 
-test("FAQ page renders questions server-side (SEO: answers in the HTML)", async ({ page }) => {
+test("FAQ page renders questions server-side (SEO: answers visible in the HTML)", async ({ page }) => {
   await page.goto("/faq");
   // SSR guarantees the first question's button is in the HTML before hydration.
   await expect(page.locator("h3 button[id$='-button']").first()).toBeVisible();
-  // Every answer is in the DOM even while collapsed.
+  // Every answer is in the DOM and visible by default.
+  expect(await page.locator("h3 button[aria-expanded='true']").count()).toBeGreaterThan(5);
   const html = await page.content();
   expect(html).toContain("<h3");
   expect(html).toContain('"@type":"FAQPage"');
 });
 
-test("accordion expands and collapses a question", async ({ page }) => {
+test("FAQ shows 'Chi è Stefano Lunardi?' with its answer", async ({ page }) => {
+  await page.goto("/faq");
+  const identity = page.locator("h3 button[id$='-button']", { hasText: "Chi è Stefano Lunardi?" });
+  await expect(identity).toBeVisible();
+  await expect(identity).toHaveAttribute("aria-expanded", "true");
+  await expect(page.getByText(/Fotografo con oltre trent/)).toBeVisible();
+});
+
+test("accordion collapses and reopens a question", async ({ page }) => {
   await page.goto("/faq");
   const button = page.locator("h3 button[id$='-button']").first();
   const panel = page.locator("div[id$='-panel']").first();
 
-  await expect(button).toHaveAttribute("aria-expanded", "false");
+  await expect(button).toHaveAttribute("aria-expanded", "true");
+  await expect(panel).toBeVisible();
+  await clickToggling(button, "aria-expanded", "false");
+  await expect(panel).toBeHidden();
   await clickToggling(button, "aria-expanded", "true");
   // The answer text is reachable inside the expanded region.
   await expect(panel).toBeVisible();
   await expect(panel.locator("p").first()).toContainText(/.+/);
-  await clickToggling(button, "aria-expanded", "false");
 });
 
 test("search filters questions and can be cleared", async ({ page }) => {

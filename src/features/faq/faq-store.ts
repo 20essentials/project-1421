@@ -44,6 +44,8 @@ export interface FaqStoreOptions {
   expandOnlyOne?: boolean;
   /** Open the first visible answer on load (default false). */
   openFirst?: boolean;
+  /** Open every visible answer on load (default false) — for pages that show the answers in full. */
+  defaultOpenAll?: boolean;
   /** Read `?category` and `#q-…` on start and write them on change (default true). */
   syncUrl?: boolean;
 }
@@ -62,6 +64,7 @@ let state: FaqState = {
 };
 let expandOnlyOne = true;
 let openFirst = false;
+let defaultOpenAll = false;
 let syncUrl = true;
 let seeded = false;
 let started = false;
@@ -120,7 +123,7 @@ function load(): void {
   fetchFaq()
     .then((data) => {
       if (generation !== id) return; // superseded — drop it
-      setState({ data, loading: false, expandedIds: openFirst ? firstId(data) : state.expandedIds });
+      setState({ data, loading: false, expandedIds: defaultOpenAll ? allIds(data) : openFirst ? firstId(data) : state.expandedIds });
       applyDeepLink();
     })
     .catch((e) => {
@@ -133,6 +136,10 @@ function load(): void {
 function firstId(data: FaqData): string[] {
   const first = visibleQuestions(data, state.activeCategoryId, state.query)[0];
   return first ? [first.id] : [];
+}
+
+function allIds(data: FaqData): string[] {
+  return visibleQuestions(data, state.activeCategoryId, state.query).map((q) => q.id);
 }
 
 function start(): void {
@@ -150,6 +157,7 @@ function start(): void {
 export function seedFaq(o: FaqStoreOptions = {}): void {
   if (o.expandOnlyOne !== undefined) expandOnlyOne = o.expandOnlyOne;
   if (o.openFirst !== undefined) openFirst = o.openFirst;
+  if (o.defaultOpenAll !== undefined) defaultOpenAll = o.defaultOpenAll;
   if (o.syncUrl !== undefined) syncUrl = o.syncUrl;
   if (!o.initialData || (seeded && isBrowser())) return;
   seeded = true;
@@ -159,7 +167,7 @@ export function seedFaq(o: FaqStoreOptions = {}): void {
   state = { ...state, data, activeCategoryId, loading: false, error: null };
   state.visible = visibleQuestions(data, activeCategoryId, state.query);
   state.resultsCount = 0;
-  state.expandedIds = openFirst ? firstId(data) : [];
+  state.expandedIds = defaultOpenAll ? allIds(data) : openFirst ? firstId(data) : [];
   // No emit: seeding happens during render, before any subscriber exists.
 }
 
