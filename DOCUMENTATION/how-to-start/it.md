@@ -106,7 +106,7 @@ npm run test:e2e       # Playwright (comportamento nel browser)
 npm run format:check   # Prettier
 ```
 
-Una modifica al codice termina con `npm run release` (Wix CLI); il server di sviluppo non è la versione live. Fallo solo se hai il permesso di pubblicare su quel sito.
+Una modifica al codice NON viene rilasciata in automatico: termina solo verificata (`astro check`, test, screenshot). Pubblica (release) SOLO su ordine esplicito, con i comandi `.opencode/commands/deploy.md` o `.opencode/commands/commit-and-deploy.md` — mai di tua iniziativa.
 
 ## 8. Dove si trova il contenuto
 

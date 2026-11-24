@@ -106,7 +106,7 @@ npm run test:e2e       # Playwright (browser behaviour)
 npm run format:check   # Prettier
 ```
 
-A code change ends with `npm run release` (Wix CLI); the dev server is not the live version. Do it only if you have permission to publish to that site.
+A code change is NOT released automatically: it only ends verified (`astro check`, tests, screenshots). Deploy/publish ONLY on explicit order, with the commands `.opencode/commands/deploy.md` or `.opencode/commands/commit-and-deploy.md` — never on your own initiative.
 
 ## 8. Where the content lives
 

@@ -103,7 +103,9 @@ its copy, under the same names, in the client's own skills folder.
   `<templates>` below is that folder. Each business solution has a playbook at
   `<templates>/<solution>/INSTRUCTIONS.md`; `node .agents/skills/wix-headless-kit/install/deploy.mjs <solution> --stack astro`
   adds one; `node <templates>/<solution>/seed/read-site.mjs` reads what the
-  site holds for it, with the documentation URL of every call it made. A code change ends with a release; the live URL shows it, the dev server does not count.
+  site holds for it, with the documentation URL of every call it made. A code change NEVER
+  auto-releases: deploy only when the user explicitly orders it (`.opencode/commands/deploy.md`
+  or `.opencode/commands/commit-and-deploy.md`).
   `node .agents/skills/wix-headless-kit/install/check.mjs` says whether the skill or its templates have a newer
   version and prints the update commands; an update touches the skill folder or `templates/`, never `src/`.
   When Wix gets in the way of a change here (a confusing error, a doc gap, a workaround you had to
@@ -239,8 +241,10 @@ anything beyond a straight markup template) MUST have tests. Two layers, both al
 A change to TypeScript logic is not done until its tests pass. New logic ships with its tests in the
 same change; do not leave test debt.
 
-## Release
+## Release — only on explicit order
 
-A code change ends with a release; the live URL shows it, the dev server does not count.
-(Use the wix-headless-kit skill's deploy/release flow.)
+Never deploy or release on your own initiative, not even to "finish" a change: a code change
+ends verified (`astro check`, tests, screenshots) — NOT released. Deploy/publish ONLY when the
+user explicitly orders it with the commands `.opencode/commands/deploy.md` or
+`.opencode/commands/commit-and-deploy.md`, and then follow the flow written in that command file.
 
