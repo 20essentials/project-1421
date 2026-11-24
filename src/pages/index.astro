@@ -267,30 +267,35 @@ const alignFor = (i: number): "center" | "right" | "left" =>
     </div>
   </section>
 
-  <section id="mi-presento" class="mp-root px-6 py-24">
-    <div class="mx-auto max-w-4xl">
-      <div class="text-center">
-        <p class="eyebrow mp-eyebrow">{heroContent.presentoEyebrow}</p>
-        <h2 class="font-display mp-heading mt-4 break-words text-4xl font-medium leading-tight sm:text-5xl">{heroContent.presentoTitle}</h2>
-        <p class="mp-copy mx-auto mt-5 max-w-2xl text-sm leading-relaxed sm:text-base">
-          {heroContent.presentoIntro}
-        </p>
-      </div>
-      <div class="mp-frame relative mt-12">
-        <lite-youtube
-          videoid={heroContent.presentoVideoId}
-          videoTitle="Mi presento — Stefano Lunardi"
-          playlabel="Riproduci: Mi presento — Stefano Lunardi"
-          params="rel=0"
-          class="mp-video"
-        />
-        <p class="mp-frame__caption font-display text-sm italic sm:text-base">
-          {heroContent.presentoCaption}
-        </p>
-      </div>
-      <div class="mt-10 text-center">
-        <a href={href("/video")} class="mp-link text-sm underline-offset-4 hover:underline no-underline">{heroContent.presentoLink}</a>
-      </div>
+  <section id="mi-presento" class="mp-root relative h-svh min-h-[38rem] overflow-hidden">
+    <lite-youtube
+      videoid={heroContent.presentoVideoId}
+      videoTitle="Mi presento — Stefano Lunardi"
+      playlabel="Riproduci: Mi presento — Stefano Lunardi"
+      params="rel=0"
+      class="mp-media"
+    >
+      <img
+        slot="image"
+        src="https://static.wixstatic.com/media/600582_845da6b245d64d8a9fb152dcb8a9325c~mv2.avif"
+        alt="Stefano Lunardi nel suo studio, anteprima del video Mi presento"
+        loading="lazy"
+        decoding="async"
+        width="1280"
+        height="720"
+      />
+    </lite-youtube>
+    <div class="mp-scrim pointer-events-none absolute inset-0" aria-hidden="true"></div>
+    <div class="mp-copy pointer-events-none absolute inset-x-0 bottom-0 z-10 flex flex-col items-start px-6 pb-8 sm:px-10 sm:pb-10">
+      <p class="eyebrow mp-eyebrow">{heroContent.presentoEyebrow}</p>
+      <h2 class="font-display mp-heading mt-3 break-words text-3xl font-medium leading-tight sm:text-5xl">{heroContent.presentoTitle}</h2>
+      <p class="mp-copy-text mt-4 max-w-xl text-sm leading-relaxed sm:text-base">
+        {heroContent.presentoIntro}
+      </p>
+      <a href={href("/video")} class="mp-link pointer-events-auto mt-6 no-underline">{heroContent.presentoLink}</a>
+      <p class="mp-frame__caption font-display mt-5 text-sm italic sm:text-base">
+        {heroContent.presentoCaption}
+      </p>
     </div>
   </section>
 
@@ -503,6 +508,11 @@ const alignFor = (i: number): "center" | "right" | "left" =>
 
 <script>
   import "@justinribeiro/lite-youtube";
+
+  const presento = document.getElementById("mi-presento");
+  presento
+    ?.querySelector("lite-youtube")
+    ?.addEventListener("click", () => presento.setAttribute("data-playing", ""), { once: true });
 </script>
 
 <script>
@@ -645,50 +655,63 @@ const alignFor = (i: number): "center" | "right" | "left" =>
     will-change: transform;
   }
 
-  /* "Mi presento": camera oscura. Sezione scura a contrasto con la schermata
-     chiara di "chi siamo": il video diventa una pellicola esposta. */
+  /* "Mi presento": pellicola a piena pagina. Il video copre l'intero viewport
+     (crop 16:9, stile reference); il copy è una didascalia cinematografica in
+     basso a sinistra così il play di YouTube resta libero al centro. Alla
+     riproduzione il testo sfuma e resta solo il film. */
   .mp-root {
     background: #0b0b0d;
     color: rgb(255 255 255 / 0.92);
   }
+  .mp-media {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    width: 100vw;
+    height: 56.25vw; /* 16:9 di 100vw */
+    min-height: 100vh;
+    min-width: 177.78vh; /* 16:9 di 100vh */
+    border: none;
+  }
+  .mp-scrim {
+    background: linear-gradient(to top, rgb(0 0 0 / 0.78), rgb(0 0 0 / 0.3) 48%, transparent 78%);
+  }
   .mp-eyebrow {
-    color: rgb(255 255 255 / 0.55);
+    color: rgb(255 255 255 / 0.6);
   }
   .mp-heading {
     color: #ffffff;
+    text-shadow: 0 2px 24px rgb(0 0 0 / 0.45);
   }
-  .mp-copy {
-    color: rgb(255 255 255 / 0.65);
+  .mp-copy-text {
+    color: rgb(255 255 255 / 0.75);
+    text-shadow: 0 1px 12px rgb(0 0 0 / 0.5);
   }
-  .mp-frame {
-    padding: clamp(0.75rem, 2.5vw, 1.5rem);
-    background: #101014;
-    border: 1px solid rgb(255 255 255 / 0.14);
-    box-shadow:
-      0 0 0 1px rgb(0 0 0 / 0.6),
-      0 30px 80px rgb(0 0 0 / 0.55);
+  .mp-copy,
+  .mp-scrim {
+    transition: opacity 0.7s ease;
   }
-  .mp-video {
-    display: block;
-    width: 100%;
-    max-width: 64rem;
-    margin-inline: auto;
-    border: 1px solid rgb(255 255 255 / 0.2);
+  .mp-root[data-playing] .mp-copy,
+  .mp-root[data-playing] .mp-scrim {
+    opacity: 0;
   }
   .mp-frame__caption {
-    margin-top: 1rem;
-    text-align: center;
-    color: rgb(255 255 255 / 0.55);
+    color: rgb(255 255 255 / 0.6);
+    text-shadow: 0 1px 12px rgb(0 0 0 / 0.5);
   }
   .mp-link {
-    color: rgb(255 255 255 / 0.75);
-    border-bottom: 1px solid rgb(255 255 255 / 0.3);
-    padding-bottom: 2px;
-    transition: color 0.2s, border-color 0.2s;
+    color: #ffffff;
+    border: 1px solid rgb(255 255 255 / 0.75);
+    padding: 0.8rem 1.9rem;
+    font-size: 0.875rem;
+    letter-spacing: 0.08em;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
   }
   .mp-link:hover {
-    color: #ffffff;
-    border-color: rgb(255 255 255 / 0.8);
+    background-color: #ffffff;
+    color: #0b0b0d;
+    border-color: #ffffff;
   }
 
   /* "Fotografia artistica": dos tarjetas oscuras de galería sobre fondo claro,
