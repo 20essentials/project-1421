@@ -238,3 +238,7 @@ C:\Users\amoil\Desktop\stefanolunardi-photographer\stefano-lunardi-assets\foto\f
 C:\Users\amoil\Desktop\stefanolunardi-photographer\stefano-lunardi-assets\foto\foto artistiche non matrimoni\IMG_7572.HEIC -> https://static.wixstatic.com/media/600582_3494214c1db84154bcc6e0062ddd1331~mv2.avif
 C:\Users\amoil\Desktop\stefanolunardi-photographer\stefano-lunardi-assets\foto\foto artistiche non matrimoni\IMG_7574.HEIC -> https://static.wixstatic.com/media/600582_21cd64f25399425e992e6149e183914c~mv2.avif
 yt:5gY0HgkSVjU maxresdefault.jpg (YouTube, 1280x720) -> https://static.wixstatic.com/media/600582_845da6b245d64d8a9fb152dcb8a9325c~mv2.avif
+
+# 2026-11-24 — index hero slide 1, primary image replaced (user request).
+stefano-lunardi-assets/foto/autentiche e naturali/_D3S8972.jpg (1.6MB) -> 600582_bce4bc5112ed48f582001d7abb6384b5~mv2.avif (605KB, q62)  # index hero heroImage (gruppo matrimonio in salto)
+# Replaces 600582_d3da93d4d8584fd282a085b093fc7b9d~mv2.avif as Home.heroImage (old file kept in Media Manager).
