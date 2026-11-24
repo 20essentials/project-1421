@@ -543,10 +543,12 @@ const alignFor = (i: number): "center" | "right" | "left" =>
     display: flex;
   }
   .sw-still--split .sw-still__img {
-    flex: 0 0 50%;
+    flex: none;
     width: 50%;
+    transform-origin: right center;
   }
   .sw-still--split .sw-still__img + .sw-still__img {
+    transform-origin: left center;
     border-left: 1px solid rgb(255 255 255 / 0.3);
   }
   @media (max-width: 767px) {
@@ -554,7 +556,6 @@ const alignFor = (i: number): "center" | "right" | "left" =>
       display: none;
     }
     .sw-still--split .sw-still__img {
-      flex: 0 0 100%;
       width: 100%;
     }
     .sw-still--split .sw-still__img + .sw-still__img {
