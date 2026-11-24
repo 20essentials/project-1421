@@ -325,6 +325,44 @@ const alignFor = (i: number): "center" | "right" | "left" =>
     ctaHref={href("/fine-art")}
   />
 
+  <section id="metodo-fusion" class="px-6 py-24">
+    <div class="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 lg:grid-cols-[4fr_5fr] lg:gap-16">
+      <figure>
+        <img
+          src={imgSrc(heroContent.slide3Image, 640, 800)}
+          alt="Coppia in bianco e nero che cammina — fotografia fine art di matrimonio, Stefano Lunardi"
+          loading="lazy"
+          decoding="async"
+          class="aspect-4/5 w-full bg-background object-cover"
+          width="640"
+          height="800"
+        />
+      </figure>
+      <div>
+        <p class="eyebrow">Il mio metodo</p>
+        <h2 class="font-display mt-3 text-4xl font-medium leading-tight sm:text-5xl">Il Metodo Fusion</h2>
+        <p class="mt-5 text-lg leading-relaxed text-muted-foreground">
+          Il mio metodo si chiama Metodo Fusion: unisce l'eleganza della fotografia di moda alla naturalezza del reportage. Ed è per questo che le vostre fotografie avranno la cura di un editoriale e la verità di un racconto.
+        </p>
+        <ol class="mt-10 grid gap-6 sm:grid-cols-3 lg:grid-cols-1">
+          <li>
+            <p class="eyebrow">01 — Reportage</p>
+            <p class="mt-2 text-sm leading-relaxed text-muted-foreground">Gran parte della giornata scorre senza intervenire: nessun "guardate qui", nessuna posa.</p>
+          </li>
+          <li>
+            <p class="eyebrow">02 — Ritratti editoriali</p>
+            <p class="mt-2 text-sm leading-relaxed text-muted-foreground">Un momento breve e dedicato ai ritratti, con luce e composizione editoriali.</p>
+          </li>
+          <li>
+            <p class="eyebrow">03 — Analogico + digitale</p>
+            <p class="mt-2 text-sm leading-relaxed text-muted-foreground">Circa 20 rullini per gli scatti iconici; il digitale è supporto e backup.</p>
+          </li>
+        </ol>
+        <a href={href("/il-mio-metodo")} class="btn-ghost mt-8 inline-block no-underline">Leggi tutto il metodo</a>
+      </div>
+    </div>
+  </section>
+
   <section class="border-y border-border bg-secondary px-6 py-20">
     <div class="mx-auto grid max-w-5xl grid-cols-1 gap-10 md:grid-cols-3">
       <div>

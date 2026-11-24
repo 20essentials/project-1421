@@ -8,13 +8,21 @@ test.describe("CMS Single Item pages", () => {
     await expect(
       page.getByRole("heading", {
         level: 1,
-        name: "Matrimoni come opere d'arte",
+        name: "STEFANO LUNARDI",
       }),
     ).toBeVisible();
     await expect(
       page.getByRole("heading", { name: "Un volto, una voce, un metodo" }),
     ).toBeVisible();
     await expect(page.getByRole("heading", { name: "Dietro l'obiettivo" })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 2, name: "Il Metodo Fusion" })).toBeVisible();
+    await expect(
+      page.getByText("Il mio metodo si chiama Metodo Fusion:", { exact: false }),
+    ).toBeVisible();
+    await expect(page.getByRole("link", { name: "Leggi tutto il metodo" })).toHaveAttribute(
+      "href",
+      "/it/il-mio-metodo",
+    );
     await expect(page.getByRole("link", { name: "Guarda tutto il portfolio" })).toHaveAttribute(
       "href",
       "/it/portfolio",
