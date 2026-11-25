@@ -40,17 +40,27 @@ const label = (key: string, fallback: string) => labels[key] || fallback;
       locale={locale}
       labels={labels}
     />
-    <header class="px-6 pt-14 text-center text-primary-foreground">
-      <p class="eyebrow text-primary-foreground/80">{content.eyebrow}</p>
-      <h1 class="font-display mt-3 text-4xl font-medium sm:text-5xl">{content.title}</h1>
-      <p class="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-primary-foreground/85 sm:text-base">{content.intro}</p>
-      <a
-        href={localizedHref(locale, "/")}
-        class="mt-8 inline-block rounded-control border border-primary-foreground/60 px-8 py-3 text-sm font-medium no-underline hover:bg-primary-foreground hover:text-foreground"
-      >
-        {label("backHome", "Torna alla home")}
-      </a>
-    </header>
-    <TidalLens src={tidalPhoto} />
+    <TidalLens src={tidalPhoto}>
+      <header class="flex h-full flex-col items-center justify-center px-6 pb-24 text-center text-foreground">
+        <div class="not-found-panel w-full max-w-2xl border border-foreground/20 bg-background/90 px-6 py-10 backdrop-blur-xl sm:px-12 sm:py-12">
+          <p class="eyebrow text-muted-foreground">{content.eyebrow}</p>
+          <h1 class="font-display mt-3 text-4xl font-medium sm:text-5xl">{content.title}</h1>
+          <p class="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">{content.intro}</p>
+          <a
+            href={localizedHref(locale, "/")}
+            class="pointer-events-auto mt-8 inline-block rounded-control border border-foreground/60 px-8 py-3 text-sm font-medium no-underline hover:bg-foreground hover:text-background"
+          >
+            {label("backHome", "Torna alla home")}
+          </a>
+        </div>
+      </header>
+    </TidalLens>
+    <style>
+      .not-found-panel {
+        box-shadow:
+          inset 0 1px 0 rgb(255 255 255 / 0.12),
+          0 24px 60px -20px rgb(0 0 0 / 0.85);
+      }
+    </style>
   </body>
 </html>
