@@ -290,3 +290,33 @@ routes in the same build (e.g. the `lang-trigger` aria-label fix) were live.
 - The curated llms.txt content and Wix's MCP section are two sources in one
   file; a Wix-side dashboard edit of llms.txt (SEO Tools) would diverge from
   the generator — re-PUT after any manual dashboard edit.
+
+## 7. Wix API 429 under parallel Playwright load → sporadic 500s on unrelated routes
+
+**Status:** open / test-environment noise. Not a site regression; do not "fix"
+application code for it.
+
+**Symptom.** A full `npm run test:e2e` run (Playwright `workers: 4`) returned
+HTTP 500 for many `tests/e2e/routes.spec.ts` routes at once (`/`, `/examples`,
+`/location`, `/il-mio-metodo`, `/faq`, `/blog`, …), while other specs in the
+same run passed. The same routes passed when the affected specs were re-run
+alone.
+
+**Evidence.** The dev server log (`npm run dev:fg`) at the time of the failures
+showed Wix responding **429 Too Many Requests** from two independent calls:
+
+- `listSiteScripts2` (site scripts, via
+  `src/middleware.ts` → `@wix/astro` html-embeds runtime) — the middleware aborts
+  the render, so Astro answers 500.
+- `queryItems` (CMS Wix Data, via
+  `src/features/site-content/site-content.ts:44`) on the pages whose frontmatter
+  fetches page content.
+
+**Workaround.** Re-run the affected spec(s) in isolation (or reduce Playwright
+workers) before treating these 500s as a code regression. Keep the normal suite
+as-is: the 429 is a rate limit on the account/site APIs, not deterministic app
+behavior.
+
+**Residual risk / what to watch:** a cluster of unrelated route 500s in a full
+suite, with 429 in the dev log, means the account is throttled. Individual route
+500s with a different error are still real bugs and need normal debugging.
