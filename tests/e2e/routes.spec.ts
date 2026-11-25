@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-const routes = ["/", "/portfolio", "/il-mio-metodo", "/chi-sono", "/location", "/investimento", "/blog", "/faq", "/contatti", "/recensioni", "/awards", "/fine-art", "/impressum", "/legal", "/legal/termini-e-condizioni", "/legal/privacy", "/legal/accessibilita", "/legal/avviso-legale"];
+const routes = ["/", "/portfolio", "/examples", "/il-mio-metodo", "/chi-sono", "/location", "/investimento", "/blog", "/faq", "/contatti", "/recensioni", "/awards", "/fine-art", "/impressum", "/legal", "/legal/termini-e-condizioni", "/legal/privacy", "/legal/accessibilita", "/legal/avviso-legale"];
 
 test.describe("site routes", () => {
   for (const route of routes) {

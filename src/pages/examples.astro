@@ -1,0 +1,277 @@
+---
+import SiteLayout from "@/app/layout.astro";
+
+const ROLE = "Fotografo di matrimoni | Fine Art | Fotoreporter";
+const HEADING = "Every frame is a painting";
+const INTRO =
+  "Ogni scatto è un quadro d'arte: candid autentici, ritratti editoriali e aeree che raccontano la vostra storia.";
+
+type Specimen = {
+  id: string;
+  name: string;
+  pairing: string;
+  note: string;
+  eyebrowFont: string;
+  headingFont: string;
+  bodyFont: string;
+  headingWeight: number;
+};
+
+const specimens: Specimen[] = [
+  {
+    id: "originale",
+    name: "00 · Quello attuale",
+    pairing: "Jost / Inter",
+    note: "Il sistema del sito: sans geometrico nel titolo, sans neutro nel testo.",
+    eyebrowFont: "var(--font-inter)",
+    headingFont: "var(--font-jost)",
+    bodyFont: "var(--font-inter)",
+    headingWeight: 500,
+  },
+  {
+    id: "cormorant-inter",
+    name: "01 · Delicato editoriale",
+    pairing: "Cormorant Garamond / Inter",
+    note: "Serif ad alto contrasto nel titolo e Inter nel corpo: la scelta più sicura per un portfolio fine art.",
+    eyebrowFont: "var(--font-inter)",
+    headingFont: "var(--font-cormorant-garamond)",
+    bodyFont: "var(--font-inter)",
+    headingWeight: 600,
+  },
+  {
+    id: "playfair-source",
+    name: "02 · Editoriale classico",
+    pairing: "Playfair Display / Source Sans 3",
+    note: "Il contrasto editoriale consigliato per i fotografi: Playfair nei titoli, Source Sans 3 nel testo.",
+    eyebrowFont: "var(--font-source-sans-3)",
+    headingFont: "var(--font-playfair-display)",
+    bodyFont: "var(--font-source-sans-3)",
+    headingWeight: 600,
+  },
+  {
+    id: "bodoni-jost",
+    name: "03 · Alta moda",
+    pairing: "Bodoni Moda / Jost",
+    note: "Didone chic con il Jost già usato dal sito: più moda, meno romanticismo.",
+    eyebrowFont: "var(--font-jost)",
+    headingFont: "var(--font-bodoni-moda)",
+    bodyFont: "var(--font-jost)",
+    headingWeight: 500,
+  },
+  {
+    id: "lora-inter",
+    name: "04 · Caldo e professionale",
+    pairing: "Lora / Inter",
+    note: "Serif calligrafica ma robusta, con Inter sotto: calda senza perdere chiarezza.",
+    eyebrowFont: "var(--font-inter)",
+    headingFont: "var(--font-lora)",
+    bodyFont: "var(--font-inter)",
+    headingWeight: 600,
+  },
+  {
+    id: "libre-nunito",
+    name: "05 · Senza tempo",
+    pairing: "Libre Baskerville / Nunito Sans",
+    note: "Baskerville ottimizzata per il web con un sans arrotondato: senza tempo e accogliente.",
+    eyebrowFont: "var(--font-nunito-sans)",
+    headingFont: "var(--font-libre-baskerville)",
+    bodyFont: "var(--font-nunito-sans)",
+    headingWeight: 700,
+  },
+  {
+    id: "cinzel-raleway",
+    name: "06 · Fine art classico",
+    pairing: "Cinzel / Raleway",
+    note: "Maiuscole ispirate alle iscrizioni romane con Raleway: solenne, da mostra.",
+    eyebrowFont: "var(--font-raleway)",
+    headingFont: "var(--font-cinzel)",
+    bodyFont: "var(--font-raleway)",
+    headingWeight: 600,
+  },
+  {
+    id: "dm-serif-dm-sans",
+    name: "07 · Moderno coerente",
+    pairing: "DM Serif Display / DM Sans",
+    note: "Stessa foundry: contrasto netto ma proporzioni coerenti. DM Serif Display resta a 400.",
+    eyebrowFont: "var(--font-dm-sans)",
+    headingFont: "var(--font-dm-serif-display)",
+    bodyFont: "var(--font-dm-sans)",
+    headingWeight: 400,
+  },
+  {
+    id: "fraunces-inter",
+    name: "08 · Caldo e wonky",
+    pairing: "Fraunces / Inter",
+    note: "Old-style soft serif consigliata da Fontpair con Inter: più carattere, corpo sempre leggibile.",
+    eyebrowFont: "var(--font-inter)",
+    headingFont: "var(--font-fraunces)",
+    bodyFont: "var(--font-inter)",
+    headingWeight: 600,
+  },
+  {
+    id: "fraunces-instrument-sans",
+    name: "09 · Espressivo e ordinato",
+    pairing: "Fraunces / Instrument Sans",
+    note: "Fontpair: le curve morbide di Fraunces nel titolo, il neo-grotesque preciso di Instrument Sans nel testo.",
+    eyebrowFont: "var(--font-instrument-sans)",
+    headingFont: "var(--font-fraunces)",
+    bodyFont: "var(--font-instrument-sans)",
+    headingWeight: 700,
+  },
+  {
+    id: "instrument-serif-instrument-sans",
+    name: "10 · Magazine",
+    pairing: "Instrument Serif / Instrument Sans",
+    note: "Stessi designer, contrasto netto: serif condensata solo nei titoli, sans nei paragrafi.",
+    eyebrowFont: "var(--font-instrument-sans)",
+    headingFont: "var(--font-instrument-serif)",
+    bodyFont: "var(--font-instrument-sans)",
+    headingWeight: 400,
+  },
+  {
+    id: "gloock-inter",
+    name: "11 · Alto contrasto",
+    pairing: "Gloock / Inter",
+    note: "Serif display da newspaper, pensata per titoli grandi; Inter resta il corpo.",
+    eyebrowFont: "var(--font-inter)",
+    headingFont: "var(--font-gloock)",
+    bodyFont: "var(--font-inter)",
+    headingWeight: 400,
+  },
+  {
+    id: "young-serif-inter",
+    name: "12 · Vintage morbido",
+    pairing: "Young Serif / Inter",
+    note: "Serif old-style pesante e generosa, con un sans neutro sotto per non appesantire la lettura.",
+    eyebrowFont: "var(--font-inter)",
+    headingFont: "var(--font-young-serif)",
+    bodyFont: "var(--font-inter)",
+    headingWeight: 400,
+  },
+  {
+    id: "ovo-mulish",
+    name: "13 · Classico informale",
+    pairing: "Ovo / Mulish",
+    note: "Capitelli a serif morbida con un geometric sans arrotondato: classico ma non rigido.",
+    eyebrowFont: "var(--font-mulish)",
+    headingFont: "var(--font-ovo)",
+    bodyFont: "var(--font-mulish)",
+    headingWeight: 400,
+  },
+  {
+    id: "playfair-figtree",
+    name: "14 · Editoriale amichevole",
+    pairing: "Playfair Display / Figtree",
+    note: "Fontpair: titoli ad alto contrasto e corpo geometric friendly, più contemporaneo di Source Sans 3.",
+    eyebrowFont: "var(--font-figtree)",
+    headingFont: "var(--font-playfair-display)",
+    bodyFont: "var(--font-figtree)",
+    headingWeight: 700,
+  },
+  {
+    id: "bodoni-mulish",
+    name: "15 · Didone addolcita",
+    pairing: "Bodoni Moda / Mulish",
+    note: "Stesso contrasto di Bodoni / Jost, ma con un corpo più arrotondato e disteso.",
+    eyebrowFont: "var(--font-mulish)",
+    headingFont: "var(--font-bodoni-moda)",
+    bodyFont: "var(--font-mulish)",
+    headingWeight: 500,
+  },
+  {
+    id: "epilogue-inter",
+    name: "16 · Sans geometrico",
+    pairing: "Epilogue / Inter",
+    note: "Titolo sans con personalità geometrica, corpo Inter: nessuna serif, massima neutralità.",
+    eyebrowFont: "var(--font-inter)",
+    headingFont: "var(--font-epilogue)",
+    bodyFont: "var(--font-inter)",
+    headingWeight: 700,
+  },
+  {
+    id: "space-grotesk-inter",
+    name: "17 · Tecnico editoriale",
+    pairing: "Space Grotesk / Inter",
+    note: "Grotesque con dettagli monospace al 600, consigliato per portfolio; Inter fa il lavoro silenzioso.",
+    eyebrowFont: "var(--font-inter)",
+    headingFont: "var(--font-space-grotesk)",
+    bodyFont: "var(--font-inter)",
+    headingWeight: 600,
+  },
+  {
+    id: "syne-dm-sans",
+    name: "18 · Atipico",
+    pairing: "Syne / DM Sans",
+    note: "Fontpair: il sans geometrico che si allarga nei pesi alti, addolcito da DM Sans nel corpo.",
+    eyebrowFont: "var(--font-dm-sans)",
+    headingFont: "var(--font-syne)",
+    bodyFont: "var(--font-dm-sans)",
+    headingWeight: 600,
+  },
+  {
+    id: "bricolage-inter",
+    name: "19 · Collage",
+    pairing: "Bricolage Grotesque / Inter",
+    note: "Grotesque ibrido con ottiche e larghezze variabili: più irriverente, corpo sempre Inter.",
+    eyebrowFont: "var(--font-inter)",
+    headingFont: "var(--font-bricolage-grotesque)",
+    bodyFont: "var(--font-inter)",
+    headingWeight: 600,
+  },
+];
+---
+
+<SiteLayout title="Font combinations — Stefano Lunardi" description="Venti combinazioni tipografiche per la sezione hero del portfolio, con lo stesso testo e lo stesso sfondo a puntini.">
+  <section class="dot-grid border-b border-border px-6 pb-10 pt-12 text-center">
+    <p class="eyebrow">Laboratorio tipografico</p>
+    <h1 class="mt-3 text-4xl font-medium sm:text-5xl">Font combinations</h1>
+    <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">La stessa sezione del portfolio, venti palette di font. Tutti i paragrafi restano sans-serif per leggibilità; solo i titoli sperimentano serif e sans.</p>
+  </section>
+
+  {
+    specimens.map((specimen) => (
+      <section class="border-b border-border" data-specimen={specimen.id}>
+        <div class="mx-auto max-w-7xl px-6 pt-8">
+          <div class="flex flex-wrap items-baseline justify-between gap-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
+            <p>{specimen.name}</p>
+            <p>{specimen.pairing}</p>
+          </div>
+          <p class="mt-2 text-sm text-muted-foreground">{specimen.note}</p>
+        </div>
+        <header
+          class="dot-grid mt-6 border-b border-border px-6 pb-10 text-center"
+          style={`
+            --specimen-eyebrow-font: ${specimen.eyebrowFont};
+            --specimen-heading-font: ${specimen.headingFont};
+            --specimen-body-font: ${specimen.bodyFont};
+            --specimen-heading-weight: ${specimen.headingWeight};
+          `}
+        >
+          <p class="eyebrow specimen-eyebrow">{ROLE}</p>
+          <h2 class="specimen-heading mt-3 text-4xl sm:text-5xl">{HEADING}</h2>
+          <p class="specimen-body mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">{INTRO}</p>
+        </header>
+      </section>
+    ))
+  }
+</SiteLayout>
+
+<style>
+  .specimen-eyebrow {
+    font-family: var(--specimen-eyebrow-font);
+    font-size-adjust: from-font;
+  }
+
+  .specimen-heading {
+    font-family: var(--specimen-heading-font);
+    font-size-adjust: from-font;
+    font-weight: var(--specimen-heading-weight);
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+
+  .specimen-body {
+    font-family: var(--specimen-body-font);
+    font-size-adjust: from-font;
+  }
+</style>
