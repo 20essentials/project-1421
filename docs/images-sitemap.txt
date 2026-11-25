@@ -257,3 +257,33 @@ public/image.png_a91f575b_2K.jpg (4.1MB, 2752x1536) -> https://static.wixstatic.
 # 2026-11-25 — hero left image replaced from user-supplied my-img.jpg (AVIF q100).
 public/my-img.jpg (4.1MB, 2752x1536, sha256 28adc65d306cb984d1e86b89e231a346951b0862d9f0907da5d8b5f028cfcf11) -> https://static.wixstatic.com/media/600582_b7b6237f50864490822e1dd24cd9b0e0~mv2.avif (5.2MB, AVIF q100, original size)  # Home.heroImage
 # Replaces 600582_c1c81cc82b87404b822677aed4dcc7b4~mv2.avif as Home.heroImage (old file kept in Media Manager).
+
+# 2026-11-25 — static-page og:image set (28 pages). JPEG instead of AVIF because Wix Item SEO Tags rejects AVIF for og:image; each source cropped to 1200x630.
+stefano-lunardi-assets/foto/artistiche matirmoni/01_veillow.jpg (cropped 1200x630 JPEG) -> https://static.wixstatic.com/media/600582_4c52a05bbf904a389af38932582dab78~mv2.jpg  # og:HOME
+stefano-lunardi-assets/foto/artistiche matirmoni/_D3S5566awarded.jpg (cropped 1200x630 JPEG) -> https://static.wixstatic.com/media/600582_c07eb6807ace424587d9d7cad28f6314~mv2.jpg  # og:portfolio
+stefano-lunardi-assets/foto/foto artistiche non matrimoni/the tubeBN_loghiawards.jpg (cropped 1200x630 JPEG) -> https://static.wixstatic.com/media/600582_72070260dab5490ea3a8541c7709b805~mv2.jpg  # og:fine-art
+stefano-lunardi-assets/foto/foto artistiche non matrimoni/color awards moments.jpg (cropped 1200x630 JPEG) -> https://static.wixstatic.com/media/600582_783f6fc8f76841419f184edba4d5768d~mv2.jpg  # og:awards
+stefano-lunardi-assets/foto/autentiche e naturali/weddingemotions_sipa2016.jpg (cropped 1200x630 JPEG) -> https://static.wixstatic.com/media/600582_e49fdf63c7254586abcfe8ecd9cda7d1~mv2.jpg  # og:recensioni
+stefano-lunardi-assets/foto/autentiche e naturali/stefano lunardi photographer_wedding_Italy, Venice, hotel Excelsior_MIK0206.jpg (cropped 1200x630 JPEG) -> https://static.wixstatic.com/media/600582_40d5d7d8dfe348a397fcbb1cd1b3bf04~mv2.jpg  # og:location
+stefano-lunardi-assets/foto/foto artistiche non matrimoni/lunardi_stefano_42.jpg (cropped 1200x630 JPEG) -> https://static.wixstatic.com/media/600582_2f46e9653d0f4600bf3021b1bd893322~mv2.jpg  # og:contatti
+stefano-lunardi-assets/foto/foto artistiche non matrimoni/lunardi_stefano_23_1.jpg (cropped 1200x630 JPEG) -> https://static.wixstatic.com/media/600582_2b6141da5c384cdabe52faea2eca1fa3~mv2.jpg  # og:chi-sono
+stefano-lunardi-assets/foto/autentiche e naturali/_D3S8972.jpg (cropped 1200x630 JPEG) -> https://static.wixstatic.com/media/600582_90a59072db2f412094fce60fd781d1b8~mv2.jpg  # og:il-mio-metodo
+stefano-lunardi-assets/foto/autentiche e naturali/ZFF_0558.jpg (cropped 1200x630 JPEG) -> https://static.wixstatic.com/media/600582_0a3e7e1761df4cbf9881d1aa4cb62f99~mv2.jpg  # og:blog
+stefano-lunardi-assets/foto/eleganti e iconiche/_DSC5163 copia.jpg (cropped 1200x630 JPEG) -> https://static.wixstatic.com/media/600582_b0ac9d00cf364efaa42f13521d950c75~mv2.jpg  # og:video
+stefano-lunardi-assets/foto/autentiche e naturali/Z8D_4796.jpg (cropped 1200x630 JPEG) -> https://static.wixstatic.com/media/600582_f44b3061f5e6428e9b0f87906cbf508a~mv2.jpg  # og:faq
+stefano-lunardi-assets/foto/artistiche matirmoni/Z8D_9993BN.jpg (cropped 1200x630 JPEG) -> https://static.wixstatic.com/media/600582_116631b9c8f041ab81c63d301c58be5b~mv2.jpg  # og:investimento
+stefano-lunardi-assets/foto/eleganti e iconiche/Z8D_0001.jpg (cropped 1200x630 JPEG) -> https://static.wixstatic.com/media/600582_7fe66046edfe442a8c00e44c853a0dfb~mv2.jpg  # og:projects
+stefano-lunardi-assets/foto/foto artistiche non matrimoni/the boy_stefano_lunardi_D8D_2276.jpg (cropped 1200x630 JPEG) -> https://static.wixstatic.com/media/600582_ab6d44c923024d28a75ec2261eab406c~mv2.jpg  # og:404
+stefano-lunardi-assets/foto/foto artistiche non matrimoni/interior-of-modern-design-room-3rd ipa3.jpg (cropped 1200x630 JPEG) -> https://static.wixstatic.com/media/600582_394d2c97676a4a288dc9ad02c40107cd~mv2.jpg  # og:impressum
+stefano-lunardi-assets/foto/foto artistiche non matrimoni/interior-of-modern-design-eagle3.jpg (cropped 1200x630 JPEG) -> https://static.wixstatic.com/media/600582_1eeba0c8fe1f4e7eab3ccae02626285a~mv2.jpg  # og:legal
+stefano-lunardi-assets/foto/foto artistiche non matrimoni/stefanolunardi_ipaexi_original.jpg (cropped 1200x630 JPEG) -> https://static.wixstatic.com/media/600582_7b6e28d86db54088abbdf1a0b1eca459~mv2.jpg  # og:legal manifesto-soberania-digitale
+stefano-lunardi-assets/foto/foto artistiche non matrimoni/IMG_7279.jpg (cropped 1200x630 JPEG) -> https://static.wixstatic.com/media/600582_821d0185ad464da6b0105e057a04e913~mv2.jpg  # og:legal termini-di-utilizzo
+stefano-lunardi-assets/foto/foto artistiche non matrimoni/IMG_7285.jpg (cropped 1200x630 JPEG) -> https://static.wixstatic.com/media/600582_68f5ee2b4d8546309a3592d16ad7a38b~mv2.jpg  # og:legal protezione-dati
+stefano-lunardi-assets/foto/foto artistiche non matrimoni/IMG_7584.jpg (cropped 1200x630 JPEG) -> https://static.wixstatic.com/media/600582_ffe9e415b7f345949937cdd77b4dc9f4~mv2.jpg  # og:legal cookie-policy
+stefano-lunardi-assets/foto/foto artistiche non matrimoni/IMG_7589.jpg (cropped 1200x630 JPEG) -> https://static.wixstatic.com/media/600582_2d62f7abcdba45819edae897a59c9890~mv2.jpg  # og:legal privacy
+stefano-lunardi-assets/foto/foto artistiche non matrimoni/IMG_7591.jpg (cropped 1200x630 JPEG) -> https://static.wixstatic.com/media/600582_bccceba33e3c48d0a46ee80450b9e913~mv2.jpg  # og:legal accessibilita
+stefano-lunardi-assets/foto/foto artistiche non matrimoni/IMG_7594.jpg (cropped 1200x630 JPEG) -> https://static.wixstatic.com/media/600582_e50b93ae994044639fe1c88b7354bc33~mv2.jpg  # og:legal avviso-legale
+stefano-lunardi-assets/foto/foto artistiche non matrimoni/_DSC7052.jpg (cropped 1200x630 JPEG) -> https://static.wixstatic.com/media/600582_916f7a1461924f69a79c5c45c89755c3~mv2.jpg  # og:legal carta-accordo-privacy
+stefano-lunardi-assets/foto/foto artistiche non matrimoni/_MG_3818.jpg (cropped 1200x630 JPEG) -> https://static.wixstatic.com/media/600582_071bef0d92224d4ab7ad382a36f2d2a4~mv2.jpg  # og:legal resi-e-rimborsi
+stefano-lunardi-assets/foto/foto artistiche non matrimoni/_Z7I0893_1.jpg (cropped 1200x630 JPEG) -> https://static.wixstatic.com/media/600582_eff2c240c632482ba30acb9aca33660b~mv2.jpg  # og:legal termini-e-condizioni
+stefano-lunardi-assets/foto/foto artistiche non matrimoni/_Z7I4670.jpg (cropped 1200x630 JPEG) -> https://static.wixstatic.com/media/600582_a086602e7b9d4e3ebab759373433f745~mv2.jpg  # og:legal accordo-utente
