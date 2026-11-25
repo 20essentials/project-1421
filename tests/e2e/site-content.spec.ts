@@ -15,10 +15,13 @@ test.describe("CMS Single Item pages", () => {
       page.getByRole("heading", { name: "Un volto, una voce, un metodo" }),
     ).toBeVisible();
     await expect(page.getByRole("heading", { name: "Dietro l'obiettivo" })).toBeVisible();
-    await expect(page.getByRole("heading", { level: 2, name: "Il Metodo Fusion" })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 2, name: "IL METODO Fusion" })).toBeVisible();
     await expect(
-      page.getByText("Il mio metodo si chiama Metodo Fusion:", { exact: false }),
+      page.getByText("L'eleganza della moda, la naturalezza del reportage."),
     ).toBeVisible();
+    await expect(page.getByText("Una regia invisibile")).toBeVisible();
+    await expect(page.getByText("Il tempo della pellicola")).toBeVisible();
+    await expect(page.getByText("Pellicola e digitale, insieme")).toBeVisible();
     await expect(page.getByRole("link", { name: "Leggi tutto il metodo" })).toHaveAttribute(
       "href",
       "/it/il-mio-metodo",

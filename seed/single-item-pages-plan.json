@@ -935,34 +935,6 @@
           "type": "TEXT"
         },
         {
-          "key": "shot1Eyebrow",
-          "type": "TEXT"
-        },
-        {
-          "key": "shot1Text",
-          "type": "TEXT"
-        },
-        {
-          "key": "shot2Eyebrow",
-          "type": "TEXT"
-        },
-        {
-          "key": "shot2Text",
-          "type": "TEXT"
-        },
-        {
-          "key": "shot3Eyebrow",
-          "type": "TEXT"
-        },
-        {
-          "key": "shot3Text",
-          "type": "TEXT"
-        },
-        {
-          "key": "shotsCta",
-          "type": "TEXT"
-        },
-        {
           "key": "fvEyebrow",
           "type": "TEXT"
         },
@@ -1141,13 +1113,6 @@
           "manifestoQuote": "\"Ti hanno detto che deve essere il giorno più bello della tua vita. Nessuno ti ha detto che deve essere il tuo.\"",
           "manifestoText": "Esiste un'altra strada. Più lenta. Più rara. Più umana. Una fotografia che si prende il tempo di conoscerti prima di fotografarti, che consegna cento immagini straordinarie invece di mille dimenticabili, che tratta il matrimonio per quello che è: un'opera d'arte.",
           "manifestoWelcome": "Benvenuto nella tua storia.",
-          "shot1Eyebrow": "La foto iconica naturale",
-          "shot1Text": "Non forzata, non posata, ma tecnicamente perfetta: il soggetto nella luce giusta — e non lo sa.",
-          "shot2Eyebrow": "La candid foto",
-          "shot2Text": "Interazione vera — una risata, un abbraccio, uno sguardo — impostata a livello tecnico.",
-          "shot3Eyebrow": "Lo snapshot",
-          "shot3Text": "Catturato in real-time senza alcun intervento: il livello più intimo.",
-          "shotsCta": "Scopri il Metodo Fusion",
           "fvEyebrow": "L'opera in divenire",
           "fvTitle": "La tela si dipinge, l'obbiettivo racconta",
           "fvText": "A volte la macchina da presa si punta su di me: registro la nascita delle mie opere, dalla prima pennellata all'ultima luce. Lo stesso sguardo che segue un matrimonio guarda anche la tela.",
@@ -1174,7 +1139,7 @@
           "presentoVideoId": "5gY0HgkSVjU",
           "fvVideoUrl": "https://video.wixstatic.com/video/600582_ebf55de548bd485d860b78ad136c87e4/file",
           "gridEyebrow": "Portfolio",
-          "gridTitle": "Autentiche e naturali. Eleganti e iconiche.",
+          "gridTitle": "MOMENTI VERI, composti con eleganza",
           "gridCta": "Guarda tutto il portfolio",
           "parallaxEyebrow": "Fine Art",
           "parallaxTitle": "Foto Artistiche",

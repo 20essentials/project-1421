@@ -340,22 +340,25 @@ const alignFor = (i: number): "center" | "right" | "left" =>
       </figure>
       <div>
         <p class="eyebrow">Il mio metodo</p>
-        <h2 class="font-display mt-3 text-4xl font-medium leading-tight sm:text-5xl">Il Metodo Fusion</h2>
+        <h2 class="font-display mt-3 text-4xl font-medium leading-tight sm:text-5xl">IL METODO Fusion</h2>
         <p class="mt-5 text-lg leading-relaxed text-muted-foreground">
-          Il mio metodo si chiama Metodo Fusion: unisce l'eleganza della fotografia di moda alla naturalezza del reportage. Ed è per questo che le vostre fotografie avranno la cura di un editoriale e la verità di un racconto.
+          L'eleganza della moda, la naturalezza del reportage.
+        </p>
+        <p class="mt-3 text-lg leading-relaxed text-muted-foreground">
+          È per questo che le vostre fotografie avranno la cura di un editoriale e la verità di un racconto. Un modo di lavorare costruito in anni di reportage e di fotografia d'autore, pensato per chi desidera immagini belle e insieme autentiche.
         </p>
         <ol class="mt-10 grid gap-6 sm:grid-cols-3 lg:grid-cols-1">
           <li>
-            <p class="eyebrow">01 — Reportage</p>
-            <p class="mt-2 text-sm leading-relaxed text-muted-foreground">Gran parte della giornata scorre senza intervenire: nessun "guardate qui", nessuna posa.</p>
+            <p class="eyebrow">Una regia invisibile</p>
+            <p class="mt-2 text-sm leading-relaxed text-muted-foreground">Vi guido solo quando serve: una luce, un gesto, un punto in cui fermarvi. Poi mi faccio da parte e lascio accadere la giornata. Per gran parte del tempo non vi accorgerete nemmeno che ci sono.</p>
           </li>
           <li>
-            <p class="eyebrow">02 — Ritratti editoriali</p>
-            <p class="mt-2 text-sm leading-relaxed text-muted-foreground">Un momento breve e dedicato ai ritratti, con luce e composizione editoriali.</p>
+            <p class="eyebrow">Il tempo della pellicola</p>
+            <p class="mt-2 text-sm leading-relaxed text-muted-foreground">Un rullino ha trentasei scatti, e questo cambia il modo in cui guardo una stanza. Non inseguo la fotografia giusta: la aspetto.</p>
           </li>
           <li>
-            <p class="eyebrow">03 — Analogico + digitale</p>
-            <p class="mt-2 text-sm leading-relaxed text-muted-foreground">Circa 20 rullini per gli scatti iconici; il digitale è supporto e backup.</p>
+            <p class="eyebrow">Pellicola e digitale, insieme</p>
+            <p class="mt-2 text-sm leading-relaxed text-muted-foreground">Ogni matrimonio lo fotografo su pellicola e in digitale. Non dovete scegliere: la pellicola porta il carattere, il digitale racconta tutto il resto della giornata.</p>
           </li>
         </ol>
         <a href={href("/il-mio-metodo")} class="btn-ghost mt-8 inline-block no-underline">Leggi tutto il metodo</a>
@@ -363,21 +366,31 @@ const alignFor = (i: number): "center" | "right" | "left" =>
     </div>
   </section>
 
-  <section class="border-y border-border bg-secondary px-6 py-20">
-    <div class="mx-auto grid max-w-5xl grid-cols-1 gap-10 md:grid-cols-3">
-      <div>
-        <p class="eyebrow">{heroContent.shot1Eyebrow}</p>
-        <p class="mt-3 text-sm leading-relaxed text-muted-foreground">{heroContent.shot1Text}</p>
+  <section id="dove-fotografo" class="border-y border-border bg-secondary px-6 py-20" aria-labelledby="dove-fotografo-title">
+    <div class="mx-auto max-w-5xl">
+      <p class="text-[0.6875rem] font-semibold tracking-[0.22em] uppercase text-foreground">Dove fotografo</p>
+      <h2 id="dove-fotografo-title" class="font-display mt-3 text-3xl font-medium leading-tight sm:text-4xl">Friuli, Veneto e Austria</h2>
+
+      <div class="mt-12 grid grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-8">
+        <div>
+          <h3 class="eyebrow">Friuli Venezia Giulia</h3>
+          <p class="mt-4 text-sm leading-relaxed text-muted-foreground">Udine · Pordenone · Trieste · Gorizia · Collio · Lignano</p>
+        </div>
+        <div>
+          <h3 class="eyebrow">Veneto</h3>
+          <p class="mt-4 text-sm leading-relaxed text-muted-foreground">Treviso · Venezia · Padova · Belluno · Colli Asolani</p>
+        </div>
+        <div>
+          <h3 class="eyebrow">Austria</h3>
+          <p class="mt-4 text-sm leading-relaxed text-muted-foreground">Carinzia · Villach · Klagenfurt · Wörthersee · Stiria · Graz</p>
+        </div>
       </div>
-      <div>
-        <p class="eyebrow">{heroContent.shot2Eyebrow}</p>
-        <p class="mt-3 text-sm leading-relaxed text-muted-foreground">{heroContent.shot2Text}</p>
+
+      <div class="mt-12 flex items-center justify-center gap-4 border-t border-border pt-8">
+        <span class="hidden h-px w-8 bg-border sm:block" aria-hidden="true"></span>
+        <p class="font-display text-[1.0625rem] italic leading-normal text-muted-foreground text-balance sm:text-lg">e ovunque vi porti la vostra storia.</p>
+        <span class="hidden h-px w-8 bg-border sm:block" aria-hidden="true"></span>
       </div>
-      <div>
-        <p class="eyebrow">{heroContent.shot3Eyebrow}</p>
-        <p class="mt-3 text-sm leading-relaxed text-muted-foreground">{heroContent.shot3Text}</p>
-      </div>
-      <a href={href("/il-mio-metodo")} class="md:col-span-3 justify-self-center rounded-control btn-ghost no-underline">{heroContent.shotsCta}</a>
     </div>
   </section>
 
