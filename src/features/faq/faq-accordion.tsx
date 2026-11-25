@@ -203,14 +203,16 @@ export default function FaqAccordion({
                         onClick={() => toggleQuestion(q.id)}
                         className="relative flex w-full items-center justify-between gap-6 px-1 py-7 text-left focus:outline-none"
                       >
-                        <span className="font-display text-lg font-medium leading-snug tracking-tight text-foreground sm:text-xl">{q.question}</span>
+                        <span className="font-sans text-lg font-medium leading-snug tracking-tight text-foreground sm:text-xl">{q.question}</span>
                         <span
                           aria-hidden="true"
-                          className={`grid h-8 w-8 shrink-0 place-items-center rounded-full border text-sm text-foreground transition-[transform,border-color,background-color] duration-500 ease-fluid ${
+                          className={`grid h-8 w-8 shrink-0 place-items-center rounded-full border text-foreground transition-[transform,border-color,background-color] duration-500 ease-fluid ${
                             expanded ? "rotate-45 border-foreground bg-foreground text-primary-foreground" : "border-border group-hover:border-foreground"
                           }`}
                         >
-                          +
+                          <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+                            <path d="M8 3v10M3 8h10" />
+                          </svg>
                         </span>
                       </button>
                     </h3>

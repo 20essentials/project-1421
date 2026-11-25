@@ -49,6 +49,33 @@ test("accordion collapses and reopens a question", async ({ page }) => {
   await expect(panel.locator("p").first()).toContainText(/.+/);
 });
 
+test("question titles are sans-serif and the toggle icon is centered in both states", async ({ page }) => {
+  await page.goto("/faq");
+  const button = page.locator("h3 button[id$='-button']", { hasText: "Dove lavori come fotografo di matrimoni?" });
+  const fontFamily = await button.locator("span").first().evaluate((el) => getComputedStyle(el).fontFamily);
+  expect(fontFamily).toContain("Inter");
+  expect(fontFamily).not.toContain("Cormorant");
+
+  const icon = button.locator("span").last();
+  await expect(icon.locator("svg path")).toHaveAttribute("d", "M8 3v10M3 8h10");
+  const expectCentered = async () => {
+    const offset = await icon.evaluate((el) => {
+      const box = el.getBoundingClientRect();
+      const glyph = el.querySelector("svg")!.getBoundingClientRect();
+      return {
+        dx: glyph.x + glyph.width / 2 - (box.x + box.width / 2),
+        dy: glyph.y + glyph.height / 2 - (box.y + box.height / 2),
+      };
+    });
+    expect(Math.abs(offset.dx)).toBeLessThan(0.5);
+    expect(Math.abs(offset.dy)).toBeLessThan(0.5);
+  };
+
+  await expectCentered();
+  await clickToggling(button, "aria-expanded", "false");
+  await expectCentered();
+});
+
 test("search filters questions and can be cleared", async ({ page }) => {
   await page.goto("/faq");
   await page.waitForLoadState("load");
