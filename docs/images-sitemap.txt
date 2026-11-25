@@ -245,3 +245,15 @@ yt:5gY0HgkSVjU maxresdefault.jpg (YouTube, 1280x720) -> https://static.wixstatic
 # 2026-11-24 — index hero slide 1, primary image replaced (user request).
 stefano-lunardi-assets/foto/autentiche e naturali/_D3S8972.jpg (1.6MB) -> 600582_bce4bc5112ed48f582001d7abb6384b5~mv2.avif (605KB, q62)  # index hero heroImage (gruppo matrimonio in salto)
 # Replaces 600582_d3da93d4d8584fd282a085b093fc7b9d~mv2.avif as Home.heroImage (old file kept in Media Manager).
+
+# 2026-11-25 — index hero slide 1, primary image replaced again (user request).
+public/new.jpg (4.1MB, 2752x1536) -> https://static.wixstatic.com/media/600582_e3183a9d8c304d518ed48986180439ef~mv2.avif (644KB, AVIF q60, max 2400x3200)  # Home.heroImage
+# Replaces 600582_bce4bc5112ed48f582001d7abb6384b5~mv2.avif as Home.heroImage (old file kept in Media Manager).
+
+# 2026-11-25 — same image re-uploaded at full quality (user request: 100% quality AVIF).
+public/image.png_a91f575b_2K.jpg (4.1MB, 2752x1536) -> https://static.wixstatic.com/media/600582_c1c81cc82b87404b822677aed4dcc7b4~mv2.avif (5.2MB, AVIF q100, original size)  # Home.heroImage
+# Replaces 600582_e3183a9d8c304d518ed48986180439ef~mv2.avif as Home.heroImage (old file kept in Media Manager).
+
+# 2026-11-25 — hero left image replaced from user-supplied my-img.jpg (AVIF q100).
+public/my-img.jpg (4.1MB, 2752x1536, sha256 28adc65d306cb984d1e86b89e231a346951b0862d9f0907da5d8b5f028cfcf11) -> https://static.wixstatic.com/media/600582_b7b6237f50864490822e1dd24cd9b0e0~mv2.avif (5.2MB, AVIF q100, original size)  # Home.heroImage
+# Replaces 600582_c1c81cc82b87404b822677aed4dcc7b4~mv2.avif as Home.heroImage (old file kept in Media Manager).
