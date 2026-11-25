@@ -18,3 +18,24 @@ describe("scrollToTarget", () => {
     expect(target.scrollIntoView).toHaveBeenCalledWith({ block: "start" });
   });
 });
+
+describe("onLenisReady", () => {
+  it("runs registered setups once Lenis mounts and stops running them after unsubscribe", async () => {
+    vi.resetModules();
+    vi.stubGlobal("window", { matchMedia: () => ({ matches: false }) });
+    vi.doMock("lenis", () => ({ default: class {} }));
+    const mod = await import("@/shared/smooth-scroll");
+    const setup = vi.fn();
+    const off = mod.onLenisReady(setup);
+
+    mod.mountSmoothScroll();
+    await vi.waitFor(() => expect(setup).toHaveBeenCalledTimes(1));
+
+    off();
+    mod.mountSmoothScroll();
+    expect(setup).toHaveBeenCalledTimes(1);
+
+    vi.unstubAllGlobals();
+    vi.doUnmock("lenis");
+  });
+});

@@ -10,8 +10,30 @@
  * Con JS activo marca data-ready y el CSS las vuelve sticky/absolutas.
  */
 
+import Snap from "lenis/snap";
+import { onLenisReady } from "@/shared/smooth-scroll";
+
 const SCROLL_PER_SCENE = 1.6; // vh de scroll por escena (wipe + dwell del copy)
 const TAU = 0.4; // mitad del ancho del wipe, en vh (como el original)
+const SNAP_DURATION = 0.9;
+
+export const heroSnapEasing = (t: number): number => -(Math.cos(Math.PI * t) - 1) / 2;
+
+export const heroSnapPoints = (
+  rootTop: number,
+  segment: number,
+  count: number,
+  rootEnd = rootTop + count * segment,
+): number[] => {
+  if (count < 2 || segment <= 0) return [];
+  const points = [rootTop];
+  for (let i = 1; i < count; i++) points.push(rootTop + i * segment + segment / 2);
+  points.push(rootEnd);
+  return points;
+};
+
+export const isHeroSnapActive = (y: number, first: number, last: number): boolean =>
+  y >= first - 1 && y <= last + 1;
 
 const clamp = (x: number, a = 0, b = 1) => Math.min(b, Math.max(a, x));
 const smooth = (x: number) => {
@@ -49,6 +71,49 @@ export function mountScrollWorld() {
   let vh = window.innerHeight;
   let laidOutW = window.innerWidth;
 
+  let snap: Snap | null = null;
+  let snapActive = false;
+  let removeSnapPoints: Array<() => void> = [];
+
+  const syncSnap = () => {
+    if (!snap) return;
+    const active = isHeroSnapActive(window.scrollY, scenes[0].start, scenes[n - 1].end + vh);
+    if (active === snapActive) return;
+    snapActive = active;
+    if (active) snap.start();
+    else snap.stop();
+  };
+
+  const applySnapPoints = () => {
+    if (!snap) return;
+    const instance = snap;
+    for (const remove of removeSnapPoints) remove();
+    removeSnapPoints = heroSnapPoints(scenes[0].start, SCROLL_PER_SCENE * vh, n, scenes[n - 1].end + vh).map(
+      (value) => instance.add(value),
+    );
+    syncSnap();
+  };
+
+  onLenisReady((instance) => {
+    snap = new Snap(instance, {
+      type: "lock",
+      duration: SNAP_DURATION,
+      easing: heroSnapEasing,
+      debounce: 0,
+      distanceThreshold: Number.POSITIVE_INFINITY,
+    });
+    snap.stop();
+    snapActive = false;
+    applySnapPoints();
+    return () => {
+      for (const remove of removeSnapPoints) remove();
+      removeSnapPoints = [];
+      snap?.destroy();
+      snap = null;
+      snapActive = false;
+    };
+  });
+
   const layout = () => {
     // Alto de referencia: el del propio viewport sticky, que en CSS es
     // 100lvh — unidad estable que NO cambia a mitad del gesto cuando la
@@ -60,19 +125,21 @@ export function mountScrollWorld() {
     laidOutW = window.innerWidth;
     // La altura del track en px (no vh): los segmentos quedan anclados aunque
     // la barra de URL mobile cambie el 100vh del CSS.
-    root.style.height = `${Math.round(n * SCROLL_PER_SCENE * vh)}px`;
+    root.style.height = `${Math.round(n * SCROLL_PER_SCENE * vh + vh)}px`;
     const seg = SCROLL_PER_SCENE * vh;
     const trackTop = root.getBoundingClientRect().top + window.scrollY;
     scenes.forEach((s, i) => {
       s.start = trackTop + i * seg;
       s.end = s.start + seg;
     });
+    applySnapPoints();
   };
 
   let ticking = false;
 
   const read = () => {
     ticking = false;
+    syncSnap();
     const y = window.scrollY;
     const t = Math.min(TAU * vh, (scenes[0].end - scenes[0].start) * 0.5);
 

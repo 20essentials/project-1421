@@ -11,6 +11,27 @@ import type Lenis from "lenis";
  */
 let lenis: Lenis | null = null;
 
+export type LenisSetup = (lenis: Lenis) => void | (() => void);
+
+const setups = new Set<LenisSetup>();
+const teardowns = new Map<LenisSetup, () => void>();
+
+function runLenisSetup(setup: LenisSetup): void {
+  if (!lenis) return;
+  const teardown = setup(lenis);
+  if (typeof teardown === "function") teardowns.set(setup, teardown);
+}
+
+export function onLenisReady(setup: LenisSetup): () => void {
+  setups.add(setup);
+  if (lenis) runLenisSetup(setup);
+  return () => {
+    teardowns.get(setup)?.();
+    teardowns.delete(setup);
+    setups.delete(setup);
+  };
+}
+
 /** Smooth scroll is an enhancement: visitors who ask for reduced motion keep native scrolling. */
 export function shouldEnableSmoothScroll(prefersReducedMotion: boolean): boolean {
   return !prefersReducedMotion;
@@ -27,6 +48,7 @@ export function mountSmoothScroll(): void {
       allowNestedScroll: true,
       stopInertiaOnNavigate: true,
     });
+    for (const setup of setups) runLenisSetup(setup);
   });
 }
 
