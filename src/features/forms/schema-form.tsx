@@ -3,9 +3,18 @@ import { useWixForm, otherValue, FORM_ERROR } from "@/features/forms/use-wix-for
 import type { FormChoice, FormDto, FormFieldDto } from "@/features/forms/types";
 import { COMBOBOX_MIN_CHOICES, filterChoices, flagFor } from "@/features/forms/choice-combobox-core";
 import { HONEYPOT_NAME } from "@/features/forms/spam-core";
+import { privacyConsentError } from "@/features/forms/privacy-consent-core";
 import { trackEvent } from "@/shared/analytics";
 
 const OTHER_SELECT_VALUE = "__other__";
+
+export interface PrivacyConsent {
+  href: string;
+  prefix: string;
+  linkLabel: string;
+  suffix: string;
+  errorMessage: string;
+}
 
 function ErrorText({ id, message }: { id: string; message?: string }) {
   if (!message) return null;
@@ -326,8 +335,18 @@ function Field({ f, f2 }: { f: FormFieldDto; f2: ReturnType<typeof useWixForm> }
   );
 }
 
-export default function SchemaForm({ formId, initialForm }: { formId: string; initialForm?: FormDto }) {
+export default function SchemaForm({
+  formId,
+  initialForm,
+  privacyConsent,
+}: {
+  formId: string;
+  initialForm?: FormDto;
+  privacyConsent?: PrivacyConsent;
+}) {
   const f = useWixForm(formId, { initialForm });
+  const [consentChecked, setConsentChecked] = useState(false);
+  const [consentError, setConsentError] = useState("");
 
   if (f.outcome && f.outcome.action !== "CHECKOUT" && f.outcome.action !== "REDIRECT") {
     return (
@@ -367,6 +386,15 @@ export default function SchemaForm({ formId, initialForm }: { formId: string; in
     <form
       noValidate
       onSubmit={async (e) => {
+        if (privacyConsent) {
+          const error = privacyConsentError(consentChecked, privacyConsent.errorMessage);
+          if (error) {
+            e.preventDefault();
+            setConsentError(error);
+            return false;
+          }
+          setConsentError("");
+        }
         const outcome = await f.submit(e);
         if (outcome) trackEvent("FormSubmit", { form_id: formId });
         if (outcome && (outcome.action === "CHECKOUT" || outcome.action === "REDIRECT") && outcome.url) {
@@ -400,6 +428,32 @@ export default function SchemaForm({ formId, initialForm }: { formId: string; in
           </div>
         ))}
       </div>
+
+      {privacyConsent && (
+        <div className="mt-6">
+          <label className="flex cursor-pointer items-start gap-3 text-sm leading-relaxed text-foreground">
+            <input
+              type="checkbox"
+              checked={consentChecked}
+              onChange={(e) => {
+                setConsentChecked(e.currentTarget.checked);
+                setConsentError("");
+              }}
+              aria-describedby="err-privacy-consent"
+              aria-invalid={Boolean(consentError)}
+              className="mt-0.5 h-4 w-4 shrink-0 accent-foreground"
+            />
+            <span>
+              {privacyConsent.prefix}
+              <a href={privacyConsent.href} className="underline underline-offset-2 hover:text-accent">
+                {privacyConsent.linkLabel}
+              </a>
+              {privacyConsent.suffix}
+            </span>
+          </label>
+          <ErrorText id="err-privacy-consent" message={consentError} />
+        </div>
+      )}
 
       {f.errors[FORM_ERROR] && (
         <p className="mt-4 text-sm text-destructive" role="alert">

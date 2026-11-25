@@ -5,6 +5,8 @@ import { getForm } from "@/features/forms/forms";
 import { getSiteChrome } from "@/features/site-chrome/site-chrome";
 import type { FormDto } from "@/features/forms/types";
 import { getSitePageContent } from "@/features/site-content/site-content";
+import { currentLocale } from "@/features/i18n/current-locale";
+import { localizedHref } from "@/features/i18n/localized-path";
 
 const FORM_ID = "9ab7aa27-14c9-4278-a9e5-c530df27d1ac";
 
@@ -17,6 +19,14 @@ try {
 const content = await getSitePageContent("contatti", Astro.request.headers);
 const labels = await getSiteChrome(Astro.request.headers);
 const label = (key: string, fallback: string) => labels[key] || fallback;
+const locale = currentLocale(Astro.url, Astro.request.headers);
+const privacyConsent = {
+  href: localizedHref(locale, "/legal/privacy"),
+  prefix: label("contactPrivacyConsentPrefix", "Ho letto l'"),
+  linkLabel: label("contactPrivacyConsentLink", "informativa privacy"),
+  suffix: label("contactPrivacyConsentSuffix", "."),
+  errorMessage: label("contactPrivacyConsentError", "Devi accettare l'informativa privacy per inviare la richiesta."),
+};
 ---
 
 <SiteLayout title={content.title} description={content.intro}>
@@ -30,7 +40,7 @@ const label = (key: string, fallback: string) => labels[key] || fallback;
     <h2 class="font-display text-2xl font-medium sm:text-3xl">{label("contactMessageTitle", "Il vostro messaggio")}</h2>
     <p class="mt-2 text-sm text-muted-foreground">{label("contactResponseNote", "Risposta entro 48 ore, senza fretta e senza pressione commerciale.")}</p>
     <div class="mt-8">
-      <SchemaForm client:load formId={FORM_ID} initialForm={form ?? undefined} />
+      <SchemaForm client:load formId={FORM_ID} initialForm={form ?? undefined} privacyConsent={privacyConsent} />
     </div>
   </section>
 
