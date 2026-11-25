@@ -38,33 +38,7 @@ interface Props {
 }
 const { title, description, headFallback = false } = Astro.props;
 const NEWSLETTER_FORM_ID = "99167414-c329-4e8f-8f02-db033652f376";
-const fontVariables = [
-  "--font-inter",
-  "--font-jost",
-  "--font-cormorant-garamond",
-  "--font-playfair-display",
-  "--font-source-sans-3",
-  "--font-bodoni-moda",
-  "--font-lora",
-  "--font-libre-baskerville",
-  "--font-nunito-sans",
-  "--font-cinzel",
-  "--font-raleway",
-  "--font-dm-serif-display",
-  "--font-dm-sans",
-  "--font-fraunces",
-  "--font-instrument-serif",
-  "--font-instrument-sans",
-  "--font-gloock",
-  "--font-young-serif",
-  "--font-ovo",
-  "--font-figtree",
-  "--font-epilogue",
-  "--font-space-grotesk",
-  "--font-syne",
-  "--font-bricolage-grotesque",
-  "--font-mulish",
-] as const;
+const fontVariables = ["--font-inter", "--font-cormorant-garamond"] as const;
 
 let newsletterForm: FormDto | null = null;
 try {
@@ -139,7 +113,7 @@ const structuredData = JSON.stringify({
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {fontVariables.map((cssVariable) => (
-      <Font cssVariable={cssVariable} preload={cssVariable === "--font-inter" || cssVariable === "--font-jost"} />
+      <Font cssVariable={cssVariable} preload={cssVariable === "--font-inter" || cssVariable === "--font-cormorant-garamond"} />
     ))}
     {/* Don't offer to translate / switch language: every page is already
         authored per locale (it/es/en/de) and the site redirects visitors by

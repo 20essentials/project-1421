@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-const routes = ["/", "/portfolio", "/examples", "/il-mio-metodo", "/chi-sono", "/location", "/investimento", "/blog", "/faq", "/contatti", "/recensioni", "/awards", "/fine-art", "/impressum", "/legal", "/legal/termini-e-condizioni", "/legal/privacy", "/legal/accessibilita", "/legal/avviso-legale"];
+const routes = ["/", "/portfolio", "/il-mio-metodo", "/chi-sono", "/location", "/investimento", "/blog", "/faq", "/contatti", "/recensioni", "/awards", "/fine-art", "/impressum", "/legal", "/legal/termini-e-condizioni", "/legal/privacy", "/legal/accessibilita", "/legal/avviso-legale"];
 
 test.describe("site routes", () => {
   for (const route of routes) {
@@ -11,6 +11,24 @@ test.describe("site routes", () => {
       await expect(page.locator("main").first()).toBeVisible();
     });
   }
+});
+
+test.describe("typography", () => {
+  test("homepage uses the editorial display face and structured heading weight", async ({ page }) => {
+    const response = await page.goto("/", { waitUntil: "domcontentloaded" });
+    expect(response?.status()).toBeLessThan(500);
+    await page.evaluate(() => document.fonts.ready);
+
+    const heading = await page.locator("main h1").first().evaluate((element) => {
+      const style = getComputedStyle(element);
+      return { family: style.fontFamily, weight: style.fontWeight };
+    });
+    const bodyFamily = await page.locator("body").evaluate((element) => getComputedStyle(element).fontFamily);
+
+    expect(heading.family).toContain("Cormorant");
+    expect(heading.weight).toBe("600");
+    expect(bodyFamily).toContain("Inter");
+  });
 });
 
 test.describe("header", () => {

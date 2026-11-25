@@ -23,7 +23,7 @@
   --radius-control: 0px;
 
   --font-sans: var(--font-inter), system-ui, sans-serif;
-  --font-display: var(--font-jost), var(--font-inter), system-ui, sans-serif;
+  --font-display: var(--font-cormorant-garamond), Georgia, serif;
 
   --ease-fluid: cubic-bezier(0.32, 0.72, 0, 1);
 }
@@ -132,6 +132,9 @@
   }
   .font-display {
     font-family: var(--font-display);
+  }
+  .font-display:is(h1, h2, h3, h4, h5, h6) {
+    font-weight: 600;
   }
 
   /* Dot-grid texture: the portfolio coil's dotted backdrop as a reusable
