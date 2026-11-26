@@ -91,6 +91,8 @@ public/android-chrome-192x192.png -> https://static.wixstatic.com/media/600582_6
 # icono del manifest ("resource isn't a valid image"). Regenerado desde
 # public/favicon.svg a 192x192 (canvas de Chromium) y re-subido:
 site.webmanifest icon 192x192 (regenerado desde public/favicon.svg) -> https://static.wixstatic.com/media/600582_0246be52d6fe4016bddd36f014a0979a~mv2.png
+# 2026-11-26: SVG favicon subido al Media Manager porque Wix sirve /favicon.svg como ICO en el edge publicado.
+public/favicon.svg -> https://static.wixstatic.com/shapes/600582_b61128900f3b4f5da3e8d3fed66528e7.svg
 # 2026-11-24T11:38:03.706Z — portfolio rebuild: 4 Wix Portfolio collections from stefano-lunardi-assets/foto (AVIF q60, max 1800x2400)
 C:\Users\amoil\Desktop\stefanolunardi-photographer\stefano-lunardi-assets\foto\artistiche matirmoni\11_veilOKLOW.jpg -> https://static.wixstatic.com/media/600582_83851daf808d4f31bb7fb735c0e25443~mv2.avif
 C:\Users\amoil\Desktop\stefanolunardi-photographer\stefano-lunardi-assets\foto\artistiche matirmoni\05_veil.jpg -> https://static.wixstatic.com/media/600582_96ebb5f7bdc84b2982ceeaafbbd87bcd~mv2.avif
