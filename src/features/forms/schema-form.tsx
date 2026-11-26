@@ -347,6 +347,9 @@ export default function SchemaForm({
   const f = useWixForm(formId, { initialForm });
   const [consentChecked, setConsentChecked] = useState(false);
   const [consentError, setConsentError] = useState("");
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => setHydrated(true), []);
 
   if (f.outcome && f.outcome.action !== "CHECKOUT" && f.outcome.action !== "REDIRECT") {
     return (
@@ -385,6 +388,7 @@ export default function SchemaForm({
   return (
     <form
       noValidate
+      data-hydrated={hydrated ? "true" : undefined}
       onSubmit={async (e) => {
         if (privacyConsent) {
           const error = privacyConsentError(consentChecked, privacyConsent.errorMessage);

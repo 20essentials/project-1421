@@ -9,6 +9,8 @@ test("il modulo di contatti richiede il consenso privacy", async ({ page }) => {
     "href",
     "/it/legal/privacy",
   );
+  const form = page.locator("form[data-hydrated='true']").filter({ has: consent });
+  await expect(form).toBeVisible();
 
   await page.getByRole("button", { name: "Invia" }).click();
   await expect(page.locator("#err-privacy-consent")).toHaveText(
