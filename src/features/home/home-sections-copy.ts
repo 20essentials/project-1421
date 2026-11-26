@@ -71,6 +71,10 @@ export interface HomeSectionsCopy {
     cta: string;
     newlyweds: string;
   };
+  faq: {
+    intro: string;
+    readMore: string;
+  };
   imageAlts: {
     hero: string;
     heroSecondary: string;
@@ -184,6 +188,11 @@ export const HOME_SECTIONS_COPY: Record<Locale, HomeSectionsCopy> = {
       intro: "Storie vere, raccontate con le parole di chi le ha vissute.",
       cta: "Tutte le recensioni",
       newlyweds: "Sposi",
+    },
+    faq: {
+      intro:
+        "Le risposte che cercate prima ancora di scrivere: come lavoriamo, gli incontri, le trasferte, i tempi di consegna. Tre in anteprima qui, tutte nella pagina FAQ.",
+      readMore: "Leggi la risposta completa",
     },
     stats: {
       ariaLabel: "Numeri e riconoscimenti",
@@ -307,6 +316,11 @@ export const HOME_SECTIONS_COPY: Record<Locale, HomeSectionsCopy> = {
       cta: "Ver todas las reseñas",
       newlyweds: "Novios",
     },
+    faq: {
+      intro:
+        "Las respuestas que buscáis antes incluso de escribir: cómo trabajo, los encuentros, los desplazamientos, los plazos de entrega. Tres aquí, todas en la página de FAQ.",
+      readMore: "Leer la respuesta completa",
+    },
     stats: {
       ariaLabel: "Cifras y reconocimientos",
       items: [
@@ -429,6 +443,11 @@ export const HOME_SECTIONS_COPY: Record<Locale, HomeSectionsCopy> = {
       cta: "Read all reviews",
       newlyweds: "Newlyweds",
     },
+    faq: {
+      intro:
+        "The answers you look for before you even write: how I work, the meetings, the travel, the delivery times. Three here, all of them on the FAQ page.",
+      readMore: "Read the full answer",
+    },
     stats: {
       ariaLabel: "Numbers and awards",
       items: [
@@ -550,6 +569,11 @@ export const HOME_SECTIONS_COPY: Record<Locale, HomeSectionsCopy> = {
       intro: "Echte Geschichten, erzählt mit den Worten derer, die sie erlebt haben.",
       cta: "Alle Rezensionen lesen",
       newlyweds: "Brautpaar",
+    },
+    faq: {
+      intro:
+        "Die Antworten, die Sie suchen, bevor Sie überhaupt schreiben: wie ich arbeite, die Treffen, die Anreise, die Lieferzeiten. Drei hier, alle auf der FAQ-Seite.",
+      readMore: "Die vollständige Antwort lesen",
     },
     stats: {
       ariaLabel: "Zahlen und Auszeichnungen",

@@ -5,6 +5,7 @@ import ArtisticParallax from "@/features/home/artistic-parallax.astro";
 import ReviewsBento from "@/features/reviews/reviews-bento.astro";
 import { fetchPosts, postMetaLine, postPath } from "@/features/blog/posts";
 import { fetchFaq } from "@/features/faq/faq";
+import { faqDeepLink } from "@/features/faq/faq-core";
 import { getHomeContent } from "@/features/site-content/site-content";
 import { HOME_SECTIONS_COPY, localizedGridTitle } from "@/features/home/home-sections-copy";
 import { currentLocale } from "@/features/i18n/current-locale";
@@ -35,6 +36,7 @@ const ART_GALLERY_RATIO = 3024 / 4032;
 const VEIL_RATIO = 3425 / 4961;
 
 const faqPreview = faq.questions.slice(0, 3);
+const faqCategoryTitle = (id: string): string => faq.categories.find((c) => c.id === id)?.title ?? "";
 const latestPosts = posts?.posts.slice(0, 3) ?? [];
 
 const homeAwardLogos = [
@@ -581,23 +583,37 @@ const alignFor = (i: number): "center" | "right" | "left" =>
 
   {
     faqPreview.length > 0 && (
-      <section class="border-y border-border bg-secondary px-6 py-24">
-        <div class="mx-auto max-w-3xl">
-          <div class="text-center">
-            <p class="eyebrow text-muted-foreground">{heroContent.faqEyebrow}</p>
-            <h2 class="font-display mt-3 text-3xl font-medium tracking-tight sm:text-4xl">{heroContent.faqTitle}</h2>
+      <section class="home-faq dot-grid border-y border-border bg-secondary px-6 py-24 sm:py-28" aria-labelledby="home-faq-title">
+        <div class="mx-auto max-w-7xl">
+          <div class="flex flex-col items-start gap-8 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p class="eyebrow text-muted-foreground">{heroContent.faqEyebrow}</p>
+              <h2 id="home-faq-title" class="font-display home-faq__title">{heroContent.faqTitle}</h2>
+              <p class="home-faq__intro">{copy.faq.intro}</p>
+            </div>
+            <a href={href("/faq")} class="home-faq__cta rounded-control btn-ghost no-underline">{heroContent.faqCta}</a>
           </div>
-          <dl class="mt-14 border-b border-border">
-            {faqPreview.map((q) => (
-              <div class="group border-t border-border py-7">
-                <dt class="font-display text-lg font-medium leading-snug tracking-tight text-foreground sm:text-xl">{q.question}</dt>
-                <dd class="mt-3 max-w-[62ch] text-[15px] leading-relaxed text-muted-foreground">{q.answerText}</dd>
-              </div>
-            ))}
-          </dl>
-          <div class="mt-12 text-center">
-              <a href={href("/faq")} class="rounded-control border border-foreground px-8 py-3 text-sm font-medium no-underline transition-colors hover:bg-foreground hover:text-primary-foreground">{heroContent.faqCta}</a>
-          </div>
+          <ul class="home-faq__grid">
+            {faqPreview.map((q, i) => {
+              const categoryTitle = faqCategoryTitle(q.categoryId);
+              return (
+                <li class="home-faq__card">
+                  <div class="home-faq__card-top">
+                    <span class="font-display home-faq__num" aria-hidden="true">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    {categoryTitle && <span class="eyebrow home-faq__tag">{categoryTitle}</span>}
+                  </div>
+                  <h3 class="font-display home-faq__q">{q.question}</h3>
+                  <p class="home-faq__a">{q.answerText}</p>
+                  <a href={faqDeepLink(q, href("/faq"), q.categoryId)} class="home-faq__more no-underline">
+                    {copy.faq.readMore}
+                    <span class="home-faq__more-arrow" aria-hidden="true">→</span>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </section>
     )
@@ -1185,6 +1201,132 @@ const alignFor = (i: number): "center" | "right" | "left" =>
         animation-timeline: view();
         animation-range: entry 0% entry 65%;
       }
+    }
+  }
+
+  .home-faq__title {
+    margin-top: 0.75rem;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+  .home-faq__intro {
+    max-width: 56ch;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    line-height: 1.75;
+    color: var(--color-muted-foreground);
+  }
+  .home-faq__cta {
+    white-space: nowrap;
+  }
+  .home-faq__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+    margin-top: 3.5rem;
+    padding: 0;
+    list-style: none;
+  }
+  @media (min-width: 640px) {
+    .home-faq__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.25rem;
+      margin-top: 4rem;
+    }
+  }
+  .home-faq__card {
+    display: flex;
+    flex-direction: column;
+    padding: 1.75rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-background);
+    transition:
+      transform 350ms var(--ease-fluid),
+      border-color 350ms var(--ease-fluid),
+      box-shadow 350ms var(--ease-fluid);
+  }
+  .home-faq__card:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-foreground);
+    box-shadow: 0 18px 44px -30px color-mix(in srgb, var(--color-foreground) 45%, transparent);
+  }
+  .home-faq__card-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .home-faq__num {
+    font-size: 1.75rem;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--color-muted-foreground);
+    font-variant-numeric: lining-nums tabular-nums;
+    transition: color 350ms var(--ease-fluid);
+  }
+  .home-faq__card:hover .home-faq__num {
+    color: var(--color-accent);
+  }
+  .home-faq__tag {
+    font-size: 0.625rem;
+    color: var(--color-accent);
+    text-align: right;
+  }
+  .home-faq__q {
+    margin-top: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+  }
+  .home-faq__a {
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: var(--color-muted-foreground);
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .home-faq__more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: auto;
+    padding-top: 1.5rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-foreground);
+    transition: color 350ms var(--ease-fluid);
+  }
+  .home-faq__more:hover {
+    color: var(--color-accent);
+  }
+  .home-faq__more-arrow {
+    display: inline-block;
+    transition: transform 350ms var(--ease-fluid);
+  }
+  .home-faq__more:hover .home-faq__more-arrow {
+    transform: translateX(4px);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .home-faq__card,
+    .home-faq__num,
+    .home-faq__more,
+    .home-faq__more-arrow {
+      transition: none;
+    }
+    .home-faq__card:hover {
+      transform: none;
+    }
+    .home-faq__more:hover .home-faq__more-arrow {
+      transform: none;
     }
   }
 
