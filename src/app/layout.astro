@@ -120,6 +120,32 @@ const structuredData = JSON.stringify({
         language itself. */}
     <meta name="google" content="notranslate" />
     <meta http-equiv="content-language" content={languageTag(locale)} />
+    <script type="speculationrules" is:inline>
+      {
+        "prefetch": [
+          {
+            "where": {
+              "and": [
+                { "href_matches": "/*" },
+                {
+                  "not": {
+                    "selector_matches": [
+                      "[href^='#']",
+                      "[href^='mailto:']",
+                      "[href^='tel:']",
+                      "[target='_blank']",
+                      "[download]",
+                      "[data-locale-switch]"
+                    ]
+                  }
+                }
+              ]
+            },
+            "eagerness": "moderate"
+          }
+        ]
+      }
+    </script>
     {import.meta.env.DEV && (
       <script is:inline>
         (() => {
