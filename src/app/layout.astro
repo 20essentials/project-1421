@@ -26,6 +26,7 @@ import { getSiteChrome } from "@/features/site-chrome/site-chrome";
 import { toNavItems } from "@/features/site-chrome/site-chrome-core";
 import { fetchSiteInfo } from "@/features/site-info/site-info";
 import { SITE_INFO_FALLBACKS, type SiteInfo } from "@/features/site-info/site-info-core";
+import { shouldEmitSecondaryLocaleTitle } from "@/app/seo-head";
 
 interface Props {
   title?: string;
@@ -221,8 +222,9 @@ const structuredData = JSON.stringify({
     {/* Wix's viewer injects one locale-level title ("Es | …") for every page of a secondary
         locale and reuses it across client-side (soft) navigations. Static pages own their real
         title in the page data, so emit it — like the shipped templates do — and give the viewer
-        a per-page tag to resolve on soft navigation. Item pages pass no title (SEO.Tags owns). */}
-    {!emitFallbackHead && !hasSeoTags && title && (
+        a per-page tag to resolve on soft navigation. The default locale already gets its title
+        from the dashboard; emitting a second one duplicates it. */}
+    {shouldEmitSecondaryLocaleTitle(locale, emitFallbackHead, hasSeoTags, Boolean(title)) && (
       <>
         <title>{resolvedTitle}</title>
         {description && <meta name="description" content={resolvedDescription} />}
