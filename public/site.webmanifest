@@ -3,7 +3,7 @@
   "short_name": "Stefano Lunardi",
   "icons": [
     { "src": "https://static.wixstatic.com/media/600582_0246be52d6fe4016bddd36f014a0979a~mv2.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "/favicon.svg", "sizes": "1321x1321", "type": "image/svg+xml" }
+    { "src": "https://static.wixstatic.com/shapes/600582_b61128900f3b4f5da3e8d3fed66528e7.svg", "sizes": "any", "type": "image/svg+xml" }
   ],
   "theme_color": "#08090a",
   "background_color": "#08090a",

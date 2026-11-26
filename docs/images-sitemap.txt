@@ -289,3 +289,15 @@ stefano-lunardi-assets/foto/foto artistiche non matrimoni/_DSC7052.jpg (cropped 
 stefano-lunardi-assets/foto/foto artistiche non matrimoni/_MG_3818.jpg (cropped 1200x630 JPEG) -> https://static.wixstatic.com/media/600582_071bef0d92224d4ab7ad382a36f2d2a4~mv2.jpg  # og:legal resi-e-rimborsi
 stefano-lunardi-assets/foto/foto artistiche non matrimoni/_Z7I0893_1.jpg (cropped 1200x630 JPEG) -> https://static.wixstatic.com/media/600582_eff2c240c632482ba30acb9aca33660b~mv2.jpg  # og:legal termini-e-condizioni
 stefano-lunardi-assets/foto/foto artistiche non matrimoni/_Z7I4670.jpg (cropped 1200x630 JPEG) -> https://static.wixstatic.com/media/600582_a086602e7b9d4e3ebab759373433f745~mv2.jpg  # og:legal accordo-utente
+
+# 2026-11-26 — favicon 16x16/32x32: the original public/favicon.svg has 0 near-white pixels at 16x16,
+# so the small sizes use a simplified white S on the same #08090a rounded square. Large sizes keep the SVG.
+temp/favicon-small-simplified-16.png -> https://static.wixstatic.com/media/600582_2ae8b80b777540379b8366b38a897034~mv2.png  # favicon 16x16
+temp/favicon-small-simplified-32.png -> https://static.wixstatic.com/media/600582_8da5d525d72249298e640322b076e8f3~mv2.png  # favicon 32x32
+
+# 2026-11-26 — unused alternative favicon design, uploaded while choosing the icon; kept for audit only.
+temp/favicon-v2-16.png -> https://static.wixstatic.com/media/600582_133dbfd2d1194959a172c3823b687769~mv2.png
+temp/favicon-v2-32.png -> https://static.wixstatic.com/media/600582_72ed351e668a4cd08b0a1466d4bf8764~mv2.png
+temp/favicon-v2-180.png -> https://static.wixstatic.com/media/600582_c636608c76444995abfaac5bf183d3b9~mv2.png
+temp/favicon-v2-192.png -> https://static.wixstatic.com/media/600582_22316712266041ce837d6351e8297418~mv2.png
+temp/favicon-v2-512.png -> https://static.wixstatic.com/media/600582_335b9fd90cc249dd9d2b1536cb6feb63~mv2.png

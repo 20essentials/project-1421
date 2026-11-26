@@ -126,6 +126,10 @@ cache keys, so a poisoned browser cache entry is abandoned on the next deploy.
   live site and serves the dashboard favicon's **ICO bytes** there (our
   `public/favicon.svg` is real SVG and works in dev/preview builds) — when
   testing SVG favicon behavior, verify against the actual served bytes.
+  **Final fix 2026-11-26:** no head or manifest link points at `/favicon.svg`
+  anymore; they use the Wix-hosted SVG URL. The dashboard ICO was also invisible
+  and is no longer linked; 16x16/32x32 use simplified PNGs from the same
+  black/white design because the original SVG has 0 near-white pixels at 16x16.
 
 **Residual risk / what to watch:** if the AppId error ever becomes an
 "expose function" error naming one of OUR app IDs, an embedded-script or

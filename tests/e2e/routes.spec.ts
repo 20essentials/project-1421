@@ -1,6 +1,9 @@
 import { expect, test } from "@playwright/test";
 
 const routes = ["/", "/portfolio", "/il-mio-metodo", "/chi-sono", "/location", "/investimento", "/blog", "/faq", "/contatti", "/recensioni", "/awards", "/fine-art", "/impressum", "/legal", "/legal/termini-e-condizioni", "/legal/privacy", "/legal/accessibilita", "/legal/avviso-legale"];
+const iconSvgUrl = "https://static.wixstatic.com/shapes/600582_b61128900f3b4f5da3e8d3fed66528e7.svg";
+const icon16Url = "https://static.wixstatic.com/media/600582_2ae8b80b777540379b8366b38a897034~mv2.png";
+const icon32Url = "https://static.wixstatic.com/media/600582_8da5d525d72249298e640322b076e8f3~mv2.png";
 
 test.describe("site routes", () => {
   for (const route of routes) {
@@ -11,6 +14,33 @@ test.describe("site routes", () => {
       await expect(page.locator("main").first()).toBeVisible();
     });
   }
+});
+
+test.describe("favicon", () => {
+  test("uses Wix-hosted icons and a legible small-size variant", async ({ page }) => {
+    await page.goto("/", { waitUntil: "domcontentloaded" });
+
+    const hrefs = await page.locator("head link[rel='icon']").evaluateAll((nodes) =>
+      nodes.map((node) => node.getAttribute("href")),
+    );
+    expect(hrefs).toContain(iconSvgUrl);
+    expect(hrefs).toContain(icon16Url);
+    expect(hrefs).toContain(icon32Url);
+    expect(hrefs).not.toContain("/favicon.ico");
+
+    const manifest = await page.request.get("/site.webmanifest");
+    const json = await manifest.json();
+    expect(json.icons).toEqual(
+      expect.arrayContaining([expect.objectContaining({ src: iconSvgUrl, type: "image/svg+xml" })]),
+    );
+
+    await page.goto("/this-route-does-not-exist", { waitUntil: "domcontentloaded" });
+    const notFoundHrefs = await page.locator("head link[rel='icon']").evaluateAll((nodes) =>
+      nodes.map((node) => node.getAttribute("href")),
+    );
+    expect(notFoundHrefs).toContain(icon16Url);
+    expect(notFoundHrefs).not.toContain("/favicon.ico");
+  });
 });
 
 test.describe("typography", () => {
