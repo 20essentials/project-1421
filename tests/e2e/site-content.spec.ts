@@ -32,6 +32,25 @@ test.describe("CMS Single Item pages", () => {
     );
   });
 
+  test("home renders the percorso section with its three steps", async ({ page }) => {
+    const response = await page.goto("/", { waitUntil: "domcontentloaded" });
+    expect(response?.status()).toBeLessThan(500);
+
+    const section = page.locator("#il-percorso");
+    await expect(section).toBeVisible();
+    await expect(section.getByText("IL PERCORSO INSIEME")).toBeVisible();
+    await expect(
+      section.getByRole("heading", {
+        level: 2,
+        name: "CI VEDIAMO tre volte PRIMA DEL GRANDE GIORNO",
+      }),
+    ).toBeVisible();
+    await expect(section.locator("ol > li")).toHaveCount(3);
+    await expect(section.getByRole("heading", { name: "Ci conosciamo:" })).toBeVisible();
+    await expect(section.getByRole("heading", { name: "Disegniamo la giornata:" })).toBeVisible();
+    await expect(section.getByRole("heading", { name: "Gli ultimi dettagli:" })).toBeVisible();
+  });
+
   test("il mio metodo renders the seeded page content", async ({ page }) => {
     const response = await page.goto("/il-mio-metodo", { waitUntil: "domcontentloaded" });
     expect(response?.status()).toBeLessThan(500);
