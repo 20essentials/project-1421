@@ -109,7 +109,7 @@ test.describe("CMS Single Item pages", () => {
     );
   });
 
-  test("home shows the awards wall with twelve seals and its CTA", async ({ page }) => {
+  test("home shows the awards wall with ten seals and its CTA", async ({ page }) => {
     const response = await page.goto("/", { waitUntil: "domcontentloaded" });
     expect(response?.status()).toBeLessThan(500);
 
@@ -118,7 +118,11 @@ test.describe("CMS Single Item pages", () => {
     await expect(
       wall.getByRole("heading", { level: 2, name: "Oltre 100 premi internazionali" }),
     ).toBeVisible();
-    await expect(wall.locator("img")).toHaveCount(12);
+    await expect(wall.locator("img")).toHaveCount(10);
+    const columns = await wall
+      .locator("ul")
+      .evaluate((grid) => getComputedStyle(grid).gridTemplateColumns.split(" ").length);
+    expect(columns).toBe(5);
     await expect(wall.getByRole("link", { name: "Tutti i premi e le mostre" })).toHaveAttribute(
       "href",
       "/it/awards",

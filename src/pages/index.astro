@@ -40,8 +40,6 @@ const faqCategoryTitle = (id: string): string => faq.categories.find((c) => c.id
 const latestPosts = posts?.posts.slice(0, 3) ?? [];
 
 const homeAwardLogos = [
-  { src: heroContent.awardLogo1, alt: "Vogue Sposa", label: "Vogue Sposa", width: 600, height: 600 },
-  { src: heroContent.awardLogo2, alt: "Wezoree", label: "Wezoree", width: 5552, height: 1700 },
   { src: heroContent.awardLogo3, alt: "IPA International Photo Awards — 1° place Fine Art 2016", label: "IPA International Photo Awards", width: 800, height: 790 },
   { src: heroContent.awardLogo4, alt: "MIFA Moscow International Foto Awards", label: "MIFA Moscow", width: 702, height: 702 },
   { src: heroContent.awardLogo5, alt: "International Color Awards", label: "International Color Awards", width: 250, height: 251 },
@@ -1389,7 +1387,7 @@ const alignFor = (i: number): "center" | "right" | "left" =>
   }
   @media (min-width: 1024px) {
     .awards-wall__grid {
-      grid-template-columns: repeat(6, minmax(0, 1fr));
+      grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 1rem;
       margin-top: 4.5rem;
     }
