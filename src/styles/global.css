@@ -26,6 +26,36 @@
   --font-display: var(--font-cormorant-garamond), Georgia, serif;
 
   --ease-fluid: cubic-bezier(0.32, 0.72, 0, 1);
+  --animate-accordion-down: accordion-down 200ms var(--ease-fluid);
+  --animate-accordion-up: accordion-up 200ms var(--ease-fluid);
+}
+
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--accordion-panel-height);
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--accordion-panel-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+@theme inline {
+  --color-card: var(--color-background);
+  --color-card-foreground: var(--color-foreground);
+  --color-popover: var(--color-background);
+  --color-popover-foreground: var(--color-foreground);
+  --color-muted: var(--color-secondary);
+  --color-input: var(--color-border);
+  --color-ring: var(--color-accent);
 }
 
 @layer base {
