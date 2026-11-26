@@ -320,3 +320,30 @@ behavior.
 **Residual risk / what to watch:** a cluster of unrelated route 500s in a full
 suite, with 429 in the dev log, means the account is throttled. Individual route
 500s with a different error are still real bugs and need normal debugging.
+
+## 8. Dev startup unhandled rejection in @wix/astro after a lockfile change
+
+**Status:** open / startup noise. Not an application regression unless requests
+actually fail.
+
+**Symptom.** Restarting `npm run dev:fg` after `npm uninstall` changed
+`package-lock.json`, the log printed:
+
+- `[UnhandledRejection] Astro detected an unhandled rejection`
+- `AssertionError [ERR_ASSERTION]: null == true` at
+  `node_modules/@wix/astro/build/integration/index.mjs:4320:6`
+  (`ok(customDevServer)` inside the `astro:server:setup` middleware).
+
+**Evidence.** In the same log the adapter still reached
+`astro v7.3.3 ready in 92508 ms`, `curl http://localhost:4321/it/` returned
+`200`, and the targeted Playwright suite passed with an empty browser console.
+The assertion happened during dependency re-optimization, before readiness.
+
+**Workaround.** Wait for the `ready in …` banner and a 200 response before
+treating the rejection as a failure; re-run once if the server never becomes
+ready. Do not change application code for the rejection alone.
+
+**Residual risk / what to watch:** if `astro:server:start` never resolves or the
+first request fails with the same assertion, restart the dev server after the
+optimizer finishes; if it persists with a warm lockfile, investigate the Wix
+adapter version rather than site code.
