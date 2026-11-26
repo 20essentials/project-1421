@@ -2,9 +2,11 @@
 import SiteLayout from "@/app/layout.astro";
 import PhotoGrid from "@/features/home/photo-grid.astro";
 import ArtisticParallax from "@/features/home/artistic-parallax.astro";
+import ReviewsBento from "@/features/reviews/reviews-bento.astro";
 import { fetchPosts, postMetaLine, postPath } from "@/features/blog/posts";
 import { fetchFaq } from "@/features/faq/faq";
 import { getHomeContent } from "@/features/site-content/site-content";
+import { HOME_SECTIONS_COPY, localizedGridTitle } from "@/features/home/home-sections-copy";
 import { currentLocale } from "@/features/i18n/current-locale";
 import { localizedHref } from "@/features/i18n/localized-path";
 import { imgAttrs, imgFitSrc, imgSrc, imgSrcSet, mediaKey } from "@/shared/media";
@@ -15,6 +17,7 @@ import type { FaqData } from "@/features/faq/types";
 let posts: PostPage | undefined;
 let faq: FaqData = { categories: [], questions: [], truncated: false };
 const locale = currentLocale(Astro.url, Astro.request.headers);
+const copy = HOME_SECTIONS_COPY[locale];
 const href = (path: string) => localizedHref(locale, path);
 try {
   [posts, faq] = await Promise.all([
@@ -67,9 +70,9 @@ const heroScene: ScrollScene = {
   key: "hero",
   imageUrl: heroContent.heroImage,
   ratio: HERO_RATIO,
-  alt: "Fotografia di matrimonio fine art — Stefano Lunardi",
+  alt: copy.imageAlts.hero,
   secondaryImageUrl: heroContent.heroImage2,
-  secondaryAlt: "Fotografia d'arte — Stefano Lunardi",
+  secondaryAlt: copy.imageAlts.heroSecondary,
   eyebrow: heroContent.eyebrow,
   title: heroContent.title,
   description: heroContent.intro,
@@ -85,7 +88,7 @@ const artScene: ScrollScene = {
   key: "art-gallery",
   imageUrl: heroContent.slide2Image,
   ratio: ART_GALLERY_RATIO,
-  alt: "Fotografia d'arte — opera esposta in galleria, Stefano Lunardi",
+  alt: copy.imageAlts.art,
   eyebrow: heroContent.slide2Eyebrow,
   title: heroContent.slide2Title,
   description: heroContent.slide2Intro,
@@ -98,7 +101,7 @@ const veilScene: ScrollScene = {
   key: "fine-art-wedding",
   imageUrl: heroContent.slide3Image,
   ratio: VEIL_RATIO,
-  alt: "Coppia in bianco e nero che cammina — fotografia fine art di matrimonio, Stefano Lunardi",
+  alt: copy.imageAlts.veil,
   eyebrow: heroContent.slide3Eyebrow,
   title: heroContent.slide3Title,
   description: heroContent.slide3Intro,
@@ -184,7 +187,7 @@ const alignFor = (i: number): "center" | "right" | "left" =>
       <figure class="relative">
         <img
           src={imgFitSrc(heroContent.aboutImage, 1322, 1536)}
-          alt="Stefano Lunardi, fotografo di matrimoni fine art, con la sua macchina fotografica"
+          alt={copy.imageAlts.about}
           loading="lazy"
           decoding="async"
           class="aspect-1322/1536 h-auto w-full bg-background"
@@ -206,6 +209,21 @@ const alignFor = (i: number): "center" | "right" | "left" =>
           <a href={href("/awards")} class="rounded-control btn-ghost no-underline">{heroContent.aboutCta2}</a>
         </div>
       </div>
+    </div>
+  </section>
+
+  <ReviewsBento locale={locale} />
+
+  <section id="numeri" aria-label={copy.stats.ariaLabel} class="stats-band dot-grid dot-grid-light px-6 py-20 sm:py-24">
+    <div class="mx-auto max-w-7xl">
+      <dl class="stats-grid">
+        {copy.stats.items.map((stat) => (
+          <div class="stat aspect-square">
+            <dt class="stat__value">{stat.value}</dt>
+            <dd class="stat__label">{stat.label}</dd>
+          </div>
+        ))}
+      </dl>
     </div>
   </section>
 
@@ -270,15 +288,15 @@ const alignFor = (i: number): "center" | "right" | "left" =>
   <section id="mi-presento" class="mp-root relative h-svh min-h-[38rem] overflow-hidden">
     <lite-youtube
       videoid={heroContent.presentoVideoId}
-      videoTitle="Mi presento — Stefano Lunardi"
-      playlabel="Riproduci: Mi presento — Stefano Lunardi"
+      videoTitle={copy.video.title}
+      playlabel={copy.video.playLabel}
       params="rel=0"
       class="mp-media"
     >
       <img
         slot="image"
         src="https://static.wixstatic.com/media/600582_845da6b245d64d8a9fb152dcb8a9325c~mv2.avif"
-        alt="Stefano Lunardi nel suo studio, anteprima del video Mi presento"
+        alt={copy.video.posterAlt}
         loading="lazy"
         decoding="async"
         width="1280"
@@ -313,7 +331,7 @@ const alignFor = (i: number): "center" | "right" | "left" =>
 
   <PhotoGrid
     eyebrow={heroContent.gridEyebrow}
-    title={heroContent.gridTitle}
+    title={localizedGridTitle(locale, heroContent.gridTitle)}
     ctaLabel={heroContent.gridCta}
     ctaHref={href("/portfolio")}
   />
@@ -330,7 +348,7 @@ const alignFor = (i: number): "center" | "right" | "left" =>
       <figure>
         <img
           src={imgSrc(heroContent.slide3Image, 640, 800)}
-          alt="Coppia in bianco e nero che cammina — fotografia fine art di matrimonio, Stefano Lunardi"
+          alt={copy.imageAlts.method}
           loading="lazy"
           decoding="async"
           class="aspect-4/5 w-full bg-background object-cover"
@@ -339,56 +357,92 @@ const alignFor = (i: number): "center" | "right" | "left" =>
         />
       </figure>
       <div>
-        <p class="eyebrow">Il mio metodo</p>
-        <h2 class="font-display mt-3 text-4xl font-medium leading-tight sm:text-5xl">IL METODO Fusion</h2>
+        <p class="eyebrow">{copy.method.eyebrow}</p>
+        <h2 class="font-display mt-3 text-4xl font-medium leading-tight sm:text-5xl">{copy.method.title}</h2>
         <p class="mt-5 text-lg leading-relaxed text-muted-foreground">
-          L'eleganza della moda, la naturalezza del reportage.
+          {copy.method.lead}
         </p>
         <p class="mt-3 text-lg leading-relaxed text-muted-foreground">
-          È per questo che le vostre fotografie avranno la cura di un editoriale e la verità di un racconto. Un modo di lavorare costruito in anni di reportage e di fotografia d'autore, pensato per chi desidera immagini belle e insieme autentiche.
+          {copy.method.body}
         </p>
         <ol class="mt-10 grid gap-6 sm:grid-cols-3 lg:grid-cols-1">
-          <li>
-            <p class="eyebrow">Una regia invisibile</p>
-            <p class="mt-2 text-sm leading-relaxed text-muted-foreground">Vi guido solo quando serve: una luce, un gesto, un punto in cui fermarvi. Poi mi faccio da parte e lascio accadere la giornata. Per gran parte del tempo non vi accorgerete nemmeno che ci sono.</p>
-          </li>
-          <li>
-            <p class="eyebrow">Il tempo della pellicola</p>
-            <p class="mt-2 text-sm leading-relaxed text-muted-foreground">Un rullino ha trentasei scatti, e questo cambia il modo in cui guardo una stanza. Non inseguo la fotografia giusta: la aspetto.</p>
-          </li>
-          <li>
-            <p class="eyebrow">Pellicola e digitale, insieme</p>
-            <p class="mt-2 text-sm leading-relaxed text-muted-foreground">Ogni matrimonio lo fotografo su pellicola e in digitale. Non dovete scegliere: la pellicola porta il carattere, il digitale racconta tutto il resto della giornata.</p>
-          </li>
+          {copy.method.steps.map((step) => (
+            <li>
+              <p class="eyebrow">{step.eyebrow}</p>
+              <p class="mt-2 text-sm leading-relaxed text-muted-foreground">{step.copy}</p>
+            </li>
+          ))}
         </ol>
-        <a href={href("/il-mio-metodo")} class="btn-ghost mt-8 inline-block no-underline">Leggi tutto il metodo</a>
+        <a href={href("/il-mio-metodo")} class="btn-ghost mt-8 inline-block no-underline">{copy.method.cta}</a>
       </div>
+    </div>
+  </section>
+
+  <section id="il-percorso" class="percorso-root dot-grid dot-grid-light px-6 py-24" aria-labelledby="percorso-title">
+    <div class="mx-auto max-w-6xl">
+      <div class="text-center">
+        <p class="percorso-eyebrow">{copy.percorso.eyebrow}</p>
+        <h2 id="percorso-title" class="percorso-title font-display mt-3 text-4xl font-medium leading-tight sm:text-5xl">
+          {copy.percorso.title.map((line, i) => (
+            <Fragment>{line.before}{line.em && <em>{line.em}</em>}{line.after}{i < copy.percorso.title.length - 1 && <br />}</Fragment>
+          ))}
+        </h2>
+        <p class="percorso-intro mx-auto mt-5 max-w-2xl text-base leading-relaxed text-primary-foreground/75 sm:text-lg">
+          {copy.percorso.intro}
+        </p>
+      </div>
+      <ol class="percorso-list mt-14">
+        {copy.percorso.steps.map((step, i) => (
+          <li class="percorso-step">
+            <span class="percorso-step__number" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+            <h3 class="percorso-step__title">{step.title}</h3>
+            <p class="percorso-step__copy">{step.copy}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section id="cosa-ricevete" class="px-6 py-24" aria-labelledby="cosa-ricevete-title">
+    <div class="mx-auto max-w-6xl">
+      <div class="text-center">
+        <p class="delivery-eyebrow">{copy.delivery.eyebrow}</p>
+        <h2 id="cosa-ricevete-title" class="font-display mt-3 text-3xl font-medium leading-tight sm:text-4xl">{copy.delivery.title}</h2>
+      </div>
+      <ol class="delivery-list mt-12">
+        {copy.delivery.steps.map((step) => (
+          <li class="delivery-step">
+            <p class="delivery-when">
+              <span class="delivery-number">{step.number}</span>
+              <span class="delivery-unit">{step.unit}</span>
+            </p>
+            <div class="delivery-body">
+              <h3 class="font-display delivery-title">{step.title}</h3>
+              <p class="delivery-copy">{step.copy}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
     </div>
   </section>
 
   <section id="dove-fotografo" class="border-y border-border bg-secondary px-6 py-20" aria-labelledby="dove-fotografo-title">
     <div class="mx-auto max-w-5xl">
-      <p class="text-[0.6875rem] font-semibold tracking-[0.22em] uppercase text-foreground">Dove fotografo</p>
-      <h2 id="dove-fotografo-title" class="font-display mt-3 text-3xl font-medium leading-tight sm:text-4xl">Friuli, Veneto e Austria</h2>
+      <p class="text-[0.6875rem] font-semibold tracking-[0.22em] uppercase text-foreground">{copy.where.eyebrow}</p>
+      <h2 id="dove-fotografo-title" class="font-display mt-3 text-3xl font-medium leading-tight sm:text-4xl">{copy.where.title}</h2>
 
       <div class="mt-12 grid grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-8">
-        <div>
-          <h3 class="eyebrow">Friuli Venezia Giulia</h3>
-          <p class="mt-4 text-sm leading-relaxed text-muted-foreground">Udine · Pordenone · Trieste · Gorizia · Collio · Lignano</p>
-        </div>
-        <div>
-          <h3 class="eyebrow">Veneto</h3>
-          <p class="mt-4 text-sm leading-relaxed text-muted-foreground">Treviso · Venezia · Padova · Belluno · Colli Asolani</p>
-        </div>
-        <div>
-          <h3 class="eyebrow">Austria</h3>
-          <p class="mt-4 text-sm leading-relaxed text-muted-foreground">Carinzia · Villach · Klagenfurt · Wörthersee · Stiria · Graz</p>
-        </div>
+        {copy.where.regions.map((region) => (
+          <div>
+            <h3 class="eyebrow">{region.name}</h3>
+            <p class="mt-4 text-sm leading-relaxed text-muted-foreground">{region.places}</p>
+          </div>
+        ))}
       </div>
 
       <div class="mt-12 flex items-center justify-center gap-4 border-t border-border pt-8">
         <span class="hidden h-px w-8 bg-border sm:block" aria-hidden="true"></span>
-        <p class="font-display text-[1.0625rem] italic leading-normal text-muted-foreground text-balance sm:text-lg">e ovunque vi porti la vostra storia.</p>
+        <p class="font-display text-[1.0625rem] italic leading-normal text-muted-foreground text-balance sm:text-lg">{copy.where.closing}</p>
         <span class="hidden h-px w-8 bg-border sm:block" aria-hidden="true"></span>
       </div>
     </div>
@@ -414,7 +468,7 @@ const alignFor = (i: number): "center" | "right" | "left" =>
           playsinline
           preload="metadata"
           poster={imgSrc(heroContent.fvPoster, 1280, 720)}
-          aria-label="Clip in loop: Stefano dipinge e registra la nascita di una sua opera"
+          aria-label={copy.video.ariaLabel}
           class="fv-video"
         >
           <source src={heroContent.fvVideoUrl} type="video/mp4" />
@@ -569,6 +623,11 @@ const alignFor = (i: number): "center" | "right" | "left" =>
 <script>
   import { mountScrollWorld } from "@/features/home/scroll-world";
   mountScrollWorld();
+</script>
+
+<script>
+  import { mountStatsCounter } from "@/features/home/stats-counter";
+  mountStatsCounter();
 </script>
 
 <style>
@@ -932,6 +991,200 @@ const alignFor = (i: number): "center" | "right" | "left" =>
       width: 100%;
       aspect-ratio: 16 / 9;
       background: url("https://static.wixstatic.com/media/600582_7aee14ecf9714020be28dcff3d7a17a2~mv2.avif") center / cover no-repeat;
+    }
+  }
+
+  .delivery-eyebrow {
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-muted-foreground);
+  }
+  .delivery-list {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(2.5rem, 5vw, 3rem);
+  }
+  .delivery-step {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+  }
+  .delivery-when {
+    display: flex;
+    align-items: baseline;
+    gap: 0.625rem;
+  }
+  .delivery-number {
+    font-family: var(--font-display);
+    font-size: clamp(2.75rem, 1.75rem + 4vw, 3.75rem);
+    font-weight: 500;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+  .delivery-unit {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-muted-foreground);
+  }
+  .delivery-body {
+    max-width: 36ch;
+  }
+  .delivery-title {
+    font-size: clamp(1.375rem, 1.1rem + 1vw, 1.75rem);
+    font-weight: 500;
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+  .delivery-copy {
+    margin-top: 0.625rem;
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--color-muted-foreground);
+    text-wrap: pretty;
+  }
+  @media (min-width: 768px) {
+    .delivery-list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(2rem, 4vw, 3rem);
+    }
+  }
+
+  .percorso-root {
+    background-color: var(--color-primary);
+    color: var(--color-primary-foreground);
+    border-block: 1px solid rgb(255 255 255 / 0.14);
+  }
+  .percorso-eyebrow {
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.6);
+  }
+  .percorso-title em {
+    font-style: italic;
+    font-weight: 400;
+    color: rgb(255 255 255 / 0.72);
+  }
+  .percorso-intro {
+    text-wrap: pretty;
+  }
+  .percorso-list {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
+  .percorso-step {
+    border-block-start: 1px solid rgb(255 255 255 / 0.24);
+    padding-block: 2rem 1rem;
+  }
+  .percorso-step__number {
+    font-family: var(--font-display);
+    font-size: clamp(2.75rem, 2rem + 3vw, 4rem);
+    font-weight: 500;
+    line-height: 0.85;
+    letter-spacing: -0.03em;
+    font-variant-numeric: lining-nums tabular-nums;
+    color: rgb(255 255 255 / 0.38);
+  }
+  .percorso-step__title {
+    margin-top: 1.5rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.375rem, 1.1rem + 1vw, 1.75rem);
+    font-weight: 500;
+    line-height: 1.2;
+    color: #ffffff;
+    text-wrap: balance;
+  }
+  .percorso-step__copy {
+    max-width: 36ch;
+    margin-top: 0.875rem;
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: rgb(255 255 255 / 0.7);
+    text-wrap: pretty;
+  }
+  @media (min-width: 768px) {
+    .percorso-list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0;
+    }
+    .percorso-step {
+      padding-inline: clamp(1.5rem, 3vw, 2.5rem);
+    }
+    .percorso-step:first-child {
+      padding-inline-start: 0;
+    }
+    .percorso-step + .percorso-step {
+      border-inline-start: 1px solid rgb(255 255 255 / 0.16);
+    }
+  }
+
+  .stats-band {
+    background-color: var(--color-primary);
+    color: var(--color-primary-foreground);
+    border-block: 1px solid rgb(255 255 255 / 0.12);
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-block-end: 1px solid rgb(255 255 255 / 0.18);
+  }
+  .stat {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.375rem;
+    min-inline-size: 0;
+    padding: clamp(1.25rem, 2.5vw, 2.25rem);
+    border-block-start: 1px solid rgb(255 255 255 / 0.18);
+  }
+  .stat__value {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 3.6vw, 3rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    white-space: normal;
+    text-wrap: balance;
+    color: var(--color-primary-foreground);
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+  .stat__label {
+    margin: 0;
+    padding-block-start: 0.5rem;
+    border-block-start: 1px solid rgb(255 255 255 / 0.22);
+    font-size: clamp(0.6875rem, 1vw, 0.8125rem);
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.62);
+    text-wrap: pretty;
+  }
+  @media (min-width: 768px) {
+    .stats-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    @supports ((animation-timeline: view()) and (animation-range: entry)) {
+      @keyframes stat-enter {
+        from {
+          opacity: 0;
+          translate: 0 14px;
+        }
+      }
+      .stat {
+        animation: stat-enter auto linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 65%;
+      }
     }
   }
 
