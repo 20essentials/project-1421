@@ -95,6 +95,11 @@ Installed at `.agents/skills/` by
 `npx skills add wix/skills --skill wix-headless-kit --skill wix-docs --skill wix-manage`; a Wix plugin keeps
 its copy, under the same names, in the client's own skills folder.
 
+**Every skill installed for this repo MUST be local, under `.agents/skills/`. Never install skills globally
+(`-g`, `~/.agents/skills`, or any other user-level location): anyone else using this repo must get the same
+skills from the repository. Run `npx skills add ... -y` from the repo root, verify the destination is
+`.agents/skills/<skill>`, and remove any global copy created by mistake.**
+
 - `wix-headless-kit` — the code in this app and how to extend it. The shipped code is the
   `wix-headless-templates` skill: `node .agents/skills/wix-headless-kit/install/templates.mjs` prints where it
   is (`.agents/skills/wix-headless-templates/` when installed beside this skill, else
