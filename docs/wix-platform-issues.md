@@ -325,6 +325,20 @@ behavior.
 suite, with 429 in the dev log, means the account is throttled. Individual route
 500s with a different error are still real bugs and need normal debugging.
 
+**Observed again 2026-11-27.** A full run with `--workers=2` also hit the 429
+throttle (home CMS `queryItems` and `listSiteScripts2`) and, while Vite was
+re-optimizing deps, transient missing-file errors such as
+`node_modules/.vite/deps_ssr/@wix_portfolio.js?v=…` (route 500 on `/portfolio`).
+The same pages returned 200 and the targeted console/localization specs passed
+once the suite was not hammering the APIs. Reduce to one worker or re-run the
+affected specs in isolation before treating this as a code regression.
+
+**Observed again 2026-11-27 18:41.** The default four-worker suite produced 24
+failures across unrelated specs (`/portfolio` 500, FAQ accordion state, form
+hydration, stats counters); `dev.log` showed the same 429 from `queryItems` and
+`listSiteScripts2`. The focused FAQ test had passed in isolation immediately
+before, so this was throttle noise, not a regression.
+
 ## 8. Dev startup unhandled rejection in @wix/astro after a lockfile change
 
 **Status:** open / startup noise. Not an application regression unless requests

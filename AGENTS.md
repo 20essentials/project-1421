@@ -60,11 +60,12 @@ kills nothing reliably, and leaves an orphaned server holding port 4321. The abo
 expected behavior, not a bug in the project.
 
 The fix: `npm run dev:fg` = `astro dev --ignore-lock`, which short-circuits the forced
-background branch and runs the server in the foreground of the calling shell (use the bash
-tool's `background: true`), output streaming directly to the session. Wait for the
-"ready in ... ms" banner before polling; cold start is slow (~25s), warm start is fast.
-Stop it by killing the listening PID (`netstat -ano | grep :4321` → `taskkill //PID <pid> //F`);
-`npx astro dev stop` only manages background servers. If port 4321 is already busy, an orphan
+background branch and keeps the server in the foreground of the shell that started it. Start it
+from bash as `npm run dev:fg > "<log>" 2>&1 &`, capture the shell PID, and wait for the
+"ready in ... ms" banner in the log before polling; cold start on this machine takes ~25–70s,
+warm start is faster. Stop it by killing the listening PID
+(`netstat -ano | grep :4321` → `taskkill //PID <pid> //F`); `npx astro dev stop` only manages
+background servers and does not stop a foreground one. If port 4321 is already busy, an orphan
 from an aborted attempt is holding it — kill that PID first instead of letting Vite drift to
 another port.
 
@@ -153,7 +154,8 @@ after implementing it take a screenshot as proof of the result and store it in `
 this project. Workflow:
 
 1. Implement the feature and verify it compiles (`npx astro check`).
-2. Start the dev server if not running (`npm run dev`, default `http://localhost:4321`).
+2. Start the dev server if not running (`npm run dev:fg`, default `http://localhost:4321`) and
+   wait for the ready banner.
 3. Capture a screenshot of ONLY what you modified — the affected component/section, not the
    whole page. A full-page screenshot of a long page is useless as proof: scroll to the changed
    section (Playwright `locator.scrollIntoViewIfNeeded()` + `page.screenshot({ clip })` or
@@ -162,9 +164,10 @@ this project. Workflow:
    Take one per affected section, page or viewport when relevant (e.g. mobile menu: capture
    closed and open states).
 4. Report the saved file path(s) to the user and stop — never delete or overwrite previous screenshots.
-5. ALWAYS stop the dev server afterwards (`npx astro dev stop`), before finishing the task.
-   Leaving it running blocks the next session's `npm run dev` with "Another astro dev server is
-   already running".
+5. ALWAYS stop the dev server afterwards by killing the listening PID (`netstat -ano | grep :4321`
+   → `taskkill //PID <pid> //F`), before finishing the task. Leaving it running blocks the next
+   session with "Another astro dev server is already running"; `npx astro dev stop` does not stop
+   a foreground server.
 
 ## Browser console — zero warnings / zero errors (mandatory after complex work)
 
@@ -174,13 +177,14 @@ NO warnings and NO errors before declaring the task done. Examples that must nev
 `failed to load resource: net::ERR_CONNECTION_REFUSED`, 404s, CORS errors, hydration errors,
 unhandled promise rejections. Workflow:
 
-1. Start the dev server if not running (`npm run dev`, default `http://localhost:4321`).
+1. Start the dev server if not running (`npm run dev:fg`, default `http://localhost:4321`).
 2. Visit every affected page (or all pages for a site-wide change) with Playwright:
    collect `page.on('console')` (type `error` AND `warning`) and `page.on('pageerror')` events
    while the page loads and after its client scripts settle.
 3. Fix every reported warning/error in the same change, then re-verify. An empty console is
    the pass condition; "it renders fine" is not.
-4. Report what was checked and the result to the user.
+4. Report what was checked and the result to the user. Chrome DevTools `[issue]` messages are
+   not `error`/`warning` console messages; do not "fix" them unless this change introduced them.
 
 ## Tailwind moderno (v4, 2026) — siempre clases canónicas
 
@@ -226,6 +230,24 @@ browser module that is never executed during SSR:
 </script>
 ```
 
+## Verification scope — proportional, not blanket
+
+Choose checks from what changed; do not run every command "just in case".
+
+- Static markup, CSS, copy or one section: `npx astro check`; add one focused Playwright test
+  for the changed section when it has user-visible behaviour; check that page's console; take
+  the screenshot. Do NOT run `npm run test` or the full `npm run test:e2e`.
+- TypeScript logic/data layer/mapper: run its colocated Vitest tests and the focused E2E that
+  exercises it. Full suite only when the change touches shared code used by many routes, or the
+  user explicitly asks.
+- The full `npm run test:e2e` uses 4 workers by default and has repeatedly tripped the Wix 429
+  throttle documented in `docs/wix-platform-issues.md` §7, producing unrelated 500s and
+  timeouts. Consult that section before debugging; if genuinely needed, use `--workers=1` once
+  and do not retry in a loop.
+- A focused test that passes is enough for that surface. Do not re-run it through the full suite
+  to "confirm" it, and do not report unrelated throttled specs as results of the change.
+- Report only the relevant commands and their real outcomes.
+
 ## Checks — zero hints allowed
 
 `npx astro check` (or `npm run check`) must report **0 errors, 0 warnings AND 0 hints**. Hints are
@@ -244,12 +266,13 @@ anything beyond a straight markup template) MUST have tests. Two layers, both al
   works (e.g. an accordion expands, a form submits), data reaches the DOM.
 
 A change to TypeScript logic is not done until its tests pass. New logic ships with its tests in the
-same change; do not leave test debt.
+same change; do not leave test debt. Running the whole suite for a single section is over-verification,
+not diligence: scope the tests as described above.
 
 ## Release — only on explicit order
 
 Never deploy or release on your own initiative, not even to "finish" a change: a code change
-ends verified (`astro check`, tests, screenshots) — NOT released. Deploy/publish ONLY when the
+ends verified (`astro check`, scoped tests, screenshots) — NOT released. Deploy/publish ONLY when the
 user explicitly orders it with the commands `.opencode/commands/deploy.md` or
 `.opencode/commands/commit-and-deploy.md`, and then follow the flow written in that command file.
 
