@@ -1,23 +1,24 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "mcp": {
-    "wix-mcp": {
-      "type": "remote",
-      "url": "https://mcp.wix.com/mcp",
-      "headers": {
-        "Authorization": "<MODIFY...>🟢",
-        "wix-account-id": "<MODIFY...>🟢"
-      }
+    "timeout": {
+      "startup": 60000,
+      "catalog": 60000,
+      "execution": 43200000
     },
-    "chrome-devtools": {
-      "type": "local",
-      "command": [
-        "npx",
-        "-y",
-        "chrome-devtools-mcp@1.10.1"
-      ],
-      "timeout": {
-        "startup": 60000
+    "servers": {
+      "wix-mcp": {
+        "type": "remote",
+        "url": "https://mcp.wix.com/mcp",
+        "oauth": false,
+        "headers": {
+          "Authorization": "IST.eyJraWQi...🟢",
+          "wix-account-id": "60058239-f2bd...🟢"
+        }
+      },
+      "chrome-devtools": {
+        "type": "local",
+        "command": ["npx", "-y", "chrome-devtools-mcp@latest"]
       }
     }
   }

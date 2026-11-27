@@ -11,7 +11,9 @@ dist/
 # dependencies
 node_modules/
 .opencode/opencode.json
+.opencode/opencode-previous.json
 opencode.json
+opencode-previous.json
 stefanolunardi-cumplimiento-linee-guida/
 
 # logs
