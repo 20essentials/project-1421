@@ -1,7 +1,6 @@
 ---
 import SiteLayout from "@/app/layout.astro";
 import Gallery from "@/features/portfolio/gallery";
-import PortfolioCoil from "@/features/portfolio/coil/portfolio-coil.astro";
 import { currentLocale } from "@/features/i18n/current-locale";
 import { fetchCollections } from "@/features/portfolio/portfolio";
 import { getSiteChrome } from "@/features/site-chrome/site-chrome";
@@ -26,5 +25,4 @@ const label = (key: string, fallback: string) => labels[key] || fallback;
   <div id="galleria" class="mx-auto max-w-7xl px-6 pt-12 pb-12">
     <Gallery client:load initialCollections={collections} locale={locale} labels={labels} />
   </div>
-  <PortfolioCoil />
 </SiteLayout>

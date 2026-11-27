@@ -167,8 +167,8 @@
     font-weight: 600;
   }
 
-  /* Dot-grid texture: the portfolio coil's dotted backdrop as a reusable
-     background-image, so monochrome sections gain the same dotted depth
+  /* Dot-grid texture: a reusable dotted background-image, so monochrome
+     sections gain the same dotted depth
      instead of a flat single-color fill. Default ink dots suit light
      surfaces; .dot-grid-light switches to faint white dots for dark ones. */
   .dot-grid {
