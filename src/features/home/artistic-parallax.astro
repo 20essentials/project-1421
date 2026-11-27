@@ -80,6 +80,7 @@ const slides = SLIDES.map((s) => ({
     srcset={slides[1].srcSet}
     sizes="100vw"
     aria-hidden="true"
+    fetchpriority="low"
     decoding="async"
     alt={slides[1].alt}
   />
@@ -138,7 +139,9 @@ const slides = SLIDES.map((s) => ({
       incoming.style.transition = "";
       incoming.classList.add("is-active");
       incoming.setAttribute("aria-hidden", "false");
+      incoming.setAttribute("fetchpriority", "high");
       outgoing.setAttribute("aria-hidden", "true");
+      outgoing.setAttribute("fetchpriority", "low");
       active = 1 - active;
 
       if (cleanup !== undefined) window.clearTimeout(cleanup);

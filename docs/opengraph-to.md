@@ -138,9 +138,9 @@ tags already present on the page (`og:image:width`, `og:image:height`,
 - Wix serves dashboard `/favicon.ico` bytes at `/favicon.svg` on the live edge.
   All head/manifest links therefore use Wix-hosted URLs, never local
   `/favicon.svg` or `/favicon.ico`.
-- `twitter:site` is empty because the real X/Twitter handle has not been
-  verified. `@stefanolunardiphoto` was seen but not confirmed; never add an
-  unverified handle. Ask the user for the exact handle before adding it.
+- `twitter:site` is empty in the live snapshot above. The user confirmed the
+  handle as `@stefanolunardiphoto` on 2026-11-27; add it through the Wix
+  dashboard SEO flow that owns the other homepage tags, then re-check the API.
 
 ## Performance context behind the two general issues
 
@@ -175,10 +175,10 @@ Chrome DevTools trace facts from the same site:
 
 ## Prioritized plan to raise the score
 
-1. **Add a real `twitter:site` only after confirmation.** Ask the user for the
-   exact X/Twitter handle. If confirmed, add `<meta name="twitter:site"
-   content="@handle" />` through the Wix dashboard SEO flow that owns the other
-   homepage tags. Do not use a placeholder.
+1. **Add the confirmed `twitter:site`.** The user confirmed
+   `@stefanolunardiphoto` on 2026-11-27. Add `<meta name="twitter:site"
+   content="@stefanolunardiphoto" />` through the Wix dashboard SEO flow that
+   owns the other homepage tags. Do not use a placeholder.
 2. **Reduce response time.** The API warning triggers above `1s`; aim under
    `1s`, ideally well below. Investigate Wix SSR/document latency before touching
    metadata. The Chrome trace points at document latency as the largest

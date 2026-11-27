@@ -23,7 +23,7 @@ import {
   localizedPath,
 } from "@/features/i18n/localized-path";
 import { getSiteChrome } from "@/features/site-chrome/site-chrome";
-import { toNavItems } from "@/features/site-chrome/site-chrome-core";
+import { toNavItems, toSiteChromeLabels } from "@/features/site-chrome/site-chrome-core";
 import { fetchSiteInfo } from "@/features/site-info/site-info";
 import { SITE_INFO_FALLBACKS, type SiteInfo } from "@/features/site-info/site-info-core";
 import { shouldEmitSecondaryLocaleTitle } from "@/app/seo-head";
@@ -41,27 +41,24 @@ const { title, description, headFallback = false } = Astro.props;
 const NEWSLETTER_FORM_ID = "99167414-c329-4e8f-8f02-db033652f376";
 const fontVariables = ["--font-inter", "--font-cormorant-garamond"] as const;
 
-let newsletterForm: FormDto | null = null;
-try {
-  newsletterForm = await getForm(NEWSLETTER_FORM_ID, Astro.request.headers);
-} catch {
-}
+const [newsletterFormResult, siteInfoResult, labelsResult] = await Promise.all([
+  getForm(NEWSLETTER_FORM_ID, Astro.request.headers).catch(() => null),
+  fetchSiteInfo().catch(() => null),
+  getSiteChrome(Astro.request.headers).catch(() => toSiteChromeLabels({})),
+]);
+
+const newsletterForm: FormDto | null = newsletterFormResult;
 
 // Business info from the dashboard (Settings > Business Info) with the studio's
 // values as fallback — the page renders the same whether the owner filled the
 // dashboard fields or not. The favicon follows the same idea: Wix serves the
 // dashboard favicon (Settings > Website settings) at /favicon.ico on its own,
 // and the local PNG set below is the fallback for the higher-resolution icons.
-let siteInfo: SiteInfo | null = null;
-try {
-  siteInfo = await fetchSiteInfo();
-} catch {
-}
-const info = siteInfo ?? SITE_INFO_FALLBACKS;
+const info: SiteInfo = siteInfoResult ?? SITE_INFO_FALLBACKS;
 
 const locale = currentLocale(Astro.url, Astro.request.headers);
 const currentPath = currentCleanPath(Astro.url.pathname);
-const labels = await getSiteChrome(Astro.request.headers);
+const labels = labelsResult;
 const navPrimary = toNavItems(primaryNavPaths, labels, locale);
 const navAll = toNavItems(allNavPaths, labels, locale);
 const label = (key: string, fallback: string) => labels[key] || fallback;
@@ -266,7 +263,7 @@ const structuredData = JSON.stringify({
           <p class="mt-3 text-sm leading-relaxed text-muted-foreground">{label("newsletterDescription", "Nuovi lavori, premi e storie dietro le quinte, una volta al mese. Niente spam.")}</p>
           <div class="mt-8 text-left">
             {newsletterForm ? (
-              <SchemaForm client:load formId={NEWSLETTER_FORM_ID} initialForm={newsletterForm} />
+              <SchemaForm client:visible formId={NEWSLETTER_FORM_ID} initialForm={newsletterForm} />
             ) : (
               <p class="text-sm text-muted-foreground">{label("newsletterUnavailable", "L'iscrizione alla newsletter è temporaneamente non disponibile. Scrivici a studio@stefanolunardi.com.")}</p>
             )}
@@ -356,8 +353,17 @@ const structuredData = JSON.stringify({
         });
       }
 
-      mountRipple();
-      mountSmoothScroll();
+      const whenIdle = (fn: () => void) => {
+        if ("requestIdleCallback" in window) {
+          window.requestIdleCallback(fn, { timeout: 1500 });
+        } else {
+          setTimeout(fn, 200);
+        }
+      };
+      whenIdle(() => {
+        mountRipple();
+        mountSmoothScroll();
+      });
     </script>
   </body>
 </html>

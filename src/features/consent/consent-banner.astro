@@ -141,6 +141,16 @@ const label = (key: string, fallback: string) => labels[key] || fallback;
   </div>
 </aside>
 
+<script is:inline>
+  try {
+    const state = localStorage.getItem("sl_consent_v1");
+    if (state !== "accepted" && state !== "rejected") {
+      document.querySelector("[data-sl-consent]")?.setAttribute("data-open", "");
+    }
+  } catch {
+  }
+</script>
+
 <style>
   /* Entrance stagger: title, copy and actions rise in sequence after the
      banner itself slides up (data-open on the aside). */
