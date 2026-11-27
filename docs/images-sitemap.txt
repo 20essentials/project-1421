@@ -301,3 +301,13 @@ temp/favicon-v2-32.png -> https://static.wixstatic.com/media/600582_72ed351e668a
 temp/favicon-v2-180.png -> https://static.wixstatic.com/media/600582_c636608c76444995abfaac5bf183d3b9~mv2.png
 temp/favicon-v2-192.png -> https://static.wixstatic.com/media/600582_22316712266041ce837d6351e8297418~mv2.png
 temp/favicon-v2-512.png -> https://static.wixstatic.com/media/600582_335b9fd90cc249dd9d2b1536cb6feb63~mv2.png
+
+# 2026-11-27 — "Pubblicato su / Featured In" homepage section logos (from stefano-lunardi-assets/magazzini-e-siti-web), converted to AVIF before upload
+stefano-lunardi-assets/magazzini-e-siti-web/bridal.png (AVIF q60 552x236) -> https://static.wixstatic.com/media/600582_9616c66a020348fdb5411134860f67bc~mv2.avif  # featured-in bridal
+stefano-lunardi-assets/magazzini-e-siti-web/ipa.png (AVIF q60 447x151) -> https://static.wixstatic.com/media/600582_2715e4c9d8df468c9e309b627b2e95d9~mv2.avif  # featured-in ipa
+stefano-lunardi-assets/magazzini-e-siti-web/px3.png (AVIF q60 543x566) -> https://static.wixstatic.com/media/600582_79495c09a4ef418bbba7e74099f29797~mv2.avif  # featured-in px3
+stefano-lunardi-assets/magazzini-e-siti-web/singulart.png (AVIF q60 479x142) -> https://static.wixstatic.com/media/600582_c3ef40b6c07143a19c95c42896944a45~mv2.avif  # featured-in singulart
+stefano-lunardi-assets/magazzini-e-siti-web/the-lucie-awards.png (AVIF q60 250x128) -> https://static.wixstatic.com/media/600582_b2ccf8c759b946ee9efe2d62f2f0f47c~mv2.avif  # featured-in the-lucie-awards
+stefano-lunardi-assets/magazzini-e-siti-web/vogue-sposa.png (AVIF q60 600x221) -> https://static.wixstatic.com/media/600582_5e0a5795795d402590420a004f40712d~mv2.avif  # featured-in vogue-sposa
+stefano-lunardi-assets/magazzini-e-siti-web/vogue.png (AVIF q60 1024x294) -> https://static.wixstatic.com/media/600582_369e8c9107054fc0b070eeb8b79983ac~mv2.avif  # featured-in vogue
+stefano-lunardi-assets/magazzini-e-siti-web/wezoree.png (AVIF q60 5552x1700) -> https://static.wixstatic.com/media/600582_fe7621c434fe49bb830dc67d7ac431ad~mv2.avif  # featured-in wezoree

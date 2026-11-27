@@ -64,6 +64,9 @@ export interface HomeSectionsCopy {
     ariaLabel: string;
     items: Stat[];
   };
+  featuredIn: {
+    title: string;
+  };
   reviews: {
     eyebrow: string;
     title: string;
@@ -203,6 +206,9 @@ export const HOME_SECTIONS_COPY: Record<Locale, HomeSectionsCopy> = {
         { value: "25", label: "Matrimoni l'anno, non di più" },
       ],
     },
+    featuredIn: {
+      title: "Pubblicato su",
+    },
     imageAlts: {
       hero: "Fotografia di matrimonio fine art — Stefano Lunardi",
       heroSecondary: "Fotografia d'arte — Stefano Lunardi",
@@ -329,6 +335,9 @@ export const HOME_SECTIONS_COPY: Record<Locale, HomeSectionsCopy> = {
         { value: "Desde 2012", label: "Bodas en Italia y Austria" },
         { value: "25", label: "Bodas al año, no más" },
       ],
+    },
+    featuredIn: {
+      title: "Publicado en",
     },
     imageAlts: {
       hero: "Fotografía de boda fine art — Stefano Lunardi",
@@ -457,6 +466,9 @@ export const HOME_SECTIONS_COPY: Record<Locale, HomeSectionsCopy> = {
         { value: "25", label: "Weddings a year, no more" },
       ],
     },
+    featuredIn: {
+      title: "Featured in",
+    },
     imageAlts: {
       hero: "Fine-art wedding photograph — Stefano Lunardi",
       heroSecondary: "Fine-art photograph — Stefano Lunardi",
@@ -583,6 +595,9 @@ export const HOME_SECTIONS_COPY: Record<Locale, HomeSectionsCopy> = {
         { value: "Seit 2012", label: "Hochzeiten in Italien und Österreich" },
         { value: "25", label: "Hochzeiten pro Jahr, nicht mehr" },
       ],
+    },
+    featuredIn: {
+      title: "Veröffentlicht in",
     },
     imageAlts: {
       hero: "Fine-Art-Hochzeitsfoto — Stefano Lunardi",
