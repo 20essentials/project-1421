@@ -74,12 +74,6 @@ export interface HomeSectionsCopy {
     about: string;
     method: string;
   };
-  video: {
-    title: string;
-    playLabel: string;
-    posterAlt: string;
-    ariaLabel: string;
-  };
 }
 
 export const HOME_SECTIONS_COPY: Record<Locale, HomeSectionsCopy> = {
@@ -185,12 +179,6 @@ export const HOME_SECTIONS_COPY: Record<Locale, HomeSectionsCopy> = {
       about: "Stefano Lunardi, fotografo di matrimoni fine art, con la sua macchina fotografica",
       method: "Coppia in bianco e nero che cammina — fotografia fine art di matrimonio, Stefano Lunardi",
     },
-    video: {
-      title: "Mi presento — Stefano Lunardi",
-      playLabel: "Riproduci: Mi presento — Stefano Lunardi",
-      posterAlt: "Stefano Lunardi nel suo studio, anteprima del video Mi presento",
-      ariaLabel: "Clip in loop: Stefano dipinge e registra la nascita di una sua opera",
-    },
   },
 
   es: {
@@ -294,12 +282,6 @@ export const HOME_SECTIONS_COPY: Record<Locale, HomeSectionsCopy> = {
       veil: "Pareja en blanco y negro caminando — fotografía de boda fine art, Stefano Lunardi",
       about: "Stefano Lunardi, fotógrafo de bodas fine art, con su cámara",
       method: "Pareja en blanco y negro caminando — fotografía de boda fine art, Stefano Lunardi",
-    },
-    video: {
-      title: "Me presento — Stefano Lunardi",
-      playLabel: "Reproducir: Me presento — Stefano Lunardi",
-      posterAlt: "Stefano Lunardi en su estudio, vista previa del vídeo Me presento",
-      ariaLabel: "Vídeo en bucle: Stefano pinta y registra el nacimiento de una de sus obras",
     },
   },
 
@@ -405,12 +387,6 @@ export const HOME_SECTIONS_COPY: Record<Locale, HomeSectionsCopy> = {
       about: "Stefano Lunardi, fine-art wedding photographer, with his camera",
       method: "Black-and-white couple walking — fine-art wedding photograph, Stefano Lunardi",
     },
-    video: {
-      title: "Let me introduce myself — Stefano Lunardi",
-      playLabel: "Play: Let me introduce myself — Stefano Lunardi",
-      posterAlt: "Stefano Lunardi in his studio, preview of the introduction video",
-      ariaLabel: "Looping clip: Stefano paints and records the birth of one of his works",
-    },
   },
 
   de: {
@@ -514,12 +490,6 @@ export const HOME_SECTIONS_COPY: Record<Locale, HomeSectionsCopy> = {
       veil: "Schwarz-weißes Paar beim Spaziergang — Fine-Art-Hochzeitsfoto, Stefano Lunardi",
       about: "Stefano Lunardi, Fine-Art-Hochzeitsfotograf, mit seiner Kamera",
       method: "Schwarz-weißes Paar beim Spaziergang — Fine-Art-Hochzeitsfoto, Stefano Lunardi",
-    },
-    video: {
-      title: "Ich stelle mich vor — Stefano Lunardi",
-      playLabel: "Abspielen: Ich stelle mich vor — Stefano Lunardi",
-      posterAlt: "Stefano Lunardi in seinem Studio, Vorschau des Vorstellungsvideos",
-      ariaLabel: "Endlosschleife: Stefano malt und hält die Entstehung eines seiner Werke fest",
     },
   },
 };

@@ -37,7 +37,6 @@ describe("HOME_SECTIONS_COPY", () => {
       base.reviews.intro,
       base.reviews.cta,
       base.reviews.newlyweds,
-      base.video.title,
     ];
     for (const locale of ["es", "en", "de"] as const) {
       const serialized = JSON.stringify(HOME_SECTIONS_COPY[locale]);

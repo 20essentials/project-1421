@@ -23,7 +23,6 @@
   },
   "dependencies": {
     "@base-ui/react": "1.9.0",
-    "@justinribeiro/lite-youtube": "1.9.0",
     "@tailwindcss/vite": "^4.1.7",
     "@wix/astro": "^3.0.0",
     "@wix/astro-pages": "^3.0.0",

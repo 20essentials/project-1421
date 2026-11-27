@@ -60,7 +60,6 @@ aparece en el sitio en vivo, sin redeploy.
 | `/il-mio-metodo`  | `IlMetodo`     | [Il Metodo](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/IlMetodo)        |
 | `/chi-sono`       | `ChiSono`      | [Chi Sono](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/ChiSono)          |
 | `/contatti`       | `Contatti`     | [Contatti](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Contatti)         |
-| `/video`          | `Video`        | [Video](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Video)               |
 | `/fine-art`       | `FineArt`      | [Fine Art](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/FineArt)          |
 | `/location`       | `Location`     | [Location](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Location)         |
 | `/investimento`   | `Investimento` | [Investimento](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Investimento) |
@@ -69,12 +68,12 @@ aparece en el sitio en vivo, sin redeploy.
 | `/legal` (cabecera)| `LegalIndex`  | [Documenti legali](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/LegalIndex) |
 | `/404`            | `NotFound`     | [404](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/NotFound)              |
 
-Alcance por página: en `/` son editables el texto, las imágenes y los vídeos de cada sección
-(slides del hero, presentación, intro de las galerías, vídeo de presentación, los tres tipos de
+Alcance por página: en `/` son editables el texto y las imágenes de cada sección
+(slides del hero, presentación, intro de las galerías, los tres tipos de
 foto, sección foto/vídeo, cabecera del blog, muro de reconocimientos (texto y seis primeras
 imágenes editables; los otros seis sellos quedan fijos), citas, cabecera FAQ y el llamado final —
-las cuadrículas de las galerías mantienen su layout); en `/contatti`, `/video` y
-`/recensioni` editas el texto de la cabecera (el formulario, los vídeos y las tarjetas de
+las cuadrículas de las galerías mantienen su layout); en `/contatti` y
+`/recensioni` editas el texto de la cabecera (el formulario y las tarjetas de
 reseñas quedan fijos); en `/awards` son editables las listas de premios y exposiciones, la
 cuadrícula de sellos queda fija; `/fine-art`, `/location`, `/investimento`, `/il-mio-metodo` y
 `/chi-sono` son totalmente editables. El SEO de la página (título y descripción para Google) ya

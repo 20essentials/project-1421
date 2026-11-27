@@ -28,7 +28,6 @@ const STATIC_ROUTES: Record<string, Expected> = {
   "/recensioni": {},
   "/awards": {},
   "/fine-art": {},
-  "/video": {},
   "/impressum": {},
   "/legal": {},
   "/legal/termini-e-condizioni": {},

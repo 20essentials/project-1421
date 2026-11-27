@@ -20,7 +20,6 @@ import { fetchCollections, fetchProjects } from "@/features/portfolio/portfolio"
 const STATIC_PATHS = [
   "/",
   "/portfolio",
-  "/video",
   "/il-mio-metodo",
   "/chi-sono",
   "/location",

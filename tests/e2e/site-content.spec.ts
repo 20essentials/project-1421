@@ -11,9 +11,7 @@ test.describe("CMS Single Item pages", () => {
         name: "STEFANO LUNARDI",
       }),
     ).toBeVisible();
-    await expect(
-      page.getByRole("heading", { name: "Un volto, una voce, un metodo" }),
-    ).toBeVisible();
+    await expect(page.locator("#mi-presento")).toHaveCount(0);
     await expect(page.getByRole("heading", { name: "Dietro l'obiettivo" })).toBeVisible();
     await expect(page.getByRole("heading", { level: 2, name: "IL METODO Fusion" })).toBeVisible();
     await expect(

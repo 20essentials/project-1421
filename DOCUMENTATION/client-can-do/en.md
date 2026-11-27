@@ -60,7 +60,6 @@ redeploy.
 | `/il-mio-metodo`  | `IlMetodo`     | [Il Metodo](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/IlMetodo)       |
 | `/chi-sono`       | `ChiSono`      | [Chi Sono](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/ChiSono)         |
 | `/contatti`       | `Contatti`     | [Contatti](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Contatti)        |
-| `/video`          | `Video`        | [Video](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Video)              |
 | `/fine-art`       | `FineArt`      | [Fine Art](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/FineArt)         |
 | `/location`       | `Location`     | [Location](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Location)        |
 | `/investimento`   | `Investimento` | [Investimento](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Investimento)|
@@ -69,12 +68,12 @@ redeploy.
 | `/legal` (header) | `LegalIndex`   | [Documenti legali](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/LegalIndex) |
 | `/404`            | `NotFound`     | [404](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/NotFound)             |
 
-Scope per page: on `/` every section's text, images and videos are editable (hero slides,
-about, art galleries intro, intro video, the three shot types, photo/video section, blog
+Scope per page: on `/` every section's text and images are editable (hero slides,
+about, art galleries intro, the three shot types, photo/video section, blog
 preview header, awards wall (its text and first six logos are editable; the six additional seals
 stay fixed), quotes, FAQ header and the final call to action — the gallery grids themselves keep
-their layout); on `/contatti`, `/video` and `/recensioni` you edit the
-header text (the form, the video embeds and the review cards stay fixed); on `/awards` the
+their layout); on `/contatti` and `/recensioni` you edit the
+header text (the form and the review cards stay fixed); on `/awards` the
 awards lists and exhibitions are editable, the seals grid stays fixed; `/fine-art`,
 `/location`, `/investimento`, `/il-mio-metodo` and `/chi-sono` are fully editable. The page
 SEO (title and description for Google) is NOT in the CMS anymore: it is managed in the SEO

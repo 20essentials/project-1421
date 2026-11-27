@@ -63,7 +63,6 @@ export async function GET({ request }: { request: Request }): Promise<Response> 
   lines.push("");
   for (const [path, name] of [
     ["/portfolio", "Portfolio — collezioni di matrimoni e progetti"],
-    ["/video", "Video — showreel e film di matrimonio"],
     ["/il-mio-metodo", "Il mio metodo — i tre incontri preparatori"],
     ["/chi-sono", "Chi sono — biografia di Stefano Lunardi"],
     ["/location", "Location — dove lavoro (Austria e Italia)"],

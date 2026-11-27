@@ -13,7 +13,6 @@ const SITE_PAGE_COLLECTIONS = {
   "il-mio-metodo": "IlMetodo",
   "chi-sono": "ChiSono",
   contatti: "Contatti",
-  video: "Video",
   "fine-art": "FineArt",
   location: "Location",
   investimento: "Investimento",

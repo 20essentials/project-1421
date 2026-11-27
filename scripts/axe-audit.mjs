@@ -5,7 +5,7 @@ import { chromium } from "@playwright/test";
 
 const routes = process.argv[2]
   ? process.argv[2].split(",")
-  : ["/", "/contatti", "/portfolio", "/blog", "/faq", "/chi-sono", "/video", "/recensioni", "/location", "/investimento", "/awards", "/fine-art", "/il-mio-metodo", "/legal", "/impressum"];
+  : ["/", "/contatti", "/portfolio", "/blog", "/faq", "/chi-sono", "/recensioni", "/location", "/investimento", "/awards", "/fine-art", "/il-mio-metodo", "/legal", "/impressum"];
 
 const axeSource = readFileSync("node_modules/axe-core/axe.min.js", "utf8");
 const browser = await chromium.launch();

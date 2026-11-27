@@ -104,37 +104,6 @@
       ]
     },
     {
-      "id": "Video",
-      "displayName": "Video",
-      "plugins": [
-        {
-          "type": "SINGLE_ITEM",
-          "singleItemOptions": {}
-        }
-      ],
-      "fields": [
-        {
-          "key": "eyebrow",
-          "type": "TEXT"
-        },
-        {
-          "key": "title",
-          "type": "TEXT"
-        },
-        {
-          "key": "intro",
-          "type": "TEXT"
-        }
-      ],
-      "items": [
-        {
-          "eyebrow": "Wedding films",
-          "title": "Le storie in movimento",
-          "intro": "Oltre alla fotografia: reel e film di matrimonio che restituiscono ritmo, sguardi e atmosfera della giornata."
-        }
-      ]
-    },
-    {
       "id": "FineArt",
       "displayName": "Fine Art",
       "plugins": [
@@ -899,30 +868,6 @@
           "type": "IMAGE"
         },
         {
-          "key": "presentoEyebrow",
-          "type": "TEXT"
-        },
-        {
-          "key": "presentoTitle",
-          "type": "TEXT"
-        },
-        {
-          "key": "presentoIntro",
-          "type": "TEXT"
-        },
-        {
-          "key": "presentoVideoId",
-          "type": "TEXT"
-        },
-        {
-          "key": "presentoCaption",
-          "type": "TEXT"
-        },
-        {
-          "key": "presentoLink",
-          "type": "TEXT"
-        },
-        {
           "key": "manifestoQuote",
           "type": "TEXT"
         },
@@ -1105,11 +1050,6 @@
           "arteSingulartCta": "Visita la pagina dell'artista →",
           "arteLunagalleryLabel": "Fine art portrait in edizione limitata",
           "arteLunagalleryCta": "Esplora LunaGallery →",
-          "presentoEyebrow": "Mi presento",
-          "presentoTitle": "Un volto, una voce, un metodo",
-          "presentoIntro": "Prima dei premi e delle fotografie, c'è una persona. In questo minuto vi racconto chi sono e come guardo un giorno di matrimonio — senza filtri, come con il rullino.",
-          "presentoCaption": "«Un minuto per conoscervi, una giornata per raccontarvi.»",
-          "presentoLink": "Guarda i wedding film e i reel",
           "manifestoQuote": "\"Ti hanno detto che deve essere il giorno più bello della tua vita. Nessuno ti ha detto che deve essere il tuo.\"",
           "manifestoText": "Esiste un'altra strada. Più lenta. Più rara. Più umana. Una fotografia che si prende il tempo di conoscerti prima di fotografarti, che consegna cento immagini straordinarie invece di mille dimenticabili, che tratta il matrimonio per quello che è: un'opera d'arte.",
           "manifestoWelcome": "Benvenuto nella tua storia.",
@@ -1136,7 +1076,6 @@
           "ctaText": "Risposta entro 48 ore. Nessuna fretta, nessuna pressione: solo una conversazione sulla vostra storia.",
           "ctaButton": "Conosci Stefano",
           "aboutIntro": "Fotografo con oltre trent'anni di esperienza: fotogiornalista per le maggiori testate italiane, artista fine art premiato in tutto il mondo, fotografo di matrimoni dal 2012.",
-          "presentoVideoId": "5gY0HgkSVjU",
           "fvVideoUrl": "https://video.wixstatic.com/video/600582_ebf55de548bd485d860b78ad136c87e4/file",
           "gridEyebrow": "Portfolio",
           "gridTitle": "MOMENTI VERI, composti con eleganza",

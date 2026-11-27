@@ -60,7 +60,6 @@ sito in tempo reale, senza redeploy.
 | `/il-mio-metodo`  | `IlMetodo`     | [Il Metodo](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/IlMetodo)        |
 | `/chi-sono`       | `ChiSono`      | [Chi Sono](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/ChiSono)          |
 | `/contatti`       | `Contatti`     | [Contatti](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Contatti)         |
-| `/video`          | `Video`        | [Video](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Video)               |
 | `/fine-art`       | `FineArt`      | [Fine Art](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/FineArt)          |
 | `/location`       | `Location`     | [Location](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Location)         |
 | `/investimento`   | `Investimento` | [Investimento](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/Investimento) |
@@ -69,12 +68,12 @@ sito in tempo reale, senza redeploy.
 | `/legal` (testata)| `LegalIndex`   | [Documenti legali](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/LegalIndex) |
 | `/404`            | `NotFound`     | [404](https://manage.wix.com/dashboard/b24dc2d0-f24b-4d97-b733-550f7c321876/wix-cms/data/NotFound)              |
 
-Perimetro per pagina: in `/` sono modificabili testo, immagini e video di ogni sezione (slide
-hero, presentazione, intro delle gallerie, video di presentazione, i tre tipi di foto, sezione
+Perimetro per pagina: in `/` sono modificabili testo e immagini di ogni sezione (slide
+hero, presentazione, intro delle gallerie, i tre tipi di foto, sezione
 foto/video, testata del blog, muro dei riconoscimenti (testo e prime sei immagini modificabili;
 gli altri sei sigilli restano fissi), citazioni, testata FAQ e invito finale — le griglie delle
-gallerie mantengono il loro layout); in `/contatti`, `/video` e `/recensioni`
-modifichi il testo dell'intestazione (il modulo, i video e le card delle recensioni restano
+gallerie mantengono il loro layout); in `/contatti` e `/recensioni`
+modifichi il testo dell'intestazione (il modulo e le card delle recensioni restano
 fissi); in `/awards` sono modificabili gli elenchi di premi e mostre, la griglia dei sigilli
 resta fissa; `/fine-art`, `/location`, `/investimento`, `/il-mio-metodo` e `/chi-sono` sono
 completamente modificabili. Il SEO della pagina (titolo e descrizione per Google) NON è più

@@ -2,7 +2,6 @@ import type { NavPath } from "@/features/site-chrome/site-chrome-core";
 
 export const primaryNav: NavPath[] = [
   { href: "/portfolio", labelKey: "navPortfolio" },
-  { href: "/video", labelKey: "navVideo" },
   { href: "/il-mio-metodo", labelKey: "navMethod" },
   { href: "/chi-sono", labelKey: "navAbout" },
   { href: "/location", labelKey: "navLocation" },

@@ -18,7 +18,6 @@ export interface NavItem {
 
 export const SITE_CHROME_FALLBACKS: SiteChromeLabels = {
   navPortfolio: "Portfolio",
-  navVideo: "Video",
   navMethod: "Il metodo",
   navAbout: "Chi sono",
   navLocation: "Location",
