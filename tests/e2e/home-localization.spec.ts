@@ -13,10 +13,6 @@ const EXPECTED = {
     deliveryTitle: "VUESTRAS FOTOGRAFÍAS, con los plazos adecuados",
     deliveryUnit: "DÍAS",
     deliveryStep: "La historia completa",
-    whereEyebrow: "Dónde fotografo",
-    whereTitle: "Friuli, Véneto y Austria",
-    whereRegion: "Carintia",
-    whereClosing: "y dondequiera que vuestra historia os lleve.",
     gridTitle: "MOMENTOS REALES, compuestos con elegancia",
     reviewsTitle: "Las reseñas, una por una",
     reviewsIntro: "Historias reales, contadas con las palabras de quienes las vivieron.",
@@ -35,10 +31,6 @@ const EXPECTED = {
     deliveryTitle: "YOUR PHOTOGRAPHS, on the right timeline",
     deliveryUnit: "DAYS",
     deliveryStep: "The full story",
-    whereEyebrow: "Where I photograph",
-    whereTitle: "Friuli, Veneto and Austria",
-    whereRegion: "Carinthia",
-    whereClosing: "and wherever your story takes you.",
     gridTitle: "REAL MOMENTS, composed with elegance",
     reviewsTitle: "The reviews, one by one",
     reviewsIntro: "Real stories, told in the words of the people who lived them.",
@@ -57,10 +49,6 @@ const EXPECTED = {
     deliveryTitle: "IHRE FOTOS, im richtigen Tempo",
     deliveryUnit: "TAGE",
     deliveryStep: "Die ganze Geschichte",
-    whereEyebrow: "Wo ich fotografiere",
-    whereTitle: "Friaul, Venetien und Österreich",
-    whereRegion: "Kärnten",
-    whereClosing: "und überall dorthin, wohin Ihre Geschichte Sie führt.",
     gridTitle: "ECHTE MOMENTE, mit Eleganz komponiert",
     reviewsTitle: "Die Rezensionen, eine nach der anderen",
     reviewsIntro: "Echte Geschichten, erzählt mit den Worten derer, die sie erlebt haben.",
@@ -112,11 +100,8 @@ for (const [locale, expected] of Object.entries(EXPECTED)) {
     await expect(delivery.getByText(expected.deliveryUnit).first()).toBeVisible();
     await expect(delivery.getByRole("heading", { name: expected.deliveryStep })).toBeVisible();
 
-    const where = page.locator("#dove-fotografo");
-    await expect(where.getByText(expected.whereEyebrow)).toBeVisible();
-    await expect(where.getByRole("heading", { level: 2, name: expected.whereTitle })).toBeVisible();
-    await expect(where.getByText(expected.whereRegion)).toBeVisible();
-    await expect(where.getByText(expected.whereClosing)).toBeVisible();
+    await expect(page.locator("#dove-fotografo")).toHaveCount(0);
+    await expect(page.locator("#foto-e-video")).toHaveCount(0);
 
     await expect(page.locator("#photo-grid-title")).toHaveText(expected.gridTitle);
 

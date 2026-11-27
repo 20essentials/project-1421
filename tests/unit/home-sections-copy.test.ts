@@ -11,7 +11,6 @@ describe("HOME_SECTIONS_COPY", () => {
       expect(copy.percorso.title).toHaveLength(base.percorso.title.length);
       expect(copy.percorso.steps).toHaveLength(base.percorso.steps.length);
       expect(copy.delivery.steps).toHaveLength(base.delivery.steps.length);
-      expect(copy.where.regions).toHaveLength(base.where.regions.length);
       expect(copy.stats.items).toHaveLength(base.stats.items.length);
       expect(copy.reviews.eyebrow).not.toBe("");
       expect(copy.reviews.title).not.toBe("");
@@ -32,9 +31,6 @@ describe("HOME_SECTIONS_COPY", () => {
       base.percorso.intro,
       base.delivery.eyebrow,
       base.delivery.title,
-      base.where.eyebrow,
-      base.where.title,
-      base.where.closing,
       base.stats.ariaLabel,
       base.reviews.eyebrow,
       base.reviews.title,

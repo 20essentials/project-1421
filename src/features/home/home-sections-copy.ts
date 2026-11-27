@@ -23,11 +23,6 @@ interface DeliveryStep {
   copy: string;
 }
 
-interface Region {
-  name: string;
-  places: string;
-}
-
 interface Stat {
   value: string;
   label: string;
@@ -53,12 +48,6 @@ export interface HomeSectionsCopy {
     eyebrow: string;
     title: string;
     steps: DeliveryStep[];
-  };
-  where: {
-    eyebrow: string;
-    title: string;
-    regions: Region[];
-    closing: string;
   };
   stats: {
     ariaLabel: string;
@@ -165,25 +154,6 @@ export const HOME_SECTIONS_COPY: Record<Locale, HomeSectionsCopy> = {
           copy: "Un album, una scatola di stampe fine art o una piccola mostra: lo scegliamo insieme.",
         },
       ],
-    },
-    where: {
-      eyebrow: "Dove fotografo",
-      title: "Friuli, Veneto e Austria",
-      regions: [
-        {
-          name: "Friuli Venezia Giulia",
-          places: "Udine · Pordenone · Trieste · Gorizia · Collio · Lignano",
-        },
-        {
-          name: "Veneto",
-          places: "Treviso · Venezia · Padova · Belluno · Colli Asolani",
-        },
-        {
-          name: "Austria",
-          places: "Carinzia · Villach · Klagenfurt · Wörthersee · Stiria · Graz",
-        },
-      ],
-      closing: "e ovunque vi porti la vostra storia.",
     },
     reviews: {
       eyebrow: "Le parole degli sposi",
@@ -296,25 +266,6 @@ export const HOME_SECTIONS_COPY: Record<Locale, HomeSectionsCopy> = {
         },
       ],
     },
-    where: {
-      eyebrow: "Dónde fotografo",
-      title: "Friuli, Véneto y Austria",
-      regions: [
-        {
-          name: "Friuli-Venezia Giulia",
-          places: "Udine · Pordenone · Trieste · Gorizia · Collio · Lignano",
-        },
-        {
-          name: "Véneto",
-          places: "Treviso · Venecia · Padua · Belluno · Colli Asolani",
-        },
-        {
-          name: "Austria",
-          places: "Carintia · Villach · Klagenfurt · Wörthersee · Estiria · Graz",
-        },
-      ],
-      closing: "y dondequiera que vuestra historia os lleve.",
-    },
     reviews: {
       eyebrow: "Las palabras de los novios",
       title: "Las reseñas, una por una",
@@ -426,25 +377,6 @@ export const HOME_SECTIONS_COPY: Record<Locale, HomeSectionsCopy> = {
         },
       ],
     },
-    where: {
-      eyebrow: "Where I photograph",
-      title: "Friuli, Veneto and Austria",
-      regions: [
-        {
-          name: "Friuli Venezia Giulia",
-          places: "Udine · Pordenone · Trieste · Gorizia · Collio · Lignano",
-        },
-        {
-          name: "Veneto",
-          places: "Treviso · Venice · Padua · Belluno · Colli Asolani",
-        },
-        {
-          name: "Austria",
-          places: "Carinthia · Villach · Klagenfurt · Wörthersee · Styria · Graz",
-        },
-      ],
-      closing: "and wherever your story takes you.",
-    },
     reviews: {
       eyebrow: "Words from the newlyweds",
       title: "The reviews, one by one",
@@ -555,25 +487,6 @@ export const HOME_SECTIONS_COPY: Record<Locale, HomeSectionsCopy> = {
           copy: "Ein Album, eine Box mit Fine-Art-Abzügen oder eine kleine Ausstellung: wir entscheiden gemeinsam.",
         },
       ],
-    },
-    where: {
-      eyebrow: "Wo ich fotografiere",
-      title: "Friaul, Venetien und Österreich",
-      regions: [
-        {
-          name: "Friaul-Julisch Venetien",
-          places: "Udine · Pordenone · Triest · Görz · Collio · Lignano",
-        },
-        {
-          name: "Venetien",
-          places: "Treviso · Venedig · Padua · Belluno · Colli Asolani",
-        },
-        {
-          name: "Österreich",
-          places: "Kärnten · Villach · Klagenfurt · Wörthersee · Steiermark · Graz",
-        },
-      ],
-      closing: "und überall dorthin, wohin Ihre Geschichte Sie führt.",
     },
     reviews: {
       eyebrow: "Worte der Brautpaare",

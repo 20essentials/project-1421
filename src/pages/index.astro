@@ -427,60 +427,6 @@ const alignFor = (i: number): "center" | "right" | "left" =>
     </div>
   </section>
 
-  <section id="dove-fotografo" class="border-y border-border bg-secondary px-6 py-20" aria-labelledby="dove-fotografo-title">
-    <div class="mx-auto max-w-5xl">
-      <p class="text-[0.6875rem] font-semibold tracking-[0.22em] uppercase text-foreground">{copy.where.eyebrow}</p>
-      <h2 id="dove-fotografo-title" class="font-display mt-3 text-3xl font-medium leading-tight sm:text-4xl">{copy.where.title}</h2>
-
-      <div class="mt-12 grid grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-8">
-        {copy.where.regions.map((region) => (
-          <div>
-            <h3 class="eyebrow">{region.name}</h3>
-            <p class="mt-4 text-sm leading-relaxed text-muted-foreground">{region.places}</p>
-          </div>
-        ))}
-      </div>
-
-      <div class="mt-12 flex items-center justify-center gap-4 border-t border-border pt-8">
-        <span class="hidden h-px w-8 bg-border sm:block" aria-hidden="true"></span>
-        <p class="font-display text-[1.0625rem] italic leading-normal text-muted-foreground text-balance sm:text-lg">{copy.where.closing}</p>
-        <span class="hidden h-px w-8 bg-border sm:block" aria-hidden="true"></span>
-      </div>
-    </div>
-  </section>
-
-  <section id="foto-e-video" class="fv-root px-6 py-24">
-    <div class="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 md:grid-cols-[3fr_4fr] md:gap-16">
-      <div>
-        <p class="eyebrow fv-eyebrow">{heroContent.fvEyebrow}</p>
-        <h2 class="font-display fv-heading mt-3 text-3xl font-medium leading-tight sm:text-4xl">
-          {heroContent.fvTitle}
-        </h2>
-        <p class="fv-copy mt-5 leading-relaxed">
-          {heroContent.fvText}
-        </p>
-        <a href={href("/video")} class="fv-cta mt-8 inline-block no-underline">{heroContent.fvCta}</a>
-      </div>
-      <figure class="fv-frame">
-        <video
-          autoplay
-          loop
-          muted
-          playsinline
-          preload="metadata"
-          poster={imgSrc(heroContent.fvPoster, 1280, 720)}
-          aria-label={copy.video.ariaLabel}
-          class="fv-video"
-        >
-          <source src={heroContent.fvVideoUrl} type="video/mp4" />
-        </video>
-        <figcaption class="fv-frame__caption font-display text-sm italic sm:text-base">
-          {heroContent.fvCaption}
-        </figcaption>
-      </figure>
-    </div>
-  </section>
-
   {
     latestPosts.length > 0 && (
       <section class="px-6 pb-20 pt-20">
@@ -965,67 +911,9 @@ const alignFor = (i: number): "center" | "right" | "left" =>
     border-color: rgb(255 255 255 / 0.8);
   }
 
-  /* "La tela si dipinge, l'obbiettivo racconta": cámara oscura como "Mi presento",
-     con la ventana activa de la clip que gira (autoplay + loop + muted). */
-  .fv-root {
-    background: #0b0b0d;
-    color: rgb(255 255 255 / 0.92);
-  }
-  .fv-eyebrow {
-    color: rgb(255 255 255 / 0.55);
-  }
-  .fv-heading {
-    color: #ffffff;
-  }
-  .fv-copy {
-    color: rgb(255 255 255 / 0.65);
-  }
-  .fv-cta {
-    color: rgb(255 255 255 / 0.75);
-    border-bottom: 1px solid rgb(255 255 255 / 0.3);
-    padding-bottom: 2px;
-    font-size: 0.875rem;
-    transition: color 0.2s, border-color 0.2s;
-  }
-  .fv-cta:hover {
-    color: #ffffff;
-    border-color: rgb(255 255 255 / 0.8);
-  }
-  .fv-frame {
-    margin: 0;
-    padding: clamp(0.75rem, 2.5vw, 1.5rem);
-    background: #101014;
-    border: 1px solid rgb(255 255 255 / 0.14);
-    box-shadow:
-      0 0 0 1px rgb(0 0 0 / 0.6),
-      0 30px 80px rgb(0 0 0 / 0.55);
-  }
-  .fv-video {
-    display: block;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    background: #0b0b0d;
-    border: 1px solid rgb(255 255 255 / 0.2);
-    object-fit: cover;
-  }
-  .fv-frame__caption {
-    margin-top: 1rem;
-    text-align: center;
-    color: rgb(255 255 255 / 0.55);
-  }
   @media (prefers-reduced-motion: reduce) {
     .fa-card {
       transition: none;
-    }
-    .fv-video {
-      display: none;
-    }
-    .fv-frame::after {
-      content: "";
-      display: block;
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      background: url("https://static.wixstatic.com/media/600582_7aee14ecf9714020be28dcff3d7a17a2~mv2.avif") center / cover no-repeat;
     }
   }
 
