@@ -57,7 +57,7 @@ stefanolunardi-photographer
 │   ├── Latest articles → src/pages/index.astro
 │   ├── Awards/press band → src/pages/index.astro
 │   ├── Testimonial + FAQ preview → src/pages/index.astro
-│   └── Final "Heart to Heart" CTA → src/pages/index.astro
+│   └── Final "Tell me your story" / "Get started" CTA → src/pages/index.astro
 │
 ├── Wix content (domain features)
 │   ├── Blog
