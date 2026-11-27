@@ -178,7 +178,7 @@ export default function BlogFeedView({
                 type="button"
                 onClick={loadMore}
                 disabled={loadingMore}
-                className="rounded-lg border border-border px-6 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-secondary disabled:opacity-50"
+                className="rounded-full border border-border px-6 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-secondary disabled:opacity-50"
               >
                 {loadingMore ? "Loading…" : "Load more"}
               </button>

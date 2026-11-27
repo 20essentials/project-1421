@@ -374,7 +374,7 @@ const alignFor = (i: number): "center" | "right" | "left" =>
             </li>
           ))}
         </ol>
-        <a href={href("/il-mio-metodo")} class="btn-ghost mt-8 inline-block no-underline">{copy.method.cta}</a>
+        <a href={href("/il-mio-metodo")} class="rounded-control btn-ghost mt-8 inline-block no-underline">{copy.method.cta}</a>
       </div>
     </div>
   </section>
@@ -817,6 +817,7 @@ const alignFor = (i: number): "center" | "right" | "left" =>
   .mp-link {
     color: #ffffff;
     border: 1px solid rgb(255 255 255 / 0.75);
+    border-radius: var(--radius-control, 9999px);
     padding: 0.8rem 1.9rem;
     font-size: 0.875rem;
     letter-spacing: 0.08em;

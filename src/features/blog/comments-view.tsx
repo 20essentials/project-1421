@@ -48,11 +48,11 @@ function CommentForm({
       />
       <div className="flex justify-end gap-2">
         {onCancel && (
-          <button type="button" onClick={onCancel} className="rounded-lg px-4 py-2 text-sm text-muted-foreground hover:bg-secondary">
+          <button type="button" onClick={onCancel} className="rounded-full px-4 py-2 text-sm text-muted-foreground hover:bg-secondary">
             Cancel
           </button>
         )}
-        <button type="submit" disabled={disabled || !text.trim()} className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground disabled:opacity-50">
+        <button type="submit" disabled={disabled || !text.trim()} className="rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground disabled:opacity-50">
           {submitLabel}
         </button>
       </div>
@@ -198,7 +198,7 @@ export default function CommentsView({ referenceId, currentMemberId, signInHref 
 
       {hasMore && (
         <div className="text-center">
-          <button type="button" onClick={loadMore} disabled={loadingMore} className="rounded-lg border border-border px-6 py-2.5 text-sm font-medium hover:bg-secondary disabled:opacity-50">
+          <button type="button" onClick={loadMore} disabled={loadingMore} className="rounded-full border border-border px-6 py-2.5 text-sm font-medium hover:bg-secondary disabled:opacity-50">
             {loadingMore ? "Loading…" : "Load more comments"}
           </button>
         </div>
