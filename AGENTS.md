@@ -92,9 +92,21 @@ call is memory, and an empty or error reply to it says nothing about the site.
 
 ## Skills
 
-Installed at `.agents/skills/` by
-`npx skills add wix/skills --skill wix-headless-kit --skill wix-docs --skill wix-manage`; a Wix plugin keeps
-its copy, under the same names, in the client's own skills folder.
+This project works with local skills under `.agents/skills/`. `.agents/` is in `.gitignore`, so a fresh
+clone does not include them: install them locally from the repo root before doing repo work. A Wix plugin
+may keep its own copy, under the same names, in the client's skills folder.
+
+Install the expected set with OpenCode selected as the agent:
+
+```bash
+npx skills add wix/skills --skill wix-headless-kit --skill wix-docs --skill wix-manage -y
+npx skills add pbakaus/impeccable --skill impeccable -y
+npx skills add anthropics/skills --skill frontend-design -y
+npx skills add GoogleChrome/modern-web-guidance --skill modern-web-guidance -y
+npx skills add shadcn-ui/ui --skill shadcn -y
+npx skills add vercel-labs/agent-skills --skill web-design-guidelines -y
+npx skills add wheresryan22/anatomy --skill anatomy -y
+```
 
 **Every skill installed for this repo MUST be local, under `.agents/skills/`. Never install skills globally
 (`-g`, `~/.agents/skills`, or any other user-level location): anyone else using this repo must get the same
