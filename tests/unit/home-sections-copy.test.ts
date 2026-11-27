@@ -13,6 +13,14 @@ describe("HOME_SECTIONS_COPY", () => {
       expect(copy.delivery.steps).toHaveLength(base.delivery.steps.length);
       expect(copy.stats.items).toHaveLength(base.stats.items.length);
       expect(copy.aboutCv).not.toBe("");
+      expect(copy.weddingVideo.title).not.toBe("");
+      expect(copy.weddingVideo.text).not.toBe("");
+      expect(copy.weddingVideo.cta).not.toBe("");
+      expect(copy.weddingVideo.caption).not.toBe("");
+      expect(copy.featuredVideos.title).not.toBe("");
+      expect(copy.featuredVideos.captions).toHaveLength(base.featuredVideos.captions.length);
+      expect(copy.featuredVideos.player.play).not.toBe("");
+      expect(copy.featuredVideos.player.close).not.toBe("");
       expect(copy.reviews.eyebrow).not.toBe("");
       expect(copy.reviews.title).not.toBe("");
       expect(copy.reviews.intro).not.toBe("");
@@ -33,6 +41,13 @@ describe("HOME_SECTIONS_COPY", () => {
       base.percorso.intro,
       base.delivery.eyebrow,
       base.delivery.title,
+      base.weddingVideo.title,
+      base.weddingVideo.text,
+      base.weddingVideo.cta,
+      base.weddingVideo.caption,
+      base.featuredVideos.title,
+      base.featuredVideos.player.play,
+      base.featuredVideos.player.close,
       base.stats.ariaLabel,
       base.reviews.eyebrow,
       base.reviews.title,

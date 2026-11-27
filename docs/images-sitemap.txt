@@ -314,3 +314,14 @@ stefano-lunardi-assets/magazzini-e-siti-web/wezoree.png (AVIF q60 5552x1700) -> 
 
 # 2026-11-27 — curriculum PDF linked from the homepage "Stefano Lunardi" section; uploaded to Wix Media Manager (application/pdf, 82902 bytes, READY)
 public/curriculum-awards.pdf -> https://b24dc2d0-f24b-4d97-b733-550f7c321876.usrfiles.com/ugd/600582_87e7a91d884146588e5c7172eae587be.pdf  # curriculum CTA
+
+# 2026-11-27 — wedding films uploaded to Wix Media Manager (video/mp4, resumable TUS upload).
+# Posters are the thumbnails Wix generated for each video (get-file-by-id -> thumbnailUrl).
+public/denise-e-gabriela.mp4 -> https://video.wixstatic.com/video/600582_f90223411bf34cc285dbad610a4f005f/file  # video parallax "Creazione di un video di matrimonio personalizzato"
+https://static.wixstatic.com/media/600582_f90223411bf34cc285dbad610a4f005ff002.jpg -> poster denise-e-gabriela
+public/video-reel-weeding-2026.mp4 -> https://video.wixstatic.com/video/600582_2c9a6dc4d0d34c919f54ad6b5875fcd7/file  # VIDEO IN EVIDENZA "Video reel wedding 2026"
+https://static.wixstatic.com/media/600582_23fb48b239e34239a43036bee7d20c85~mv2.avif -> poster video-reel-weeding-2026 (frame at 180s, AVIF q55 1920x1080, 10779 bytes, READY; replaces 600582_2c9a6dc4d0d34c919f54ad6b5875fcd7f002.jpg)
+public/wedding-video-v-and-l.mp4 -> https://video.wixstatic.com/video/600582_a8a5fb88168c442bbaa6c24e878d79c4/file  # VIDEO IN EVIDENZA "Wedding video V+L"
+https://static.wixstatic.com/media/600582_a8a5fb88168c442bbaa6c24e878d79c4f002.jpg -> poster wedding-video-v-and-l
+public/cristina-e-nicolo.mp4 -> https://video.wixstatic.com/video/600582_95a808d03b09495586f6c7788a309d33/file  # VIDEO IN EVIDENZA "Cristina e Nicolo wedding movie"
+https://static.wixstatic.com/media/600582_95a808d03b09495586f6c7788a309d33f002.jpg -> poster cristina-e-nicolo

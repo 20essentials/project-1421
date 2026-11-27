@@ -1,6 +1,7 @@
 ---
 import SiteLayout from "@/app/layout.astro";
 import PhotoGrid from "@/features/home/photo-grid.astro";
+import WeddingFilmSections from "@/features/home/wedding-film-sections.astro";
 import ArtisticParallax from "@/features/home/artistic-parallax.astro";
 import ReviewsBento from "@/features/reviews/reviews-bento.astro";
 import { fetchPosts, postMetaLine, postPath } from "@/features/blog/posts";
@@ -219,6 +220,8 @@ const alignFor = (i: number): "center" | "right" | "left" =>
     ctaLabel={heroContent.gridCta}
     ctaHref={href("/portfolio")}
   />
+
+  <WeddingFilmSections locale={locale} />
 
   <section
     data-featured-in

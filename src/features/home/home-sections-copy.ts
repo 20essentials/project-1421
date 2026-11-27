@@ -28,6 +28,26 @@ interface Stat {
   label: string;
 }
 
+interface WeddingVideoCopy {
+  eyebrow: string;
+  title: string;
+  text: string;
+  cta: string;
+  caption: string;
+}
+
+interface VideoPlayerCopy {
+  play: string;
+  close: string;
+}
+
+interface FeaturedVideosCopy {
+  eyebrow: string;
+  title: string;
+  captions: string[];
+  player: VideoPlayerCopy;
+}
+
 export interface HomeSectionsCopy {
   gridTitle: string;
   aboutCv: string;
@@ -57,6 +77,8 @@ export interface HomeSectionsCopy {
   featuredIn: {
     title: string;
   };
+  weddingVideo: WeddingVideoCopy;
+  featuredVideos: FeaturedVideosCopy;
   reviews: {
     eyebrow: string;
     title: string;
@@ -173,6 +195,22 @@ export const HOME_SECTIONS_COPY: Record<Locale, HomeSectionsCopy> = {
     featuredIn: {
       title: "Pubblicato su",
     },
+    weddingVideo: {
+      eyebrow: "WEDDING FILM",
+      title: "Creazione di un video di matrimonio personalizzato",
+      text: "Un film che nasce da voi: le vostre parole, i vostri gesti, la luce del giorno che vi appartiene. Nessuna formula precostituita, solo una storia raccontata con il vostro sguardo.",
+      cta: "Richiedi un wedding film",
+      caption: "Video di matrimonio editato da Stefano Lunardi",
+    },
+    featuredVideos: {
+      eyebrow: "STEFANO LUNARDI",
+      title: "VIDEO IN EVIDENZA",
+      captions: ["Video reel wedding 2026", "Wedding video V+L", "Cristina e Nicolo wedding movie"],
+      player: {
+        play: "Riproduci video",
+        close: "Chiudi il video",
+      },
+    },
     imageAlts: {
       hero: "Fotografia di matrimonio fine art — Stefano Lunardi",
       heroSecondary: "Fotografia d'arte — Stefano Lunardi",
@@ -277,6 +315,22 @@ export const HOME_SECTIONS_COPY: Record<Locale, HomeSectionsCopy> = {
     },
     featuredIn: {
       title: "Publicado en",
+    },
+    weddingVideo: {
+      eyebrow: "WEDDING FILM",
+      title: "La creación de un vídeo de boda personalizado",
+      text: "Un filme que nace de vosotros: vuestras palabras, vuestros gestos, la luz del día que os pertenece. Ninguna fórmula preestablecida, solo una historia contada con vuestra mirada.",
+      cta: "Solicitar un wedding film",
+      caption: "Vídeo de boda editado por Stefano Lunardi",
+    },
+    featuredVideos: {
+      eyebrow: "STEFANO LUNARDI",
+      title: "VÍDEOS DESTACADOS",
+      captions: ["Video reel wedding 2026", "Wedding video V+L", "Cristina e Nicolo wedding movie"],
+      player: {
+        play: "Reproducir vídeo",
+        close: "Cerrar vídeo",
+      },
     },
     imageAlts: {
       hero: "Fotografía de boda fine art — Stefano Lunardi",
@@ -383,6 +437,22 @@ export const HOME_SECTIONS_COPY: Record<Locale, HomeSectionsCopy> = {
     featuredIn: {
       title: "Featured in",
     },
+    weddingVideo: {
+      eyebrow: "WEDDING FILM",
+      title: "Creating a personalized wedding video",
+      text: "A film made from you: your words, your gestures, the light of a day that belongs to you. No ready-made formula, only a story told through your own way of seeing.",
+      cta: "Request a wedding film",
+      caption: "Wedding film edited by Stefano Lunardi",
+    },
+    featuredVideos: {
+      eyebrow: "STEFANO LUNARDI",
+      title: "FEATURED VIDEOS",
+      captions: ["Video reel wedding 2026", "Wedding video V+L", "Cristina e Nicolo wedding movie"],
+      player: {
+        play: "Play video",
+        close: "Close video",
+      },
+    },
     imageAlts: {
       hero: "Fine-art wedding photograph — Stefano Lunardi",
       heroSecondary: "Fine-art photograph — Stefano Lunardi",
@@ -487,6 +557,22 @@ export const HOME_SECTIONS_COPY: Record<Locale, HomeSectionsCopy> = {
     },
     featuredIn: {
       title: "Veröffentlicht in",
+    },
+    weddingVideo: {
+      eyebrow: "WEDDING FILM",
+      title: "Die Erstellung eines individuellen Hochzeitsvideos",
+      text: "Ein Film, der aus Ihnen entsteht: Ihre Worte, Ihre Gesten, das Licht eines Tages, der Ihnen gehört. Keine vorgefertigte Formel – nur eine Geschichte, erzählt mit Ihrem Blick.",
+      cta: "Ein Hochzeitsvideo anfragen",
+      caption: "Hochzeitsfilm, geschnitten von Stefano Lunardi",
+    },
+    featuredVideos: {
+      eyebrow: "STEFANO LUNARDI",
+      title: "VIDEOS IM FOKUS",
+      captions: ["Video reel wedding 2026", "Wedding video V+L", "Cristina e Nicolo wedding movie"],
+      player: {
+        play: "Video abspielen",
+        close: "Video schließen",
+      },
     },
     imageAlts: {
       hero: "Fine-Art-Hochzeitsfoto — Stefano Lunardi",

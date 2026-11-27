@@ -1,0 +1,544 @@
+---
+import type { Locale } from "@/features/i18n/locale";
+import { localizedHref } from "@/features/i18n/localized-path";
+import { HOME_SECTIONS_COPY } from "@/features/home/home-sections-copy";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const story = HOME_SECTIONS_COPY[locale].weddingVideo;
+const featured = HOME_SECTIONS_COPY[locale].featuredVideos;
+const player = featured.player;
+const lazyVideoAttrs: Record<string, string> = { loading: "lazy" };
+
+const WEDDING_FILM = {
+  src: "https://video.wixstatic.com/video/600582_f90223411bf34cc285dbad610a4f005f/file",
+  poster: "https://static.wixstatic.com/media/600582_f90223411bf34cc285dbad610a4f005ff002.jpg",
+  width: 1920,
+  height: 1080,
+};
+
+const FEATURED_VIDEOS = [
+  {
+    src: "https://video.wixstatic.com/video/600582_2c9a6dc4d0d34c919f54ad6b5875fcd7/file",
+    poster: "https://static.wixstatic.com/media/600582_23fb48b239e34239a43036bee7d20c85~mv2.avif",
+  },
+  {
+    src: "https://video.wixstatic.com/video/600582_a8a5fb88168c442bbaa6c24e878d79c4/file",
+    poster: "https://static.wixstatic.com/media/600582_a8a5fb88168c442bbaa6c24e878d79c4f002.jpg",
+  },
+  {
+    src: "https://video.wixstatic.com/video/600582_95a808d03b09495586f6c7788a309d33/file",
+    poster: "https://static.wixstatic.com/media/600582_95a808d03b09495586f6c7788a309d33f002.jpg",
+  },
+];
+
+const videos = FEATURED_VIDEOS.map((video, index) => ({
+  ...video,
+  caption: featured.captions[index] ?? "",
+}));
+---
+
+<section class="wf-story" data-wedding-film aria-labelledby="wedding-film-title">
+  <div class="wf-story__layer">
+    <video
+      class="wf-story__video"
+      data-wedding-film-video
+      src={WEDDING_FILM.src}
+      poster={WEDDING_FILM.poster}
+      width={WEDDING_FILM.width}
+      height={WEDDING_FILM.height}
+      {...lazyVideoAttrs}
+      preload="none"
+      muted
+      loop
+      playsinline
+      disablepictureinpicture
+      aria-label={story.caption}
+    ></video>
+  </div>
+  <div class="wf-story__scrim"></div>
+  <div class="wf-story__copy">
+    <div class="wf-story__copy-inner">
+      <p class="eyebrow wf-story__eyebrow">{story.eyebrow}</p>
+      <h2 id="wedding-film-title" class="font-display wf-story__title">{story.title}</h2>
+      <p class="wf-story__text">{story.text}</p>
+      <a href={localizedHref(locale, "/contatti")} class="rounded-control wf-story__cta">{story.cta}</a>
+    </div>
+  </div>
+</section>
+
+<section
+  id="video-in-evidenza"
+  aria-labelledby="featured-videos-title"
+  class="wf-featured border-y border-border bg-secondary px-6 py-20 sm:py-24"
+>
+  <div class="mx-auto max-w-7xl">
+    <div class="text-center">
+      <p class="eyebrow text-muted-foreground">{featured.eyebrow}</p>
+      <h2 id="featured-videos-title" class="font-display mt-3 text-3xl font-medium leading-tight sm:text-4xl">
+        {featured.title}
+      </h2>
+    </div>
+
+    <div class="wf-featured__list">
+      {
+        videos.map((video) => (
+          <figure class="wf-featured__item">
+            <div class="wf-featured__frame" data-video-card>
+              <img
+                class="wf-featured__poster"
+                data-video-poster
+                src={video.poster}
+                width="1920"
+                height="1080"
+                loading="lazy"
+                decoding="async"
+                alt=""
+              />
+              <button
+                type="button"
+                class="wf-featured__trigger"
+                data-video-open
+                data-video-src={video.src}
+                data-poster-src={video.poster}
+                data-video-caption={video.caption}
+                aria-label={`${player.play}: ${video.caption}`}
+                aria-haspopup="dialog"
+              >
+                <span class="wf-featured__play" aria-hidden="true">
+                  <svg class="wf-featured__play-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M8 5.5v13l11-6.5z" fill="currentColor" />
+                  </svg>
+                </span>
+              </button>
+              <noscript>
+                <video
+                  class="wf-featured__fallback"
+                  data-video-fallback
+                  src={video.src}
+                  poster={video.poster}
+                  width="1920"
+                  height="1080"
+                  preload="none"
+                  controls
+                  playsinline
+                  disablepictureinpicture
+                  aria-label={video.caption}
+                ></video>
+              </noscript>
+            </div>
+            <figcaption class="wf-featured__caption">{video.caption}</figcaption>
+          </figure>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<dialog
+  id="wf-video-lightbox"
+  class="wf-lightbox"
+  data-video-lightbox
+  closedby="any"
+  aria-labelledby="wf-video-lightbox-title"
+>
+  <video
+    class="wf-lightbox__video"
+    data-video-lightbox-video
+    preload="none"
+    playsinline
+    disablepictureinpicture
+    aria-labelledby="wf-video-lightbox-title"
+  ></video>
+  <button type="button" class="wf-lightbox__close" data-video-close autofocus aria-label={player.close}>
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+      <path d="M6 6l12 12M18 6L6 18" />
+    </svg>
+  </button>
+  <h1 id="wf-video-lightbox-title" class="wf-lightbox__title" data-video-lightbox-title></h1>
+</dialog>
+
+<script>
+  import { mountVideoLightbox } from "@/features/home/video-lightbox-zoom";
+
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const videos = Array.from(document.querySelectorAll<HTMLVideoElement>("[data-wedding-film-video]"));
+  const visible = new WeakSet<HTMLVideoElement>();
+
+  function sync(video: HTMLVideoElement): void {
+    if (reduced.matches || !visible.has(video)) {
+      video.removeAttribute("autoplay");
+      video.pause();
+      return;
+    }
+    video.setAttribute("autoplay", "");
+    void video.play().catch(() => {});
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        const video = entry.target as HTMLVideoElement;
+        if (entry.isIntersecting) visible.add(video);
+        else visible.delete(video);
+        sync(video);
+      }
+    },
+    { rootMargin: "200px 0px" },
+  );
+
+  for (const video of videos) {
+    observer.observe(video);
+    sync(video);
+  }
+
+  reduced.addEventListener?.("change", () => {
+    for (const video of videos) sync(video);
+  });
+
+  mountVideoLightbox();
+</script>
+
+<style>
+  .wf-story {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    height: 100svh;
+    overflow: clip;
+    isolation: isolate;
+    view-timeline: --wedding-film;
+    background: #08090b;
+  }
+
+  .wf-story__layer {
+    position: absolute;
+    inset: -10% 0;
+    z-index: 0;
+  }
+
+  .wf-story__video {
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    object-position: center;
+    background: #08090b;
+  }
+
+  .wf-story__scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      90deg,
+      rgb(8 9 11 / 0.92) 0%,
+      rgb(8 9 11 / 0.7) 38%,
+      rgb(8 9 11 / 0.12) 78%,
+      rgb(8 9 11 / 0.04) 100%
+    );
+    pointer-events: none;
+  }
+
+  .wf-story__copy {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    padding: 2rem 1.5rem;
+    color: #ffffff;
+    pointer-events: none;
+  }
+
+  .wf-story__copy-inner {
+    max-width: 42rem;
+    text-align: left;
+  }
+
+  .wf-story__eyebrow {
+    color: rgb(255 255 255 / 0.7);
+  }
+
+  .wf-story__title {
+    margin-top: 0.875rem;
+    font-size: clamp(2rem, 1.4rem + 3vw, 4rem);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    text-shadow: 0 2px 24px rgb(0 0 0 / 0.5);
+  }
+
+  .wf-story__text {
+    max-width: 38rem;
+    margin-top: 1.25rem;
+    font-size: clamp(0.95rem, 0.85rem + 0.5vw, 1.125rem);
+    line-height: 1.7;
+    color: rgb(255 255 255 / 0.86);
+    text-wrap: pretty;
+    text-shadow: 0 1px 14px rgb(0 0 0 / 0.45);
+  }
+
+  .wf-story__cta {
+    pointer-events: auto;
+    margin-top: 2rem;
+    border: 1px solid rgb(255 255 255 / 0.6);
+    padding: 0.75rem 2rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  .wf-story__cta:hover {
+    border-color: #ffffff;
+    background: rgb(255 255 255 / 0.1);
+  }
+
+  @keyframes wedding-film-parallax {
+    from {
+      transform: translateY(-7%);
+    }
+    to {
+      transform: translateY(7%);
+    }
+  }
+
+  @supports ((animation-timeline: view()) and (animation-range: entry)) {
+    @media (prefers-reduced-motion: no-preference) {
+      .wf-story__layer {
+        animation: wedding-film-parallax linear both;
+        animation-timeline: --wedding-film;
+        animation-range: entry 0% exit 100%;
+        will-change: transform;
+      }
+    }
+  }
+
+  @media (min-width: 768px) {
+    .wf-story__copy {
+      padding-inline: clamp(2rem, 6vw, 6rem);
+    }
+  }
+
+  .wf-featured__list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .wf-featured__item {
+    flex: 1 1 0;
+    min-inline-size: 0;
+    margin: 0;
+  }
+
+  .wf-featured__frame {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: clip;
+    border: 1px solid var(--color-border);
+    background: #08090b;
+  }
+
+  .wf-featured__poster,
+  .wf-featured__fallback {
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    background: #08090b;
+  }
+
+  .wf-featured__fallback {
+    position: absolute;
+    inset: 0;
+    display: none;
+  }
+
+  .wf-featured__trigger {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: #ffffff;
+    cursor: pointer;
+    scale: 1;
+    transition:
+      background-color 200ms ease-out,
+      scale 200ms ease-out;
+  }
+
+  .wf-featured__trigger::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgb(8 9 11 / 0.16);
+    transition: background-color 200ms ease-out;
+  }
+
+  .wf-featured__trigger:hover {
+    scale: 1.02;
+  }
+
+  .wf-featured__trigger:hover::before {
+    background: rgb(8 9 11 / 0.28);
+  }
+
+  .wf-featured__trigger:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: -3px;
+  }
+
+  .wf-featured__play {
+    position: relative;
+    display: grid;
+    place-items: center;
+    inline-size: 3.25rem;
+    block-size: 3.25rem;
+    border: 1px solid rgb(255 255 255 / 0.7);
+    border-radius: 999px;
+    background: rgb(8 9 11 / 0.32);
+    transition: background-color 200ms ease-out;
+  }
+
+  .wf-featured__trigger:hover .wf-featured__play {
+    background: rgb(8 9 11 / 0.5);
+  }
+
+  .wf-featured__play-icon {
+    inline-size: 1.25rem;
+    block-size: 1.25rem;
+    margin-inline-start: 0.125rem;
+  }
+
+  .wf-lightbox {
+    position: fixed;
+    inset: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    max-inline-size: none;
+    max-block-size: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #ffffff;
+    overflow: hidden;
+  }
+
+  .wf-lightbox[open] {
+    display: block;
+  }
+
+  .wf-lightbox:modal {
+    overscroll-behavior: contain;
+  }
+
+  .wf-lightbox::backdrop {
+    background: rgb(6 6 8 / 0.94);
+    overflow: hidden;
+    overscroll-behavior: contain;
+  }
+
+  .wf-lightbox__video {
+    position: absolute;
+    z-index: 0;
+    display: block;
+    background: #000000;
+    object-fit: contain;
+  }
+
+  .wf-lightbox__title {
+    position: absolute;
+    z-index: 1;
+    inset-inline: 1rem;
+    inset-block-end: 1.25rem;
+    margin: 0;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: 0.1em;
+    text-align: center;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.86);
+  }
+
+  .wf-lightbox__close {
+    position: absolute;
+    z-index: 1;
+    inset-block-start: 1rem;
+    inset-inline-end: 1rem;
+    display: grid;
+    place-items: center;
+    inline-size: 2.75rem;
+    block-size: 2.75rem;
+    border: 1px solid rgb(255 255 255 / 0.35);
+    border-radius: 999px;
+    background: rgb(8 9 11 / 0.42);
+    color: #ffffff;
+    cursor: pointer;
+  }
+
+  .wf-lightbox__close:hover {
+    border-color: rgb(255 255 255 / 0.7);
+    background: rgb(8 9 11 / 0.65);
+  }
+
+  .wf-lightbox__close:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+  }
+
+  .wf-featured__caption {
+    margin-top: 0.875rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-foreground);
+    text-wrap: pretty;
+  }
+
+  @media (min-width: 768px) {
+    .wf-featured__list {
+      flex-direction: row;
+      gap: 1.25rem;
+    }
+
+    .wf-featured__caption {
+      font-size: 0.9375rem;
+    }
+  }
+
+  @media (scripting: none) {
+    .wf-featured__trigger {
+      display: none;
+    }
+
+    .wf-featured__fallback {
+      display: block;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wf-featured__trigger,
+    .wf-featured__trigger::before,
+    .wf-featured__play {
+      transition: none;
+    }
+
+    .wf-featured__trigger:hover {
+      scale: 1;
+    }
+  }
+</style>
