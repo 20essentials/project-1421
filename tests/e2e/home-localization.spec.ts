@@ -158,6 +158,30 @@ test("reviews bento keeps review text inside every tile on mobile", async ({ pag
   expect(horizontalOverflow).toBeLessThanOrEqual(0);
 });
 
+test("home FAQ is a centered list of six expandable questions", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto("/it/", { waitUntil: "domcontentloaded" });
+
+  const section = page.locator(".home-faq");
+  const items = section.locator(".home-faq__item");
+  await expect(items).toHaveCount(6);
+  await expect(section.locator(".home-faq__card, .home-faq__num, .home-faq__more")).toHaveCount(0);
+
+  const sectionBox = await section.boundingBox();
+  expect(sectionBox).not.toBeNull();
+  const sectionCenter = sectionBox!.x + sectionBox!.width / 2;
+  for (const selector of [".home-faq__title", ".home-faq__intro", ".home-faq__list"]) {
+    const box = await section.locator(selector).boundingBox();
+    expect(box).not.toBeNull();
+    expect(Math.abs(box!.x + box!.width / 2 - sectionCenter)).toBeLessThan(2);
+  }
+
+  const first = items.first();
+  await expect(first).not.toHaveAttribute("open", "");
+  await first.locator("summary").click();
+  await expect(first).toHaveAttribute("open", "");
+});
+
 test("stats values and labels never overflow in any locale", async ({ page }) => {
   test.setTimeout(120000);
 
