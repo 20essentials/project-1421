@@ -34,6 +34,7 @@ const heroContent = await getHomeContent(Astro.request.headers);
 const HERO_RATIO = 1536 / 2752;
 const ART_GALLERY_RATIO = 3024 / 4032;
 const VEIL_RATIO = 3425 / 4961;
+const CURRICULUM_PDF_URL = "https://b24dc2d0-f24b-4d97-b733-550f7c321876.usrfiles.com/ugd/600582_87e7a91d884146588e5c7172eae587be.pdf";
 
 const faqPreview = faq.questions.slice(0, 6);
 const latestPosts = posts?.posts.slice(0, 3) ?? [];
@@ -203,9 +204,10 @@ const alignFor = (i: number): "center" | "right" | "left" =>
           <p>{heroContent.aboutText1}</p>
           <p>{heroContent.aboutText2}</p>
         </div>
-        <div class="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+        <div class="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:flex-wrap sm:items-center">
           <a href={href("/chi-sono")} class="rounded-control border border-foreground bg-foreground px-8 py-3 text-sm font-medium text-primary-foreground no-underline transition-colors hover:border-accent hover:bg-accent">{heroContent.aboutCta}</a>
           <a href={href("/awards")} class="rounded-control btn-ghost no-underline">{heroContent.aboutCta2}</a>
+          <a href={CURRICULUM_PDF_URL} class="rounded-control btn-ghost no-underline">{copy.aboutCv}</a>
         </div>
       </div>
     </div>

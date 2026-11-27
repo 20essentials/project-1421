@@ -311,3 +311,6 @@ stefano-lunardi-assets/magazzini-e-siti-web/the-lucie-awards.png (AVIF q60 250x1
 stefano-lunardi-assets/magazzini-e-siti-web/vogue-sposa.png (AVIF q60 600x221) -> https://static.wixstatic.com/media/600582_5e0a5795795d402590420a004f40712d~mv2.avif  # featured-in vogue-sposa
 stefano-lunardi-assets/magazzini-e-siti-web/vogue.png (AVIF q60 1024x294) -> https://static.wixstatic.com/media/600582_369e8c9107054fc0b070eeb8b79983ac~mv2.avif  # featured-in vogue
 stefano-lunardi-assets/magazzini-e-siti-web/wezoree.png (AVIF q60 5552x1700) -> https://static.wixstatic.com/media/600582_fe7621c434fe49bb830dc67d7ac431ad~mv2.avif  # featured-in wezoree
+
+# 2026-11-27 — curriculum PDF linked from the homepage "Stefano Lunardi" section; uploaded to Wix Media Manager (application/pdf, 82902 bytes, READY)
+public/curriculum-awards.pdf -> https://b24dc2d0-f24b-4d97-b733-550f7c321876.usrfiles.com/ugd/600582_87e7a91d884146588e5c7172eae587be.pdf  # curriculum CTA

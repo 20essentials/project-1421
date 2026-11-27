@@ -30,6 +30,7 @@ interface Stat {
 
 export interface HomeSectionsCopy {
   gridTitle: string;
+  aboutCv: string;
   method: {
     eyebrow: string;
     title: string;
@@ -79,6 +80,7 @@ export interface HomeSectionsCopy {
 export const HOME_SECTIONS_COPY: Record<Locale, HomeSectionsCopy> = {
   it: {
     gridTitle: "MOMENTI VERI, composti con eleganza",
+    aboutCv: "Leggi il curriculum (PDF)",
     method: {
       eyebrow: "Il mio metodo",
       title: "IL METODO Fusion",
@@ -183,6 +185,7 @@ export const HOME_SECTIONS_COPY: Record<Locale, HomeSectionsCopy> = {
 
   es: {
     gridTitle: "MOMENTOS REALES, compuestos con elegancia",
+    aboutCv: "Ver el currículum (PDF)",
     method: {
       eyebrow: "Mi método",
       title: "EL MÉTODO Fusion",
@@ -287,6 +290,7 @@ export const HOME_SECTIONS_COPY: Record<Locale, HomeSectionsCopy> = {
 
   en: {
     gridTitle: "REAL MOMENTS, composed with elegance",
+    aboutCv: "View CV (PDF)",
     method: {
       eyebrow: "My method",
       title: "THE Fusion METHOD",
@@ -391,6 +395,7 @@ export const HOME_SECTIONS_COPY: Record<Locale, HomeSectionsCopy> = {
 
   de: {
     gridTitle: "ECHTE MOMENTE, mit Eleganz komponiert",
+    aboutCv: "Lebenslauf ansehen (PDF)",
     method: {
       eyebrow: "Meine Methode",
       title: "DIE Fusion-METHODE",

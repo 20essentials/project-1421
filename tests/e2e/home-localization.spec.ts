@@ -182,6 +182,33 @@ test("home FAQ is a centered list of six expandable questions", async ({ page })
   await expect(first).toHaveAttribute("open", "");
 });
 
+test("Stefano section links to the curriculum PDF in every locale", async ({ page }) => {
+  const labels = {
+    it: "Leggi il curriculum (PDF)",
+    es: "Ver el currículum (PDF)",
+    en: "View CV (PDF)",
+    de: "Lebenslauf ansehen (PDF)",
+  } as const;
+  const pdfUrl =
+    "https://b24dc2d0-f24b-4d97-b733-550f7c321876.usrfiles.com/ugd/600582_87e7a91d884146588e5c7172eae587be.pdf";
+
+  for (const viewport of [
+    { width: 1280, height: 800 },
+    { width: 390, height: 844 },
+  ]) {
+    await page.setViewportSize(viewport);
+    for (const [locale, label] of Object.entries(labels)) {
+      await page.goto(`/${locale}/`, { waitUntil: "domcontentloaded" });
+      const section = page.locator("#chi-e-stefano");
+      await section.scrollIntoViewIfNeeded();
+      const link = section.getByRole("link", { name: label });
+      await expect(link).toBeVisible();
+      await expect(link).toHaveAttribute("href", pdfUrl);
+      expect(await section.evaluate((element) => element.scrollWidth - element.clientWidth)).toBeLessThanOrEqual(0);
+    }
+  }
+});
+
 test("stats values and labels never overflow in any locale", async ({ page }) => {
   test.setTimeout(120000);
 
