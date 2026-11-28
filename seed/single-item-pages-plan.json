@@ -1022,6 +1022,134 @@
         {
           "key": "ctaButton",
           "type": "TEXT"
+        },
+        {
+          "key": "gridImage01",
+          "type": "IMAGE"
+        },
+        {
+          "key": "gridAlt01",
+          "type": "TEXT"
+        },
+        {
+          "key": "gridImage02",
+          "type": "IMAGE"
+        },
+        {
+          "key": "gridAlt02",
+          "type": "TEXT"
+        },
+        {
+          "key": "gridImage03",
+          "type": "IMAGE"
+        },
+        {
+          "key": "gridAlt03",
+          "type": "TEXT"
+        },
+        {
+          "key": "gridImage04",
+          "type": "IMAGE"
+        },
+        {
+          "key": "gridAlt04",
+          "type": "TEXT"
+        },
+        {
+          "key": "gridImage05",
+          "type": "IMAGE"
+        },
+        {
+          "key": "gridAlt05",
+          "type": "TEXT"
+        },
+        {
+          "key": "gridImage06",
+          "type": "IMAGE"
+        },
+        {
+          "key": "gridAlt06",
+          "type": "TEXT"
+        },
+        {
+          "key": "gridImage07",
+          "type": "IMAGE"
+        },
+        {
+          "key": "gridAlt07",
+          "type": "TEXT"
+        },
+        {
+          "key": "gridImage08",
+          "type": "IMAGE"
+        },
+        {
+          "key": "gridAlt08",
+          "type": "TEXT"
+        },
+        {
+          "key": "gridImage09",
+          "type": "IMAGE"
+        },
+        {
+          "key": "gridAlt09",
+          "type": "TEXT"
+        },
+        {
+          "key": "gridImage10",
+          "type": "IMAGE"
+        },
+        {
+          "key": "gridAlt10",
+          "type": "TEXT"
+        },
+        {
+          "key": "gridImage11",
+          "type": "IMAGE"
+        },
+        {
+          "key": "gridAlt11",
+          "type": "TEXT"
+        },
+        {
+          "key": "gridImage12",
+          "type": "IMAGE"
+        },
+        {
+          "key": "gridAlt12",
+          "type": "TEXT"
+        },
+        {
+          "key": "gridImage13",
+          "type": "IMAGE"
+        },
+        {
+          "key": "gridAlt13",
+          "type": "TEXT"
+        },
+        {
+          "key": "gridImage14",
+          "type": "IMAGE"
+        },
+        {
+          "key": "gridAlt14",
+          "type": "TEXT"
+        },
+        {
+          "key": "gridImage15",
+          "type": "IMAGE"
+        },
+        {
+          "key": "gridAlt15",
+          "type": "TEXT"
+        },
+        {
+          "key": "gridImage16",
+          "type": "IMAGE"
+        },
+        {
+          "key": "gridAlt16",
+          "type": "TEXT"
         }
       ],
       "items": [
@@ -1094,7 +1222,39 @@
           "awardLogo3": "https://static.wixstatic.com/media/600582_02a8c1efe51347b6b7f588636d848557~mv2.png",
           "awardLogo4": "https://static.wixstatic.com/media/600582_fbdd14dd878d401890627eb7f701cd66~mv2.png",
           "awardLogo5": "https://static.wixstatic.com/media/600582_3bc5573e9969414b839d337d95269b6f~mv2.png",
-          "awardLogo6": "https://static.wixstatic.com/media/600582_0334b4cb9a1b4846963c5c3631d83b47~mv2.png"
+          "awardLogo6": "https://static.wixstatic.com/media/600582_0334b4cb9a1b4846963c5c3631d83b47~mv2.png",
+          "gridImage01": "https://static.wixstatic.com/media/600582_fbe75a0dbb094103a08d0e0f992f8186~mv2.avif",
+          "gridAlt01": "Fotografia di matrimonio — autentiche e naturali — Stefano Lunardi",
+          "gridImage02": "https://static.wixstatic.com/media/600582_98bde7e5ffbc4124b2b6f2d64b08c0f5~mv2.avif",
+          "gridAlt02": "Fotografia di matrimonio — autentiche e naturali — Stefano Lunardi",
+          "gridImage03": "https://static.wixstatic.com/media/600582_7ec859798b004506aea97bb8dd48c8df~mv2.avif",
+          "gridAlt03": "Fotografia di matrimonio — autentiche e naturali — Stefano Lunardi",
+          "gridImage04": "https://static.wixstatic.com/media/600582_ffdd5edd29d0477085d7909a0d926abd~mv2.avif",
+          "gridAlt04": "Fotografia di matrimonio — autentiche e naturali — Stefano Lunardi",
+          "gridImage05": "https://static.wixstatic.com/media/600582_0069da0e26164a8db2f2af2396151629~mv2.avif",
+          "gridAlt05": "Fotografia di matrimonio — autentiche e naturali — Stefano Lunardi",
+          "gridImage06": "https://static.wixstatic.com/media/600582_607291a4e7964300b951e68bf91b969e~mv2.avif",
+          "gridAlt06": "Fotografia di matrimonio — autentiche e naturali — Stefano Lunardi",
+          "gridImage07": "https://static.wixstatic.com/media/600582_be9e01aebbb74383a26c5b1c4381a52c~mv2.avif",
+          "gridAlt07": "Fotografia di matrimonio — eleganti e iconiche — Stefano Lunardi",
+          "gridImage08": "https://static.wixstatic.com/media/600582_f96227e2f4364778b18809de020fff84~mv2.avif",
+          "gridAlt08": "Fotografia di matrimonio — eleganti e iconiche — Stefano Lunardi",
+          "gridImage09": "https://static.wixstatic.com/media/600582_db193f89b9814abfb63ff81d3a19ae62~mv2.avif",
+          "gridAlt09": "Fotografia di matrimonio — eleganti e iconiche — Stefano Lunardi",
+          "gridImage10": "https://static.wixstatic.com/media/600582_f23b3380682c4fb696de902c4f8ad04c~mv2.avif",
+          "gridAlt10": "Fotografia di matrimonio — eleganti e iconiche — Stefano Lunardi",
+          "gridImage11": "https://static.wixstatic.com/media/600582_784098bff49645abb120fe31276c15c0~mv2.avif",
+          "gridAlt11": "Fotografia di matrimonio — eleganti e iconiche — Stefano Lunardi",
+          "gridImage12": "https://static.wixstatic.com/media/600582_8cedcb97009d487f8ebf10da852a9bdb~mv2.avif",
+          "gridAlt12": "Fotografia di matrimonio — eleganti e iconiche — Stefano Lunardi",
+          "gridImage13": "https://static.wixstatic.com/media/600582_eff485b7bca3404aad4885b5f34ba6f8~mv2.avif",
+          "gridAlt13": "Fotografia di matrimonio — eleganti e iconiche — Stefano Lunardi",
+          "gridImage14": "https://static.wixstatic.com/media/600582_534e39d33a594a2c9052a1c55a32fbbd~mv2.avif",
+          "gridAlt14": "Fotografia di matrimonio — autentiche e naturali — Stefano Lunardi",
+          "gridImage15": "https://static.wixstatic.com/media/600582_b11b4ae71aa4404e868ee98488e0aebd~mv2.avif",
+          "gridAlt15": "Fotografia di matrimonio — autentiche e naturali — Stefano Lunardi",
+          "gridImage16": "https://static.wixstatic.com/media/600582_19f71ad41f7c474ea5e24e2b55cbbccf~mv2.avif",
+          "gridAlt16": "Fotografia di matrimonio — autentiche e naturali — Stefano Lunardi"
         }
       ]
     },
@@ -1119,13 +1279,18 @@
         {
           "key": "intro",
           "type": "TEXT"
+        },
+        {
+          "key": "notFoundImage",
+          "type": "IMAGE"
         }
       ],
       "items": [
         {
           "eyebrow": "Errore 404",
           "title": "Pagina non trovata",
-          "intro": "La pagina che cerchi non esiste o è stata spostata."
+          "intro": "La pagina che cerchi non esiste o è stata spostata.",
+          "notFoundImage": "https://static.wixstatic.com/media/600582_fbe75a0dbb094103a08d0e0f992f8186~mv2.avif"
         }
       ]
     },

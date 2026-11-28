@@ -141,7 +141,7 @@ export function mountPhotoZoom(targets: PhotoZoomTargets): void {
     };
     flipState.flip = flipTransform(flipState.content, flipState.target);
 
-    img.src = tileImg.currentSrc || tileImg.src;
+    img.src = tileImg.dataset.fullSrc || tileImg.currentSrc || tileImg.src;
     img.alt = tileImg.alt;
     root.setAttribute("aria-label", tileImg.alt);
     root.hidden = false;

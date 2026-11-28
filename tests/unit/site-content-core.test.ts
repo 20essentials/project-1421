@@ -1,5 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { toHomeContent, toSitePageContent } from "@/features/site-content/site-content-core";
+import {
+  HOME_GRID_ALT_FIELDS,
+  HOME_GRID_IMAGE_FIELDS,
+  toHomeContent,
+  toHomeGridPhotos,
+  toNotFoundContent,
+  toSitePageContent,
+} from "@/features/site-content/site-content-core";
 
 const item = {
   eyebrow: "Occhiello",
@@ -63,5 +70,60 @@ describe("toHomeContent", () => {
   it("returns null when there is no item", () => {
     expect(toHomeContent(null)).toBeNull();
     expect(toHomeContent(undefined)).toBeNull();
+  });
+});
+
+describe("toHomeGridPhotos", () => {
+  it("keeps the portfolio at the intended 16 photos", () => {
+    expect(HOME_GRID_IMAGE_FIELDS).toHaveLength(16);
+    expect(HOME_GRID_ALT_FIELDS).toHaveLength(16);
+  });
+
+  it("pairs each CMS image with its editable alt and source dimensions", () => {
+    const home = toHomeContent({
+      gridImage01: "https://static.wixstatic.com/media/one.avif",
+      gridAlt01: "Matrimonio autentico",
+      gridImage02: "https://static.wixstatic.com/media/two.avif",
+      gridAlt02: "Ritratto elegante",
+    });
+    expect(home && toHomeGridPhotos(home)).toEqual([
+      {
+        src: "https://static.wixstatic.com/media/one.avif",
+        alt: "Matrimonio autentico",
+        width: 1600,
+        height: 1066,
+      },
+      {
+        src: "https://static.wixstatic.com/media/two.avif",
+        alt: "Ritratto elegante",
+        width: 1066,
+        height: 1600,
+      },
+    ]);
+  });
+
+  it("skips grid slots without a CMS image", () => {
+    const home = toHomeContent({ gridAlt01: "Solo testo" });
+    expect(home && toHomeGridPhotos(home)).toEqual([]);
+  });
+});
+
+describe("toNotFoundContent", () => {
+  it("maps the 404 background image from the NotFound collection", () => {
+    expect(
+      toNotFoundContent({
+        eyebrow: "404",
+        title: "Pagina non trovata",
+        notFoundImage: "https://static.wixstatic.com/media/background.avif",
+      }),
+    ).toMatchObject({
+      eyebrow: "404",
+      title: "Pagina non trovata",
+      notFoundImage: "https://static.wixstatic.com/media/background.avif",
+    });
+  });
+
+  it("returns null when there is no item", () => {
+    expect(toNotFoundContent(null)).toBeNull();
   });
 });

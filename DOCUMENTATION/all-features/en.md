@@ -129,7 +129,7 @@ stefanolunardi-photographer
 ├── Media, design and accessibility
 │   ├── Wix media resolution → src/shared/media.ts
 │   ├── Ricos to safe HTML/text → src/shared/ricos.ts
-│   ├── Optimized local images → src/assets/photos/*.webp, src/features/home/photo-grid.astro
+│   ├── CMS-hosted wedding photos → Home.gridImage01-16, NotFound.notFoundImage, src/features/home/photo-grid.astro
 │   ├── Favicons and icons → public/favicon*, public/apple-touch-icon.png, public/android-chrome-*.png
 │   ├── Webmanifest → public/site.webmanifest
 │   ├── Logos → public/logo.png, public/logo_QEP-copy-1.webp

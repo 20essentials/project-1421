@@ -7,6 +7,7 @@ import ReviewsBento from "@/features/reviews/reviews-bento.astro";
 import { fetchPosts, postMetaLine, postPath } from "@/features/blog/posts";
 import { fetchFaq } from "@/features/faq/faq";
 import { getHomeContent } from "@/features/site-content/site-content";
+import { toHomeGridPhotos } from "@/features/site-content/site-content-core";
 import { HOME_SECTIONS_COPY, localizedGridTitle } from "@/features/home/home-sections-copy";
 import { currentLocale } from "@/features/i18n/current-locale";
 import { localizedHref } from "@/features/i18n/localized-path";
@@ -29,6 +30,7 @@ try {
 } catch {}
 
 const heroContent = await getHomeContent(Astro.request.headers);
+const gridPhotos = toHomeGridPhotos(heroContent);
 
 // Slide aspect ratios (height/width) — layout facts; the CMS supplies the images themselves.
 const HERO_RATIO = 1536 / 2752;
@@ -272,6 +274,7 @@ const alignFor = (i: number): "center" | "right" | "left" =>
     title={localizedGridTitle(locale, heroContent.gridTitle)}
     ctaLabel={heroContent.gridCta}
     ctaHref={href("/portfolio")}
+    photos={gridPhotos}
   />
 
   <WeddingFilmSections locale={locale} />

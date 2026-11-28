@@ -3,8 +3,10 @@ import type { HeaderLike } from "@/features/i18n/locale-from-request";
 import { queryItems } from "@/wix/cms/items";
 import {
   toHomeContent,
+  toNotFoundContent,
   toSitePageContent,
   type HomeContent,
+  type NotFoundContent,
   type SitePageContent,
 } from "./site-content-core";
 
@@ -58,5 +60,16 @@ export async function getHomeContent(headers?: HeaderLike): Promise<HomeContent>
     : {};
   const content = toHomeContent(translated);
   if (!content) throw new Error('SiteContent: no item in collection "Home".');
+  return content;
+}
+
+export async function get404Content(headers?: HeaderLike): Promise<NotFoundContent> {
+  const result = await queryItems("NotFound", { limit: 1 });
+  const raw = result.items[0];
+  const translated = raw
+    ? await withPublishedTranslation(raw, { entityType: "NotFound", headers })
+    : {};
+  const content = toNotFoundContent(translated);
+  if (!content) throw new Error('SiteContent: no item in collection "NotFound".');
   return content;
 }

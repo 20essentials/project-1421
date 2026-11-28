@@ -79,6 +79,10 @@ awards lists and exhibitions are editable, the seals grid stays fixed; `/fine-ar
 SEO (title and description for Google) is NOT in the CMS anymore: it is managed in the SEO
 settings, see below.
 
+The wedding photo grid on `/` uses `gridImage01`–`gridImage16` and `gridAlt01`–`gridAlt16` in `Home`;
+the `/404` background uses `notFoundImage` in `NotFound`. Upload images in the Media Manager and
+select them in those fields: the site picks them up without a redeploy.
+
 ## Legal documents (CMS)
 
 Each legal document is its own **Single Item** collection: header text, version and full body

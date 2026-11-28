@@ -79,6 +79,10 @@ resta fissa; `/fine-art`, `/location`, `/investimento`, `/il-mio-metodo` e `/chi
 completamente modificabili. Il SEO della pagina (titolo e descrizione per Google) NON è più
 nel CMS: si gestisce nelle impostazioni SEO, vedi sotto.
 
+La griglia di foto matrimonio in `/` usa `gridImage01`–`gridImage16` e `gridAlt01`–`gridAlt16` in `Home`;
+lo sfondo di `/404` usa `notFoundImage` in `NotFound`. Carica le immagini nel Media Manager e
+selezionale in quei campi: il sito le mostra senza redeploy.
+
 ## Documenti legali (CMS)
 
 Ogni documento legale ha la sua collezione **Single Item**: testata, versione e corpo completo

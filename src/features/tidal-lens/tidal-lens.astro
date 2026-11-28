@@ -1,17 +1,23 @@
 ---
-import type { ImageMetadata } from "astro";
+import { imgFitSrc, imgSrc } from "@/shared/media";
 
 interface Props {
-  src: ImageMetadata;
+  src: string;
+  srcSet?: string;
+  width?: number;
+  height?: number;
 }
 
-const { src } = Astro.props;
+const { src, srcSet, width = 1600, height = 1066 } = Astro.props;
+const ratio = height / width;
+const fallbackSrc = imgSrc(src, 1600, Math.round(1600 * ratio));
+const textureSrc = imgFitSrc(src, 1600, 1600);
 ---
 
 <section
   class="tidal-stage relative isolate h-dvh w-full select-none overflow-hidden bg-foreground text-white"
   data-tidal
-  data-tidal-src={src.src}
+  data-tidal-src={textureSrc}
   tabindex="0"
   role="group"
   aria-label="Lente interattiva prima/dopo: muovi il puntatore, trascina o usa le frecce della tastiera per esplorare la foto. La lente rivela l'immagine a colori."
@@ -19,28 +25,38 @@ const { src } = Astro.props;
   <canvas class="absolute inset-0 z-0 h-full w-full" data-tidal-canvas aria-hidden="true"></canvas>
 
   <div class="absolute inset-0 z-0" data-tidal-fallback aria-hidden="true">
-    <img
-      class="absolute inset-0 h-full w-full object-cover grayscale"
-      src={src.src}
-      width={src.width}
-      height={src.height}
-      alt=""
-      loading="eager"
-      decoding="async"
-      draggable="false"
-    />
-    <img
-      class="absolute inset-0 h-full w-full object-cover"
-      style={`clip-path: circle(30% at 50% 50%);`}
-      data-tidal-after
-      src={src.src}
-      width={src.width}
-      height={src.height}
-      alt=""
-      loading="eager"
-      decoding="async"
-      draggable="false"
-    />
+    {
+      fallbackSrc && (
+        <img
+          class="absolute inset-0 h-full w-full object-cover grayscale"
+          src={fallbackSrc}
+          srcset={srcSet}
+          sizes="100vw"
+          width={width}
+          height={height}
+          alt=""
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+          draggable="false"
+        />
+        <img
+          class="absolute inset-0 h-full w-full object-cover"
+          style={`clip-path: circle(30% at 50% 50%);`}
+          data-tidal-after
+          src={fallbackSrc}
+          srcset={srcSet}
+          sizes="100vw"
+          width={width}
+          height={height}
+          alt=""
+          loading="eager"
+          fetchpriority="low"
+          decoding="async"
+          draggable="false"
+        />
+      )
+    }
   </div>
 
   <div class="pointer-events-none absolute inset-0 z-10">

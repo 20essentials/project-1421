@@ -14,7 +14,9 @@ async function openFirstTile(page: import("@playwright/test").Page) {
 
 test("la grid es masonry y cada foto conserva su proporción natural", async ({ page }) => {
   await page.goto("/");
+  await expect(page.locator(".bento-tile")).toHaveCount(16);
   expect(await page.locator(".bento-grid").evaluate((el) => getComputedStyle(el).columnCount)).toBe("4");
+  await page.locator(".bento-grid").scrollIntoViewIfNeeded();
 
   await page.waitForFunction(() =>
     Array.from(document.querySelectorAll<HTMLImageElement>(".bento-tile img"))
@@ -44,6 +46,9 @@ test("la grid es masonry y cada foto conserva su proporción natural", async ({ 
 test("el click en un tile abre el lightbox con la imagen centrada y sin recorte", async ({ page }) => {
   await page.goto("/");
   const { lightbox } = await openFirstTile(page);
+  const fullSrc = await page.locator(".bento-tile img").first().getAttribute("data-full-src");
+  expect(fullSrc).toBeTruthy();
+  await expect(page.locator(LIGHTBOX_IMG)).toHaveAttribute("src", fullSrc!);
 
   // Al terminar la animación el FLIP queda en identidad (sin transform) y sin clip.
   await page.waitForFunction(

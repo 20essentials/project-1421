@@ -79,6 +79,10 @@ cuadrícula de sellos queda fija; `/fine-art`, `/location`, `/investimento`, `/i
 `/chi-sono` son totalmente editables. El SEO de la página (título y descripción para Google) ya
 NO está en el CMS: se gestiona en los ajustes SEO, ver abajo.
 
+La cuadrícula de fotos de boda en `/` usa `gridImage01`–`gridImage16` y `gridAlt01`–`gridAlt16` en `Home`;
+el fondo de `/404` usa `notFoundImage` en `NotFound`. Sube las imágenes al Media Manager y
+selecciónalas en esos campos: el sitio las muestra sin redeploy.
+
 ## Documentos legales (CMS)
 
 Cada documento legal tiene su propia colección **Single Item**: cabecera, versión y cuerpo

@@ -325,3 +325,25 @@ public/wedding-video-v-and-l.mp4 -> https://video.wixstatic.com/video/600582_a8a
 https://static.wixstatic.com/media/600582_a8a5fb88168c442bbaa6c24e878d79c4f002.jpg -> poster wedding-video-v-and-l
 public/cristina-e-nicolo.mp4 -> https://video.wixstatic.com/video/600582_95a808d03b09495586f6c7788a309d33/file  # VIDEO IN EVIDENZA "Cristina e Nicolo wedding movie"
 https://static.wixstatic.com/media/600582_a530f94f864d4c739fb8dee39c92278a~mv2.avif -> poster cristina-e-nicolo (black bars 130px top and bottom cropped, center crop 1458x820 to 16:9, AVIF q55 1920x1080, 23850 bytes, READY; replaces 600582_95a808d03b09495586f6c7788a309d33f002.jpg)
+
+# 2026-11-28 — homepage wedding grid: 16 local WebP originals used in the site, converted to AVIF before upload and served from Wix Media Manager / CMS IMAGE fields. Images 17/18 were uploaded but intentionally not rendered.
+src/assets/photos/01-autentiche.webp (AVIF q38) -> https://static.wixstatic.com/media/600582_fbe75a0dbb094103a08d0e0f992f8186~mv2.avif  # Home.gridImage01 and NotFound.notFoundImage
+src/assets/photos/02-autentiche.webp (AVIF q38) -> https://static.wixstatic.com/media/600582_98bde7e5ffbc4124b2b6f2d64b08c0f5~mv2.avif  # Home.gridImage02
+src/assets/photos/03-autentiche.webp (AVIF q38) -> https://static.wixstatic.com/media/600582_7ec859798b004506aea97bb8dd48c8df~mv2.avif  # Home.gridImage03
+src/assets/photos/04-autentiche.webp (AVIF q38) -> https://static.wixstatic.com/media/600582_ffdd5edd29d0477085d7909a0d926abd~mv2.avif  # Home.gridImage04
+src/assets/photos/05-autentiche.webp (AVIF q38) -> https://static.wixstatic.com/media/600582_0069da0e26164a8db2f2af2396151629~mv2.avif  # Home.gridImage05
+src/assets/photos/06-autentiche.webp (AVIF q38) -> https://static.wixstatic.com/media/600582_607291a4e7964300b951e68bf91b969e~mv2.avif  # Home.gridImage06
+src/assets/photos/07-eleganti.webp (AVIF q38) -> https://static.wixstatic.com/media/600582_be9e01aebbb74383a26c5b1c4381a52c~mv2.avif  # Home.gridImage07
+src/assets/photos/08-eleganti.webp (AVIF q38) -> https://static.wixstatic.com/media/600582_f96227e2f4364778b18809de020fff84~mv2.avif  # Home.gridImage08
+src/assets/photos/09-eleganti.webp (AVIF q38) -> https://static.wixstatic.com/media/600582_db193f89b9814abfb63ff81d3a19ae62~mv2.avif  # Home.gridImage09
+src/assets/photos/10-eleganti.webp (AVIF q38) -> https://static.wixstatic.com/media/600582_f23b3380682c4fb696de902c4f8ad04c~mv2.avif  # Home.gridImage10
+src/assets/photos/11-eleganti.webp (AVIF q38) -> https://static.wixstatic.com/media/600582_784098bff49645abb120fe31276c15c0~mv2.avif  # Home.gridImage11
+src/assets/photos/12-eleganti.webp (AVIF q38) -> https://static.wixstatic.com/media/600582_8cedcb97009d487f8ebf10da852a9bdb~mv2.avif  # Home.gridImage12
+src/assets/photos/13-eleganti.webp (AVIF q38) -> https://static.wixstatic.com/media/600582_eff485b7bca3404aad4885b5f34ba6f8~mv2.avif  # Home.gridImage13
+src/assets/photos/14-autentiche.webp (AVIF q38) -> https://static.wixstatic.com/media/600582_534e39d33a594a2c9052a1c55a32fbbd~mv2.avif  # Home.gridImage14
+src/assets/photos/15-autentiche.webp (AVIF q38) -> https://static.wixstatic.com/media/600582_b11b4ae71aa4404e868ee98488e0aebd~mv2.avif  # Home.gridImage15
+src/assets/photos/16-autentiche.webp (AVIF q38) -> https://static.wixstatic.com/media/600582_19f71ad41f7c474ea5e24e2b55cbbccf~mv2.avif  # Home.gridImage16
+src/assets/photos/17-autentiche.webp (AVIF q38) -> https://static.wixstatic.com/media/600582_e4d1ffaec97d4138a25bb3e26c71babc~mv2.avif  # uploaded but unused (16-photo grid)
+src/assets/photos/18-eleganti.webp (AVIF q38) -> https://static.wixstatic.com/media/600582_d362b385f16e4a568c8d6d6687df611a~mv2.avif  # uploaded but unused (16-photo grid)
+
+# Erroneous upload kept for audit only, not referenced by the site: displayName 01-autentiche.txt, Media Manager id 600582_ed554df7f75245af85cff0fd3f7d43b6.txt.

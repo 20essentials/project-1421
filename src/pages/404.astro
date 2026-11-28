@@ -2,19 +2,20 @@
 import "@/styles/global.css";
 import SiteHeader from "@/app/header.astro";
 import { allNav as allNavPaths, primaryNav as primaryNavPaths } from "@/app/nav";
-import tidalPhoto from "@/assets/photos/01-autentiche.webp";
 import { currentLocale } from "@/features/i18n/current-locale";
 import { languageTag } from "@/features/i18n/locale";
 import { currentCleanPath, localizedHref } from "@/features/i18n/localized-path";
 import { getSiteChrome } from "@/features/site-chrome/site-chrome";
 import { toNavItems } from "@/features/site-chrome/site-chrome-core";
-import { getSitePageContent } from "@/features/site-content/site-content";
+import { get404Content } from "@/features/site-content/site-content";
+import { imgSrcSet } from "@/shared/media";
 import TidalLens from "@/features/tidal-lens/tidal-lens.astro";
 
 const headers = Astro.request.headers;
 const locale = currentLocale(Astro.url, headers);
 const labels = await getSiteChrome(headers);
-const content = await getSitePageContent("not-found", headers);
+const content = await get404Content(headers);
+const notFoundSrcSet = imgSrcSet(content.notFoundImage, [640, 960, 1280, 1600], 1066 / 1600);
 const currentPath = currentCleanPath(Astro.url.pathname);
 const navPrimary = toNavItems(primaryNavPaths, labels, locale);
 const navAll = toNavItems(allNavPaths, labels, locale);
@@ -40,7 +41,12 @@ const label = (key: string, fallback: string) => labels[key] || fallback;
       locale={locale}
       labels={labels}
     />
-    <TidalLens src={tidalPhoto}>
+    <TidalLens
+      src={content.notFoundImage}
+      srcSet={notFoundSrcSet}
+      width={1600}
+      height={1066}
+    >
       <header class="flex h-full flex-col items-center justify-center px-6 pb-24 text-center text-foreground">
         <div class="not-found-panel w-full max-w-2xl border border-foreground/20 bg-background/90 px-6 py-10 backdrop-blur-xl sm:px-12 sm:py-12">
           <p class="eyebrow text-muted-foreground">{content.eyebrow}</p>

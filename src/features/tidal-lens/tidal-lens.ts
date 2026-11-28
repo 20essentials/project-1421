@@ -226,6 +226,7 @@ export function mountTidalLens(root: HTMLElement): void {
   const loadTexture = (): boolean => {
     if (!gl || !texture) return false;
     const img = new Image();
+    img.crossOrigin = "anonymous";
     img.decoding = "async";
     img.onload = () => {
       if (!gl || !texture) return;

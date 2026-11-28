@@ -15,7 +15,7 @@ describe("toAssetPath", () => {
 
   it("strips a locale segment from localized asset paths", () => {
     expect(toAssetPath("/es/_astro/index.CAOXZTkl.css")).toBe("/_astro/index.CAOXZTkl.css");
-    expect(toAssetPath("/it-IT/_astro/10-eleganti.webp")).toBe("/_astro/10-eleganti.webp");
+    expect(toAssetPath("/it-IT/_astro/photo.avif")).toBe("/_astro/photo.avif");
     expect(toAssetPath("/de/site.webmanifest")).toBe("/site.webmanifest");
   });
 

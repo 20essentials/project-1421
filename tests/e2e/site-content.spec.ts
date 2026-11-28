@@ -126,4 +126,16 @@ test.describe("CMS Single Item pages", () => {
       "/it/awards",
     );
   });
+
+  test("404 renders the Wix CMS background image", async ({ page }) => {
+    const response = await page.goto("/404", { waitUntil: "domcontentloaded" });
+    expect(response?.status()).toBeLessThan(500);
+
+    await expect(page.getByRole("heading", { level: 1, name: "Pagina non trovata" })).toBeVisible();
+    const image = page.locator("[data-tidal-fallback] img").first();
+    await expect(image).toHaveAttribute("src", /static\.wixstatic\.com\/media\//);
+    await image.evaluate(async (el) => {
+      await (el as HTMLImageElement).decode();
+    });
+  });
 });
