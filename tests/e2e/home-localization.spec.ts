@@ -118,6 +118,34 @@ for (const [locale, expected] of Object.entries(EXPECTED)) {
   });
 }
 
+test("switching language keeps the reader at the same home section", async ({ page }) => {
+  const problems: string[] = [];
+  page.on("pageerror", (error) => problems.push(`pageerror: ${error.message}`));
+  page.on("console", (message) => {
+    if (message.type() === "error" || message.type() === "warning") {
+      problems.push(`${message.type()}: ${message.text()}`);
+    }
+  });
+
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto("/it/", { waitUntil: "domcontentloaded" });
+  await page.locator("#cosa-ricevete").scrollIntoViewIfNeeded();
+  await page.waitForTimeout(400);
+  const before = await page.evaluate(() => window.scrollY);
+  expect(before).toBeGreaterThan(1000);
+
+  await page.locator(".lang-trigger").click();
+  await page.locator('.lang-panel [data-locale-switch="es"]').click();
+  await page.waitForLoadState("load");
+  await page.waitForTimeout(400);
+
+  expect(page.url()).toContain("/es");
+  const after = await page.evaluate(() => window.scrollY);
+  expect(Math.abs(after - before)).toBeLessThan(150);
+  await expect(page.locator("#cosa-ricevete h2")).toContainText("VUESTRAS FOTOGRAFÍAS");
+  expect(problems).toEqual([]);
+});
+
 test("reviews bento fills a dense editorial mosaic on desktop", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto("/it/", { waitUntil: "domcontentloaded" });

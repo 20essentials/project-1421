@@ -470,8 +470,29 @@ const isActive = (link: string) => {
     "click",
     (event) => {
       const link = event.target instanceof Element ? event.target.closest("[data-locale-switch]") : null;
-      if (link instanceof HTMLAnchorElement && link.dataset.localeSwitch) {
-        document.cookie = `wixLanguage=${link.dataset.localeSwitch}; path=/; max-age=31536000; samesite=lax`;
+      if (!(link instanceof HTMLAnchorElement) || !link.dataset.localeSwitch) return;
+      document.cookie = `wixLanguage=${link.dataset.localeSwitch}; path=/; max-age=31536000; samesite=lax`;
+
+      // A plain navigation starts at the top of the translated page. Hand the
+      // current position to the next document so the reader stays in the same
+      // section (layout.astro restores it before the browser does).
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      ) {
+        return;
+      }
+      try {
+        sessionStorage.setItem(
+          "locale-switch-scroll",
+          JSON.stringify({ href: link.href, x: window.scrollX, y: window.scrollY }),
+        );
+      } catch {
+        // Storage can be disabled; the switch still works, just from the top.
       }
     },
     true,

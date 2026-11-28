@@ -110,6 +110,47 @@ const structuredData = JSON.stringify({
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script is:inline>
+      (() => {
+        let saved;
+        try {
+          const raw = sessionStorage.getItem("locale-switch-scroll");
+          if (!raw) return;
+          sessionStorage.removeItem("locale-switch-scroll");
+          saved = JSON.parse(raw);
+        } catch {
+          return;
+        }
+        if (
+          !saved ||
+          typeof saved.href !== "string" ||
+          typeof saved.x !== "number" ||
+          !Number.isFinite(saved.x) ||
+          typeof saved.y !== "number" ||
+          !Number.isFinite(saved.y) ||
+          saved.y < 0
+        ) {
+          return;
+        }
+        let target;
+        try {
+          target = new URL(saved.href, window.location.href);
+        } catch {
+          return;
+        }
+        const clean = (path) => path.replace(/\/+$/, "") || "/";
+        if (clean(target.pathname) !== clean(window.location.pathname)) return;
+
+        // Suppress the browser's own restoration so it cannot overwrite ours.
+        history.scrollRestoration = "manual";
+        const restore = (event) => {
+          window.scrollTo(saved.x, saved.y);
+          if (event?.type === "load") history.scrollRestoration = "auto";
+        };
+        window.addEventListener("DOMContentLoaded", restore, { once: true });
+        window.addEventListener("load", restore, { once: true });
+      })();
+    </script>
     {fontVariables.map((cssVariable) => (
       <Font cssVariable={cssVariable} preload={cssVariable === "--font-inter" || cssVariable === "--font-cormorant-garamond"} />
     ))}
