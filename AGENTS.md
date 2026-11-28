@@ -6,6 +6,10 @@ node_modules/@wix/cli/agents/instructions.md
 # Notes
 - NO python, just nodejs
 
+## CMS Single Item field order
+
+Every Wix collection with the `SINGLE_ITEM` plugin — including `SiteChrome` — must keep its fields in the same order in which their content appears in the UI. Derive that order from the `.astro`/component source that renders the fields, never from TypeScript field lists or the CMS schema itself. When adding a new page, section or CMS field, reorder the corresponding collection immediately with the documented full-replace `UpdateDataCollection` call: GET the collection first, send every non-system field from the GET in the new order, preserve all field metadata and collection metadata, then verify values/metadata are unchanged and the new order matches the rendered page.
+
 ## Wix platform issues — read before debugging oddities
 
 `docs/wix-platform-issues.md` logs every Wix platform behavior that broke the
