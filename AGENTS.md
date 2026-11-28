@@ -168,15 +168,22 @@ this project. Workflow:
 1. Implement the feature and verify it compiles (`npx astro check`).
 2. Start the dev server if not running (`npm run dev:fg`, default `http://localhost:4321`) and
    wait for the ready banner.
-3. Capture a screenshot of ONLY what you modified — the affected component/section, not the
+3. Dismiss the cookie banner in EVERY screenshot session before capturing anything: click
+   `[data-sl-consent] [data-consent-reject]` and wait until `[data-sl-consent]` no longer has
+   `data-open`. Never ship a screenshot with the banner covering the section.
+4. Wait for every image in the affected section to be loaded and decoded before capturing: scroll
+   it into view, then wait for each `<img>` (e.g. `[data-video-poster]`) to be `complete` with
+   `naturalWidth > 0` and for `img.decode()` to resolve. Never ship a screenshot taken before its
+   images finish loading.
+5. Capture a screenshot of ONLY what you modified — the affected component/section, not the
    whole page. A full-page screenshot of a long page is useless as proof: scroll to the changed
    section (Playwright `locator.scrollIntoViewIfNeeded()` + `page.screenshot({ clip })` or
    element screenshot) with a normal viewport (e.g. 1280×800). Full page only when the change
    genuinely affects the entire page. Save it to `.screenshots/<feature>-<YYYYMMDD-HHmmss>.png`.
    Take one per affected section, page or viewport when relevant (e.g. mobile menu: capture
    closed and open states).
-4. Report the saved file path(s) to the user and stop — never delete or overwrite previous screenshots.
-5. ALWAYS stop the dev server afterwards by killing the listening PID (`netstat -ano | grep :4321`
+6. Report the saved file path(s) to the user and stop — never delete or overwrite previous screenshots.
+7. ALWAYS stop the dev server afterwards by killing the listening PID (`netstat -ano | grep :4321`
    → `taskkill //PID <pid> //F`), before finishing the task. Leaving it running blocks the next
    session with "Another astro dev server is already running"; `npx astro dev stop` does not stop
    a foreground server.
