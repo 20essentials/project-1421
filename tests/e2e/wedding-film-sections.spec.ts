@@ -11,6 +11,12 @@ const CAPTIONS = [
   "Cristina e Nicolo wedding movie",
 ] as const;
 
+const POSTERS = [
+  "https://static.wixstatic.com/media/600582_6c1b7f9e06374e769fd15a105a2d8fd8~mv2.avif",
+  /static\.wixstatic\.com\/media\//,
+  "https://static.wixstatic.com/media/600582_a530f94f864d4c739fb8dee39c92278a~mv2.avif",
+] as const;
+
 const HEADINGS = {
   it: { story: "Creazione di un video di matrimonio personalizzato", featured: "VIDEO IN EVIDENZA", cta: "Richiedi un wedding film" },
   es: { story: "La creación de un vídeo de boda personalizado", featured: "VÍDEOS DESTACADOS", cta: "Solicitar un wedding film" },
@@ -74,12 +80,7 @@ test("featured videos are three minimal columns with a centered play affordance"
   for (let index = 0; index < CAPTIONS.length; index += 1) {
     const card = cards.nth(index);
     await expect(items.nth(index).locator("figcaption")).toHaveText(CAPTIONS[index]);
-    await expect(card.locator("[data-video-poster]")).toHaveAttribute(
-      "src",
-      index === 0
-        ? "https://static.wixstatic.com/media/600582_23fb48b239e34239a43036bee7d20c85~mv2.avif"
-        : /static\.wixstatic\.com\/media\//,
-    );
+    await expect(card.locator("[data-video-poster]")).toHaveAttribute("src", POSTERS[index]);
     await expect(card.locator("[data-video-open]")).toHaveAttribute(
       "aria-label",
       `${PLAYER.it.play}: ${CAPTIONS[index]}`,

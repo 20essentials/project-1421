@@ -320,8 +320,8 @@ public/curriculum-awards.pdf -> https://b24dc2d0-f24b-4d97-b733-550f7c321876.usr
 public/denise-e-gabriela.mp4 -> https://video.wixstatic.com/video/600582_f90223411bf34cc285dbad610a4f005f/file  # video parallax "Creazione di un video di matrimonio personalizzato"
 https://static.wixstatic.com/media/600582_f90223411bf34cc285dbad610a4f005ff002.jpg -> poster denise-e-gabriela
 public/video-reel-weeding-2026.mp4 -> https://video.wixstatic.com/video/600582_2c9a6dc4d0d34c919f54ad6b5875fcd7/file  # VIDEO IN EVIDENZA "Video reel wedding 2026"
-https://static.wixstatic.com/media/600582_23fb48b239e34239a43036bee7d20c85~mv2.avif -> poster video-reel-weeding-2026 (frame at 180s, AVIF q55 1920x1080, 10779 bytes, READY; replaces 600582_2c9a6dc4d0d34c919f54ad6b5875fcd7f002.jpg)
+https://static.wixstatic.com/media/600582_6c1b7f9e06374e769fd15a105a2d8fd8~mv2.avif -> poster video-reel-weeding-2026 (frame at 180s, black bars 102px top and bottom cropped, center crop 1558x876 to 16:9, AVIF q55 1920x1080, 9589 bytes, READY; replaces 600582_23fb48b239e34239a43036bee7d20c85~mv2.avif)
 public/wedding-video-v-and-l.mp4 -> https://video.wixstatic.com/video/600582_a8a5fb88168c442bbaa6c24e878d79c4/file  # VIDEO IN EVIDENZA "Wedding video V+L"
 https://static.wixstatic.com/media/600582_a8a5fb88168c442bbaa6c24e878d79c4f002.jpg -> poster wedding-video-v-and-l
 public/cristina-e-nicolo.mp4 -> https://video.wixstatic.com/video/600582_95a808d03b09495586f6c7788a309d33/file  # VIDEO IN EVIDENZA "Cristina e Nicolo wedding movie"
-https://static.wixstatic.com/media/600582_95a808d03b09495586f6c7788a309d33f002.jpg -> poster cristina-e-nicolo
+https://static.wixstatic.com/media/600582_a530f94f864d4c739fb8dee39c92278a~mv2.avif -> poster cristina-e-nicolo (black bars 130px top and bottom cropped, center crop 1458x820 to 16:9, AVIF q55 1920x1080, 23850 bytes, READY; replaces 600582_95a808d03b09495586f6c7788a309d33f002.jpg)
