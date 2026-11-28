@@ -175,13 +175,18 @@ this project. Workflow:
    it into view, then wait for each `<img>` (e.g. `[data-video-poster]`) to be `complete` with
    `naturalWidth > 0` and for `img.decode()` to resolve. Never ship a screenshot taken before its
    images finish loading.
-5. Capture a screenshot of ONLY what you modified — the affected component/section, not the
-   whole page. A full-page screenshot of a long page is useless as proof: scroll to the changed
-   section (Playwright `locator.scrollIntoViewIfNeeded()` + `page.screenshot({ clip })` or
-   element screenshot) with a normal viewport (e.g. 1280×800). Full page only when the change
-   genuinely affects the entire page. Save it to `.screenshots/<feature>-<YYYYMMDD-HHmmss>.png`.
-   Take one per affected section, page or viewport when relevant (e.g. mobile menu: capture
-   closed and open states).
+5. Capture a SECTION-LEVEL screenshot: target the nearest meaningful section/card that contains
+   the change, never the single mutated leaf (`<p>`, `<span>`, icon). Leaf-only crops are useless
+   as proof: they lose layout, contrast context and surrounding content. A full-page screenshot
+   of a long page is equally useless. If the section has no accessible name/uid, temporarily label
+   it in the browser only (e.g. `el.setAttribute('role', 'region');
+   el.setAttribute('aria-label', 'Screenshot target')`), take a fresh snapshot and screenshot that
+   uid; do not change source markup for the screenshot. Scroll it into view (Playwright
+   `locator.scrollIntoViewIfNeeded()` + `page.screenshot({ clip })` or element screenshot) with a
+   normal viewport (e.g. 1280×800). Discard and retake any blank or text-node-only crop. Full page
+   only when the change genuinely affects the entire page. Save it to
+   `.screenshots/<feature>-<YYYYMMDD-HHmmss>.png`. Take one per affected section, page or viewport
+   when relevant (e.g. mobile menu: capture closed and open states).
 6. Report the saved file path(s) to the user and stop — never delete or overwrite previous screenshots.
 7. ALWAYS stop the dev server afterwards by killing the listening PID (`netstat -ano | grep :4321`
    → `taskkill //PID <pid> //F`), before finishing the task. Leaving it running blocks the next
